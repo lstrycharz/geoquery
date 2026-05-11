@@ -1,9 +1,10 @@
 """Agent orchestrator — wires the skills end-to-end.
 
-Chunk 1: only define_icp → draft_content_brief (skip the middle skills; pick
-the segment's first decision-criterion as the placeholder target query).
-Subsequent chunks layer in generate_geo_query_list, score_queries,
-select_priority_query, analyze_serp, and replace the placeholder drafter.
+Chunk 1: define_icp → draft_content_brief (placeholder query).
+Chunk 2: + generate_geo_query_list (Haiku) between them; placeholder picks
+the middle refined-stretch query (position 13-15) as the target.
+Subsequent chunks layer in score_queries, select_priority_query, analyze_serp,
+and replace the placeholder drafter.
 """
 
 from __future__ import annotations
@@ -16,12 +17,13 @@ from pathlib import Path
 from anthropic import Anthropic
 
 from config import Settings, get_settings
-from contracts import ContentBrief, ICPSegment, ICPSegmentList
+from contracts import BuyerJourney, ContentBrief, ICPSegmentList
 from guardrails import BudgetExceeded, RetryExceeded, RunBudget
 from memory import EpisodicMemory, SkillInvocationRecord
 from memory.episodic import _now, serialize_for_log
 from skills.define_icp import DefineIcp, DefineIcpInputs
 from skills.draft_content_brief import DraftBriefInputs, DraftContentBrief
+from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueriesInputs
 
 _EPISODIC_DB_NAME = "episodic.db"
 
@@ -39,9 +41,20 @@ def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:60] or "untitled"
 
 
-def _placeholder_target_query(segment: ICPSegment, market: str) -> str:
-    pain = (segment.firmographic.strategic_pain_points or ["the core problem"])[0]
-    return f"how to solve {pain.lower()} in {market.lower()}"
+def _placeholder_priority_query(journey: BuyerJourney) -> str:
+    """Until chunks 3+5 land (scoring + priority + SERP), pick a refined-stretch
+    vendor-comparing or power-user query — the highest commercial-intent zone
+    of the journey. Stable, defensible heuristic for v0.
+
+    Falls back to the middle query if no refined query matches the preferred
+    framings (which shouldn't happen with a healthy generator output).
+    """
+    preferred = {"vendor-comparing", "power-user"}
+    for q in journey.queries:
+        if q.refinement_applied and q.framing in preferred:
+            return q.text
+    middle = journey.queries[len(journey.queries) // 2]
+    return middle.text
 
 
 def _format_brief_markdown(brief: ContentBrief, run_id: str, company: str, market: str) -> str:
@@ -124,8 +137,33 @@ def run_brief(
         segments: ICPSegmentList = icp_result.output
         primary_segment = segments.segments[0]
 
+        # Skill 2: generate_geo_query_list (Haiku)
+        queries_skill = GenerateGeoQueryList(client=client, budget=budget)
+        queries_inputs = GenerateQueriesInputs(icp_segment=primary_segment, market=market)
+        queries_start = time.monotonic()
+        queries_started_at = _now()
+        queries_result = queries_skill.run(queries_inputs)
+        memory.log_skill_invocation(
+            SkillInvocationRecord(
+                run_id=run.id,
+                skill_name=queries_skill.name,
+                attempt=queries_result.attempt,
+                model=queries_result.model,
+                input_json=serialize_for_log(
+                    {"icp_segment_label": primary_segment.segment_label, "market": market}
+                ),
+                output_json=queries_result.output.model_dump_json(),
+                input_tokens=queries_result.input_tokens,
+                output_tokens=queries_result.output_tokens,
+                cost_usd=queries_result.cost_usd,
+                duration_ms=int((time.monotonic() - queries_start) * 1000),
+                started_at=queries_started_at,
+            )
+        )
+        journey: BuyerJourney = queries_result.output
+
         # Skill (placeholder): draft_content_brief
-        target_query = _placeholder_target_query(primary_segment, market)
+        target_query = _placeholder_priority_query(journey)
         draft_skill = DraftContentBrief(client=client, budget=budget)
         draft_inputs = DraftBriefInputs(
             target_query=target_query,

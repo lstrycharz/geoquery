@@ -7,10 +7,16 @@ from __future__ import annotations
 from agent import run_brief
 from memory import EpisodicMemory
 
+_PIPELINE_CASSETTES = ("define_icp", "generate_geo_query_list", "draft_content_brief")
 
-def test_run_brief_produces_brief_file_and_logs_two_invocations(fake_client, tmp_settings):
-    fake_client.load_cassette("define_icp")
-    fake_client.load_cassette("draft_content_brief")
+
+def _load_pipeline(fake_client) -> None:
+    for name in _PIPELINE_CASSETTES:
+        fake_client.load_cassette(name)
+
+
+def test_run_brief_produces_brief_file_and_logs_each_skill(fake_client, tmp_settings):
+    _load_pipeline(fake_client)
 
     outcome = run_brief(
         company="Notion",
@@ -34,15 +40,14 @@ def test_run_brief_produces_brief_file_and_logs_two_invocations(fake_client, tmp
     assert run is not None
     assert run["status"] == "completed"
     invocations = mem.get_invocations(outcome.run_id)
-    assert [i["skill_name"] for i in invocations] == ["define_icp", "draft_content_brief"]
+    assert [i["skill_name"] for i in invocations] == list(_PIPELINE_CASSETTES)
     assert all(i["cost_usd"] > 0 for i in invocations)
 
 
 def test_run_brief_records_aborted_cost_when_cap_is_too_low(
     fake_client, tmp_settings, monkeypatch
 ):
-    fake_client.load_cassette("define_icp")
-    fake_client.load_cassette("draft_content_brief")
+    _load_pipeline(fake_client)
     # Force cap below first-skill projected cost
     monkeypatch.setattr(tmp_settings, "max_cost_usd", 0.0001)
 
