@@ -42,6 +42,7 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(
         settings=tmp_settings,
         client=fake_client,
         embedder=stub_embedder,
+        fetch_page=lambda url: None,  # skip real HTTP in tests
     )
 
     assert outcome.status == "completed"
@@ -78,6 +79,7 @@ def test_run_brief_records_aborted_cost_when_cap_is_too_low(
         settings=tmp_settings,
         client=fake_client,
         embedder=stub_embedder,
+        fetch_page=lambda url: None,
     )
     assert outcome.status == "aborted_cost"
     assert outcome.brief_path is None

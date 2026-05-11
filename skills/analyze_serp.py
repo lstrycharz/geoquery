@@ -28,10 +28,16 @@ class AnalyzeSerp(Skill[AnalyzeSerpInputs, SerpAnalysis]):
     max_output_tokens = 4096
 
     def build_user_message(self, inputs: AnalyzeSerpInputs) -> str:
-        results_block = "\n\n".join(
-            f"#{r.rank} {r.title}\n{r.url}\n{r.snippet}"
-            for r in inputs.serp_results
-        )
+        blocks: list[str] = []
+        for r in inputs.serp_results:
+            block = f"#{r.rank} {r.title}\n{r.url}\n{r.snippet}"
+            if r.extracted_content:
+                # Cap per-page to keep total context within Sonnet's limits;
+                # 4000 chars ≈ 1k tokens is plenty for angle/gap inference.
+                snippet = r.extracted_content[:4000]
+                block += f"\n\nExtracted page content (top {len(snippet)} chars):\n{snippet}"
+            blocks.append(block)
+        results_block = "\n\n---\n\n".join(blocks)
         return (
             f"Query: {inputs.query_text}\n\n"
             f"Top SERP results:\n{results_block}\n\n"

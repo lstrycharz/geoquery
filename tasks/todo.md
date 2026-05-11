@@ -14,7 +14,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 
 ## Stretches (additive, no regression to v1)
 - [x] **Chunk 9** — `research_company` (Sonnet, 11-section CASINO dossier) runs first; `define_icp` consumes it as upstream grounding. Pydantic `_coerce_json_dict` validator added for SWOT/Porter dict fields (parallel to `_coerce_json_list`). 53/53 green.
-- [ ] **Chunk 10** — `tools/web_fetch.py` (SSRF-hardened) → `analyze_serp` reads top-3 pages.
+- [x] **Chunk 10** — `tools/web_fetch.py` (SSRF-hardened: DNS-resolution check, scheme whitelist, redirect re-validation, 5MB streaming cap, 10s timeout). `agent.py` fetches top-3 SERP pages and populates `SerpResult.extracted_content`. analyze_serp prompt updated to consume page content when present. 62/62 green.
 - [ ] **Chunk 11** — `tools/dataforseo.py` (**hybrid**: works without credentials, uses real volume/KD when set) → `score_queries` consumes metrics when available; competitor URLs.
 - [ ] **Chunk 12** — `tools/sitemap_parser.py` → grounded internal linking in briefs.
 - [ ] **Chunk 13** — Golden regression set + `eval-golden` command + `--report` HTML.

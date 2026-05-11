@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -27,7 +28,10 @@ from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueries
 from skills.research_company import ResearchCompany, ResearchCompanyInputs
 from skills.score_queries import ScoreQueries, ScoreQueriesInputs
 from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQuery
+from tools.web_fetch import fetch_page as _default_fetch_page
 from tools.web_search import search_top_n
+
+PageFetcher = Callable[[str], str | None]
 
 _EPISODIC_DB_NAME = "episodic.db"
 _SEMANTIC_DB_NAME = "semantic.db"
@@ -101,9 +105,11 @@ def run_brief(
     settings: Settings | None = None,
     client: Anthropic | None = None,
     embedder: Embedder | None = None,
+    fetch_page: PageFetcher | None = None,
 ) -> AgentOutcome:
     settings = settings or get_settings()
     client = client or Anthropic(api_key=settings.anthropic_api_key)
+    fetch_page = fetch_page or _default_fetch_page
 
     memory = EpisodicMemory(db_path=settings.data_dir / _EPISODIC_DB_NAME)
     semantic = SemanticMemory(
@@ -251,6 +257,11 @@ def run_brief(
         serp_results = search_top_n(
             client=client, budget=budget, query=priority.selected_query.query.text, n=10
         )
+        # Tool: web_fetch (chunk 10) — populate extracted_content on the top-3
+        # results. SSRF-hardened, returns None on any failure (we degrade
+        # gracefully — analyze_serp can still synthesize from snippets alone).
+        for r in serp_results[:3]:
+            r.extracted_content = fetch_page(r.url)
 
         # Skill 5: analyze_serp — synthesizes common angles + content gaps.
         analyze_skill = AnalyzeSerp(client=client, budget=budget)
