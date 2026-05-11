@@ -232,12 +232,13 @@ def run_brief(
             )
         )
 
-        # Skill 6 (placeholder until chunk 5): draft_content_brief
+        # Skill 6: draft_content_brief — now SERP-informed (chunk 5).
         draft_skill = DraftContentBrief(client=client, budget=budget)
         draft_inputs = DraftBriefInputs(
             target_query=priority.selected_query.query.text,
             icp_segment=primary_segment,
             market=market,
+            serp_analysis=analyze_result.output,
         )
         draft_start = time.monotonic()
         draft_started_at = _now()

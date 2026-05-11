@@ -1,15 +1,15 @@
 """draft_content_brief — produces the final ContentBrief.
 
-Chunk 1: placeholder version. Takes a target query + ICP segment + market and
-generates a brief without SERP data or sitemap context.
-Chunks 4/12 will layer in real SERP analysis + sitemap-grounded internal links.
+Chunk 5: now SERP-informed. Inputs include a SerpAnalysis whose common_angles
+and content_gaps drive the brief's differentiation. SerpAnalysis is optional
+so older direct callers (e.g. unit tests pre-chunk-4) keep working.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from contracts import ContentBrief, ICPSegment
+from contracts import ContentBrief, ICPSegment, SerpAnalysis
 from skills.base import Skill
 
 
@@ -18,6 +18,7 @@ class DraftBriefInputs:
     target_query: str
     icp_segment: ICPSegment
     market: str
+    serp_analysis: SerpAnalysis | None = None
 
 
 class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
@@ -28,9 +29,15 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
 
     def build_user_message(self, inputs: DraftBriefInputs) -> str:
         icp_json = inputs.icp_segment.model_dump_json(indent=2)
+        serp_block = (
+            "(no SERP analysis available — proceed from ICP + query alone)"
+            if inputs.serp_analysis is None
+            else f"```json\n{inputs.serp_analysis.model_dump_json(indent=2)}\n```"
+        )
         return (
             f"Market: {inputs.market}\n"
             f"Target query: {inputs.target_query}\n\n"
             f"Priority ICP segment:\n```json\n{icp_json}\n```\n\n"
+            f"SERP analysis:\n{serp_block}\n\n"
             "Produce the ContentBrief per the system instructions."
         )
