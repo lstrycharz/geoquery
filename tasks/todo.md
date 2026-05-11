@@ -15,7 +15,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 ## Stretches (additive, no regression to v1)
 - [ ] **Chunk 9** — `research_company` (7th skill upstream; `define_icp` consumes dossier).
 - [ ] **Chunk 10** — `tools/web_fetch.py` (SSRF-hardened) → `analyze_serp` reads top-3 pages.
-- [ ] **Chunk 11** — `tools/dataforseo.py` → `score_queries` uses real volume/KD; competitor URLs.
+- [ ] **Chunk 11** — `tools/dataforseo.py` (**hybrid**: works without credentials, uses real volume/KD when set) → `score_queries` consumes metrics when available; competitor URLs.
 - [ ] **Chunk 12** — `tools/sitemap_parser.py` → grounded internal linking in briefs.
 - [ ] **Chunk 13** — Golden regression set + `eval-golden` command + `--report` HTML.
 - [ ] **Chunk 14** — `geoquery feedback` subcommand; preferred-angle embeddings.

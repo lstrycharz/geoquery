@@ -33,7 +33,13 @@ Two interfaces sit on top of the orchestrator: a Typer CLI for humans, and an MC
 ## Quick start
 
 ```bash
-cp .env.example .env   # fill in ANTHROPIC_API_KEY and DATAFORSEO_LOGIN/PASSWORD
+cp .env.example .env
+# Required:  ANTHROPIC_API_KEY=sk-ant-...
+# Optional:  DATAFORSEO_LOGIN / DATAFORSEO_PASSWORD
+#            (when set, score_queries uses real volume + KD; otherwise
+#             scoring is LLM-estimated and the agent still runs end-to-end)
+# Optional:  SLACK_WEBHOOK_URL  (posts the brief path on completion if set)
+
 pip install -e ".[semantic,dev]"   # semantic extras pull sqlite-vec + fastembed
 geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
 ```

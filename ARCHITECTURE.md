@@ -94,4 +94,4 @@ A running list of "X over Y, because …" calls made during the build.
 - **`fastembed` over `sentence-transformers`** — same teaching value, no torch.
 - **One `RunBudget` over separate cost/retry modules** — they're conceptually one thing.
 - **Async outer-loop subcommand over mid-run "press Enter"** — decouples agent runtime from human review.
-- **DataForSEO as hard requirement** — sharper teaching artifact (real Tool boundary with real cost); accepts the cost that cloners need a paid key to run end-to-end.
+- **DataForSEO as hybrid (revised)** — the agent runs end-to-end with only `ANTHROPIC_API_KEY` set; `score_queries` falls back to LLM-estimated metrics (`KeywordMetrics.volume = None`). When `DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD` are set, `tools/dataforseo.py` fetches real volume + KD + CPC + SERP features and `score_queries` consumes them. This preserves cloneability (the "people can read AND extend it" goal) while still showcasing the real-Tool boundary when the key is present. (Earlier draft had DataForSEO as a hard requirement; flipped after the cloneability cost outweighed the teaching clarity.)
