@@ -17,8 +17,9 @@ from anthropic import Anthropic
 from config import Settings, get_settings
 from contracts import ContentBrief, ICPSegmentList, Priority
 from guardrails import BudgetExceeded, RetryExceeded, RunBudget
-from memory import EpisodicMemory, SkillInvocationRecord
+from memory import EpisodicMemory, SemanticMemory, SkillInvocationRecord
 from memory.episodic import _now, serialize_for_log
+from memory.semantic import Embedder
 from skills.analyze_serp import AnalyzeSerp, AnalyzeSerpInputs
 from skills.define_icp import DefineIcp, DefineIcpInputs
 from skills.draft_content_brief import DraftBriefInputs, DraftContentBrief
@@ -28,6 +29,15 @@ from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQue
 from tools.web_search import search_top_n
 
 _EPISODIC_DB_NAME = "episodic.db"
+_SEMANTIC_DB_NAME = "semantic.db"
+
+
+def _icp_summary(segment) -> str:
+    """One-line ICP descriptor used as the semantic-memory indexing key."""
+    return (
+        f"{segment.segment_label} | {segment.persona.role_job_title} | "
+        f"pains: {', '.join(segment.firmographic.strategic_pain_points[:3])}"
+    )
 
 
 @dataclass
@@ -89,11 +99,15 @@ def run_brief(
     *,
     settings: Settings | None = None,
     client: Anthropic | None = None,
+    embedder: Embedder | None = None,
 ) -> AgentOutcome:
     settings = settings or get_settings()
     client = client or Anthropic(api_key=settings.anthropic_api_key)
 
     memory = EpisodicMemory(db_path=settings.data_dir / _EPISODIC_DB_NAME)
+    semantic = SemanticMemory(
+        db_path=settings.data_dir / _SEMANTIC_DB_NAME, embedder=embedder
+    )
     run = memory.start_run(company=company, market=market)
     budget = RunBudget(max_cost_usd=settings.max_cost_usd)
 
@@ -242,13 +256,25 @@ def run_brief(
             )
         )
 
-        # Skill 6: draft_content_brief — now SERP-informed (chunk 5).
+        # Semantic-memory RAG: retrieve top-3 similar past briefs.
+        icp_sig = _icp_summary(primary_segment)
+        similar = tuple(
+            semantic.find_similar(
+                market=market,
+                icp_summary=icp_sig,
+                angle_hint=priority.selected_query.query.text,
+                k=3,
+            )
+        )
+
+        # Skill 6: draft_content_brief — SERP-informed + RAG-injected (chunk 7).
         draft_skill = DraftContentBrief(client=client, budget=budget)
         draft_inputs = DraftBriefInputs(
             target_query=priority.selected_query.query.text,
             icp_segment=primary_segment,
             market=market,
             serp_analysis=analyze_result.output,
+            similar_past_briefs=similar,
         )
         draft_start = time.monotonic()
         draft_started_at = _now()
@@ -279,6 +305,14 @@ def run_brief(
 
         brief_path = _write_brief(
             draft_result.output, run.id, company, market, settings.output_dir
+        )
+        # Index this run's brief into semantic memory for future RAG retrieval.
+        semantic.index_brief(
+            run_id=run.id,
+            market=market,
+            icp_summary=icp_sig,
+            angle=draft_result.output.angle,
+            brief_path=str(brief_path),
         )
         memory.finish_run(
             run_id=run.id,

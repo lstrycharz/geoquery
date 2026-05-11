@@ -30,7 +30,9 @@ def _load_pipeline(fake_client) -> None:
         fake_client.load_cassette(name)
 
 
-def test_run_brief_produces_brief_file_and_logs_each_skill(fake_client, tmp_settings):
+def test_run_brief_produces_brief_file_and_logs_each_skill(
+    fake_client, tmp_settings, stub_embedder
+):
     _load_pipeline(fake_client)
 
     outcome = run_brief(
@@ -38,6 +40,7 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(fake_client, tmp_sett
         market="B2B SaaS knowledge management",
         settings=tmp_settings,
         client=fake_client,
+        embedder=stub_embedder,
     )
 
     assert outcome.status == "completed"
@@ -62,7 +65,7 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(fake_client, tmp_sett
 
 
 def test_run_brief_records_aborted_cost_when_cap_is_too_low(
-    fake_client, tmp_settings, monkeypatch
+    fake_client, tmp_settings, monkeypatch, stub_embedder
 ):
     _load_pipeline(fake_client)
     # Force cap below first-skill projected cost
@@ -73,6 +76,7 @@ def test_run_brief_records_aborted_cost_when_cap_is_too_low(
         market="Y",
         settings=tmp_settings,
         client=fake_client,
+        embedder=stub_embedder,
     )
     assert outcome.status == "aborted_cost"
     assert outcome.brief_path is None

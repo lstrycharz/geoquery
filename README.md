@@ -34,9 +34,11 @@ Two interfaces sit on top of the orchestrator: a Typer CLI for humans, and an MC
 
 ```bash
 cp .env.example .env   # fill in ANTHROPIC_API_KEY and DATAFORSEO_LOGIN/PASSWORD
-pip install -e ".[dev]"
+pip install -e ".[semantic,dev]"   # semantic extras pull sqlite-vec + fastembed
 geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
 ```
+
+**Python requirement.** Semantic memory uses `sqlite-vec`, which requires SQLite extension loading. macOS system Python via pyenv often lacks this — use Homebrew Python 3.13+, or run via Docker (chunk 17). On Linux, distro Python has it by default.
 
 Or via Docker (chunk 17):
 

@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from contracts import ContentBrief, ICPSegment, SerpAnalysis
 from evals.deterministic import BriefStructure, DraftAngleNonEmpty, Evaluator
 from evals.model_graded import BriefSpecificityJudge
+from memory import SimilarBrief
 from skills.base import Skill
 
 
@@ -21,6 +22,7 @@ class DraftBriefInputs:
     icp_segment: ICPSegment
     market: str
     serp_analysis: SerpAnalysis | None = None
+    similar_past_briefs: tuple[SimilarBrief, ...] = ()
 
 
 class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
@@ -36,11 +38,20 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
             if inputs.serp_analysis is None
             else f"```json\n{inputs.serp_analysis.model_dump_json(indent=2)}\n```"
         )
+        past_block = (
+            "(no similar past briefs)"
+            if not inputs.similar_past_briefs
+            else "\n".join(
+                f"- (similarity {b.distance:.3f}) market={b.market!r}, angle={b.angle!r}"
+                for b in inputs.similar_past_briefs
+            )
+        )
         return (
             f"Market: {inputs.market}\n"
             f"Target query: {inputs.target_query}\n\n"
             f"Priority ICP segment:\n```json\n{icp_json}\n```\n\n"
             f"SERP analysis:\n{serp_block}\n\n"
+            f"Similar past briefs (do NOT repeat their angles — differentiate):\n{past_block}\n\n"
             "Produce the ContentBrief per the system instructions."
         )
 

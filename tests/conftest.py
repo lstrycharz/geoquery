@@ -104,6 +104,32 @@ def fake_client() -> FakeAnthropicClient:
     return FakeAnthropicClient()
 
 
+class HashEmbedder:
+    """Deterministic stand-in for FastembedEmbedder. Hashes the text into a
+    fixed-dim vector — fast enough for tests, totally bogus semantically.
+    Lets us exercise the storage + retrieval code paths without downloading
+    a ~50MB model."""
+
+    def __init__(self, dim: int = 384) -> None:
+        self.dim = dim
+
+    def embed(self, text: str) -> list[float]:
+        import hashlib
+
+        digest = hashlib.sha256(text.encode("utf-8")).digest()
+        # Stretch the 32-byte digest into `dim` floats in [-1, 1].
+        vec: list[float] = []
+        for i in range(self.dim):
+            b = digest[i % len(digest)]
+            vec.append((b / 127.5) - 1.0)
+        return vec
+
+
+@pytest.fixture
+def stub_embedder() -> HashEmbedder:
+    return HashEmbedder()
+
+
 @pytest.fixture
 def tmp_settings(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     """Isolated Settings that point at a fresh tmp dir + reset the global cache."""
