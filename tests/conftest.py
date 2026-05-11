@@ -54,11 +54,22 @@ class FakeMessagesAPI:
 
     def create(self, **kwargs: Any) -> FakeMessageResponse:
         tool_choice = kwargs.get("tool_choice") or {}
-        tool_name = tool_choice.get("name") if isinstance(tool_choice, dict) else None
+        tool_name: str | None = (
+            tool_choice.get("name") if isinstance(tool_choice, dict) else None
+        )
+        # When tool_choice is not forced (e.g. tools/web_search lets the model pick
+        # between a server tool and an emit_* client tool), find the emit_* tool in
+        # the tools list and use it as the cassette key.
         if not tool_name:
-            raise AssertionError("FakeAnthropic only supports forced tool_use calls")
-        if not tool_name.startswith("emit_"):
-            raise AssertionError(f"unexpected tool name: {tool_name}")
+            for tool in kwargs.get("tools") or []:
+                name = tool.get("name") if isinstance(tool, dict) else None
+                if isinstance(name, str) and name.startswith("emit_"):
+                    tool_name = name
+                    break
+        if not tool_name or not tool_name.startswith("emit_"):
+            raise AssertionError(
+                "FakeAnthropic could not locate an emit_* tool to use as cassette key"
+            )
         skill_name = tool_name[len("emit_") :]
         cassette = self.parent.cassettes.get(skill_name)
         if cassette is None:

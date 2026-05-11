@@ -1,8 +1,8 @@
 """Agent orchestrator — wires the skills end-to-end.
 
-Pipeline (chunks 1-3): define_icp -> generate_geo_query_list -> score_queries ->
-select_priority_query -> draft_content_brief (placeholder).
-Chunks 4-5 layer in analyze_serp + a real SERP-informed drafter.
+Pipeline (chunks 1-4): define_icp -> generate_geo_query_list -> score_queries ->
+select_priority_query -> tools.web_search -> analyze_serp -> draft_content_brief.
+Chunk 5 replaces the placeholder drafter with a real SERP-informed version.
 """
 
 from __future__ import annotations
@@ -19,11 +19,13 @@ from contracts import ContentBrief, ICPSegmentList, Priority
 from guardrails import BudgetExceeded, RetryExceeded, RunBudget
 from memory import EpisodicMemory, SkillInvocationRecord
 from memory.episodic import _now, serialize_for_log
+from skills.analyze_serp import AnalyzeSerp, AnalyzeSerpInputs
 from skills.define_icp import DefineIcp, DefineIcpInputs
 from skills.draft_content_brief import DraftBriefInputs, DraftContentBrief
 from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueriesInputs
 from skills.score_queries import ScoreQueries, ScoreQueriesInputs
 from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQuery
+from tools.web_search import search_top_n
 
 _EPISODIC_DB_NAME = "episodic.db"
 
@@ -195,7 +197,42 @@ def run_brief(
         )
         priority: Priority = priority_result.output
 
-        # Skill 5 (placeholder until chunk 5): draft_content_brief
+        # Tool: web_search — fetches top SERP results for the priority query.
+        serp_results = search_top_n(
+            client=client, budget=budget, query=priority.selected_query.query.text, n=10
+        )
+
+        # Skill 5: analyze_serp — synthesizes common angles + content gaps.
+        analyze_skill = AnalyzeSerp(client=client, budget=budget)
+        analyze_inputs = AnalyzeSerpInputs(
+            query_text=priority.selected_query.query.text,
+            serp_results=serp_results,
+        )
+        analyze_start = time.monotonic()
+        analyze_started_at = _now()
+        analyze_result = analyze_skill.run(analyze_inputs)
+        memory.log_skill_invocation(
+            SkillInvocationRecord(
+                run_id=run.id,
+                skill_name=analyze_skill.name,
+                attempt=analyze_result.attempt,
+                model=analyze_result.model,
+                input_json=serialize_for_log(
+                    {
+                        "query_text": priority.selected_query.query.text,
+                        "serp_result_count": len(serp_results),
+                    }
+                ),
+                output_json=analyze_result.output.model_dump_json(),
+                input_tokens=analyze_result.input_tokens,
+                output_tokens=analyze_result.output_tokens,
+                cost_usd=analyze_result.cost_usd,
+                duration_ms=int((time.monotonic() - analyze_start) * 1000),
+                started_at=analyze_started_at,
+            )
+        )
+
+        # Skill 6 (placeholder until chunk 5): draft_content_brief
         draft_skill = DraftContentBrief(client=client, budget=budget)
         draft_inputs = DraftBriefInputs(
             target_query=priority.selected_query.query.text,

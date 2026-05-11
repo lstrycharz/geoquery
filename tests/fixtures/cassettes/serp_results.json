@@ -1,0 +1,19 @@
+{
+  "input_tokens": 800,
+  "output_tokens": 700,
+  "input": {
+    "schema_version": 1,
+    "results": [
+      {"rank": 1, "url": "https://example.com/notion-alternatives-engineering-2026", "title": "10 Notion Alternatives for Engineering Teams (2026)", "snippet": "We tested 10 wiki tools with a 50-person engineering team. Confluence, Outline, BookStack, GitBook, Slab, Slite, Coda, Tettra, Stack Overflow for Teams, Almanac. Pricing and feature comparison.", "extracted_content": null},
+      {"rank": 2, "url": "https://example.com/leaving-notion", "title": "Why We Left Notion (and What We Switched To)", "snippet": "A migration story from a 200-person dev shop. Pain points: search, performance, Markdown export. Switched to a self-hosted Outline instance.", "extracted_content": null},
+      {"rank": 3, "url": "https://example.com/notion-vs-outline-deep-dive", "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis", "snippet": "Feature-by-feature comparison: Markdown source, API, SSO, audit log, pricing. Recommends Outline for Markdown-first teams.", "extracted_content": null},
+      {"rank": 4, "url": "https://example.com/best-engineering-wiki", "title": "Best Engineering Wikis of 2026: Editorial Picks", "snippet": "Editorial roundup of the top engineering wiki tools. Covers Notion, Confluence, GitBook, Outline, Stack Overflow for Teams.", "extracted_content": null},
+      {"rank": 5, "url": "https://example.com/notion-pricing-engineering", "title": "Is Notion Still Worth It for Engineering Teams?", "snippet": "Cost analysis at 200 seats. Compares Plus, Business, Enterprise tiers. Concludes price-per-seat doesn't scale for engineering use cases.", "extracted_content": null},
+      {"rank": 6, "url": "https://example.com/confluence-vs-notion", "title": "Confluence vs Notion for Software Teams", "snippet": "Atlassian's Confluence vs Notion comparison. Confluence wins for Jira integration; Notion wins for flexibility and Markdown.", "extracted_content": null},
+      {"rank": 7, "url": "https://example.com/self-hosted-wikis", "title": "Self-Hosted Knowledge Bases: BookStack, Outline, Wiki.js", "snippet": "For teams that need data sovereignty. BookStack, Outline (self-hosted), Wiki.js compared on setup difficulty and feature set.", "extracted_content": null},
+      {"rank": 8, "url": "https://example.com/notion-api-engineering", "title": "Building Engineering Workflows on the Notion API", "snippet": "Tutorial on using Notion's API for RFC pipelines and automated doc generation. Notes that the API has limits for production use.", "extracted_content": null},
+      {"rank": 9, "url": "https://example.com/notion-pros-cons", "title": "Notion for Engineering Documentation: Pros and Cons", "snippet": "A balanced take. Pros: ease of use, real-time collab. Cons: search, performance at scale, Markdown export pain.", "extracted_content": null},
+      {"rank": 10, "url": "https://example.com/wiki-tool-decision-framework", "title": "How to Pick a Wiki Tool: A Decision Framework", "snippet": "Framework covering 5 axes: source-of-truth, collaboration, security, integration, total cost. Examples include Notion, Confluence, Outline.", "extracted_content": null}
+    ]
+  }
+}

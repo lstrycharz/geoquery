@@ -165,6 +165,13 @@ class SerpAnalysis(BaseModel):
     recommended_format: str
 
 
+class SerpResultList(BaseModel):
+    """Wrapper used by the web_search tool's structured-output emit."""
+
+    schema_version: int = 1
+    results: list[SerpResult]
+
+
 # ---------------------------------------------------------------------------
 # Content brief (draft_content_brief skill)
 # ---------------------------------------------------------------------------

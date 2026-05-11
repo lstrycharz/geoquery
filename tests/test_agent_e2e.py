@@ -7,13 +7,18 @@ from __future__ import annotations
 from agent import run_brief
 from memory import EpisodicMemory
 
-_PIPELINE_CASSETTES = (
+# Skill cassettes (logged to episodic memory)
+_SKILL_CASSETTES = (
     "define_icp",
     "generate_geo_query_list",
     "score_queries",
     "select_priority_query",
+    "analyze_serp",
     "draft_content_brief",
 )
+# Plus tool cassettes (not logged as skill invocations but still need to be loaded)
+_TOOL_CASSETTES = ("serp_results",)
+_PIPELINE_CASSETTES = _SKILL_CASSETTES + _TOOL_CASSETTES
 
 
 def _load_pipeline(fake_client) -> None:
@@ -46,7 +51,7 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(fake_client, tmp_sett
     assert run is not None
     assert run["status"] == "completed"
     invocations = mem.get_invocations(outcome.run_id)
-    assert [i["skill_name"] for i in invocations] == list(_PIPELINE_CASSETTES)
+    assert [i["skill_name"] for i in invocations] == list(_SKILL_CASSETTES)
     assert all(i["cost_usd"] > 0 for i in invocations)
 
 
