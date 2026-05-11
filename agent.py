@@ -28,6 +28,7 @@ from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueries
 from skills.research_company import ResearchCompany, ResearchCompanyInputs
 from skills.score_queries import ScoreQueries, ScoreQueriesInputs
 from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQuery
+from tools.dataforseo import fetch_keyword_metrics
 from tools.web_fetch import fetch_page as _default_fetch_page
 from tools.web_search import search_top_n
 
@@ -200,9 +201,20 @@ def run_brief(
         )
         journey = queries_result.output
 
+        # Tool (chunk 11, hybrid): DataForSEO keyword metrics. Returns {} when
+        # credentials are unset; score_queries falls back to LLM estimation.
+        keyword_metrics = fetch_keyword_metrics(
+            login=settings.dataforseo_login,
+            password=settings.dataforseo_password,
+            queries=[q.text for q in journey.queries],
+            budget=budget,
+        )
+
         # Skill 3: score_queries
         score_skill = ScoreQueries(client=client, budget=budget)
-        score_inputs = ScoreQueriesInputs(journey=journey, icp_segment=primary_segment)
+        score_inputs = ScoreQueriesInputs(
+            journey=journey, icp_segment=primary_segment, keyword_metrics=keyword_metrics or None
+        )
         score_start = time.monotonic()
         score_started_at = _now()
         score_result = score_skill.run(score_inputs)
