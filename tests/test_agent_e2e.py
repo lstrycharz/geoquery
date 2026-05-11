@@ -7,7 +7,13 @@ from __future__ import annotations
 from agent import run_brief
 from memory import EpisodicMemory
 
-_PIPELINE_CASSETTES = ("define_icp", "generate_geo_query_list", "draft_content_brief")
+_PIPELINE_CASSETTES = (
+    "define_icp",
+    "generate_geo_query_list",
+    "score_queries",
+    "select_priority_query",
+    "draft_content_brief",
+)
 
 
 def _load_pipeline(fake_client) -> None:

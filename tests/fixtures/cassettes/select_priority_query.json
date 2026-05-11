@@ -1,0 +1,25 @@
+{
+  "input_tokens": 3000,
+  "output_tokens": 600,
+  "input": {
+    "schema_version": 1,
+    "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+    "selected_query": {
+      "schema_version": 1,
+      "query": {
+        "position": 19,
+        "text": "alternatives to notion for engineering documentation",
+        "framing": "vendor-comparing",
+        "refinement_applied": true
+      },
+      "metrics": {"volume": null, "kd": null, "cpc": null, "serp_features": []},
+      "traffic_score": 7,
+      "difficulty_score": 7,
+      "business_value_score": 9,
+      "composite": 7.4,
+      "competitor_urls": [],
+      "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+    },
+    "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
+  }
+}

@@ -1,10 +1,8 @@
 """Agent orchestrator — wires the skills end-to-end.
 
-Chunk 1: define_icp → draft_content_brief (placeholder query).
-Chunk 2: + generate_geo_query_list (Haiku) between them; placeholder picks
-the middle refined-stretch query (position 13-15) as the target.
-Subsequent chunks layer in score_queries, select_priority_query, analyze_serp,
-and replace the placeholder drafter.
+Pipeline (chunks 1-3): define_icp -> generate_geo_query_list -> score_queries ->
+select_priority_query -> draft_content_brief (placeholder).
+Chunks 4-5 layer in analyze_serp + a real SERP-informed drafter.
 """
 
 from __future__ import annotations
@@ -17,13 +15,15 @@ from pathlib import Path
 from anthropic import Anthropic
 
 from config import Settings, get_settings
-from contracts import BuyerJourney, ContentBrief, ICPSegmentList
+from contracts import ContentBrief, ICPSegmentList, Priority
 from guardrails import BudgetExceeded, RetryExceeded, RunBudget
 from memory import EpisodicMemory, SkillInvocationRecord
 from memory.episodic import _now, serialize_for_log
 from skills.define_icp import DefineIcp, DefineIcpInputs
 from skills.draft_content_brief import DraftBriefInputs, DraftContentBrief
 from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueriesInputs
+from skills.score_queries import ScoreQueries, ScoreQueriesInputs
+from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQuery
 
 _EPISODIC_DB_NAME = "episodic.db"
 
@@ -39,22 +39,6 @@ class AgentOutcome:
 
 def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:60] or "untitled"
-
-
-def _placeholder_priority_query(journey: BuyerJourney) -> str:
-    """Until chunks 3+5 land (scoring + priority + SERP), pick a refined-stretch
-    vendor-comparing or power-user query — the highest commercial-intent zone
-    of the journey. Stable, defensible heuristic for v0.
-
-    Falls back to the middle query if no refined query matches the preferred
-    framings (which shouldn't happen with a healthy generator output).
-    """
-    preferred = {"vendor-comparing", "power-user"}
-    for q in journey.queries:
-        if q.refinement_applied and q.framing in preferred:
-            return q.text
-    middle = journey.queries[len(journey.queries) // 2]
-    return middle.text
 
 
 def _format_brief_markdown(brief: ContentBrief, run_id: str, company: str, market: str) -> str:
@@ -160,13 +144,61 @@ def run_brief(
                 started_at=queries_started_at,
             )
         )
-        journey: BuyerJourney = queries_result.output
+        journey = queries_result.output
 
-        # Skill (placeholder): draft_content_brief
-        target_query = _placeholder_priority_query(journey)
+        # Skill 3: score_queries
+        score_skill = ScoreQueries(client=client, budget=budget)
+        score_inputs = ScoreQueriesInputs(journey=journey, icp_segment=primary_segment)
+        score_start = time.monotonic()
+        score_started_at = _now()
+        score_result = score_skill.run(score_inputs)
+        memory.log_skill_invocation(
+            SkillInvocationRecord(
+                run_id=run.id,
+                skill_name=score_skill.name,
+                attempt=score_result.attempt,
+                model=score_result.model,
+                input_json=serialize_for_log(
+                    {"journey_size": len(journey.queries), "segment": primary_segment.segment_label}
+                ),
+                output_json=score_result.output.model_dump_json(),
+                input_tokens=score_result.input_tokens,
+                output_tokens=score_result.output_tokens,
+                cost_usd=score_result.cost_usd,
+                duration_ms=int((time.monotonic() - score_start) * 1000),
+                started_at=score_started_at,
+            )
+        )
+
+        # Skill 4: select_priority_query
+        priority_skill = SelectPriorityQuery(client=client, budget=budget)
+        priority_inputs = SelectPriorityInputs(
+            scored=score_result.output, icp_segment=primary_segment
+        )
+        priority_start = time.monotonic()
+        priority_started_at = _now()
+        priority_result = priority_skill.run(priority_inputs)
+        memory.log_skill_invocation(
+            SkillInvocationRecord(
+                run_id=run.id,
+                skill_name=priority_skill.name,
+                attempt=priority_result.attempt,
+                model=priority_result.model,
+                input_json=serialize_for_log({"scored_count": len(score_result.output.scored)}),
+                output_json=priority_result.output.model_dump_json(),
+                input_tokens=priority_result.input_tokens,
+                output_tokens=priority_result.output_tokens,
+                cost_usd=priority_result.cost_usd,
+                duration_ms=int((time.monotonic() - priority_start) * 1000),
+                started_at=priority_started_at,
+            )
+        )
+        priority: Priority = priority_result.output
+
+        # Skill 5 (placeholder until chunk 5): draft_content_brief
         draft_skill = DraftContentBrief(client=client, budget=budget)
         draft_inputs = DraftBriefInputs(
-            target_query=target_query,
+            target_query=priority.selected_query.query.text,
             icp_segment=primary_segment,
             market=market,
         )
@@ -181,7 +213,7 @@ def run_brief(
                 model=draft_result.model,
                 input_json=serialize_for_log(
                     {
-                        "target_query": target_query,
+                        "target_query": priority.selected_query.query.text,
                         "icp_segment_label": primary_segment.segment_label,
                         "market": market,
                     }

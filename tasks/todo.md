@@ -5,7 +5,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 ## Vertical slice
 - [x] **Chunk 1 — Tracer bullet**: project skeleton, `Skill` base, `define_icp`, placeholder `draft_content_brief`, episodic memory, `RunBudget`, Typer CLI, E2E smoke test. README outline + ARCHITECTURE skeleton committed. 19/19 tests green, ruff clean.
 - [x] **Chunk 2** — `generate_geo_query_list` (Haiku, single prompt, 5 buyer framings). 23/23 tests green, ruff clean. Placeholder priority-query picker until ch3 lands.
-- [ ] **Chunk 3** — `score_queries` (LLM-only stub) + `select_priority_query` (picks segment + query).
+- [x] **Chunk 3** — `score_queries` (LLM-only) + `select_priority_query` (strategic, not argmax). 27/27 green, ruff clean. Placeholder priority-query picker retired.
 - [ ] **Chunk 4** — `tools/web_search.py` + `analyze_serp` (snippets only).
 - [ ] **Chunk 5** — Replace placeholder `draft_content_brief` with real SERP-snippet-informed version.
 - [ ] **Chunk 6** — Deterministic + model-graded evals + inner-loop revision.
