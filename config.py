@@ -9,7 +9,15 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+    # `env_ignore_empty=True`: a shell var like `ANTHROPIC_API_KEY=""` (empty
+    # string) is treated as unset, so the value in `.env` is not silently
+    # shadowed by a sandboxed/harness shell that injects empty vars.
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        env_ignore_empty=True,
+    )
 
     anthropic_api_key: str = Field(..., alias="ANTHROPIC_API_KEY")
 

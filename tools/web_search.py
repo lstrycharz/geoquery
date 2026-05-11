@@ -23,8 +23,8 @@ from guardrails import RunBudget
 from skills.base import estimate_cost
 
 WEB_SEARCH_TOOL_TYPE = "web_search_20250305"
-_MODEL = "claude-haiku-4-5"
-_MAX_OUTPUT_TOKENS = 2048
+_MODEL = "claude-haiku-4-5-20251001"
+_MAX_OUTPUT_TOKENS = 4096
 _SEARCH_FLAT_USD = 0.01  # ~$10 / 1000 searches, charged once per call
 
 _SYSTEM = (

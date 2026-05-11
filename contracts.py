@@ -6,9 +6,24 @@ Nested models inherit their parent's version.
 
 from __future__ import annotations
 
-from typing import Literal
+import json
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, field_validator
+
+
+def _coerce_json_list(v: Any) -> Any:
+    """Some models occasionally serialize nested list-of-object fields as a
+    JSON string instead of a real list. Coerce defensively so the contract
+    doesn't reject otherwise-valid output."""
+    if isinstance(v, str):
+        try:
+            decoded = json.loads(v)
+            if isinstance(decoded, list):
+                return decoded
+        except json.JSONDecodeError:
+            pass
+    return v
 
 # ---------------------------------------------------------------------------
 # Company Dossier (research_company skill, added in chunk 9)
@@ -70,6 +85,11 @@ class ICPSegmentList(BaseModel):
     schema_version: int = 1
     segments: list[ICPSegment] = Field(min_length=2, max_length=4)
 
+    @field_validator("segments", mode="before")
+    @classmethod
+    def _decode_segments(cls, v):
+        return _coerce_json_list(v)
+
 
 # ---------------------------------------------------------------------------
 # GEO query list (generate_geo_query_list skill, added in chunk 2)
@@ -92,6 +112,11 @@ class BuyerJourney(BaseModel):
     schema_version: int = 1
     queries: list[Query] = Field(min_length=22, max_length=28)
     journey_arc_summary: str
+
+    @field_validator("queries", mode="before")
+    @classmethod
+    def _decode_queries(cls, v):
+        return _coerce_json_list(v)
 
     @field_validator("queries")
     @classmethod
@@ -130,6 +155,11 @@ class ScoredQueryList(BaseModel):
     schema_version: int = 1
     scored: list[ScoredQuery]
 
+    @field_validator("scored", mode="before")
+    @classmethod
+    def _decode_scored(cls, v):
+        return _coerce_json_list(v)
+
 
 # ---------------------------------------------------------------------------
 # Priority (select_priority_query skill, added in chunk 3)
@@ -163,6 +193,16 @@ class SerpAnalysis(BaseModel):
     common_angles: list[str]
     content_gaps: list[str]
     recommended_format: str
+
+    @field_validator("top_results", mode="before")
+    @classmethod
+    def _decode_top_results(cls, v):
+        return _coerce_json_list(v)
+
+    @field_validator("common_angles", "content_gaps", mode="before")
+    @classmethod
+    def _decode_string_lists(cls, v):
+        return _coerce_json_list(v)
 
 
 class SerpResultList(BaseModel):
@@ -200,3 +240,14 @@ class ContentBrief(BaseModel):
     sources: list[str]
     recommended_length_words: int
     internal_linking_suggestions: list[InternalLink] = Field(default_factory=list)
+
+    @field_validator(
+        "structure",
+        "key_points",
+        "sources",
+        "internal_linking_suggestions",
+        mode="before",
+    )
+    @classmethod
+    def _decode_brief_lists(cls, v):
+        return _coerce_json_list(v)

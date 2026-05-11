@@ -24,7 +24,7 @@ class ScoreQueries(Skill[ScoreQueriesInputs, ScoredQueryList]):
     name = "score_queries"
     model = "claude-sonnet-4-6"
     output_type = ScoredQueryList
-    max_output_tokens = 4096
+    max_output_tokens = 8192  # 25 scored queries + per-query rationales
 
     def build_user_message(self, inputs: ScoreQueriesInputs) -> str:
         journey_json = inputs.journey.model_dump_json(indent=2)

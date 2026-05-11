@@ -19,7 +19,7 @@ class DefineIcp(Skill[DefineIcpInputs, ICPSegmentList]):
     name = "define_icp"
     model = "claude-sonnet-4-6"
     output_type = ICPSegmentList
-    max_output_tokens = 4096
+    max_output_tokens = 8192  # multi-segment ICPs are verbose (2-4 segments * ~2k tokens each)
 
     def build_user_message(self, inputs: DefineIcpInputs) -> str:
         return (

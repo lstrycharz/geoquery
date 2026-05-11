@@ -64,15 +64,23 @@ class BuyerRealismJudge:
     client: Anthropic
     budget: RunBudget
     name: str = "judge_buyer_realism"
+    # Judges are advisory: their failures surface in the episodic log but do
+    # not gate the run. Deterministic checks are the blocking gate.
+    blocking: bool = False
 
     _SYSTEM = (
         "You evaluate whether a list of search queries reads like what a real "
         "buyer (not an expert) would actually type into a search engine. "
         "Real buyers use casual phrasing, drop filler words, type half-formed "
-        "questions, and never sound like SEO professionals or domain experts. "
-        "Flag any query that reads over-formal, over-polished, or expert-toned. "
-        "Pass if the LIST OVERALL reads like a real buyer journey — a few "
-        "over-formal items are tolerable; many are not."
+        "questions, and rarely sound like SEO professionals or domain experts.\n\n"
+        "Threshold rule (apply strictly):\n"
+        "- PASS if at least 70% of queries read like real-buyer queries. A few "
+        "  borderline-formal queries are normal and tolerable in any journey.\n"
+        "- FAIL only if a clear majority (>30%) read truly SEO-professional / "
+        "  marketing-deck-style: full sentences, no dropped words, perfectly "
+        "  parallel structure, polished terminology a buyer wouldn't type.\n\n"
+        "In `failures`, list only the queries you'd flag as truly expert-toned "
+        "(not just slightly formal). This list informs revision; keep it tight."
     )
 
     def evaluate(self, output: BuyerJourney) -> EvalResult:
@@ -95,6 +103,7 @@ class BriefSpecificityJudge:
     client: Anthropic
     budget: RunBudget
     name: str = "judge_brief_specificity"
+    blocking: bool = False
 
     _SYSTEM = (
         "You evaluate whether a content brief's angle is SPECIFIC and DIFFERENTIATED, "

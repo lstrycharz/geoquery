@@ -25,7 +25,7 @@ class AnalyzeSerp(Skill[AnalyzeSerpInputs, SerpAnalysis]):
     name = "analyze_serp"
     model = "claude-sonnet-4-6"
     output_type = SerpAnalysis
-    max_output_tokens = 2048
+    max_output_tokens = 4096
 
     def build_user_message(self, inputs: AnalyzeSerpInputs) -> str:
         results_block = "\n\n".join(

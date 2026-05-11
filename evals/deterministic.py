@@ -33,6 +33,11 @@ class EvalResult:
 @runtime_checkable
 class Evaluator(Protocol):
     name: str
+    # Blocking evaluators trigger the inner-loop revision when they fail.
+    # Advisory evaluators surface their failures in the episodic log but
+    # do not block the pipeline. Deterministic shape checks should block;
+    # model-graded judgment calls are usually advisory.
+    blocking: bool
 
     def evaluate(self, output: Any) -> EvalResult: ...
 
@@ -43,6 +48,7 @@ class Evaluator(Protocol):
 @dataclass
 class IcpSegmentsInRange:
     name: str = "icp_segments_in_range"
+    blocking: bool = True
 
     def evaluate(self, output: ICPSegmentList) -> EvalResult:
         fails: list[str] = []
@@ -55,6 +61,7 @@ class IcpSegmentsInRange:
 @dataclass
 class PersonasHaveLanguagePatterns:
     name: str = "personas_have_language_patterns"
+    blocking: bool = True
 
     def evaluate(self, output: ICPSegmentList) -> EvalResult:
         fails: list[str] = []
@@ -74,6 +81,7 @@ class PersonasHaveLanguagePatterns:
 @dataclass
 class QueryCountInRange:
     name: str = "query_count_in_range"
+    blocking: bool = True
 
     def evaluate(self, output: BuyerJourney) -> EvalResult:
         fails: list[str] = []
@@ -88,6 +96,7 @@ class RefinementMatchesPositions:
     """Positions 1-14 are broad (refinement_applied=False); 15+ are refined."""
 
     name: str = "refinement_matches_positions"
+    blocking: bool = True
 
     def evaluate(self, output: BuyerJourney) -> EvalResult:
         fails: list[str] = []
@@ -105,6 +114,7 @@ class RefinementMatchesPositions:
 @dataclass
 class ScoredQueriesHaveValidComposites:
     name: str = "scored_queries_have_valid_composites"
+    blocking: bool = True
 
     def evaluate(self, output: ScoredQueryList) -> EvalResult:
         fails: list[str] = []
@@ -124,6 +134,7 @@ class ScoredQueriesHaveValidComposites:
 @dataclass
 class AnalyzeSerpStructure:
     name: str = "analyze_serp_structure"
+    blocking: bool = True
 
     def evaluate(self, output: SerpAnalysis) -> EvalResult:
         fails: list[str] = []
@@ -144,6 +155,7 @@ class AnalyzeSerpStructure:
 @dataclass
 class BriefStructure:
     name: str = "brief_structure"
+    blocking: bool = True
 
     def evaluate(self, output: ContentBrief) -> EvalResult:
         fails: list[str] = []
@@ -166,6 +178,7 @@ class BriefStructure:
 @dataclass
 class DraftAngleNonEmpty:
     name: str = "draft_angle_non_empty"
+    blocking: bool = True
     min_words: int = 6
 
     def evaluate(self, output: ContentBrief) -> EvalResult:

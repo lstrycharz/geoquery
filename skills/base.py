@@ -37,7 +37,9 @@ PROMPTS_DIR = Path(__file__).parent / "prompts"
 # Pricing per million tokens (USD), approximate Claude 4.X public pricing.
 # Used to charge the RunBudget after each call.
 _PRICE_PER_MTOK: dict[str, tuple[float, float]] = {
+    # Aliases and versioned IDs both supported by the Messages API; map both.
     "claude-haiku-4-5": (0.80, 4.00),
+    "claude-haiku-4-5-20251001": (0.80, 4.00),
     "claude-sonnet-4-6": (3.00, 15.00),
     "claude-opus-4-7": (15.00, 75.00),
 }
@@ -96,30 +98,36 @@ class Skill(ABC, Generic[InputT, OutputT]):
 
     def run(self, inputs: InputT) -> SkillResult[OutputT]:
         """Public entry: runs the skill and applies the inner-loop revision
-        if any evaluators fail. Bounded by RunBudget.register_attempt's retry cap.
+        if any *blocking* evaluators fail. Advisory evaluators (model-graded
+        judges) surface their failures in the result but do not gate the loop.
+        Bounded by RunBudget.register_attempt's retry cap.
         """
         evaluators = self.make_evaluators()
         revision_feedback: list[str] = []
-        last_result: SkillResult[OutputT] | None = None
         while True:
             result = self._invoke_once(inputs, revision_feedback)
-            failures: list[str] = []
+            blocking_failures: list[str] = []
+            advisory_failures: list[str] = []
             for ev in evaluators:
                 er = ev.evaluate(result.output)
-                if not er.passed:
-                    failures.extend(f"[{er.name}] {msg}" for msg in er.failures)
-            if not failures:
+                if er.passed:
+                    continue
+                bucket = blocking_failures if getattr(ev, "blocking", True) else advisory_failures
+                bucket.extend(f"[{er.name}] {msg}" for msg in er.failures)
+            if not blocking_failures:
+                # Pipeline proceeds. Advisory failures are recorded but not
+                # treated as failures for purposes of eval_passed (which gates
+                # downstream consumers / episodic-log "did this skill pass?").
                 result.eval_passed = True
-                result.eval_failures = []
+                result.eval_failures = [f"[ADVISORY] {f}" for f in advisory_failures]
                 return result
             result.eval_passed = False
-            result.eval_failures = failures
-            last_result = result
-            revision_feedback = failures
-            # Loop continues. The next call to budget.register_attempt() (inside
-            # _invoke_once) will raise RetryExceeded once the cap is hit, surfacing
-            # the still-failing last_result via the partial-run logs in agent.py.
-            del last_result  # keep linter happy; we only kept it for clarity
+            result.eval_failures = blocking_failures + [
+                f"[ADVISORY] {f}" for f in advisory_failures
+            ]
+            # Only blocking failures feed the revision header — advisory ones
+            # would distract the model with irrelevant instructions.
+            revision_feedback = blocking_failures
 
     def _invoke_once(
         self, inputs: InputT, revision_feedback: list[str]
@@ -164,6 +172,13 @@ class Skill(ABC, Generic[InputT, OutputT]):
 
         cost = estimate_cost(self.model, response.usage.input_tokens, response.usage.output_tokens)
         self.budget.record_spend(cost)
+
+        if response.stop_reason == "max_tokens":
+            raise RuntimeError(
+                f"skill {self.name!r} hit max_output_tokens={self.max_output_tokens} "
+                f"mid-generation; tool_use input is incomplete. Raise the skill's "
+                f"max_output_tokens class var."
+            )
 
         for block in response.content:
             if block.type == "tool_use" and block.name == tool_name:

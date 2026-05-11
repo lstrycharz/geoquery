@@ -10,7 +10,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 - [x] **Chunk 5** — `draft_content_brief` is now SERP-informed. Inputs include `SerpAnalysis` (optional for backward-compat); prompt explicitly requires the angle to exploit a `content_gap` and call out a `common_angle` to differentiate from. 31/31 green.
 - [x] **Chunk 6** — Deterministic + model-graded evals + inner-loop revision. Each skill owns its evaluator list; failures trigger re-run with revision header prepended (no cache_control so revisions are cheap). 49/49 green.
 - [x] **Chunk 7** — `memory/semantic.py` (sqlite-vec + fastembed, 384-dim BGE-small). Drafter retrieves top-3 similar past briefs as "don't repeat" RAG context. 52/52 green. Note: requires SQLite with extension loading — Brew Python 3.13+ or Docker.
-- [ ] **Chunk 8** — Generate 3 example briefs; verify v1 pipeline holds.
+- [x] **Chunk 8** — V1 pipeline validated on 3 real runs (Notion / Linear / Glossier across B2B SaaS + DTC beauty), $0.99 total. Fixes landed: bump per-skill max_output_tokens to prevent mid-JSON truncation; defensive `_coerce_json_list` validators on contracts (model occasionally double-encodes nested arrays); `env_ignore_empty=True` so harness shell can't shadow `.env`; advisory vs blocking eval distinction (model-graded judges no longer gate the run on borderline calls).
 
 ## Stretches (additive, no regression to v1)
 - [ ] **Chunk 9** — `research_company` (7th skill upstream; `define_icp` consumes dossier).
