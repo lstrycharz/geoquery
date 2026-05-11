@@ -1,0 +1,71 @@
+{
+  "input_tokens": 2000,
+  "output_tokens": 1500,
+  "input": {
+    "schema_version": 1,
+    "target_query": "how to solve search across docs is fragmented in b2b saas knowledge management",
+    "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+    "angle": "How distributed engineering teams pick a KB when half the team writes in Markdown and half doesn't",
+    "audience": "Engineering Directors at 200–500-person dev shops with a Markdown-vs-WYSIWYG factional split",
+    "structure": [
+      {
+        "heading": "The fragmented-search problem nobody admits to",
+        "purpose": "Establish recognition of the pain in the reader's own words.",
+        "key_points": [
+          "Search returning archived/duplicate docs erodes trust faster than the migration cost",
+          "Bus-factor risk is the real cost — not the seat license"
+        ]
+      },
+      {
+        "heading": "Markdown source of truth vs WYSIWYG: stop arbitrating, start funneling",
+        "purpose": "Defuse the factional fight by reframing it as a workflow question.",
+        "key_points": [
+          "Both groups care about the same outcome: their writing surviving the system",
+          "Tooling that exports clean Markdown wins the long game"
+        ]
+      },
+      {
+        "heading": "The four decision criteria engineering directors actually evaluate on",
+        "purpose": "Map criteria to evaluation activities the reader can run this week.",
+        "key_points": [
+          "Real-time collab parity with Notion (paired-doc test)",
+          "Markdown source of truth (round-trip test)",
+          "API + automation hooks (RFC-template-via-CI test)",
+          "SSO + audit log (security review checklist)"
+        ]
+      },
+      {
+        "heading": "The 30-day pilot script",
+        "purpose": "Give the reader a copy-pasteable plan they can socialize to their VP.",
+        "key_points": [
+          "Week 1: import 50 critical docs",
+          "Week 2: route RFCs through it",
+          "Week 3: measure search-hit-rate vs baseline",
+          "Week 4: decision meeting with data"
+        ]
+      },
+      {
+        "heading": "When to walk away — three failure modes to watch",
+        "purpose": "Trust-building section: name what does NOT work.",
+        "key_points": [
+          "Tool sprawl: layering a 5th tool on top",
+          "Custom wiki: maintenance cost compounds",
+          "Half-rolled-out: split-brain across teams kills adoption"
+        ]
+      }
+    ],
+    "key_points": [
+      "Lead with bus-factor framing, not feature comparison",
+      "Cite the Markdown vs WYSIWYG factional split as a known problem",
+      "Use the language pattern 'single source of truth' verbatim in H2 or intro",
+      "Avoid the word 'tribal knowledge' in titles; use it in body only — overused in SERP"
+    ],
+    "sources": [
+      "Placeholder — chunk 4 replaces with SERP top-3",
+      "Placeholder — Hacker News thread referenced for credibility",
+      "Placeholder — internal incident postmortem citation"
+    ],
+    "recommended_length_words": 2200,
+    "internal_linking_suggestions": []
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "input_tokens": 1200,
+  "output_tokens": 1800,
+  "input": {
+    "schema_version": 1,
+    "segments": [
+      {
+        "schema_version": 1,
+        "segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "firmographic": {
+          "industry_vertical": "B2B SaaS — developer tooling",
+          "company_size": "200–500 employees, $20M–$100M ARR",
+          "geography": "North America + EMEA distributed",
+          "organizational_structure": "Engineering Director reports to VP Eng; KB tool selection runs through them",
+          "buying_stage": "Active evaluation after outgrowing free wiki",
+          "strategic_pain_points": [
+            "Search across docs is fragmented",
+            "New hires take 3+ months to find tribal knowledge",
+            "Markdown vs WYSIWYG factions on the team"
+          ],
+          "trigger_events": [
+            "Major incident traced to undocumented decision",
+            "Hired 20+ engineers in a quarter",
+            "Notion price hike or migration event"
+          ]
+        },
+        "persona": {
+          "role_job_title": "Director of Engineering",
+          "demographic_context": "32–45, 10+ years experience, technical IC background",
+          "motivations": [
+            "Reduce onboarding time",
+            "Lower bus-factor risk",
+            "Earn promotion to VP"
+          ],
+          "decision_criteria": [
+            "Real-time collab parity with Notion",
+            "Markdown source of truth",
+            "API + automation hooks",
+            "SSO + audit log"
+          ],
+          "language_patterns": [
+            "single source of truth",
+            "we keep losing tribal knowledge",
+            "search just doesn't work across our docs",
+            "it should integrate with our existing stack"
+          ],
+          "frustrations": [
+            "Notion search returns archived stuff",
+            "Confluence feels like 2010",
+            "Tooling teams hate maintaining a custom wiki"
+          ],
+          "downstream_use_cases": [
+            "RFC + ADR storage",
+            "Runbooks and incident postmortems",
+            "Onboarding paths per role"
+          ],
+          "information_sources": [
+            "r/engineeringmanagers",
+            "Hacker News",
+            "DevOps Slack communities",
+            "Lenny's Newsletter"
+          ]
+        }
+      },
+      {
+        "schema_version": 1,
+        "segment_label": "Ops/RevOps Manager at 50-200 startup",
+        "firmographic": {
+          "industry_vertical": "B2B SaaS — sales or marketing platform",
+          "company_size": "50–200 employees, $5M–$30M ARR",
+          "geography": "US-centric, remote-first",
+          "organizational_structure": "Reports to COO or CRO; cross-functional ownership of internal tooling",
+          "buying_stage": "Comparing 2-3 finalists with budget approved",
+          "strategic_pain_points": [
+            "Sales and CS rooms duplicate playbooks across tools",
+            "Marketing assets live in Drive, Notion, and Slack threads"
+          ],
+          "trigger_events": [
+            "New COO hire pushing on tool consolidation",
+            "Onboarding-cost review by exec team"
+          ]
+        },
+        "persona": {
+          "role_job_title": "RevOps Manager",
+          "demographic_context": "28–38, MBA optional, project-management mindset",
+          "motivations": [
+            "Be the person who fixes 'how we work'",
+            "Drive measurable onboarding-time reduction"
+          ],
+          "decision_criteria": [
+            "Templates for sales playbooks out of the box",
+            "Permissions granularity",
+            "Salesforce / HubSpot integration",
+            "Time-to-value under 30 days"
+          ],
+          "language_patterns": [
+            "we need one place for this",
+            "I'm tired of hunting in Slack",
+            "leadership wants visibility"
+          ],
+          "frustrations": [
+            "Sales reps don't update docs",
+            "Tool sprawl with overlapping subscriptions"
+          ],
+          "downstream_use_cases": [
+            "Sales playbooks",
+            "Onboarding checklists",
+            "Customer-facing handoff docs"
+          ],
+          "information_sources": [
+            "RevOps Co-op",
+            "Pavilion communities",
+            "LinkedIn long-form posts"
+          ]
+        }
+      }
+    ]
+  }
+}

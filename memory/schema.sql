@@ -1,0 +1,46 @@
+-- Episodic memory schema. Append-only, parameterized writes.
+-- Tables carry schema_version on each row so old data stays parseable.
+
+CREATE TABLE IF NOT EXISTS runs (
+    id              TEXT PRIMARY KEY,
+    started_at      TEXT NOT NULL,
+    ended_at        TEXT,
+    company         TEXT NOT NULL,
+    market          TEXT NOT NULL,
+    status          TEXT NOT NULL,         -- 'in_progress' | 'completed' | 'failed' | 'aborted_cost' | 'aborted_retries'
+    total_cost_usd  REAL NOT NULL DEFAULT 0.0,
+    brief_path      TEXT,
+    schema_version  INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS skill_invocations (
+    id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id              TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE,
+    skill_name          TEXT NOT NULL,
+    attempt             INTEGER NOT NULL,
+    model               TEXT NOT NULL,
+    input_json          TEXT NOT NULL,
+    output_json         TEXT,
+    eval_passed         INTEGER,           -- nullable: chunks 1-5 don't run evals
+    eval_details_json   TEXT,
+    input_tokens        INTEGER NOT NULL DEFAULT 0,
+    output_tokens       INTEGER NOT NULL DEFAULT 0,
+    cost_usd            REAL NOT NULL DEFAULT 0.0,
+    duration_ms         INTEGER,
+    started_at          TEXT NOT NULL,
+    schema_version      INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE INDEX IF NOT EXISTS idx_skill_inv_run_id ON skill_invocations(run_id);
+CREATE INDEX IF NOT EXISTS idx_runs_started_at ON runs(started_at);
+
+-- Outer-loop feedback table (populated by `geoquery feedback`, chunk 14).
+CREATE TABLE IF NOT EXISTS human_edits (
+    id                      INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id                  TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE,
+    original_brief_path     TEXT NOT NULL,
+    edited_brief_path       TEXT NOT NULL,
+    diff_summary            TEXT NOT NULL,
+    captured_at             TEXT NOT NULL,
+    schema_version          INTEGER NOT NULL DEFAULT 1
+);

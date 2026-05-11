@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "geoquery"
+version = "0.1.0"
+description = "GEO Query → Content Brief Agent (cluster anchor)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Lukasz Strycharz" }]
+# Core deps are everything chunks 1–6 need (skills + episodic memory + CLI + evals).
+dependencies = [
+    "anthropic==0.101.0",
+    "pydantic==2.13.4",
+    "pydantic-settings==2.14.1",
+    "typer==0.25.1",
+    "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+# Chunk 7: semantic memory.
+semantic = [
+    "sqlite-vec==0.1.6",
+    "fastembed==0.4.2",
+]
+# Chunk 10+12: page-content extraction and sitemap parsing.
+web = [
+    "readability-lxml==0.8.1",
+    "lxml==5.3.0",
+]
+# Chunk 13: HTML eval reports.
+report = ["jinja2==3.1.4"]
+# Chunk 16: MCP server.
+mcp = ["mcp==1.1.2"]
+# Dev tooling.
+dev = [
+    "pytest==9.0.3",
+    "pytest-asyncio==0.24.0",
+    "ruff==0.8.4",
+    "pre-commit==4.0.1",
+]
+# Convenience: everything.
+all = [
+    "geoquery[semantic,web,report,mcp,dev]",
+]
+
+[project.scripts]
+geoquery = "cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["skills", "tools", "memory", "evals", "guardrails"]
+include = [
+    "agent.py",
+    "cli.py",
+    "config.py",
+    "contracts.py",
+    "mcp_server.py",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
