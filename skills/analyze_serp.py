@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from contracts import SerpAnalysis, SerpResult
+from evals.deterministic import AnalyzeSerpStructure, Evaluator
 from skills.base import Skill
 
 
@@ -36,3 +37,6 @@ class AnalyzeSerp(Skill[AnalyzeSerpInputs, SerpAnalysis]):
             f"Top SERP results:\n{results_block}\n\n"
             "Produce the SerpAnalysis per the system instructions."
         )
+
+    def make_evaluators(self) -> list[Evaluator]:
+        return [AnalyzeSerpStructure()]

@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from contracts import ContentBrief, ICPSegment, SerpAnalysis
+from evals.deterministic import BriefStructure, DraftAngleNonEmpty, Evaluator
+from evals.model_graded import BriefSpecificityJudge
 from skills.base import Skill
 
 
@@ -41,3 +43,10 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
             f"SERP analysis:\n{serp_block}\n\n"
             "Produce the ContentBrief per the system instructions."
         )
+
+    def make_evaluators(self) -> list[Evaluator]:
+        return [
+            BriefStructure(),
+            DraftAngleNonEmpty(),
+            BriefSpecificityJudge(client=self.client, budget=self.budget),
+        ]

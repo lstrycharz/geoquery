@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from contracts import BuyerJourney, ICPSegment
+from evals.deterministic import Evaluator, QueryCountInRange, RefinementMatchesPositions
+from evals.model_graded import BuyerRealismJudge
 from skills.base import Skill
 
 
@@ -37,3 +39,10 @@ class GenerateGeoQueryList(Skill[GenerateQueriesInputs, BuyerJourney]):
             f"{'; '.join(seg.firmographic.strategic_pain_points)}\n\n"
             "Produce the 25-query buyer journey per the system instructions."
         )
+
+    def make_evaluators(self) -> list[Evaluator]:
+        return [
+            QueryCountInRange(),
+            RefinementMatchesPositions(),
+            BuyerRealismJudge(client=self.client, budget=self.budget),
+        ]

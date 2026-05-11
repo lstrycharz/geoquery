@@ -1,0 +1,8 @@
+{
+  "input_tokens": 800,
+  "output_tokens": 40,
+  "input": {
+    "passed": true,
+    "failures": []
+  }
+}

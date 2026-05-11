@@ -112,6 +112,8 @@ def run_brief(
                 model=icp_result.model,
                 input_json=serialize_for_log({"company": company, "market": market}),
                 output_json=icp_result.output.model_dump_json(),
+                eval_passed=icp_result.eval_passed,
+                eval_details_json=serialize_for_log(icp_result.eval_failures),
                 input_tokens=icp_result.input_tokens,
                 output_tokens=icp_result.output_tokens,
                 cost_usd=icp_result.cost_usd,
@@ -139,6 +141,8 @@ def run_brief(
                     {"icp_segment_label": primary_segment.segment_label, "market": market}
                 ),
                 output_json=queries_result.output.model_dump_json(),
+                eval_passed=queries_result.eval_passed,
+                eval_details_json=serialize_for_log(queries_result.eval_failures),
                 input_tokens=queries_result.input_tokens,
                 output_tokens=queries_result.output_tokens,
                 cost_usd=queries_result.cost_usd,
@@ -164,6 +168,8 @@ def run_brief(
                     {"journey_size": len(journey.queries), "segment": primary_segment.segment_label}
                 ),
                 output_json=score_result.output.model_dump_json(),
+                eval_passed=score_result.eval_passed,
+                eval_details_json=serialize_for_log(score_result.eval_failures),
                 input_tokens=score_result.input_tokens,
                 output_tokens=score_result.output_tokens,
                 cost_usd=score_result.cost_usd,
@@ -188,6 +194,8 @@ def run_brief(
                 model=priority_result.model,
                 input_json=serialize_for_log({"scored_count": len(score_result.output.scored)}),
                 output_json=priority_result.output.model_dump_json(),
+                eval_passed=priority_result.eval_passed,
+                eval_details_json=serialize_for_log(priority_result.eval_failures),
                 input_tokens=priority_result.input_tokens,
                 output_tokens=priority_result.output_tokens,
                 cost_usd=priority_result.cost_usd,
@@ -224,6 +232,8 @@ def run_brief(
                     }
                 ),
                 output_json=analyze_result.output.model_dump_json(),
+                eval_passed=analyze_result.eval_passed,
+                eval_details_json=serialize_for_log(analyze_result.eval_failures),
                 input_tokens=analyze_result.input_tokens,
                 output_tokens=analyze_result.output_tokens,
                 cost_usd=analyze_result.cost_usd,
@@ -257,6 +267,8 @@ def run_brief(
                     }
                 ),
                 output_json=draft_result.output.model_dump_json(),
+                eval_passed=draft_result.eval_passed,
+                eval_details_json=serialize_for_log(draft_result.eval_failures),
                 input_tokens=draft_result.input_tokens,
                 output_tokens=draft_result.output_tokens,
                 cost_usd=draft_result.cost_usd,

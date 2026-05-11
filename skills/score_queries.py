@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from contracts import BuyerJourney, ICPSegment, ScoredQueryList
+from evals.deterministic import Evaluator, ScoredQueriesHaveValidComposites
 from skills.base import Skill
 
 
@@ -34,3 +35,6 @@ class ScoreQueries(Skill[ScoreQueriesInputs, ScoredQueryList]):
             f"Buyer journey to score:\n```json\n{journey_json}\n```\n\n"
             "Produce one ScoredQuery per input query per the system instructions."
         )
+
+    def make_evaluators(self) -> list[Evaluator]:
+        return [ScoredQueriesHaveValidComposites()]

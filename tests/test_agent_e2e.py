@@ -16,9 +16,13 @@ _SKILL_CASSETTES = (
     "analyze_serp",
     "draft_content_brief",
 )
-# Plus tool cassettes (not logged as skill invocations but still need to be loaded)
-_TOOL_CASSETTES = ("serp_results",)
-_PIPELINE_CASSETTES = _SKILL_CASSETTES + _TOOL_CASSETTES
+# Plus tool + judge cassettes (not logged as skill invocations but still loaded)
+_OTHER_CASSETTES = (
+    "serp_results",
+    "judge_buyer_realism",
+    "judge_brief_specificity",
+)
+_PIPELINE_CASSETTES = _SKILL_CASSETTES + _OTHER_CASSETTES
 
 
 def _load_pipeline(fake_client) -> None:
@@ -53,6 +57,8 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(fake_client, tmp_sett
     invocations = mem.get_invocations(outcome.run_id)
     assert [i["skill_name"] for i in invocations] == list(_SKILL_CASSETTES)
     assert all(i["cost_usd"] > 0 for i in invocations)
+    # Chunk 6: every invocation should have eval_passed = 1 (cassette outputs pass)
+    assert all(i["eval_passed"] == 1 for i in invocations)
 
 
 def test_run_brief_records_aborted_cost_when_cap_is_too_low(

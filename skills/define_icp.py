@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from contracts import ICPSegmentList
+from evals.deterministic import Evaluator, IcpSegmentsInRange, PersonasHaveLanguagePatterns
 from skills.base import Skill
 
 
@@ -26,3 +27,6 @@ class DefineIcp(Skill[DefineIcpInputs, ICPSegmentList]):
             f"Market: {inputs.market}\n\n"
             "Produce 2 to 4 distinct ICP segments per the system instructions."
         )
+
+    def make_evaluators(self) -> list[Evaluator]:
+        return [IcpSegmentsInRange(), PersonasHaveLanguagePatterns()]

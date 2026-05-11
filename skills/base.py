@@ -2,26 +2,30 @@
 
 A Skill is a deep module with one public method, `.run(inputs) -> SkillResult`.
 Internally it owns: a prompt template, a Pydantic output type, a model choice,
-and (added in chunk 6) a list of evaluators. The base class enforces:
+and a list of evaluators (chunk 6+). The base class enforces:
 
 - Anthropic structured outputs via forced tool use (the output Pydantic type's
   JSON schema is the tool's input schema; the model is forced to call it).
 - Prompt caching on the static system prompt via `cache_control: ephemeral`.
 - Budget accounting (cost cap + retry cap) before and after every call.
-- Eval + inner-loop revision hooks (stubbed here; wired in chunk 6).
+- Eval + inner-loop revision: on eval failure, re-run with feedback prepended
+  to the system prompt as a non-cached revision block. Bounded by retry cap.
 """
 
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import ClassVar, Generic, TypeVar
+from typing import TYPE_CHECKING, ClassVar, Generic, TypeVar
 
 from anthropic import Anthropic
 from pydantic import BaseModel, ValidationError
 
 from guardrails import RunBudget
+
+if TYPE_CHECKING:
+    from evals.deterministic import Evaluator
 
 InputT = TypeVar("InputT")
 OutputT = TypeVar("OutputT", bound=BaseModel)
@@ -61,6 +65,8 @@ class SkillResult(Generic[OutputT]):
     output_tokens: int
     cost_usd: float
     attempt: int
+    eval_passed: bool = True
+    eval_failures: list[str] = field(default_factory=list)
 
 
 class Skill(ABC, Generic[InputT, OutputT]):
@@ -81,21 +87,68 @@ class Skill(ABC, Generic[InputT, OutputT]):
     def system_prompt(self) -> str:
         return load_prompt(self.name)
 
+    def make_evaluators(self) -> list[Evaluator]:
+        """Subclasses override to declare deterministic + model-graded evaluators.
+
+        Default: no evaluators (skill returns whatever the model emits).
+        """
+        return []
+
     def run(self, inputs: InputT) -> SkillResult[OutputT]:
+        """Public entry: runs the skill and applies the inner-loop revision
+        if any evaluators fail. Bounded by RunBudget.register_attempt's retry cap.
+        """
+        evaluators = self.make_evaluators()
+        revision_feedback: list[str] = []
+        last_result: SkillResult[OutputT] | None = None
+        while True:
+            result = self._invoke_once(inputs, revision_feedback)
+            failures: list[str] = []
+            for ev in evaluators:
+                er = ev.evaluate(result.output)
+                if not er.passed:
+                    failures.extend(f"[{er.name}] {msg}" for msg in er.failures)
+            if not failures:
+                result.eval_passed = True
+                result.eval_failures = []
+                return result
+            result.eval_passed = False
+            result.eval_failures = failures
+            last_result = result
+            revision_feedback = failures
+            # Loop continues. The next call to budget.register_attempt() (inside
+            # _invoke_once) will raise RetryExceeded once the cap is hit, surfacing
+            # the still-failing last_result via the partial-run logs in agent.py.
+            del last_result  # keep linter happy; we only kept it for clarity
+
+    def _invoke_once(
+        self, inputs: InputT, revision_feedback: list[str]
+    ) -> SkillResult[OutputT]:
         attempt = self.budget.register_attempt(self.name)
         self.budget.check_can_spend(self._projected_cost())
+
+        system_blocks: list[dict] = []
+        if revision_feedback:
+            system_blocks.append(
+                {
+                    "type": "text",
+                    "text": _format_revision_header(revision_feedback, attempt),
+                    # No cache_control — revision header is dynamic per attempt.
+                }
+            )
+        system_blocks.append(
+            {
+                "type": "text",
+                "text": self.system_prompt,
+                "cache_control": {"type": "ephemeral"},
+            }
+        )
 
         tool_name = f"emit_{self.name}"
         response = self.client.messages.create(
             model=self.model,
             max_tokens=self.max_output_tokens,
-            system=[
-                {
-                    "type": "text",
-                    "text": self.system_prompt,
-                    "cache_control": {"type": "ephemeral"},
-                }
-            ],
+            system=system_blocks,
             messages=[
                 {"role": "user", "content": self.build_user_message(inputs)},
             ],
@@ -138,3 +191,15 @@ class Skill(ABC, Generic[InputT, OutputT]):
         prompt. Cheap to overestimate — the actual cost is recorded afterward.
         """
         return estimate_cost(self.model, 4000, self.max_output_tokens)
+
+
+def _format_revision_header(failures: list[str], attempt: int) -> str:
+    bulleted = "\n".join(f"- {f}" for f in failures)
+    return (
+        f"[REVISION ATTEMPT {attempt}]\n"
+        f"The previous output failed these checks:\n"
+        f"{bulleted}\n\n"
+        f"Re-do the task, addressing each failure specifically. Do not repeat the "
+        f"mistakes named above.\n\n"
+        f"---\n"
+    )

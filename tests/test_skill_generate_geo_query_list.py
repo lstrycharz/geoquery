@@ -24,6 +24,7 @@ def test_skill_uses_haiku_per_source_skill_warning():
 
 def test_returns_validated_journey(fake_client):
     fake_client.load_cassette("generate_geo_query_list")
+    fake_client.load_cassette("judge_buyer_realism")
     skill = GenerateGeoQueryList(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
 
     result = skill.run(
