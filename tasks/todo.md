@@ -13,7 +13,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 - [x] **Chunk 8** — V1 pipeline validated on 3 real runs (Notion / Linear / Glossier across B2B SaaS + DTC beauty), $0.99 total. Fixes landed: bump per-skill max_output_tokens to prevent mid-JSON truncation; defensive `_coerce_json_list` validators on contracts (model occasionally double-encodes nested arrays); `env_ignore_empty=True` so harness shell can't shadow `.env`; advisory vs blocking eval distinction (model-graded judges no longer gate the run on borderline calls).
 
 ## Stretches (additive, no regression to v1)
-- [ ] **Chunk 9** — `research_company` (7th skill upstream; `define_icp` consumes dossier).
+- [x] **Chunk 9** — `research_company` (Sonnet, 11-section CASINO dossier) runs first; `define_icp` consumes it as upstream grounding. Pydantic `_coerce_json_dict` validator added for SWOT/Porter dict fields (parallel to `_coerce_json_list`). 53/53 green.
 - [ ] **Chunk 10** — `tools/web_fetch.py` (SSRF-hardened) → `analyze_serp` reads top-3 pages.
 - [ ] **Chunk 11** — `tools/dataforseo.py` (**hybrid**: works without credentials, uses real volume/KD when set) → `score_queries` consumes metrics when available; competitor URLs.
 - [ ] **Chunk 12** — `tools/sitemap_parser.py` → grounded internal linking in briefs.

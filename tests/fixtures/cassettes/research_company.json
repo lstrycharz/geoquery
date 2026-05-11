@@ -1,0 +1,95 @@
+{
+  "input_tokens": 1400,
+  "output_tokens": 2800,
+  "input": {
+    "schema_version": 1,
+    "customer_segments": [
+      "Distributed engineering teams at 200-500-person dev shops",
+      "Ops/RevOps managers at 50-200-person B2B SaaS startups",
+      "Indie creators and consultants on the free tier"
+    ],
+    "product_portfolio": [
+      "Notion free tier (personal/team)",
+      "Notion Plus (small teams, $10/seat/mo)",
+      "Notion Business (mid-market, $18/seat/mo, SSO)",
+      "Notion Enterprise (SOC2 + advanced admin)",
+      "Notion AI add-on ($10/seat/mo)"
+    ],
+    "inferred_icp": "Notion's de facto ICP appears to be 50-300-person knowledge-driven teams (B2B SaaS, agencies, creator-economy companies) where the Director of Operations or VP of Engineering owns the tool-selection decision, prioritizes design and flexibility over enterprise hardening, and has outgrown a free wiki but isn't yet ready for Atlassian's complexity.",
+    "icp_priorities": [
+      "design polish",
+      "flexibility (databases + pages)",
+      "speed of setup",
+      "real-time collaboration",
+      "ease of templates/duplication"
+    ],
+    "competitors": [
+      "Confluence (Atlassian)",
+      "Outline (open-source, self-host friendly)",
+      "Coda",
+      "ClickUp Docs",
+      "GitBook",
+      "Slab",
+      "Almanac",
+      "Tettra",
+      "Stack Overflow for Teams"
+    ],
+    "company_advantages": [
+      "Best-in-class UI/UX for non-technical users",
+      "Powerful flexible-block model (mixes docs + databases)",
+      "Strong template marketplace and community",
+      "Real-time collaboration parity with Google Docs"
+    ],
+    "competitor_advantages": [
+      "Confluence integrates deeply with Jira and Atlassian admin",
+      "Outline offers Markdown source-of-truth and self-hosting (data sovereignty)",
+      "GitBook is better for technical documentation and code embeds",
+      "Coda has stronger spreadsheet-like formulas and automation"
+    ],
+    "swot": {
+      "strengths": [
+        "Dominant brand awareness among knowledge workers under 35",
+        "Network effects from template sharing and public pages",
+        "API + integrations ecosystem"
+      ],
+      "weaknesses": [
+        "Search at scale degrades visibly past 10K pages",
+        "Markdown export is lossy (a deal-breaker for engineering teams)",
+        "Pricing per-seat doesn't scale for 200+ engineer teams"
+      ],
+      "opportunities": [
+        "Engineering-team vertical with first-class Markdown source-of-truth",
+        "AI summarization + search to defuse the at-scale search issue",
+        "Enterprise governance features to defend against Confluence migration"
+      ],
+      "threats": [
+        "Outline + similar open-source alternatives winning on data sovereignty",
+        "GitHub Docs / GitBook owning the engineering-team niche",
+        "Recent price hikes triggering migration audits at incumbent customers"
+      ]
+    },
+    "porter_five_forces": {
+      "buyer_power": "Moderate-to-high — switching costs are real (re-importing docs is painful) but buyers have many credible alternatives, and IT teams can mandate a migration when budget cycles hit.",
+      "supplier_power": "Low — Notion controls its own platform end-to-end; no critical supplier dependencies beyond cloud infra.",
+      "rivalry": "Intense and rising — incumbents (Confluence) defending Atlassian-bundled accounts, open-source contenders (Outline) winning on data sovereignty, niche players (GitBook, Slab) splitting verticals.",
+      "new_entrants": "High threat — barriers are mostly UX and ecosystem, both of which AI-native startups are credibly attacking from scratch.",
+      "substitutes": "High — for many use cases, a combination of Google Docs + Slack channels + a sharepoint substitutes 'good enough' for free."
+    },
+    "strategic_recommendations": [
+      "Build a first-class Markdown source-of-truth export pipeline to neutralize engineering teams' top objection",
+      "Ship enterprise governance features (granular permissions, audit log, retention policies) to defend against Confluence",
+      "Open a small-but-credible 'Notion for Engineering' content track with technical-grade case studies",
+      "Tier AI features into a free band to defuse migration audits driven by Notion AI price increases"
+    ],
+    "executable_work_plan": [
+      "Run a 5-customer interview series with Directors of Engineering at 200-500-person dev shops to validate the Markdown-source-of-truth objection.",
+      "Audit the top 100 SERP results for engineering-doc queries to identify content gaps that a 'Notion for Engineering' content track could fill.",
+      "Publish a technical migration playbook for 'Confluence to Notion at 250 engineers' targeting BOFU vendor-comparing queries.",
+      "Commission a benchmark: search-hit-rate vs Outline and Confluence at 10K-page scale; publish results.",
+      "Engineering-specific landing page that names the Markdown source-of-truth concern head-on (don't dodge it).",
+      "Partner with 3 dev-tooling vendors for joint case studies (e.g. Linear + Notion for engineering ops).",
+      "Test pricing communication around the AI add-on; surface a 'no-AI tier' if the price-driven migration audits confirm the hypothesis.",
+      "Stand up an open-source Notion-to-Markdown export utility and host it on GitHub (defuses the lossy-export objection)."
+    ]
+  }
+}

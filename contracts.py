@@ -25,6 +25,18 @@ def _coerce_json_list(v: Any) -> Any:
             pass
     return v
 
+
+def _coerce_json_dict(v: Any) -> Any:
+    """Sibling to _coerce_json_list for dict-shaped fields (SWOT, Porter)."""
+    if isinstance(v, str):
+        try:
+            decoded = json.loads(v)
+            if isinstance(decoded, dict):
+                return decoded
+        except json.JSONDecodeError:
+            pass
+    return v
+
 # ---------------------------------------------------------------------------
 # Company Dossier (research_company skill, added in chunk 9)
 # ---------------------------------------------------------------------------
@@ -43,6 +55,26 @@ class CompanyDossier(BaseModel):
     porter_five_forces: dict[str, str]
     strategic_recommendations: list[str]
     executable_work_plan: list[str]
+
+    @field_validator(
+        "customer_segments",
+        "product_portfolio",
+        "icp_priorities",
+        "competitors",
+        "company_advantages",
+        "competitor_advantages",
+        "strategic_recommendations",
+        "executable_work_plan",
+        mode="before",
+    )
+    @classmethod
+    def _decode_dossier_lists(cls, v):
+        return _coerce_json_list(v)
+
+    @field_validator("swot", "porter_five_forces", mode="before")
+    @classmethod
+    def _decode_dossier_dicts(cls, v):
+        return _coerce_json_dict(v)
 
 
 # ---------------------------------------------------------------------------

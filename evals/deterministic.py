@@ -16,6 +16,7 @@ from typing import Any, Protocol, runtime_checkable
 
 from contracts import (
     BuyerJourney,
+    CompanyDossier,
     ContentBrief,
     ICPSegmentList,
     ScoredQueryList,
@@ -40,6 +41,45 @@ class Evaluator(Protocol):
     blocking: bool
 
     def evaluate(self, output: Any) -> EvalResult: ...
+
+
+# --- research_company ---------------------------------------------------------
+
+
+@dataclass
+class CompanyDossierComplete:
+    name: str = "company_dossier_complete"
+    blocking: bool = True
+
+    def evaluate(self, output: CompanyDossier) -> EvalResult:
+        fails: list[str] = []
+        if not output.customer_segments:
+            fails.append("customer_segments is empty")
+        if not output.product_portfolio:
+            fails.append("product_portfolio is empty")
+        if not output.inferred_icp.strip():
+            fails.append("inferred_icp is empty")
+        if not output.competitors:
+            fails.append("competitors is empty")
+        required_swot = {"strengths", "weaknesses", "opportunities", "threats"}
+        missing_swot = required_swot - set(output.swot.keys())
+        if missing_swot:
+            fails.append(f"swot missing buckets: {sorted(missing_swot)}")
+        required_forces = {
+            "buyer_power",
+            "supplier_power",
+            "rivalry",
+            "new_entrants",
+            "substitutes",
+        }
+        missing_forces = required_forces - set(output.porter_five_forces.keys())
+        if missing_forces:
+            fails.append(f"porter_five_forces missing: {sorted(missing_forces)}")
+        if not output.strategic_recommendations:
+            fails.append("strategic_recommendations is empty")
+        if not output.executable_work_plan:
+            fails.append("executable_work_plan is empty")
+        return EvalResult(name=self.name, passed=not fails, failures=fails)
 
 
 # --- define_icp ---------------------------------------------------------------

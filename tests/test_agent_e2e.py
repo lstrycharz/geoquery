@@ -9,6 +9,7 @@ from memory import EpisodicMemory
 
 # Skill cassettes (logged to episodic memory)
 _SKILL_CASSETTES = (
+    "research_company",
     "define_icp",
     "generate_geo_query_list",
     "score_queries",

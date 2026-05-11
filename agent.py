@@ -24,6 +24,7 @@ from skills.analyze_serp import AnalyzeSerp, AnalyzeSerpInputs
 from skills.define_icp import DefineIcp, DefineIcpInputs
 from skills.draft_content_brief import DraftBriefInputs, DraftContentBrief
 from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueriesInputs
+from skills.research_company import ResearchCompany, ResearchCompanyInputs
 from skills.score_queries import ScoreQueries, ScoreQueriesInputs
 from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQuery
 from tools.web_search import search_top_n
@@ -112,9 +113,36 @@ def run_brief(
     budget = RunBudget(max_cost_usd=settings.max_cost_usd)
 
     try:
-        # Skill 1: define_icp
+        # Skill 1: research_company — CASINO dossier upstream of define_icp.
+        research_skill = ResearchCompany(client=client, budget=budget)
+        research_start = time.monotonic()
+        research_started_at = _now()
+        research_result = research_skill.run(
+            ResearchCompanyInputs(company=company, market=market)
+        )
+        memory.log_skill_invocation(
+            SkillInvocationRecord(
+                run_id=run.id,
+                skill_name=research_skill.name,
+                attempt=research_result.attempt,
+                model=research_result.model,
+                input_json=serialize_for_log({"company": company, "market": market}),
+                output_json=research_result.output.model_dump_json(),
+                eval_passed=research_result.eval_passed,
+                eval_details_json=serialize_for_log(research_result.eval_failures),
+                input_tokens=research_result.input_tokens,
+                output_tokens=research_result.output_tokens,
+                cost_usd=research_result.cost_usd,
+                duration_ms=int((time.monotonic() - research_start) * 1000),
+                started_at=research_started_at,
+            )
+        )
+
+        # Skill 2: define_icp (now consumes the dossier).
         icp_skill = DefineIcp(client=client, budget=budget)
-        icp_inputs = DefineIcpInputs(company=company, market=market)
+        icp_inputs = DefineIcpInputs(
+            company=company, market=market, company_dossier=research_result.output
+        )
         icp_start = time.monotonic()
         icp_started_at = _now()
         icp_result = icp_skill.run(icp_inputs)

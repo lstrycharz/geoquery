@@ -7,6 +7,7 @@ Failures feed the inner-loop revision in skills/base.py.
 from evals.deterministic import (
     AnalyzeSerpStructure,
     BriefStructure,
+    CompanyDossierComplete,
     DraftAngleNonEmpty,
     EvalResult,
     Evaluator,
@@ -23,6 +24,7 @@ __all__ = [
     "BriefSpecificityJudge",
     "BriefStructure",
     "BuyerRealismJudge",
+    "CompanyDossierComplete",
     "DraftAngleNonEmpty",
     "EvalResult",
     "Evaluator",
