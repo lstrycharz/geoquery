@@ -18,7 +18,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 - [x] **Chunk 11** — `tools/dataforseo.py` (hybrid; returns {} without creds, uses Labs API when set) → `score_queries` receives `keyword_metrics` and copies real volume/KD/CPC into each `ScoredQuery.metrics`. 67/67 green. Competitor URLs intentionally deferred (would require 25 SERP calls; current `web_search` for the priority query is sufficient).
 - [x] **Chunk 12** — `tools/sitemap_parser.py` (SSRF-hardened, supports `<urlset>` + `<sitemapindex>` recursion, caps at 500). CLI gains `--sitemap URL`. Drafter prompt picks 3-5 real URLs from the sitemap with anchors + placement rationale; leaves the section empty when no sitemap is supplied. 73/73 green.
 - [x] **Chunk 13** — Golden regression set (3 curated inputs in `tests/golden/inputs.json`) + `geoquery eval-golden [--report]` command. Haiku-based judge checks ICP role keywords + brief angle keywords (60% threshold). `--report` writes a self-contained HTML report to `eval_reports/<timestamp>.html`. Exits non-zero if pass rate < 80%. 77/77 green.
-- [ ] **Chunk 14** — `geoquery feedback` subcommand; preferred-angle embeddings.
+- [x] **Chunk 14** — `geoquery feedback <run-id> --edited path.md` subcommand. Async outer loop: diffs the edited brief against the original, captures the unified diff into `human_edits`, and (if the Angle line changed) re-embeds the new angle into semantic memory so future similar runs surface it via RAG. 81/81 green.
 - [ ] **Chunk 15** — Streaming output for `draft_content_brief` (tokens to stdout).
 - [ ] **Chunk 16** — `mcp_server.py` (MCP stdio transport).
 - [ ] **Chunk 17** — Dockerfile + docker-compose + pre-commit hook (ruff + pytest).

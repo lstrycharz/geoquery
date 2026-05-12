@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 from datetime import UTC
+from pathlib import Path
 
 import typer
 
@@ -76,6 +77,30 @@ def show(run_id: str = typer.Argument(...)) -> None:
             f"model={inv['model']}  cost=${inv['cost_usd']:.4f}  "
             f"duration={inv['duration_ms']}ms"
         )
+
+
+@app.command()
+def feedback(
+    run_id: str = typer.Argument(..., help="Run ID returned by `geoquery brief`."),
+    edited: Path = typer.Option(  # noqa: B008 — Typer idiom
+        ..., "--edited", help="Path to the edited brief markdown file."
+    ),
+) -> None:
+    """Capture human edits to a past brief and re-embed the preferred angle.
+
+    Async outer-loop feedback: never blocks the original `brief` run. Use this
+    after you've edited the brief markdown to your taste.
+    """
+    from feedback import capture_feedback
+
+    outcome = capture_feedback(run_id=run_id, edited_brief_path=edited)
+    typer.echo(f"run_id:         {outcome.run_id}")
+    typer.echo(f"captured:       {outcome.captured}")
+    typer.echo(f"angle changed:  {outcome.angle_changed}")
+    typer.echo(f"lines changed:  {outcome.diff_lines_changed}")
+    if outcome.angle_changed:
+        typer.echo(f"original angle: {outcome.original_angle}")
+        typer.echo(f"new angle:      {outcome.edited_angle}")
 
 
 @app.command(name="eval-golden")

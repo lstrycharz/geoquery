@@ -137,6 +137,29 @@ class EpisodicMemory:
             ).fetchall()
         return [dict(r) for r in rows]
 
+    def log_human_edit(
+        self,
+        *,
+        run_id: str,
+        original_brief_path: str,
+        edited_brief_path: str,
+        diff_summary: str,
+    ) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                "INSERT INTO human_edits "
+                "(run_id, original_brief_path, edited_brief_path, diff_summary, captured_at) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (run_id, original_brief_path, edited_brief_path, diff_summary, _now()),
+            )
+
+    def get_human_edits(self, run_id: str) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM human_edits WHERE run_id = ? ORDER BY captured_at ASC", (run_id,)
+            ).fetchall()
+        return [dict(r) for r in rows]
+
 
 def serialize_for_log(value: Any) -> str:
     """Best-effort JSON serialization for skill inputs/outputs."""
