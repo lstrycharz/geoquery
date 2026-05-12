@@ -1,0 +1,17 @@
+services:
+  geoquery:
+    build: .
+    image: geoquery:0.1.0
+    env_file: .env
+    environment:
+      OUTPUT_DIR: /app/briefs
+      DATA_DIR: /app/data
+    volumes:
+      - ./briefs:/app/briefs
+      - ./data:/app/data
+    # The image's ENTRYPOINT is `python -m cli`. To run a brief:
+    #   docker compose run --rm geoquery brief --company Notion --market "B2B SaaS knowledge management"
+    # To list past runs:
+    #   docker compose run --rm geoquery runs
+    # To start the MCP server (override the entrypoint):
+    #   docker compose run --rm --entrypoint "python -m mcp_server" geoquery

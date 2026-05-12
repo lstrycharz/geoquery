@@ -83,9 +83,7 @@ class FakeMessagesAPI:
 
     def create(self, **kwargs: Any) -> FakeMessageResponse:
         tool_choice = kwargs.get("tool_choice") or {}
-        tool_name: str | None = (
-            tool_choice.get("name") if isinstance(tool_choice, dict) else None
-        )
+        tool_name: str | None = tool_choice.get("name") if isinstance(tool_choice, dict) else None
         # When tool_choice is not forced (e.g. tools/web_search lets the model pick
         # between a server tool and an emit_* client tool), find the emit_* tool in
         # the tools list and use it as the cassette key.

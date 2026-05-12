@@ -41,8 +41,6 @@ class RunBudget:
         Raises RetryExceeded after MAX_RETRIES_PER_SKILL."""
         current = self.attempts.get(skill_name, 0) + 1
         if current > MAX_RETRIES_PER_SKILL:
-            raise RetryExceeded(
-                f"skill {skill_name!r} exhausted {MAX_RETRIES_PER_SKILL} attempts"
-            )
+            raise RetryExceeded(f"skill {skill_name!r} exhausted {MAX_RETRIES_PER_SKILL} attempts")
         self.attempts[skill_name] = current
         return current

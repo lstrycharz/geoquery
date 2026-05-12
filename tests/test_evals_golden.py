@@ -36,13 +36,9 @@ def _fake_judge(pass_for: set[str]):
         passed = any(name in brief.angle.lower() for name in pass_for)
         return GoldenJudgeVerdict(
             icp_keywords_matched=expected_themes["icp_role_keywords"][:2] if passed else [],
-            icp_keywords_missing=[]
-            if passed
-            else expected_themes["icp_role_keywords"],
+            icp_keywords_missing=[] if passed else expected_themes["icp_role_keywords"],
             angle_keywords_matched=expected_themes["brief_angle_keywords"][:2] if passed else [],
-            angle_keywords_missing=[]
-            if passed
-            else expected_themes["brief_angle_keywords"],
+            angle_keywords_missing=[] if passed else expected_themes["brief_angle_keywords"],
             overall_pass=passed,
             notes="" if passed else "fake judge says: not enough keywords matched",
         )

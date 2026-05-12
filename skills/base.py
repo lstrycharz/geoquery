@@ -142,9 +142,7 @@ class Skill(ABC, Generic[InputT, OutputT]):
             # would distract the model with irrelevant instructions.
             revision_feedback = blocking_failures
 
-    def _invoke_once(
-        self, inputs: InputT, revision_feedback: list[str]
-    ) -> SkillResult[OutputT]:
+    def _invoke_once(self, inputs: InputT, revision_feedback: list[str]) -> SkillResult[OutputT]:
         attempt = self.budget.register_attempt(self.name)
         self.budget.check_can_spend(self._projected_cost())
 

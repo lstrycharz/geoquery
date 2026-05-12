@@ -57,11 +57,14 @@ def parse_sitemap(url: str, *, limit: int = _DEFAULT_LIMIT) -> list[SitemapEntry
 
 def _fetch(url: str) -> bytes | None:
     try:
-        with httpx.Client(
-            follow_redirects=False,
-            timeout=httpx.Timeout(_TIMEOUT_SECONDS),
-            headers={"User-Agent": "geoquery-agent/0.1"},
-        ) as client, client.stream("GET", url) as response:
+        with (
+            httpx.Client(
+                follow_redirects=False,
+                timeout=httpx.Timeout(_TIMEOUT_SECONDS),
+                headers={"User-Agent": "geoquery-agent/0.1"},
+            ) as client,
+            client.stream("GET", url) as response,
+        ):
             if response.status_code // 100 != 2:
                 return None
             chunks: list[bytes] = []

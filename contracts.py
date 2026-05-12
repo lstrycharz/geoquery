@@ -37,6 +37,7 @@ def _coerce_json_dict(v: Any) -> Any:
             pass
     return v
 
+
 # ---------------------------------------------------------------------------
 # Company Dossier (research_company skill, added in chunk 9)
 # ---------------------------------------------------------------------------
@@ -128,9 +129,7 @@ class ICPSegmentList(BaseModel):
 # ---------------------------------------------------------------------------
 
 
-QueryFraming = Literal[
-    "novice", "power-user", "vendor-comparing", "price-driven", "problem-aware"
-]
+QueryFraming = Literal["novice", "power-user", "vendor-comparing", "price-driven", "problem-aware"]
 
 
 class Query(BaseModel):

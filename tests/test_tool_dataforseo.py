@@ -76,9 +76,7 @@ def test_parses_search_volume_and_kd(monkeypatch):
 def test_charges_budget(monkeypatch):
     monkeypatch.setattr(dataforseo, "_post", lambda *a, **kw: None)
     budget = RunBudget(max_cost_usd=3.0)
-    fetch_keyword_metrics(
-        login="u", password="p", queries=["a"], budget=budget
-    )
+    fetch_keyword_metrics(login="u", password="p", queries=["a"], budget=budget)
     assert budget.spent_usd > 0
 
 

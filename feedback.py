@@ -34,8 +34,8 @@ _ICP_LINE_RE = re.compile(r"^\*\*ICP segment:\*\*\s*(.+)$", re.MULTILINE)
 @dataclass
 class FeedbackOutcome:
     run_id: str
-    captured: bool                   # True if a human_edit row was created
-    angle_changed: bool              # True if the angle line differs
+    captured: bool  # True if a human_edit row was created
+    angle_changed: bool  # True if the angle line differs
     original_angle: str
     edited_angle: str
     diff_lines_changed: int
@@ -55,9 +55,7 @@ def capture_feedback(
 ) -> FeedbackOutcome:
     settings = settings or get_settings()
     memory = EpisodicMemory(db_path=settings.data_dir / "episodic.db")
-    semantic = SemanticMemory(
-        db_path=settings.data_dir / "semantic.db", embedder=embedder
-    )
+    semantic = SemanticMemory(db_path=settings.data_dir / "semantic.db", embedder=embedder)
 
     run = memory.get_run(run_id)
     if not run:
@@ -85,7 +83,9 @@ def capture_feedback(
         )
     )
     diff_summary = "\n".join(diff[:200])  # cap for storage
-    lines_changed = sum(1 for line in diff if line.startswith(("+", "-")) and not line.startswith(("+++", "---")))
+    lines_changed = sum(
+        1 for line in diff if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
+    )
 
     memory.log_human_edit(
         run_id=run_id,

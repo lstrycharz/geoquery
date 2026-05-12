@@ -66,9 +66,7 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(
     assert all(i["eval_passed"] == 1 for i in invocations)
 
 
-def test_progress_callback_fires_for_each_skill(
-    fake_client, tmp_settings, stub_embedder
-):
+def test_progress_callback_fires_for_each_skill(fake_client, tmp_settings, stub_embedder):
     _load_pipeline(fake_client)
     events: list[str] = []
 

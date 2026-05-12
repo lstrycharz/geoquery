@@ -102,7 +102,9 @@ def test_preferred_angle_re_embeds_into_semantic_memory(tmp_settings, stub_embed
     _seed_run(tmp_settings, "run-b", original)
     edited_path = tmp_settings.output_dir / "edited.md"
     edited_path.write_text(
-        original.replace("Original angle one two three four five.", "Edited angle text materially different."),
+        original.replace(
+            "Original angle one two three four five.", "Edited angle text materially different."
+        ),
         encoding="utf-8",
     )
 

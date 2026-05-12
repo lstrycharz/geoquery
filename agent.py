@@ -119,9 +119,7 @@ def run_brief(
     on_progress = on_progress or (lambda _: None)
 
     memory = EpisodicMemory(db_path=settings.data_dir / _EPISODIC_DB_NAME)
-    semantic = SemanticMemory(
-        db_path=settings.data_dir / _SEMANTIC_DB_NAME, embedder=embedder
-    )
+    semantic = SemanticMemory(db_path=settings.data_dir / _SEMANTIC_DB_NAME, embedder=embedder)
     run = memory.start_run(company=company, market=market)
     budget = RunBudget(max_cost_usd=settings.max_cost_usd)
 
@@ -131,9 +129,7 @@ def run_brief(
         research_skill = ResearchCompany(client=client, budget=budget)
         research_start = time.monotonic()
         research_started_at = _now()
-        research_result = research_skill.run(
-            ResearchCompanyInputs(company=company, market=market)
-        )
+        research_result = research_skill.run(ResearchCompanyInputs(company=company, market=market))
         memory.log_skill_invocation(
             SkillInvocationRecord(
                 run_id=run.id,
@@ -152,7 +148,9 @@ def run_brief(
             )
         )
 
-        on_progress(f"  ✓ research_company  {research_result.cost_usd:.4f}$  attempt={research_result.attempt}")
+        on_progress(
+            f"  ✓ research_company  {research_result.cost_usd:.4f}$  attempt={research_result.attempt}"
+        )
 
         # Skill 2: define_icp (now consumes the dossier).
         on_progress("→ define_icp")
@@ -227,7 +225,9 @@ def run_brief(
         )
 
         if settings.dataforseo_login:
-            on_progress(f"  ✓ dataforseo  {len(keyword_metrics)}/{len(journey.queries)} queries hit")
+            on_progress(
+                f"  ✓ dataforseo  {len(keyword_metrics)}/{len(journey.queries)} queries hit"
+            )
 
         # Skill 3: score_queries
         on_progress("→ score_queries")
@@ -397,9 +397,7 @@ def run_brief(
 
         on_progress(f"  ✓ draft_content_brief  {draft_result.cost_usd:.4f}$")
 
-        brief_path = _write_brief(
-            draft_result.output, run.id, company, market, settings.output_dir
-        )
+        brief_path = _write_brief(draft_result.output, run.id, company, market, settings.output_dir)
         # Index this run's brief into semantic memory for future RAG retrieval.
         semantic.index_brief(
             run_id=run.id,
