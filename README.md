@@ -104,12 +104,26 @@ It can also be used from inside Claude Desktop or Claude Code as a tool — see 
 
 ## For engineers reading the code
 
-The full architecture write-up is in [**`ARCHITECTURE.md`**](./ARCHITECTURE.md). Short version: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP), built incrementally over 19 commits each leaving the repo in a working state. Every layer has tests. 84 of them. They run in 3 seconds and cost $0.
+The full architecture write-up is in [**`ARCHITECTURE.md`**](./ARCHITECTURE.md). Short version: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP), built incrementally over 19 commits each leaving the repo in a working state. Every layer has tests. ~130 of them at v2. They run in ~10 seconds and cost $0.
 
 ```bash
-pytest -q     # 84 tests, $0
+pytest -q     # default suite (~130 tests, includes the 5 regression smoke cases), $0
 ruff check .  # lint
 ```
+
+The v2 eval framework is documented in [**`EVALS.md`**](./EVALS.md): four-layer eval system (deterministic + LLM-judge + regression suite + production monitoring), a CI regression gate, and a Streamlit dashboard.
+
+### Regression gate
+
+Every PR runs the regression suite via [`.github/workflows/regression.yml`](./.github/workflows/regression.yml): the default pytest pass (smoke tier, 5 cases) plus the full tier (25 cases). Both replay recorded cassettes — deterministic, no API spend. Cassettes are keyed by `sha256(system_prompt + user_message + model)`, so prompt edits force a "stale cassette" failure that surfaces in a per-PR comment with the per-case pass/fail diff. Re-record locally with `pytest -m regression_record` (free) or `pytest -m regression_record_live` (real Anthropic, ~$0.50/case).
+
+To make the gate blocking, set up branch protection on `main`:
+
+1. GitHub → repo Settings → Branches → "Add branch protection rule"
+2. Branch name pattern: `main`
+3. Check "Require status checks to pass before merging"
+4. Search for and select `regression / regression`
+5. Save
 
 ---
 

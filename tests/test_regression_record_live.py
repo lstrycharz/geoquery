@@ -77,8 +77,7 @@ def live_settings(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     real_key = _resolve_live_key()
     if not real_key:
         pytest.skip(
-            "no real ANTHROPIC_API_KEY found in shell env or .env; "
-            "skipping live recording."
+            "no real ANTHROPIC_API_KEY found in shell env or .env; skipping live recording."
         )
     monkeypatch.setenv("ANTHROPIC_API_KEY", real_key)
     monkeypatch.setenv("MAX_COST_USD", "1.50")

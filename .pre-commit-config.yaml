@@ -14,7 +14,13 @@ repos:
         pass_filenames: false
         types: [python]
       - id: pytest
-        name: pytest
+        # Default `pytest` runs the full suite minus the heavy regression_full
+        # tier and the manual recording tests (see pyproject `addopts`). That
+        # includes the 5 smoke regression cases (~7s of the run), so the
+        # regression gate fires locally on every commit before it ever fires
+        # in CI. PR-CI runs the smoke + full tiers via
+        # `.github/workflows/regression.yml`.
+        name: pytest (default suite + regression smoke)
         entry: .venv/bin/python -m pytest -q
         language: system
         pass_filenames: false
