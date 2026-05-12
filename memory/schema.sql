@@ -44,3 +44,20 @@ CREATE TABLE IF NOT EXISTS human_edits (
     captured_at             TEXT NOT NULL,
     schema_version          INTEGER NOT NULL DEFAULT 1
 );
+
+-- Production sample stream (v2 chunk 7). A small % of completed runs get
+-- flagged for human review. The reviewer's rating is compared against the
+-- judges' verdicts at run-time to surface judge-vs-human divergence (chunk 8
+-- dashboard banner). reviewed_at IS NULL means "pending".
+CREATE TABLE IF NOT EXISTS human_reviews (
+    id                       INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id                   TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE,
+    sampled_at               TEXT NOT NULL,
+    reviewed_at              TEXT,
+    reviewer_rating_overall  INTEGER,                -- 1-5; NULL = pending
+    reviewer_ratings_by_dim  TEXT,                   -- JSON: {brand_voice: 5, ...}
+    reviewer_notes           TEXT,
+    schema_version           INTEGER NOT NULL DEFAULT 1
+);
+CREATE INDEX IF NOT EXISTS idx_human_reviews_run_id ON human_reviews(run_id);
+CREATE INDEX IF NOT EXISTS idx_human_reviews_pending ON human_reviews(reviewed_at);

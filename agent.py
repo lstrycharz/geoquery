@@ -414,6 +414,13 @@ def run_brief(
             total_cost_usd=budget.spent_usd,
             brief_path=str(brief_path),
         )
+        # v2 chunk 7: probabilistically flag this run for human review.
+        # No-op when sample_rate=0; raising the rate gates more runs into the
+        # dashboard's Review_Queue page for judge-calibration feedback.
+        from evals.production import maybe_sample_for_review
+
+        if maybe_sample_for_review(memory, run.id, rate=settings.sample_rate):
+            on_progress("  ✓ sampled for human review")
         return AgentOutcome(
             run_id=run.id,
             status="completed",

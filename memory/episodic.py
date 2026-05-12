@@ -160,6 +160,59 @@ class EpisodicMemory:
             ).fetchall()
         return [dict(r) for r in rows]
 
+    # ------------------------------------------------------------------
+    # Production sample stream (v2 chunk 7)
+    # ------------------------------------------------------------------
+
+    def start_human_review(self, *, run_id: str) -> int:
+        """Mark a run as sampled for review. The row stays pending (reviewed_at
+        NULL) until a human submits via the dashboard."""
+        with self._connect() as conn:
+            cur = conn.execute(
+                "INSERT INTO human_reviews (run_id, sampled_at) VALUES (?, ?)",
+                (run_id, _now()),
+            )
+            return int(cur.lastrowid)
+
+    def record_human_review(
+        self,
+        *,
+        review_id: int,
+        rating_overall: int,
+        ratings_by_dim: dict[str, int] | None = None,
+        notes: str | None = None,
+    ) -> None:
+        with self._connect() as conn:
+            conn.execute(
+                "UPDATE human_reviews SET reviewed_at = ?, "
+                "reviewer_rating_overall = ?, reviewer_ratings_by_dim = ?, "
+                "reviewer_notes = ? WHERE id = ?",
+                (
+                    _now(),
+                    rating_overall,
+                    json.dumps(ratings_by_dim) if ratings_by_dim else None,
+                    notes,
+                    review_id,
+                ),
+            )
+
+    def get_pending_reviews(self, limit: int = 50) -> list[dict[str, Any]]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT hr.id, hr.run_id, hr.sampled_at, r.company, r.market, r.brief_path "
+                "FROM human_reviews hr "
+                "JOIN runs r ON r.id = hr.run_id "
+                "WHERE hr.reviewed_at IS NULL "
+                "ORDER BY hr.sampled_at ASC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [dict(r) for r in rows]
+
+    def get_review(self, review_id: int) -> dict[str, Any] | None:
+        with self._connect() as conn:
+            row = conn.execute("SELECT * FROM human_reviews WHERE id = ?", (review_id,)).fetchone()
+        return dict(row) if row else None
+
 
 def serialize_for_log(value: Any) -> str:
     """Best-effort JSON serialization for skill inputs/outputs."""

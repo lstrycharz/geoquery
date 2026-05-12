@@ -29,6 +29,11 @@ class Settings(BaseSettings):
     output_dir: Path = Field(default=Path("./briefs"), alias="OUTPUT_DIR")
     data_dir: Path = Field(default=Path("./data"), alias="DATA_DIR")
 
+    # v2 chunk 7: 10% of completed runs flagged for human review (drives the
+    # dashboard's Review_Queue + judge-calibration loop). Set to 0 to disable;
+    # set higher for projects that want denser human feedback early on.
+    sample_rate: float = Field(default=0.10, alias="SAMPLE_RATE", ge=0.0, le=1.0)
+
     def ensure_dirs(self) -> None:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.data_dir.mkdir(parents=True, exist_ok=True)

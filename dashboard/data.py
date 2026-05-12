@@ -70,6 +70,38 @@ def cost_per_run(db_path: Path) -> list[dict[str, Any]]:
     return [dict(r) for r in rows]
 
 
+def pending_reviews(db_path: Path, *, limit: int = 50) -> list[dict[str, Any]]:
+    """Sampled runs awaiting a human rating. Used by the Review_Queue page."""
+    with _connect(db_path) as conn:
+        rows = conn.execute(
+            "SELECT hr.id AS review_id, hr.run_id, hr.sampled_at, "
+            "       r.company, r.market, r.brief_path, r.total_cost_usd "
+            "FROM human_reviews hr "
+            "JOIN runs r ON r.id = hr.run_id "
+            "WHERE hr.reviewed_at IS NULL "
+            "ORDER BY hr.sampled_at ASC LIMIT ?",
+            (limit,),
+        ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def judge_outcomes_for_run(db_path: Path, run_id: str) -> list[dict[str, Any]]:
+    """For each skill invocation of a run, return the eval outcome.
+
+    The Review_Queue form renders these so the human can see what the judges
+    said at run-time and decide whether their rating diverges from the
+    machine verdict.
+    """
+    with _connect(db_path) as conn:
+        rows = conn.execute(
+            "SELECT skill_name, attempt, model, eval_passed, eval_details_json, "
+            "       cost_usd, started_at "
+            "FROM skill_invocations WHERE run_id = ? ORDER BY id ASC",
+            (run_id,),
+        ).fetchall()
+    return [dict(r) for r in rows]
+
+
 def skill_failure_rate(db_path: Path) -> list[dict[str, Any]]:
     """For each skill, count failed + null invocations as 'failures'.
 

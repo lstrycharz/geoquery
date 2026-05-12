@@ -72,6 +72,7 @@ _BASE_PASS_RATES = {
 
 def _seed(rng: random.Random, memory: EpisodicMemory) -> None:
     now = datetime.now(UTC)
+    completed_run_ids: list[str] = []  # for seeding the review queue
     for day_offset in range(13, -1, -1):  # 14 days, oldest first
         day_start = now - timedelta(days=day_offset)
         runs_today = rng.randint(1, 4)  # uneven volume per day
@@ -135,6 +136,27 @@ def _seed(rng: random.Random, memory: EpisodicMemory) -> None:
                 brief_path=(
                     f"briefs/{run.id[:8]}_{company.lower()}_demo.md" if not run_failed else None
                 ),
+            )
+            if not run_failed:
+                completed_run_ids.append(run.id)
+
+    # Seed a handful of pending sampled reviews (~10% of completed runs) so
+    # the Review_Queue page lands non-empty. A couple already-reviewed rows
+    # too, to populate the eventual divergence chart.
+    sample_count = max(2, len(completed_run_ids) // 10)
+    sampled = rng.sample(completed_run_ids, sample_count)
+    for run_id in sampled:
+        memory.start_human_review(run_id=run_id)
+    # Mark one of them as reviewed with a low rating so chunk 8's divergence
+    # detector has something to flag in the demo data.
+    if sampled:
+        review = memory.get_pending_reviews(limit=1)
+        if review:
+            memory.record_human_review(
+                review_id=review[0]["id"],
+                rating_overall=2,
+                ratings_by_dim={"brand_voice": 4, "intent_fit": 2, "actionability": 2},
+                notes="judges said this passed but the angle was generic and key points abstract",
             )
 
 
