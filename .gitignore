@@ -71,9 +71,15 @@ logs/
 .docker/
 
 # Project-specific
-data/
+# Ignore every file under data/ except the committed demo DB used by the
+# Streamlit dashboard deploy. We split the rule instead of using `data/`
+# wholesale because git doesn't descend into a directory blocked by a
+# trailing-slash pattern, even when a re-include follows.
+data/*
 briefs/*.md
 !briefs/example_*.md
 eval_reports/*.html
 *.db
 *.db-journal
+# Re-include the demo DB LAST so it overrides both `data/*` and `*.db`.
+!data/episodic.demo.db

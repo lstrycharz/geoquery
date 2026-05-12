@@ -25,7 +25,7 @@ DEFAULT_DB = PROJECT_ROOT / "data" / "episodic.db"
 DEMO_DB = PROJECT_ROOT / "data" / "episodic.demo.db"
 
 
-def _resolve_db_path() -> Path:
+def resolve_db_path() -> Path:
     """Pick the DB to read from: env override > production DB > demo DB."""
     override = os.environ.get("GEOQUERY_EPISODIC_DB")
     if override:
@@ -38,7 +38,7 @@ def _resolve_db_path() -> Path:
 def main() -> None:
     st.set_page_config(page_title="GEOQuery — Runs", layout="wide")
     st.title("GEOQuery — Recent Runs")
-    db_path = _resolve_db_path()
+    db_path = resolve_db_path()
     st.caption(f"Reading from `{db_path.relative_to(PROJECT_ROOT)}`")
     if not db_path.is_file():
         st.warning(
