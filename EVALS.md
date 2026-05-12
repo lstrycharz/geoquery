@@ -50,7 +50,22 @@ To add a new case:
 4. Run `pytest -m regression_smoke` to confirm the new case replays cleanly.
 5. Commit all three files.
 
-The smoke tier today uses cassettes recorded against the existing `FakeAnthropicClient` fixtures (cheap + deterministic; same fake response per skill regardless of input). To upgrade a case to a **real-LLM** baseline, replace the inner client in `test_regression_record.py` with a live `anthropic.Anthropic` instance and re-run the recording — the on-disk format is identical.
+The smoke tier today ships with cassettes recorded against the existing `FakeAnthropicClient` fixtures (cheap + deterministic; same fake response per skill regardless of input). To upgrade any subset of cases to **real-LLM** cassettes:
+
+```bash
+# Re-record the 5 smoke cases (~$2.50):
+pytest -m regression_record_live -k 'notion or linear or glossier or stripe or webflow'
+
+# Re-record the entire 30-case dataset (~$15):
+pytest -m regression_record_live
+
+# Re-record one specific slug:
+pytest -m regression_record_live -k notion_b2b_saas
+```
+
+Requirements: a real `ANTHROPIC_API_KEY` in `.env`. The test is skipped automatically if the key is the test stub. Each case costs ≈$0.50 (one full agent run: 7 skill calls + 6 judge calls on Sonnet/Haiku). The per-case budget cap is set to $1.50 in the `live_settings` fixture; edit if you need headroom.
+
+After live recording, `expected.json` is stamped `source: "live-anthropic"` so the dataset's mix of bootstrap-vs-live cases is auditable in PR diffs.
 
 ## Re-recording a regression cassette after an intentional prompt change
 

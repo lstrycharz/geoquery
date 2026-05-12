@@ -19,12 +19,9 @@ spend is explicit.
 
 from __future__ import annotations
 
-import json
-
 import pytest
 
-from agent import run_brief
-from evals.regression import REGRESSION_DATASET_DIR, RecordingCassetteClient
+from evals.regression import REGRESSION_DATASET_DIR, record_case_to_disk
 from tests.test_agent_e2e import _PIPELINE_CASSETTES
 
 # Smoke tier — pre-commit gate runs these.
@@ -80,48 +77,16 @@ def test_record_case(fake_client, tmp_settings, stub_embedder, slug, company, ma
     """Record one bootstrap case with the FakeAnthropicClient as inner."""
     for cassette_name in _PIPELINE_CASSETTES:
         fake_client.load_cassette(cassette_name)
-    recorder = RecordingCassetteClient(inner=fake_client)
-
-    outcome = run_brief(
+    record_case_to_disk(
+        slug=slug,
         company=company,
         market=market,
+        tier=tier,
+        source="bootstrap-fake-client",
+        client=fake_client,
         settings=tmp_settings,
-        client=recorder,
         embedder=stub_embedder,
         fetch_page=lambda url: None,
-    )
-    assert outcome.status == "completed", outcome.error
-
-    from memory import EpisodicMemory
-
-    mem = EpisodicMemory(db_path=tmp_settings.data_dir / "episodic.db")
-    invocations = mem.get_invocations(outcome.run_id)
-    eval_profile = {i["skill_name"]: bool(i["eval_passed"]) for i in invocations}
-
-    case_dir = REGRESSION_DATASET_DIR / slug
-    case_dir.mkdir(parents=True, exist_ok=True)
-    recorder.dump(case_dir / "cassette.json")
-    (case_dir / "input.json").write_text(
-        json.dumps({"company": company, "market": market, "sitemap_url": None}, indent=2),
-        encoding="utf-8",
-    )
-    (case_dir / "expected.json").write_text(
-        json.dumps(
-            {
-                "tier": tier,
-                "eval_profile": eval_profile,
-                "status": outcome.status,
-                "source": "bootstrap-fake-client",
-                "notes": (
-                    "Bootstrapped against FakeAnthropicClient — same fake response per skill. "
-                    "Replace with `pytest -m regression_record_live` (real Anthropic, ~$0.50/case) "
-                    "to enable real-prompt regression for this slug."
-                ),
-            },
-            indent=2,
-            sort_keys=True,
-        ),
-        encoding="utf-8",
     )
 
 

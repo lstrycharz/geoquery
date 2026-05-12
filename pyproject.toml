@@ -75,13 +75,14 @@ ignore = ["E501"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
-# v2 chunk 4: default `pytest` runs everything except the recording tier and
+# v2 chunk 4: default `pytest` runs everything except the recording tiers and
 # the full regression tier. Smoke is in by default so everyday `pytest` gives
 # confidence the regression harness works (~7s of the run). Full + record are
 # opt-in via explicit `-m`.
-addopts = "-m 'not regression_record and not regression_full'"
+addopts = "-m 'not regression_record and not regression_full and not regression_record_live'"
 markers = [
     "regression_smoke: pre-commit regression tier (~5 cases, <10s, runs in default pytest)",
     "regression_full: PR-CI regression tier (~25 cases, <35s, opt-in via -m)",
-    "regression_record: cassette-recording tests (manual; writes regression_dataset/)",
+    "regression_record: cassette-recording with FakeAnthropicClient (manual; free)",
+    "regression_record_live: cassette-recording with REAL Anthropic API (manual; ~$0.50/case)",
 ]

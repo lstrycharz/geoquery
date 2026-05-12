@@ -285,6 +285,87 @@ def _response_to_entry(response: Any) -> CassetteEntry:
     )
 
 
+def _notes_for_source(source: str) -> str:
+    if source == "bootstrap-fake-client":
+        return (
+            "Bootstrapped against FakeAnthropicClient — same fake response per skill. "
+            "Replace with `pytest -m regression_record_live` (real Anthropic, ~$0.50/case) "
+            "to enable real-prompt regression for this slug."
+        )
+    if source == "live-anthropic":
+        return (
+            "Recorded against the live Anthropic API. Cassette captures real model "
+            "responses for the prompts present at recording time. Any prompt change "
+            "will force a hash miss; re-record with `pytest -m regression_record_live`."
+        )
+    return f"recorded via source={source!r}"
+
+
+def record_case_to_disk(
+    *,
+    slug: str,
+    company: str,
+    market: str,
+    tier: str,
+    source: str,
+    client: Any,
+    settings: Any,
+    embedder: Any,
+    fetch_page: Any,
+) -> None:
+    """Shared write-the-three-files step used by both bootstrap and live
+    recording. Wraps the given `client` in RecordingCassetteClient, runs the
+    full agent pipeline once, then persists:
+
+      regression_dataset/<slug>/{input,cassette,expected}.json
+
+    The `source` field on expected.json marks whether the cassette is a fake
+    placeholder or a real-LLM recording.
+    """
+    from agent import run_brief
+    from memory import EpisodicMemory
+
+    recorder = RecordingCassetteClient(inner=client)
+    outcome = run_brief(
+        company=company,
+        market=market,
+        settings=settings,
+        client=recorder,
+        embedder=embedder,
+        fetch_page=fetch_page,
+    )
+    if outcome.status != "completed":
+        raise RuntimeError(
+            f"[{slug}] recording failed: status={outcome.status}, error={outcome.error}"
+        )
+
+    mem = EpisodicMemory(db_path=settings.data_dir / "episodic.db")
+    invocations = mem.get_invocations(outcome.run_id)
+    eval_profile = {i["skill_name"]: bool(i["eval_passed"]) for i in invocations}
+
+    case_dir = REGRESSION_DATASET_DIR / slug
+    case_dir.mkdir(parents=True, exist_ok=True)
+    recorder.dump(case_dir / "cassette.json")
+    (case_dir / "input.json").write_text(
+        json.dumps({"company": company, "market": market, "sitemap_url": None}, indent=2),
+        encoding="utf-8",
+    )
+    (case_dir / "expected.json").write_text(
+        json.dumps(
+            {
+                "tier": tier,
+                "eval_profile": eval_profile,
+                "status": outcome.status,
+                "source": source,
+                "notes": _notes_for_source(source),
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+
 def dump_cassette(path: Path, cassette: dict[str, CassetteEntry]) -> None:
     """Persist the cassette. The OUTER hash → entry mapping is sorted by hash
     key so PR diffs are stable. The INNER tool_use.input dict preserves the
