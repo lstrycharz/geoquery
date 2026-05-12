@@ -367,6 +367,7 @@ def run_brief(
             serp_analysis=analyze_result.output,
             similar_past_briefs=similar,
             sitemap_entries=sitemap_entries,
+            company_dossier=research_result.output,
         )
         draft_start = time.monotonic()
         draft_started_at = _now()

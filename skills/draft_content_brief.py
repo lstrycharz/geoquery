@@ -9,9 +9,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from contracts import ContentBrief, ICPSegment, SerpAnalysis
+from contracts import CompanyDossier, ContentBrief, ICPSegment, SerpAnalysis
 from evals.deterministic import BriefStructure, DraftAngleNonEmpty, Evaluator
-from evals.model_graded import BriefSpecificityJudge
+from evals.model_graded import BrandVoiceMatchJudge, BriefSpecificityJudge
 from memory import SimilarBrief
 from skills.base import Skill
 from tools.sitemap_parser import SitemapEntry
@@ -25,6 +25,9 @@ class DraftBriefInputs:
     serp_analysis: SerpAnalysis | None = None
     similar_past_briefs: tuple[SimilarBrief, ...] = ()
     sitemap_entries: tuple[SitemapEntry, ...] = ()
+    # v2: dossier enables BrandVoiceMatchJudge. Optional so direct callers
+    # (older tests, hand-built invocations) still construct the drafter.
+    company_dossier: CompanyDossier | None = None
 
 
 class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
@@ -71,9 +74,20 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
             "Produce the ContentBrief per the system instructions."
         )
 
-    def make_evaluators(self) -> list[Evaluator]:
-        return [
+    def make_evaluators(self, inputs: DraftBriefInputs) -> list[Evaluator]:
+        evaluators: list[Evaluator] = [
             BriefStructure(),
             DraftAngleNonEmpty(),
             BriefSpecificityJudge(client=self.client, budget=self.budget),
         ]
+        # Brand-voice judge only attaches when the drafter has the upstream
+        # dossier — otherwise the rubric has no signal to triangulate from.
+        if inputs.company_dossier is not None:
+            evaluators.append(
+                BrandVoiceMatchJudge(
+                    client=self.client,
+                    budget=self.budget,
+                    dossier=inputs.company_dossier,
+                )
+            )
+        return evaluators

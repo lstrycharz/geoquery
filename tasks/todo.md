@@ -28,3 +28,22 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 ---
 
 **v1.0 ships.** 19 chunks, 19 commits + 1 doc-only DataForSEO flip, 84 tests, 8 example briefs ($3.85 spent), 6 architectural layers populated end-to-end.
+
+---
+
+# v2: Eval Framework — Production-Grade Trust Layer
+
+Plan: see `/Users/lukaszstrycharz/.claude/plans/here-is-a-new-synchronous-wirth.md` (v2 section).
+
+## Vertical slice
+- [x] **Chunk 1 — Tracer bullet (eval framework).** Extracted 2 inline judge prompts to `evals/rubrics/{buyer_realism,brief_specificity}.md`; added `evals/rubric_loader.py` (deep module, single `load_rubric` API, KeyError on missing placeholder); added `BrandVoiceMatchJudge` + `brand_voice_match.md` rubric, wired into `DraftContentBrief.make_evaluators(inputs)` when dossier is present (drafter now takes optional `company_dossier`, threaded through `agent.py`); changed `Skill.make_evaluators` signature `()` → `(inputs)` across 6 skill overrides + 3 test monkeypatches; built `dashboard/data.py::recent_runs()` (parameterized SQL, no Streamlit imports) + `dashboard/app.py` Streamlit entrypoint with env-overridable DB path; added `dashboard` extra to `pyproject.toml` (streamlit==1.40.2, pandas==2.2.3); seeded `EVALS.md` with the four-layer overview + rubric catalog. 100/100 tests green (84 v1 + 5 rubric_loader + 3 brand_voice + 5 dashboard_data + 3 e2e cassette unchanged in count).
+- [ ] **Chunk 2** — judges #4 (`SearchIntentAlignmentJudge`) and #5 (`BriefActionabilityJudge`) with rubric files + cassette tests.
+- [ ] **Chunk 3** — Regression scaffolding (smoke tier): 5 cases in `regression_dataset/`, `evals/regression.py` with `RegressionCassetteClient` keyed by sha256(sys_prompt + user_msg + model) + `RegressionStaleCassetteError`, `pytest -m regression_smoke` for pre-commit.
+
+## Stretches (additive, no v1 regression)
+- [ ] **Chunk 4** — Expand regression to 30+ cases (full tier).
+- [ ] **Chunk 5** — GitHub Actions regression gate (PR CI + pre-commit hook).
+- [ ] **Chunk 6** — Streamlit dashboard full: Evals / Drift / Costs / Tools / Review_Queue pages.
+- [ ] **Chunk 7** — Production sample stream + `human_reviews` table.
+- [ ] **Chunk 8** — Drift detection + alerts + regression-gate demo (force composite=5.0 → CI fails → GIF).
+- [ ] **Chunk 9** — Final EVALS.md + Streamlit Cloud deploy + LinkedIn post draft.

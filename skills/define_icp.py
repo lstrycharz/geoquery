@@ -36,5 +36,5 @@ class DefineIcp(Skill[DefineIcpInputs, ICPSegmentList]):
             "Produce 2 to 4 distinct ICP segments per the system instructions."
         )
 
-    def make_evaluators(self) -> list[Evaluator]:
+    def make_evaluators(self, inputs: DefineIcpInputs) -> list[Evaluator]:
         return [IcpSegmentsInRange(), PersonasHaveLanguagePatterns()]

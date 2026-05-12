@@ -34,7 +34,7 @@ class ResearchCompany(Skill[ResearchCompanyInputs, CompanyDossier]):
             "Produce the 11-section CompanyDossier per the system instructions."
         )
 
-    def make_evaluators(self) -> list[Evaluator]:
+    def make_evaluators(self, inputs: ResearchCompanyInputs) -> list[Evaluator]:
         from evals.deterministic import CompanyDossierComplete
 
         return [CompanyDossierComplete()]

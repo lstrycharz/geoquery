@@ -36,7 +36,7 @@ def test_revision_loop_succeeds_on_second_attempt(fake_client, monkeypatch):
     stub = StubEvaluator(verdicts=[False, True])
 
     skill = DefineIcp(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
-    monkeypatch.setattr(skill, "make_evaluators", lambda: [stub])
+    monkeypatch.setattr(skill, "make_evaluators", lambda _inputs: [stub])
 
     result = skill.run(DefineIcpInputs(company="X", market="Y"))
 
@@ -50,7 +50,7 @@ def test_revision_loop_aborts_after_three_attempts(fake_client, monkeypatch):
     stub = StubEvaluator(verdicts=[False, False, False, False])
 
     skill = DefineIcp(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
-    monkeypatch.setattr(skill, "make_evaluators", lambda: [stub])
+    monkeypatch.setattr(skill, "make_evaluators", lambda _inputs: [stub])
 
     with pytest.raises(RetryExceeded):
         skill.run(DefineIcpInputs(company="X", market="Y"))
@@ -66,7 +66,7 @@ def test_first_attempt_pass_skips_revision(fake_client, monkeypatch):
             return EvalResult(name=self.name, passed=True)
 
     skill = DefineIcp(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
-    monkeypatch.setattr(skill, "make_evaluators", lambda: [_AlwaysPass()])
+    monkeypatch.setattr(skill, "make_evaluators", lambda _inputs: [_AlwaysPass()])
 
     result = skill.run(DefineIcpInputs(company="X", market="Y"))
     assert result.attempt == 1

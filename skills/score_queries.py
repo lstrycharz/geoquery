@@ -62,5 +62,5 @@ class ScoreQueries(Skill[ScoreQueriesInputs, ScoredQueryList]):
                 lines.append(f"  - {query!r}: {', '.join(bits)}")
         return "\n".join(lines)
 
-    def make_evaluators(self) -> list[Evaluator]:
+    def make_evaluators(self, inputs: ScoreQueriesInputs) -> list[Evaluator]:
         return [ScoredQueriesHaveValidComposites()]

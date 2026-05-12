@@ -22,6 +22,7 @@ _OTHER_CASSETTES = (
     "serp_results",
     "judge_buyer_realism",
     "judge_brief_specificity",
+    "judge_brand_voice_match",
 )
 _PIPELINE_CASSETTES = _SKILL_CASSETTES + _OTHER_CASSETTES
 

@@ -44,5 +44,5 @@ class AnalyzeSerp(Skill[AnalyzeSerpInputs, SerpAnalysis]):
             "Produce the SerpAnalysis per the system instructions."
         )
 
-    def make_evaluators(self) -> list[Evaluator]:
+    def make_evaluators(self, inputs: AnalyzeSerpInputs) -> list[Evaluator]:
         return [AnalyzeSerpStructure()]

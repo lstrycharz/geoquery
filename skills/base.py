@@ -102,9 +102,11 @@ class Skill(ABC, Generic[InputT, OutputT]):
     def system_prompt(self) -> str:
         return load_prompt(self.name)
 
-    def make_evaluators(self) -> list[Evaluator]:
+    def make_evaluators(self, inputs: InputT) -> list[Evaluator]:
         """Subclasses override to declare deterministic + model-graded evaluators.
 
+        `inputs` is passed so judges that need upstream context (e.g. the brand-
+        voice judge needs the CompanyDossier) can be constructed conditionally.
         Default: no evaluators (skill returns whatever the model emits).
         """
         return []
@@ -115,7 +117,7 @@ class Skill(ABC, Generic[InputT, OutputT]):
         judges) surface their failures in the result but do not gate the loop.
         Bounded by RunBudget.register_attempt's retry cap.
         """
-        evaluators = self.make_evaluators()
+        evaluators = self.make_evaluators(inputs)
         revision_feedback: list[str] = []
         while True:
             result = self._invoke_once(inputs, revision_feedback)

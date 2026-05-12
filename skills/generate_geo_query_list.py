@@ -40,7 +40,7 @@ class GenerateGeoQueryList(Skill[GenerateQueriesInputs, BuyerJourney]):
             "Produce the 25-query buyer journey per the system instructions."
         )
 
-    def make_evaluators(self) -> list[Evaluator]:
+    def make_evaluators(self, inputs: GenerateQueriesInputs) -> list[Evaluator]:
         return [
             QueryCountInRange(),
             RefinementMatchesPositions(),

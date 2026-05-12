@@ -34,6 +34,11 @@ web = [
 report = ["jinja2==3.1.4"]
 # Chunk 16: MCP server.
 mcp = ["mcp==1.1.2"]
+# v2 Chunk 1: Streamlit dashboard reading data/episodic.db.
+dashboard = [
+    "streamlit==1.40.2",
+    "pandas==2.2.3",
+]
 # Dev tooling.
 dev = [
     "pytest==9.0.3",
@@ -43,14 +48,14 @@ dev = [
 ]
 # Convenience: everything.
 all = [
-    "geoquery[semantic,web,report,mcp,dev]",
+    "geoquery[semantic,web,report,mcp,dashboard,dev]",
 ]
 
 [project.scripts]
 geoquery = "cli:app"
 
 [tool.hatch.build.targets.wheel]
-packages = ["skills", "tools", "memory", "evals", "guardrails"]
+packages = ["skills", "tools", "memory", "evals", "guardrails", "dashboard"]
 include = [
     "agent.py",
     "cli.py",
