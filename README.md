@@ -70,7 +70,7 @@ You need an [Anthropic API key](https://console.anthropic.com/) (a few dollars g
 **Easiest path — Docker:**
 
 ```bash
-git clone https://github.com/lukaszstrycharz/geoquery && cd geoquery
+git clone https://github.com/lstrycharz/geoquery && cd geoquery
 cp .env.example .env       # then paste your ANTHROPIC_API_KEY into .env
 docker compose run --rm geoquery brief \
   --company "Notion" --market "B2B SaaS knowledge management"
@@ -79,7 +79,7 @@ docker compose run --rm geoquery brief \
 **If you have Python locally** (3.13+ on macOS for the vector-database support):
 
 ```bash
-git clone https://github.com/lukaszstrycharz/geoquery && cd geoquery
+git clone https://github.com/lstrycharz/geoquery && cd geoquery
 python3.13 -m venv .venv && source .venv/bin/activate
 pip install -e ".[semantic,web,report,mcp,dev]"
 cp .env.example .env       # paste your ANTHROPIC_API_KEY
