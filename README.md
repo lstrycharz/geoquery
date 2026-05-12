@@ -1,193 +1,117 @@
 # GEO Query → Content Brief Agent
 
-> Most "agents" are one big prompt. This one is decomposed across six layers — skills, tools, evals, guardrails, memory, and feedback — so that each architectural decision is visible, testable, and replaceable. The README is part of the deliverable: it teaches the decomposition, not just the feature.
-
-Given `(company, market)`, the agent produces a complete SEO content brief in ~10–15 minutes for ~$0.30–$0.60. Eight real example briefs across industries live under [`briefs/`](./briefs/).
-
-## What it does
-
-```
-company + market
-  → research_company         CASINO 11-section dossier  (Sonnet)
-  → define_icp               2–4 firmographic + persona segments  (Sonnet)
-  → generate_geo_query_list  25-query buyer journey, 5 framings  (Haiku ← non-negotiable per source skill)
-  → score_queries            traffic / KD / business-value scoring  (Sonnet; real volume + KD if DataForSEO set)
-  → select_priority_query    strategic pick, not pure argmax  (Sonnet)
-  → analyze_serp             top-3 page content fetched + synthesized  (Sonnet)
-  → draft_content_brief      SERP- + RAG-informed + sitemap-grounded  (Sonnet, streaming)
-```
-
-## Six-layer architecture
-
-```
-                          INTERFACES
-        ┌─────────────────────────────────────────────────┐
-        │  cli.py  (Typer)        │  mcp_server.py  (MCP) │
-        └─────────────────────────────────────────────────┘
-                                │
-        ┌───────────────────────▼────────────────────────────────────┐
-        │ ORCHESTRATOR  agent.run_brief()                              │
-        │   research_company → define_icp → generate_geo_query_list    │
-        │   → score_queries → select_priority_query → analyze_serp     │
-        │   → draft_content_brief                                      │
-        └──────────────────────────────────────────────────────────────┘
-                                │
-   ┌────────┬──────────────┬────┴────────────┬──────────────┬─────────────┐
-   │SKILLS  │  TOOLS       │ EVALS           │ GUARDRAILS   │ MEMORY      │
-   │ 7 deep │ web_search   │ deterministic   │ RunBudget    │ episodic    │
-   │ modules│ web_fetch    │ + model-graded  │ (cost +      │ (SQLite,    │
-   │ (prompt│   (SSRF)     │   judges        │  retry caps) │  versioned) │
-   │ + ctr  │ dataforseo   │ + golden        │              │ + semantic  │
-   │ + model│   (hybrid)   │   regression    │              │ (sqlite-vec │
-   │ + evals│ sitemap      │   set           │              │ + fastembed)│
-   │ )      │ slack_notify │                 │              │             │
-   └────────┴──────────────┴─────────────────┴──────────────┴─────────────┘
-                                │
-                ┌───────────────▼───────────────────────────┐
-                │ FEEDBACK                                   │
-                │  Inner loop (sync): eval fail → revise     │
-                │   (capped at 3 attempts per skill)         │
-                │  Outer loop (async): geoquery feedback     │
-                │   captures human edits → preferred-angle   │
-                │   re-embed into semantic memory            │
-                └────────────────────────────────────────────┘
-```
-
-| Layer | Role | Where it lives |
-|---|---|---|
-| **Skills** | The unit of reasoning. One prompt + one Pydantic contract + one model + owned evaluators. | [`skills/`](./skills/) — 7 deep modules, prompts in `skills/prompts/*.md`. |
-| **Tools** | External, deterministic interfaces. Skills *call* these; they don't reason. | [`tools/`](./tools/) — `web_search` (Anthropic native), `web_fetch` (SSRF-hardened), `dataforseo` (hybrid), `sitemap_parser`, `slack_notify`. |
-| **Evals** | Verify each skill's output. Deterministic shape checks **block** revision; model-graded judges are **advisory**. | [`evals/`](./evals/) — `deterministic.py`, `model_graded.py`, `golden_set.py`. |
-| **Guardrails** | One `RunBudget` owns cost cap + per-skill retry cap. | [`guardrails/limits.py`](./guardrails/limits.py). |
-| **Memory** | Episodic write log + semantic recall. | [`memory/episodic.py`](./memory/episodic.py) (SQLite) + [`memory/semantic.py`](./memory/semantic.py) (sqlite-vec + fastembed). |
-| **Feedback** | Inner loop (eval fail → revise) + outer loop (human edit → preferred-angle re-embed). | `Skill.run` revision header + [`feedback.py`](./feedback.py) + `geoquery feedback` CLI subcommand. |
-
-See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the full per-layer decision log.
-
-## Quick start
-
-```bash
-git clone <repo-url> && cd GEOQuery
-
-# Either: Docker (zero local Python setup)
-cp .env.example .env   # paste your ANTHROPIC_API_KEY
-docker compose run --rm geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
-
-# Or: local Python (needs Brew Python 3.13+ on macOS for sqlite extension support)
-python3.13 -m venv .venv && source .venv/bin/activate
-pip install -e ".[semantic,web,report,mcp,dev]"
-cp .env.example .env   # paste keys
-geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
-```
-
-### Environment (`.env`)
-
-```
-ANTHROPIC_API_KEY=sk-ant-...                # required
-DATAFORSEO_LOGIN=...                        # optional: real volume + KD + CPC
-DATAFORSEO_PASSWORD=...                     # optional
-SLACK_WEBHOOK_URL=https://hooks.slack.com/  # optional: notify on completion
-MAX_COST_USD=3.0                            # default $3 per run
-```
-
-When DataForSEO credentials are absent, `score_queries` falls back to LLM-estimated metrics — the agent still runs end-to-end. (Earlier draft of the architecture had this as a hard requirement; flipped for cloneability — see `ARCHITECTURE.md`.)
-
-## What you'll see when you run it
+**You type two things in. Ten minutes later you get a complete article plan out.**
 
 ```
 $ geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
-→ research_company
-  ✓ research_company  0.0735$  attempt=1
-→ define_icp
-  ✓ define_icp  0.0563$  attempt=1
-→ generate_geo_query_list  (Haiku)
-  ✓ generate_geo_query_list  0.0089$
-→ dataforseo (real metrics)
-  ✓ dataforseo  18/25 queries hit
-→ score_queries
-  ✓ score_queries  0.0421$
-→ select_priority_query
-  ✓ select_priority_query  0.0234$
-    picked: 'alternatives to notion for engineering documentation'
-→ web_search + web_fetch (top-3 pages)
-  ✓ fetched 3/3 pages, 10 results total
-→ analyze_serp
-  ✓ analyze_serp  0.0589$
-→ draft_content_brief  (streaming, similar=2)
-    ...streamed 4200 chars
-    ...streamed 8400 chars
-    ...streamed 12600 chars
-  ✓ draft_content_brief  0.0734$
-
-run_id: 54abf2d7-b317-4c89-ab24-80213a029c48
-brief:  briefs/54abf2d7_notion_alternatives-to-notion-for-engineering-documentation.md
-cost:   $0.3322
 ```
 
-## CLI
+Out comes a finished brief that a writer can use to draft the article: who it's for, the specific angle to take, what sections to write, what to cover in each one, what sources to cite, how long it should be, and which pages on your own site to link to.
 
-```
-geoquery brief --company X --market Y [--sitemap https://x.com/sitemap.xml]
-geoquery runs                        # list past runs
-geoquery show <run-id>               # run metadata + skill invocations
-geoquery feedback <run-id> --edited path/to/edited.md   # capture human edits
-geoquery eval-golden [--report]      # run the regression set
-```
+It costs about **30 to 60 cents** per brief and takes **5 to 10 minutes**. There are [eight real examples](./briefs/) in the repo across very different industries — knowledge software, payments, beauty, outdoor apparel, and more — that show what you actually get.
 
-## MCP server
+---
 
-`mcp_server.py` exposes `generate_brief(company, market, sitemap?)` over MCP stdio. Configure Claude Desktop:
+## What it actually does
 
-```json
-{
-  "mcpServers": {
-    "geoquery": {
-      "command": "/path/to/.venv/bin/python",
-      "args": ["-m", "mcp_server"],
-      "cwd": "/path/to/GEOQuery"
-    }
-  }
-}
-```
+You give it:
+- A **company name** (e.g. "Notion", "Glossier", "Patagonia")
+- A **market or topic** (e.g. "B2B SaaS knowledge management", "DTC outdoor apparel")
 
-Then in any chat: *"use the `generate_brief` tool to draft a brief for Notion in B2B SaaS knowledge management."*
+It then does, in order, the work a senior content strategist would do:
 
-## Example briefs
+1. **Researches the company** — what they sell, who their competitors are, where they're strong and weak.
+2. **Figures out who the audience is** — 2 to 4 different types of buyers, including the exact phrases those buyers actually use.
+3. **Lists 25 things those buyers would search for** — from broad questions ("what is a wiki") to specific ones ("notion vs confluence for engineering").
+4. **Scores those 25 searches** — how much traffic, how hard to rank, how valuable to the business. (Uses real Google data if you give it a [DataForSEO](https://dataforseo.com/) account; otherwise estimates.)
+5. **Picks the single best one to write about** — not just the highest-scoring one, but the one with the most strategic value.
+6. **Looks at what's already on Google for that search** — reads the top 3 results to figure out what everyone is already saying.
+7. **Writes the brief** — focused on a specific angle that doesn't repeat what's already out there.
 
-Eight real-API-generated briefs across industries live under [`briefs/`](./briefs/):
+Then it hands you a markdown file. You give it to a writer. They write the article.
 
-| File | Industry | Angle |
+---
+
+## Why this exists (and why it might matter to you)
+
+Most "AI agents" in the wild today are one giant prompt that hopes the AI does the right thing. They work sometimes and break in surprising ways the rest of the time, and there's no way to inspect what went wrong.
+
+This one is built like a **small assembly line**. Each station does exactly one job — research the company, define the audience, brainstorm searches, score them, pick the best, study the competition, write the brief. Each station has its own instructions, its own quality checks, and can be improved without breaking the others.
+
+That's the interesting bit. The brief is a useful byproduct of demonstrating that you can build agents this way — transparently, testably, and a piece at a time.
+
+**If you're trying to learn how to build agents that aren't black boxes,** the repo is meant to be read. The code is small (a few hundred lines per layer), every architectural choice is named, and [`ARCHITECTURE.md`](./ARCHITECTURE.md) explains *why* each one was made.
+
+---
+
+## See it in action
+
+Eight example briefs, real outputs from running the agent against real companies (no fake data; ~$3.85 of API spend produced these):
+
+| Brief | Industry | The angle the agent picked |
 |---|---|---|
-| [example_notion_b2b_saas_knowledge_mgmt.md](./briefs/example_notion_b2b_saas_knowledge_mgmt.md) | B2B SaaS — KM | Single source of truth for product + engineering docs |
-| [example_linear_b2b_saas_project_mgmt.md](./briefs/example_linear_b2b_saas_project_mgmt.md) | B2B SaaS — PM | Linear vs Jira for 20-person engineering team |
-| [example_glossier_dtc_beauty.md](./briefs/example_glossier_dtc_beauty.md) | DTC beauty | Good ingredients under $30 skincare brands |
-| [example_stripe_payments_fintech.md](./briefs/example_stripe_payments_fintech.md) | Fintech infra | Billing reconciliation nightmare with Stripe |
-| [example_webflow_nocode_design.md](./briefs/example_webflow_nocode_design.md) | No-code | Figma-to-live animation in a no-code builder |
-| [example_hubspot_smb_crm.md](./briefs/example_hubspot_smb_crm.md) | SMB CRM | CRM with built-in email workflows (no Zapier) |
-| [example_vercel_frontend_cloud.md](./briefs/example_vercel_frontend_cloud.md) | Frontend cloud | Alternatives to Vercel with predictable billing |
-| [example_patagonia_dtc_outdoor.md](./briefs/example_patagonia_dtc_outdoor.md) | DTC outdoor | Brands with lifetime repair programs |
+| [Notion](./briefs/example_notion_b2b_saas_knowledge_mgmt.md) | B2B knowledge software | Single source of truth for product + engineering docs |
+| [Linear](./briefs/example_linear_b2b_saas_project_mgmt.md) | Engineering project management | Linear vs Jira for a 20-person engineering team |
+| [Glossier](./briefs/example_glossier_dtc_beauty.md) | DTC beauty | Good ingredients under $30 — skincare for minimalists |
+| [Stripe](./briefs/example_stripe_payments_fintech.md) | Payments | The billing-reconciliation nightmare with Stripe |
+| [Webflow](./briefs/example_webflow_nocode_design.md) | No-code design | Figma-to-live animation in a no-code builder |
+| [HubSpot](./briefs/example_hubspot_smb_crm.md) | Small-business CRM | CRM with built-in email workflows (no Zapier) |
+| [Vercel](./briefs/example_vercel_frontend_cloud.md) | Frontend cloud hosting | Alternatives to Vercel with predictable billing |
+| [Patagonia](./briefs/example_patagonia_dtc_outdoor.md) | Outdoor apparel | Brands with lifetime repair programs |
 
-Total cost to generate all 8: **$3.85**.
+Each brief is about 100 lines of markdown — open one and you can see what the agent actually produces.
 
-## Testing
+---
+
+## Try it yourself
+
+You need an [Anthropic API key](https://console.anthropic.com/) (a few dollars goes a long way). Optionally, a [DataForSEO](https://dataforseo.com/) account if you want real keyword data instead of LLM estimates.
+
+**Easiest path — Docker:**
 
 ```bash
-pytest -q       # 84 tests, ~3s, cassette-driven, $0 LLM cost
-ruff check .    # lint
-ruff format .   # format
+git clone https://github.com/lukaszstrycharz/geoquery && cd geoquery
+cp .env.example .env       # then paste your ANTHROPIC_API_KEY into .env
+docker compose run --rm geoquery brief \
+  --company "Notion" --market "B2B SaaS knowledge management"
 ```
 
-Test cassettes live under `tests/fixtures/cassettes/`. They keep CI fast and free. Real LLM regression is gated by `geoquery eval-golden`.
+**If you have Python locally** (3.13+ on macOS for the vector-database support):
 
-## Cost discipline
+```bash
+git clone https://github.com/lukaszstrycharz/geoquery && cd geoquery
+python3.13 -m venv .venv && source .venv/bin/activate
+pip install -e ".[semantic,web,report,mcp,dev]"
+cp .env.example .env       # paste your ANTHROPIC_API_KEY
+geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
+```
 
-- One `RunBudget` per run, default `$3`. Per-skill `register_attempt` enforces a 3-attempt cap.
-- Typical happy-path cost: ~$0.30 (no research_company / DataForSEO) to ~$0.60 (full pipeline).
-- Streaming runs charge the same as non-streaming; the streaming is for UX only.
+The agent will print a live commentary as it works (one line per stage), then a path to the finished brief.
 
-## Status
+---
 
-Built incrementally over 19 chunks. See [`tasks/todo.md`](./tasks/todo.md) for chunk-level history and [`tasks/lessons.md`](./tasks/lessons.md) for corrections that landed as code changes.
+## Other things it can do
+
+- `geoquery brief … --sitemap https://yoursite.com/sitemap.xml` — when you point it at your real sitemap, the brief's "link to these other pages on your site" suggestions are grounded in actual URLs from your site instead of LLM-imagined ones.
+- `geoquery runs` — list every past run with its cost.
+- `geoquery show <run-id>` — inspect what each stage of a past run did, what it cost, and how long it took.
+- `geoquery feedback <run-id> --edited path/to/your-edited-brief.md` — once you've edited a brief by hand, this captures the change. Next time you ask for a brief in a similar market, the agent will see your preferred angle and try harder to match it.
+- `geoquery eval-golden` — runs the agent against a fixed set of test inputs and grades the output. Useful when you've tweaked the prompts and want to make sure you didn't break anything.
+
+It can also be used from inside Claude Desktop or Claude Code as a tool — see [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the MCP setup.
+
+---
+
+## For engineers reading the code
+
+The full architecture write-up is in [**`ARCHITECTURE.md`**](./ARCHITECTURE.md). Short version: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP), built incrementally over 19 commits each leaving the repo in a working state. Every layer has tests. 84 of them. They run in 3 seconds and cost $0.
+
+```bash
+pytest -q     # 84 tests, $0
+ruff check .  # lint
+```
+
+---
 
 ## License
 
