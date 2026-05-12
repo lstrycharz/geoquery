@@ -23,7 +23,11 @@ dependencies = [
 # Chunk 7: semantic memory.
 semantic = [
     "sqlite-vec==0.1.6",
-    "fastembed==0.4.2",
+    # fastembed 0.4.2 declares incompatibility with Python 3.13 (it pins
+    # tokenizers to a version that lacks 3.13 wheels). 0.5.1 is the smallest
+    # version with 3.13 support; verified locally to keep the HashEmbedder
+    # contract unchanged.
+    "fastembed==0.5.1",
 ]
 # Chunk 10+12: page-content extraction and sitemap parsing.
 web = [
