@@ -16,7 +16,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 - [x] **Chunk 9** — `research_company` (Sonnet, 11-section CASINO dossier) runs first; `define_icp` consumes it as upstream grounding. Pydantic `_coerce_json_dict` validator added for SWOT/Porter dict fields (parallel to `_coerce_json_list`). 53/53 green.
 - [x] **Chunk 10** — `tools/web_fetch.py` (SSRF-hardened: DNS-resolution check, scheme whitelist, redirect re-validation, 5MB streaming cap, 10s timeout). `agent.py` fetches top-3 SERP pages and populates `SerpResult.extracted_content`. analyze_serp prompt updated to consume page content when present. 62/62 green.
 - [x] **Chunk 11** — `tools/dataforseo.py` (hybrid; returns {} without creds, uses Labs API when set) → `score_queries` receives `keyword_metrics` and copies real volume/KD/CPC into each `ScoredQuery.metrics`. 67/67 green. Competitor URLs intentionally deferred (would require 25 SERP calls; current `web_search` for the priority query is sufficient).
-- [ ] **Chunk 12** — `tools/sitemap_parser.py` → grounded internal linking in briefs.
+- [x] **Chunk 12** — `tools/sitemap_parser.py` (SSRF-hardened, supports `<urlset>` + `<sitemapindex>` recursion, caps at 500). CLI gains `--sitemap URL`. Drafter prompt picks 3-5 real URLs from the sitemap with anchors + placement rationale; leaves the section empty when no sitemap is supplied. 73/73 green.
 - [ ] **Chunk 13** — Golden regression set + `eval-golden` command + `--report` HTML.
 - [ ] **Chunk 14** — `geoquery feedback` subcommand; preferred-angle embeddings.
 - [ ] **Chunk 15** — Streaming output for `draft_content_brief` (tokens to stdout).

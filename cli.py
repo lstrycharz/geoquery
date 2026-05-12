@@ -22,9 +22,16 @@ app = typer.Typer(help="GEO Query → Content Brief Agent", no_args_is_help=True
 def brief(
     company: str = typer.Option(..., "--company", "-c", help="Target company name."),
     market: str = typer.Option(..., "--market", "-m", help="Target market description."),
+    sitemap: str | None = typer.Option(
+        None,
+        "--sitemap",
+        "-s",
+        help="Optional sitemap URL. When provided, internal-linking suggestions "
+        "in the brief are grounded in real URLs from your site.",
+    ),
 ) -> None:
     """Generate a content brief end-to-end."""
-    outcome = run_brief(company=company, market=market)
+    outcome = run_brief(company=company, market=market, sitemap_url=sitemap)
     if outcome.status == "completed":
         typer.echo(f"run_id: {outcome.run_id}")
         typer.echo(f"brief:  {outcome.brief_path}")

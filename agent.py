@@ -29,6 +29,7 @@ from skills.research_company import ResearchCompany, ResearchCompanyInputs
 from skills.score_queries import ScoreQueries, ScoreQueriesInputs
 from skills.select_priority_query import SelectPriorityInputs, SelectPriorityQuery
 from tools.dataforseo import fetch_keyword_metrics
+from tools.sitemap_parser import parse_sitemap
 from tools.web_fetch import fetch_page as _default_fetch_page
 from tools.web_search import search_top_n
 
@@ -103,6 +104,7 @@ def run_brief(
     company: str,
     market: str,
     *,
+    sitemap_url: str | None = None,
     settings: Settings | None = None,
     client: Anthropic | None = None,
     embedder: Embedder | None = None,
@@ -318,7 +320,11 @@ def run_brief(
             )
         )
 
-        # Skill 6: draft_content_brief — SERP-informed + RAG-injected (chunk 7).
+        # Tool (chunk 12): sitemap-grounded internal linking. Empty tuple when
+        # no --sitemap was supplied; the drafter then leaves the section blank.
+        sitemap_entries = tuple(parse_sitemap(sitemap_url)) if sitemap_url else ()
+
+        # Skill 6: draft_content_brief — SERP-informed + RAG-injected + sitemap.
         draft_skill = DraftContentBrief(client=client, budget=budget)
         draft_inputs = DraftBriefInputs(
             target_query=priority.selected_query.query.text,
@@ -326,6 +332,7 @@ def run_brief(
             market=market,
             serp_analysis=analyze_result.output,
             similar_past_briefs=similar,
+            sitemap_entries=sitemap_entries,
         )
         draft_start = time.monotonic()
         draft_started_at = _now()

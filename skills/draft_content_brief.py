@@ -14,6 +14,7 @@ from evals.deterministic import BriefStructure, DraftAngleNonEmpty, Evaluator
 from evals.model_graded import BriefSpecificityJudge
 from memory import SimilarBrief
 from skills.base import Skill
+from tools.sitemap_parser import SitemapEntry
 
 
 @dataclass(frozen=True)
@@ -23,6 +24,7 @@ class DraftBriefInputs:
     market: str
     serp_analysis: SerpAnalysis | None = None
     similar_past_briefs: tuple[SimilarBrief, ...] = ()
+    sitemap_entries: tuple[SitemapEntry, ...] = ()
 
 
 class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
@@ -46,12 +48,25 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
                 for b in inputs.similar_past_briefs
             )
         )
+        sitemap_block = (
+            "(no sitemap provided — internal_linking_suggestions should be left empty)"
+            if not inputs.sitemap_entries
+            else "Site URLs to consider for internal_linking_suggestions (pick 3-5 that "
+            "*genuinely* support the brief, ignore irrelevant ones):\n"
+            + "\n".join(
+                f"  - {e.url}  (hint: {e.title_hint})"
+                # Cap injected URLs at 80 so the prompt stays reasonable; the
+                # sitemap parser already caps at 500 by default.
+                for e in inputs.sitemap_entries[:80]
+            )
+        )
         return (
             f"Market: {inputs.market}\n"
             f"Target query: {inputs.target_query}\n\n"
             f"Priority ICP segment:\n```json\n{icp_json}\n```\n\n"
             f"SERP analysis:\n{serp_block}\n\n"
             f"Similar past briefs (do NOT repeat their angles — differentiate):\n{past_block}\n\n"
+            f"{sitemap_block}\n\n"
             "Produce the ContentBrief per the system instructions."
         )
 
