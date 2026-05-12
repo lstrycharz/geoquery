@@ -1,0 +1,13 @@
+{
+  "eval_profile": {
+    "analyze_serp": true,
+    "define_icp": true,
+    "draft_content_brief": true,
+    "generate_geo_query_list": true,
+    "research_company": true,
+    "score_queries": true,
+    "select_priority_query": true
+  },
+  "notes": "Baseline captured from FakeAnthropicClient cassettes \u2014 replace with real-LLM recording (see EVALS.md) to enable real-prompt regression.",
+  "status": "completed"
+}

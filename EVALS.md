@@ -33,15 +33,50 @@ Every LLM-judge prompt lives as a Markdown file under `evals/rubrics/`. PR diffs
 
 ## Adding a regression case
 
-*(Populated in Chunk 3.)*
+Each case is a directory under `regression_dataset/<slug>/` with three files:
+
+```
+regression_dataset/notion_b2b_saas/
+├── input.json       # {company, market, sitemap_url?}
+├── cassette.json    # sha256(sys_prompt + user_msg + model) → recorded response
+└── expected.json    # {eval_profile: {skill_name: pass_bool}, status, notes}
+```
+
+To add a new case:
+
+1. Append `(slug, company, market)` to `_SMOKE_CASES` in `tests/test_regression_record.py`.
+2. Run `pytest -m regression_record` — this writes the three files for your new slug into `regression_dataset/<slug>/`.
+3. Open `expected.json` and sanity-check the recorded `eval_profile` is what you actually want as the baseline. The replay test asserts no skill flips from this baseline.
+4. Run `pytest -m regression_smoke` to confirm the new case replays cleanly.
+5. Commit all three files.
+
+The smoke tier today uses cassettes recorded against the existing `FakeAnthropicClient` fixtures (cheap + deterministic; same fake response per skill regardless of input). To upgrade a case to a **real-LLM** baseline, replace the inner client in `test_regression_record.py` with a live `anthropic.Anthropic` instance and re-run the recording — the on-disk format is identical.
+
+## Re-recording a regression cassette after an intentional prompt change
+
+When you intentionally change a system prompt or an upstream contract, the cassette hashes shift. Replay raises `RegressionStaleCassetteError` with the model + truncated prompt previews so you can identify which call regressed.
+
+If the change was intentional:
+
+```bash
+pytest -m regression_record   # refreshes regression_dataset/*/cassette.json + expected.json
+pytest -m regression_smoke    # verifies replay still passes
+git add regression_dataset/
+git commit -m "regression: re-record after <prompt-change-description>"
+```
+
+Reviewers see two diffs in the PR: the prompt-change diff (semantic) and the cassette/expected diff (mechanical). Reviewing the second one tells you what actually changed in the model's behavior, not just the prompt text.
 
 ## Reading the dashboard
 
 *(Populated in Chunk 6.)*
 
-## Re-recording a regression cassette after an intentional prompt change
+## Cassette format invariants
 
-*(Populated in Chunk 3.)*
+Two non-obvious rules the cassette dump must preserve:
+
+- **Outer mapping sorted by hash key** — diff-friendly. Re-recording produces stable file order regardless of call sequence during recording.
+- **Inner `tool_use.input` dict insertion order PRESERVED** — Pydantic's `model_dump_json` follows declaration order for top-level fields, but for `dict[str, X]` fields (e.g. `CompanyDossier.swot`) it preserves the insertion order of the input dict. Sorting inner-dict keys would silently make replay diverge from record. See `evals/regression.py::dump_cassette` for the (terse) implementation.
 
 ## The pedagogical regression-gate demo
 

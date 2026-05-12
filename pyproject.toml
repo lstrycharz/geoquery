@@ -75,3 +75,12 @@ ignore = ["E501"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+# v2 chunk 3: by default we skip the cassette-recording tests (they write
+# files into regression_dataset/ and only need to run when prompts change).
+# regression_smoke + regression_full run via explicit `-m` selection.
+addopts = "-m 'not regression_record'"
+markers = [
+    "regression_smoke: pre-commit regression tier (~5 cases, <10s)",
+    "regression_full: PR-CI regression tier (~30 cases, <30s)",
+    "regression_record: cassette-recording tests (manual; writes regression_dataset/)",
+]
