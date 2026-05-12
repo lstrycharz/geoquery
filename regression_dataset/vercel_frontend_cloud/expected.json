@@ -11,5 +11,5 @@
   "notes": "Bootstrapped against FakeAnthropicClient \u2014 same fake response per skill. Replace with `pytest -m regression_record_live` (real Anthropic, ~$0.50/case) to enable real-prompt regression for this slug.",
   "source": "bootstrap-fake-client",
   "status": "completed",
-  "tier": "smoke"
+  "tier": "full"
 }

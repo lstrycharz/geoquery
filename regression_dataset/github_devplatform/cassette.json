@@ -1,0 +1,1233 @@
+{
+  "02ac2277416e35bd021d475e8bf11e20589794763b1b8dfa2ebc5c23ef6a6713": {
+    "input_tokens": 1200,
+    "output_tokens": 60,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_buyer_realism",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "045f581bf538190c2e030859952cfc11c211ee2dbbae2536055829ec890a69ea": {
+    "input_tokens": 1400,
+    "output_tokens": 2800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_research_company",
+      "input": {
+        "schema_version": 1,
+        "customer_segments": [
+          "Distributed engineering teams at 200-500-person dev shops",
+          "Ops/RevOps managers at 50-200-person B2B SaaS startups",
+          "Indie creators and consultants on the free tier"
+        ],
+        "product_portfolio": [
+          "Notion free tier (personal/team)",
+          "Notion Plus (small teams, $10/seat/mo)",
+          "Notion Business (mid-market, $18/seat/mo, SSO)",
+          "Notion Enterprise (SOC2 + advanced admin)",
+          "Notion AI add-on ($10/seat/mo)"
+        ],
+        "inferred_icp": "Notion's de facto ICP appears to be 50-300-person knowledge-driven teams (B2B SaaS, agencies, creator-economy companies) where the Director of Operations or VP of Engineering owns the tool-selection decision, prioritizes design and flexibility over enterprise hardening, and has outgrown a free wiki but isn't yet ready for Atlassian's complexity.",
+        "icp_priorities": [
+          "design polish",
+          "flexibility (databases + pages)",
+          "speed of setup",
+          "real-time collaboration",
+          "ease of templates/duplication"
+        ],
+        "competitors": [
+          "Confluence (Atlassian)",
+          "Outline (open-source, self-host friendly)",
+          "Coda",
+          "ClickUp Docs",
+          "GitBook",
+          "Slab",
+          "Almanac",
+          "Tettra",
+          "Stack Overflow for Teams"
+        ],
+        "company_advantages": [
+          "Best-in-class UI/UX for non-technical users",
+          "Powerful flexible-block model (mixes docs + databases)",
+          "Strong template marketplace and community",
+          "Real-time collaboration parity with Google Docs"
+        ],
+        "competitor_advantages": [
+          "Confluence integrates deeply with Jira and Atlassian admin",
+          "Outline offers Markdown source-of-truth and self-hosting (data sovereignty)",
+          "GitBook is better for technical documentation and code embeds",
+          "Coda has stronger spreadsheet-like formulas and automation"
+        ],
+        "swot": {
+          "strengths": [
+            "Dominant brand awareness among knowledge workers under 35",
+            "Network effects from template sharing and public pages",
+            "API + integrations ecosystem"
+          ],
+          "weaknesses": [
+            "Search at scale degrades visibly past 10K pages",
+            "Markdown export is lossy (a deal-breaker for engineering teams)",
+            "Pricing per-seat doesn't scale for 200+ engineer teams"
+          ],
+          "opportunities": [
+            "Engineering-team vertical with first-class Markdown source-of-truth",
+            "AI summarization + search to defuse the at-scale search issue",
+            "Enterprise governance features to defend against Confluence migration"
+          ],
+          "threats": [
+            "Outline + similar open-source alternatives winning on data sovereignty",
+            "GitHub Docs / GitBook owning the engineering-team niche",
+            "Recent price hikes triggering migration audits at incumbent customers"
+          ]
+        },
+        "porter_five_forces": {
+          "buyer_power": "Moderate-to-high \u2014 switching costs are real (re-importing docs is painful) but buyers have many credible alternatives, and IT teams can mandate a migration when budget cycles hit.",
+          "supplier_power": "Low \u2014 Notion controls its own platform end-to-end; no critical supplier dependencies beyond cloud infra.",
+          "rivalry": "Intense and rising \u2014 incumbents (Confluence) defending Atlassian-bundled accounts, open-source contenders (Outline) winning on data sovereignty, niche players (GitBook, Slab) splitting verticals.",
+          "new_entrants": "High threat \u2014 barriers are mostly UX and ecosystem, both of which AI-native startups are credibly attacking from scratch.",
+          "substitutes": "High \u2014 for many use cases, a combination of Google Docs + Slack channels + a sharepoint substitutes 'good enough' for free."
+        },
+        "strategic_recommendations": [
+          "Build a first-class Markdown source-of-truth export pipeline to neutralize engineering teams' top objection",
+          "Ship enterprise governance features (granular permissions, audit log, retention policies) to defend against Confluence",
+          "Open a small-but-credible 'Notion for Engineering' content track with technical-grade case studies",
+          "Tier AI features into a free band to defuse migration audits driven by Notion AI price increases"
+        ],
+        "executable_work_plan": [
+          "Run a 5-customer interview series with Directors of Engineering at 200-500-person dev shops to validate the Markdown-source-of-truth objection.",
+          "Audit the top 100 SERP results for engineering-doc queries to identify content gaps that a 'Notion for Engineering' content track could fill.",
+          "Publish a technical migration playbook for 'Confluence to Notion at 250 engineers' targeting BOFU vendor-comparing queries.",
+          "Commission a benchmark: search-hit-rate vs Outline and Confluence at 10K-page scale; publish results.",
+          "Engineering-specific landing page that names the Markdown source-of-truth concern head-on (don't dodge it).",
+          "Partner with 3 dev-tooling vendors for joint case studies (e.g. Linear + Notion for engineering ops).",
+          "Test pricing communication around the AI add-on; surface a 'no-AI tier' if the price-driven migration audits confirm the hypothesis.",
+          "Stand up an open-source Notion-to-Markdown export utility and host it on GitHub (defuses the lossy-export objection)."
+        ]
+      }
+    }
+  },
+  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
+    "input_tokens": 1300,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_search_intent_alignment",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
+    "input_tokens": 1800,
+    "output_tokens": 900,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_analyze_serp",
+      "input": {
+        "schema_version": 1,
+        "query_text": "alternatives to notion for engineering documentation",
+        "top_results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison.",
+            "extracted_content": null
+          }
+        ],
+        "common_angles": [
+          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
+          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
+          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
+          "Editorial 'best of' picks with brief mini-reviews",
+          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
+        ],
+        "content_gaps": [
+          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
+          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
+          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
+          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
+        ],
+        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
+      }
+    }
+  },
+  "5fe0cb3f5593e51ccf8a1353498a1eed068d876e765a6bcc8e51794ef5dfa3e8": {
+    "input_tokens": 1200,
+    "output_tokens": 1800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_define_icp",
+      "input": {
+        "schema_version": 1,
+        "segments": [
+          {
+            "schema_version": 1,
+            "segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+            "firmographic": {
+              "industry_vertical": "B2B SaaS \u2014 developer tooling",
+              "company_size": "200\u2013500 employees, $20M\u2013$100M ARR",
+              "geography": "North America + EMEA distributed",
+              "organizational_structure": "Engineering Director reports to VP Eng; KB tool selection runs through them",
+              "buying_stage": "Active evaluation after outgrowing free wiki",
+              "strategic_pain_points": [
+                "Search across docs is fragmented",
+                "New hires take 3+ months to find tribal knowledge",
+                "Markdown vs WYSIWYG factions on the team"
+              ],
+              "trigger_events": [
+                "Major incident traced to undocumented decision",
+                "Hired 20+ engineers in a quarter",
+                "Notion price hike or migration event"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Director of Engineering",
+              "demographic_context": "32\u201345, 10+ years experience, technical IC background",
+              "motivations": [
+                "Reduce onboarding time",
+                "Lower bus-factor risk",
+                "Earn promotion to VP"
+              ],
+              "decision_criteria": [
+                "Real-time collab parity with Notion",
+                "Markdown source of truth",
+                "API + automation hooks",
+                "SSO + audit log"
+              ],
+              "language_patterns": [
+                "single source of truth",
+                "we keep losing tribal knowledge",
+                "search just doesn't work across our docs",
+                "it should integrate with our existing stack"
+              ],
+              "frustrations": [
+                "Notion search returns archived stuff",
+                "Confluence feels like 2010",
+                "Tooling teams hate maintaining a custom wiki"
+              ],
+              "downstream_use_cases": [
+                "RFC + ADR storage",
+                "Runbooks and incident postmortems",
+                "Onboarding paths per role"
+              ],
+              "information_sources": [
+                "r/engineeringmanagers",
+                "Hacker News",
+                "DevOps Slack communities",
+                "Lenny's Newsletter"
+              ]
+            }
+          },
+          {
+            "schema_version": 1,
+            "segment_label": "Ops/RevOps Manager at 50-200 startup",
+            "firmographic": {
+              "industry_vertical": "B2B SaaS \u2014 sales or marketing platform",
+              "company_size": "50\u2013200 employees, $5M\u2013$30M ARR",
+              "geography": "US-centric, remote-first",
+              "organizational_structure": "Reports to COO or CRO; cross-functional ownership of internal tooling",
+              "buying_stage": "Comparing 2-3 finalists with budget approved",
+              "strategic_pain_points": [
+                "Sales and CS rooms duplicate playbooks across tools",
+                "Marketing assets live in Drive, Notion, and Slack threads"
+              ],
+              "trigger_events": [
+                "New COO hire pushing on tool consolidation",
+                "Onboarding-cost review by exec team"
+              ]
+            },
+            "persona": {
+              "role_job_title": "RevOps Manager",
+              "demographic_context": "28\u201338, MBA optional, project-management mindset",
+              "motivations": [
+                "Be the person who fixes 'how we work'",
+                "Drive measurable onboarding-time reduction"
+              ],
+              "decision_criteria": [
+                "Templates for sales playbooks out of the box",
+                "Permissions granularity",
+                "Salesforce / HubSpot integration",
+                "Time-to-value under 30 days"
+              ],
+              "language_patterns": [
+                "we need one place for this",
+                "I'm tired of hunting in Slack",
+                "leadership wants visibility"
+              ],
+              "frustrations": [
+                "Sales reps don't update docs",
+                "Tool sprawl with overlapping subscriptions"
+              ],
+              "downstream_use_cases": [
+                "Sales playbooks",
+                "Onboarding checklists",
+                "Customer-facing handoff docs"
+              ],
+              "information_sources": [
+                "RevOps Co-op",
+                "Pavilion communities",
+                "LinkedIn long-form posts"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "7d83236a0d4f62e8eeb6612b3079e2c9b53d8bb0e89cca3dc56dcaea8de18cf6": {
+    "input_tokens": 1400,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_actionability",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "80919f77920b34861fe4eee56254bf512949dbdb7263e352b2b7e979f65686d6": {
+    "input_tokens": 800,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_specificity",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "890b31a28e46568dce02993137da6d20e792d33e92dffaed9c362033bc1099a6": {
+    "input_tokens": 1500,
+    "output_tokens": 1100,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_generate_geo_query_list",
+      "input": {
+        "schema_version": 1,
+        "queries": [
+          {
+            "position": 1,
+            "text": "what is a knowledge base for engineering teams",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 2,
+            "text": "do i need a wiki for my engineering team",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 3,
+            "text": "what does a knowledge base actually do",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 4,
+            "text": "are engineering wikis still a thing in 2026",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 5,
+            "text": "knowledge management tool meaning",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 6,
+            "text": "our engineering team can't find docs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 7,
+            "text": "engineering docs that nobody updates",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 8,
+            "text": "single source of truth for engineering docs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 9,
+            "text": "how to fix fragmented engineering documentation",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 10,
+            "text": "tooling teams hate maintaining custom wikis",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 11,
+            "text": "self hosted knowledge base options",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 12,
+            "text": "knowledge base with markdown source of truth",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 13,
+            "text": "wiki with git style versioning",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 14,
+            "text": "best knowledge base for engineering teams 2026",
+            "framing": "vendor-comparing",
+            "refinement_applied": false
+          },
+          {
+            "position": 15,
+            "text": "api first wiki for engineering with webhook support",
+            "framing": "power-user",
+            "refinement_applied": true
+          },
+          {
+            "position": 16,
+            "text": "knowledge base with sso and audit log for soc2",
+            "framing": "power-user",
+            "refinement_applied": true
+          },
+          {
+            "position": 17,
+            "text": "notion vs confluence for engineering teams",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 18,
+            "text": "outline vs notion engineering wiki",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 20,
+            "text": "bookstack vs notion for engineering team",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 21,
+            "text": "notion price hike 2026 alternatives",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 22,
+            "text": "cheap knowledge base for 200 person engineering team",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 23,
+            "text": "free wiki for engineering teams self hosted",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 24,
+            "text": "notion pricing per seat 2026",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 25,
+            "text": "knowledge base under $500/month for engineering team",
+            "framing": "price-driven",
+            "refinement_applied": true
+          }
+        ],
+        "journey_arc_summary": "The buyer starts with conceptual queries about whether a knowledge base is even needed, drifts into pain-naming as they realize their team has the symptoms, then shifts into implementation requirements (markdown, git versioning, SSO). By position 15 they're naming specific products and weighing alternatives, and the journey ends in pricing and total-cost-of-ownership questions where the actual buying decision crystallizes."
+      }
+    }
+  },
+  "a9baadce96322167149128aa2afe681f35c57acbea0fd8c3c6248ff642574361": {
+    "input_tokens": 800,
+    "output_tokens": 700,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_serp_results",
+      "input": {
+        "schema_version": 1,
+        "results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team. Confluence, Outline, BookStack, GitBook, Slab, Slite, Coda, Tettra, Stack Overflow for Teams, Almanac. Pricing and feature comparison.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop. Pain points: search, performance, Markdown export. Switched to a self-hosted Outline instance.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison: Markdown source, API, SSO, audit log, pricing. Recommends Outline for Markdown-first teams.",
+            "extracted_content": null
+          },
+          {
+            "rank": 4,
+            "url": "https://example.com/best-engineering-wiki",
+            "title": "Best Engineering Wikis of 2026: Editorial Picks",
+            "snippet": "Editorial roundup of the top engineering wiki tools. Covers Notion, Confluence, GitBook, Outline, Stack Overflow for Teams.",
+            "extracted_content": null
+          },
+          {
+            "rank": 5,
+            "url": "https://example.com/notion-pricing-engineering",
+            "title": "Is Notion Still Worth It for Engineering Teams?",
+            "snippet": "Cost analysis at 200 seats. Compares Plus, Business, Enterprise tiers. Concludes price-per-seat doesn't scale for engineering use cases.",
+            "extracted_content": null
+          },
+          {
+            "rank": 6,
+            "url": "https://example.com/confluence-vs-notion",
+            "title": "Confluence vs Notion for Software Teams",
+            "snippet": "Atlassian's Confluence vs Notion comparison. Confluence wins for Jira integration; Notion wins for flexibility and Markdown.",
+            "extracted_content": null
+          },
+          {
+            "rank": 7,
+            "url": "https://example.com/self-hosted-wikis",
+            "title": "Self-Hosted Knowledge Bases: BookStack, Outline, Wiki.js",
+            "snippet": "For teams that need data sovereignty. BookStack, Outline (self-hosted), Wiki.js compared on setup difficulty and feature set.",
+            "extracted_content": null
+          },
+          {
+            "rank": 8,
+            "url": "https://example.com/notion-api-engineering",
+            "title": "Building Engineering Workflows on the Notion API",
+            "snippet": "Tutorial on using Notion's API for RFC pipelines and automated doc generation. Notes that the API has limits for production use.",
+            "extracted_content": null
+          },
+          {
+            "rank": 9,
+            "url": "https://example.com/notion-pros-cons",
+            "title": "Notion for Engineering Documentation: Pros and Cons",
+            "snippet": "A balanced take. Pros: ease of use, real-time collab. Cons: search, performance at scale, Markdown export pain.",
+            "extracted_content": null
+          },
+          {
+            "rank": 10,
+            "url": "https://example.com/wiki-tool-decision-framework",
+            "title": "How to Pick a Wiki Tool: A Decision Framework",
+            "snippet": "Framework covering 5 axes: source-of-truth, collaboration, security, integration, total cost. Examples include Notion, Confluence, Outline.",
+            "extracted_content": null
+          }
+        ]
+      }
+    }
+  },
+  "ae7f11455cd6efd5a2a902f646abf90282a74d989b254b1b73613bf02327fdc8": {
+    "input_tokens": 2500,
+    "output_tokens": 2200,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_score_queries",
+      "input": {
+        "schema_version": 1,
+        "scored": [
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 1,
+              "text": "what is a knowledge base for engineering teams",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 7,
+            "difficulty_score": 6,
+            "business_value_score": 3,
+            "composite": 3.6,
+            "competitor_urls": [],
+            "rationale": "Decent head-term traffic but very low intent for a 200-person dev shop already past the 'do I need this' stage."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 2,
+              "text": "do i need a wiki for my engineering team",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 3,
+            "composite": 3.5,
+            "competitor_urls": [],
+            "rationale": "Low-funnel informational; not a buyer-ready query."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 3,
+              "text": "what does a knowledge base actually do",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 2,
+            "composite": 3.0,
+            "competitor_urls": [],
+            "rationale": "Defining-the-category query; almost no buying intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 4,
+              "text": "are engineering wikis still a thing in 2026",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 3,
+            "business_value_score": 2,
+            "composite": 2.2,
+            "competitor_urls": [],
+            "rationale": "Niche skeptic query; tiny volume."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 5,
+              "text": "knowledge management tool meaning",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 2,
+            "composite": 3.7,
+            "competitor_urls": [],
+            "rationale": "Definitional; sees traffic but no buying signal."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 6,
+              "text": "our engineering team can't find docs",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 3,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Long-tail pain expression; low volume but high intent for problem-aware buyers."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 7,
+              "text": "engineering docs that nobody updates",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 3,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Same family as #6 \u2014 pain-named, low volume, high intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 8,
+              "text": "single source of truth for engineering docs",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 7,
+            "composite": 6.6,
+            "competitor_urls": [],
+            "rationale": "Echoes the segment's exact language pattern; mid-funnel and ICP-resonant."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 9,
+              "text": "how to fix fragmented engineering documentation",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 6,
+            "composite": 5.6,
+            "competitor_urls": [],
+            "rationale": "How-to framing; reasonable intent for actively-evaluating teams."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 10,
+              "text": "tooling teams hate maintaining custom wikis",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 2,
+            "business_value_score": 5,
+            "composite": 5.0,
+            "competitor_urls": [],
+            "rationale": "Narrow phrasing; tiny volume but strong implicit buying intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 11,
+              "text": "self hosted knowledge base options",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 6,
+            "difficulty_score": 6,
+            "business_value_score": 7,
+            "composite": 6.3,
+            "competitor_urls": [],
+            "rationale": "Implementation-detail filter; clear power-user buying signal."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 12,
+              "text": "knowledge base with markdown source of truth",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 5,
+            "business_value_score": 8,
+            "composite": 6.4,
+            "competitor_urls": [],
+            "rationale": "Differentiated requirement maps to ICP decision criteria; high intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 13,
+              "text": "wiki with git style versioning",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Niche but high-fit for engineering ICP; few good answers exist."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 14,
+              "text": "best knowledge base for engineering teams 2026",
+              "framing": "vendor-comparing",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 9,
+            "difficulty_score": 9,
+            "business_value_score": 9,
+            "composite": 7.6,
+            "competitor_urls": [],
+            "rationale": "Head 'best X for Y' query \u2014 highest traffic in the journey, highest commercial intent, dominated by listicles."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 15,
+              "text": "api first wiki for engineering with webhook support",
+              "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 8,
+            "composite": 6.3,
+            "competitor_urls": [],
+            "rationale": "Very specific requirement; small volume but the searcher is ready to buy."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 16,
+              "text": "knowledge base with sso and audit log for soc2",
+              "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 5,
+            "business_value_score": 9,
+            "composite": 6.9,
+            "competitor_urls": [],
+            "rationale": "Compliance + buyer-ready \u2014 bottom of funnel."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 17,
+              "text": "notion vs confluence for engineering teams",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 9,
+            "difficulty_score": 9,
+            "business_value_score": 8,
+            "composite": 7.1,
+            "competitor_urls": [],
+            "rationale": "Head vs query; high volume but brands themselves dominate the SERP."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 18,
+              "text": "outline vs notion engineering wiki",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 8,
+            "composite": 6.5,
+            "competitor_urls": [],
+            "rationale": "Less-dominated vs query; defensible and high intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 19,
+              "text": "alternatives to notion for engineering documentation",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 7,
+            "difficulty_score": 7,
+            "business_value_score": 9,
+            "composite": 7.4,
+            "competitor_urls": [],
+            "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 20,
+              "text": "bookstack vs notion for engineering team",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Niche vs query; small but ready-to-buy audience."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 21,
+              "text": "notion price hike 2026 alternatives",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 6,
+            "difficulty_score": 5,
+            "business_value_score": 9,
+            "composite": 7.1,
+            "competitor_urls": [],
+            "rationale": "Trigger-event driven; high intent and time-sensitive."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 22,
+              "text": "cheap knowledge base for 200 person engineering team",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Narrow size + price filter; small but actively-buying audience."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 23,
+              "text": "free wiki for engineering teams self hosted",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Free-tier hunters; modest commercial intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 24,
+              "text": "notion pricing per seat 2026",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 7,
+            "difficulty_score": 8,
+            "business_value_score": 7,
+            "composite": 5.9,
+            "competitor_urls": [],
+            "rationale": "High traffic but Notion owns the SERP; tough to displace."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 25,
+              "text": "knowledge base under $500/month for engineering team",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Concrete budget threshold; small audience but commercial intent."
+          }
+        ]
+      }
+    }
+  },
+  "d382acd16fba702b659408d04efd31e8cfa3fafe995bab7c7d52a57f749ed5a7": {
+    "input_tokens": 3000,
+    "output_tokens": 600,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_select_priority_query",
+      "input": {
+        "schema_version": 1,
+        "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "selected_query": {
+          "schema_version": 1,
+          "query": {
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          "metrics": {
+            "volume": null,
+            "kd": null,
+            "cpc": null,
+            "serp_features": []
+          },
+          "traffic_score": 7,
+          "difficulty_score": 7,
+          "business_value_score": 9,
+          "composite": 7.4,
+          "competitor_urls": [],
+          "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+        },
+        "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
+      }
+    }
+  },
+  "ddd04488666e3be6623f9693113095a736628147e57eb430abc36a0feb9235ad": {
+    "input_tokens": 2400,
+    "output_tokens": 1800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_draft_content_brief",
+      "input": {
+        "schema_version": 1,
+        "target_query": "alternatives to notion for engineering documentation",
+        "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "angle": "How distributed engineering teams pick a Notion alternative when half the team writes in Markdown and half doesn't \u2014 a decision framework + 30-day pilot, framed around bus-factor risk rather than feature checklists.",
+        "audience": "Engineering Directors at 200\u2013500-person dev shops actively evaluating a Notion replacement, especially those whose teams are split between Markdown-source-of-truth and WYSIWYG factions.",
+        "structure": [
+          {
+            "heading": "The bus-factor problem the listicles don't mention",
+            "purpose": "Defuse the dominant listicle angle by reframing the decision around knowledge loss rather than features.",
+            "key_points": [
+              "Listicles compare features; the actual cost of the wrong choice is tribal-knowledge loss when senior engineers leave",
+              "Quantify bus factor \u2014 one or two engineers carrying critical decisions in their heads",
+              "Anchor in a real incident postmortem framing \u2014 what does a 'we couldn't find the docs' incident actually cost?"
+            ]
+          },
+          {
+            "heading": "The Markdown vs WYSIWYG factional split is a workflow question, not a religious one",
+            "purpose": "Address the content gap the SERP misses \u2014 the Markdown/WYSIWYG factional reality inside engineering orgs.",
+            "key_points": [
+              "Half the team writes Markdown by reflex (engineers from dev-tools backgrounds); half wants WYSIWYG (designers, PMs, junior engineers)",
+              "Tooling that exports clean Markdown wins the long game regardless of authoring surface",
+              "Round-trip test: import a Markdown doc, edit it in the tool, export it back \u2014 diff should be trivial",
+              "Use the segment's exact phrase 'single source of truth' here verbatim"
+            ]
+          },
+          {
+            "heading": "Decision framework: the four tests an engineering director should actually run",
+            "purpose": "Give a concrete framework distinct from the SERP's generic feature comparisons.",
+            "key_points": [
+              "Real-time collab parity test (paired-doc concurrent edit, including conflict handling)",
+              "Markdown source-of-truth test (round-trip import/export)",
+              "API + automation test (try to drive an RFC template via CI)",
+              "Security review test (SSO + audit log for SOC 2 readiness)"
+            ]
+          },
+          {
+            "heading": "The 30-day pilot playbook",
+            "purpose": "Fill the content gap: every listicle says 'we switched'; almost none provides a phased pilot script the reader can socialize to their VP.",
+            "key_points": [
+              "Week 1: import 50 critical docs (most painful ones first \u2014 that's the real test)",
+              "Week 2: route RFCs through the new tool",
+              "Week 3: measure search-hit-rate vs the old baseline",
+              "Week 4: decision meeting with data, not feels"
+            ]
+          },
+          {
+            "heading": "When NOT to migrate \u2014 three failure modes that quietly kill these projects",
+            "purpose": "Build trust by naming the unsexy failure modes that listicles never cover.",
+            "key_points": [
+              "Tool sprawl: layering a fifth tool on top of four others guarantees split-brain",
+              "Custom-wiki temptation: maintenance cost compounds and tooling teams hate it",
+              "Half-rolled-out: split-brain across teams kills adoption regardless of tool quality"
+            ]
+          }
+        ],
+        "key_points": [
+          "Lead with bus-factor framing \u2014 that's the content gap. Do not lead with feature comparison.",
+          "Use the ICP's verbatim phrase 'single source of truth' in either the intro or an H2",
+          "Reference the Markdown vs WYSIWYG factional split as a known problem inside engineering orgs",
+          "Avoid the word 'tribal knowledge' in titles (overused in SERP); use it in body sparingly",
+          "Cite the SERP's #2 ('Why We Left Notion') as a foil \u2014 concede their pain, then go deeper",
+          "Recommended format per SERP analysis: decision-framework + migration-playbook hybrid"
+        ],
+        "sources": [
+          "https://example.com/leaving-notion",
+          "https://example.com/notion-vs-outline-deep-dive",
+          "https://example.com/wiki-tool-decision-framework",
+          "Internal incident postmortem (replace with the writer's real example before publish)"
+        ],
+        "recommended_length_words": 2400,
+        "internal_linking_suggestions": []
+      }
+    }
+  },
+  "e18ef04a46fd6e72020f6f9300c758954fab6a0fc958d7c4206fb903c8aa20b6": {
+    "input_tokens": 1200,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brand_voice_match",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  }
+}
