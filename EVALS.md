@@ -84,7 +84,44 @@ Reviewers see two diffs in the PR: the prompt-change diff (semantic) and the cas
 
 ## Reading the dashboard
 
-*(Populated in Chunk 6.)*
+```bash
+pip install -e ".[dashboard]"
+streamlit run dashboard/app.py
+```
+
+Five pages, all read-only over `data/episodic.db` (or the committed `data/episodic.demo.db` if no real DB exists yet):
+
+| Page | What it shows | Built from |
+|---|---|---|
+| **Landing (Runs)** | Recent runs table + global drift banner if any skill is regressing | `dashboard/data.py::recent_runs` + `evals/production.py::compute_drift_windows` |
+| **Evals** | Per-skill pass-rate line chart over time + totals table | `pass_rate_per_skill_per_day` |
+| **Costs** | p50 / p95 / max metric cards, histogram, cost-over-time trend, top-10 most expensive runs | `cost_per_run` |
+| **Tools** | Per-skill failure-rate bar chart (`eval_passed = 0` OR `IS NULL`) | `skill_failure_rate` |
+| **Drift** | 7-day rolling pass-rate vs prior 7-day; per-skill window table + sorted-delta bar chart; judge-vs-human divergence panel | `compute_drift_windows` + `compute_judge_human_divergence` |
+| **Review Queue** | Pending sampled runs; one-at-a-time form (overall + 3 per-dim sliders + notes) writes back to `human_reviews` | `pending_reviews` + `judge_outcomes_for_run` |
+
+The dashboard never writes to the DB except through `dashboard/pages/5_Review_Queue.py`'s parameterized review-submit step. All SQL lives in `dashboard/data.py` (deep module, unit-tested) — pages are thin presentation.
+
+## Production sample stream + judge recalibration loop
+
+`agent.run_brief` rolls a `random()` die on every completed run; with probability `SAMPLE_RATE` (default 10%) it inserts a `human_reviews` row marked pending. The dashboard's Review Queue page surfaces those pending rows.
+
+The reviewer submits a 1-5 overall rating plus three per-dimension ratings (brand voice, search-intent fit, actionability). `evals/production.py::compute_judge_human_divergence` then compares the judges' run-time consensus (all `eval_passed = 1`?) against the human's verdict (rating ≥ 3 = pass) for every reviewed sample in the last 7 days.
+
+When divergence > 5%, the Drift page lights up a warning. The recalibration step is manual: open the offending judge's rubric in `evals/rubrics/*.md`, look at the reviewer notes from the divergent cases, tighten the rubric, and re-record affected smoke cassettes (`pytest -m regression_record_live -k <slug>`). PR reviewers see the rubric diff next to the cassette diff and can verify the change behaves as intended.
+
+This is the loop the entire framework exists to drive: judges keep up with human taste over time, instead of decaying silently after first deployment.
+
+## Drift detection
+
+`evals/production.py::compute_drift_windows` runs a single grouped CTE over `skill_invocations` and returns one `DriftWindow` per skill: current 7-day pass rate, prior 7-day pass rate, delta. `drift_detected` fires when:
+
+- `delta ≤ -10%` (configurable; default in `DEFAULT_DRIFT_THRESHOLD`), AND
+- both windows have `≥ 5` invocations (small-N noise guard).
+
+The dashboard landing page renders a banner when any skill is drifting. The Drift page renders the full table + a sorted-delta bar chart so it's obvious which skill regressed.
+
+Optional Slack alerting: `post_drift_alert_to_slack(windows, webhook_url=...)` posts a per-skill summary message via a webhook. No-op when the URL is empty. Wire it into a scheduled cron (the workflow at `.github/workflows/regression.yml` is a natural host — it already has `pytest -m regression_full` data available; just add a post-step that runs `python -c "from evals.production import ..."`).
 
 ## Cassette format invariants
 
@@ -95,4 +132,8 @@ Two non-obvious rules the cassette dump must preserve:
 
 ## The pedagogical regression-gate demo
 
-*(Populated in Chunk 8: force all `score_queries.composite` to 5.0; watch `BriefSpecificityJudge` flip pass→fail on three cases; revert; watch green.)*
+A 60-second demonstration that the gate catches real regressions: force `score_queries.composite = 5.0` → `select_priority_query` collapses to first-by-position → the brief targets the wrong query → `BriefSpecificityJudge` flips pass→fail on the 3 live cassettes (Notion, Stripe, Webflow) → CI gate trips with a PR comment → revert → green.
+
+Step-by-step procedure with the exact patches and expected output lives in [`docs/regression_gate_demo.md`](docs/regression_gate_demo.md). Use it as the asciinema script.
+
+Note the interesting asymmetry: the 2 bootstrap-cassette cases (Linear, Glossier) pass through unchanged because their fake LLM responses don't react to the bug. That's the live-vs-bootstrap coverage gap the live-recording work was meant to expose. The fix is to upgrade more cassettes to real-LLM (`pytest -m regression_record_live -k <slug>`, ~$0.50/case).
