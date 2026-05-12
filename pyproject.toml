@@ -33,6 +33,11 @@ semantic = [
 web = [
     "readability-lxml==0.8.1",
     "lxml==5.3.0",
+    # lxml 5.2+ split `lxml.html.clean` into its own package; readability-lxml
+    # still imports from the old path, so we pull the split package in
+    # explicitly. Caught by fresh CI; local installs satisfied this from a
+    # transitive cache.
+    "lxml_html_clean==0.4.4",
 ]
 # Chunk 13: HTML eval reports.
 report = ["jinja2==3.1.4"]
