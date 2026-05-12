@@ -29,14 +29,17 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
 
-      - name: Install package + dev extras
+      - name: Install package + extras
         run: |
           python -m pip install --upgrade pip
-          # `[dev]` is enough for the regression suite: it pulls pytest +
-          # asyncio. Skills + tools + memory live in base deps. semantic /
-          # fastembed / sqlite-vec aren't needed (regression tests use the
-          # HashEmbedder stub and `fetch_page=lambda url: None`).
-          pip install -e ".[dev]"
+          # `memory/__init__.py` imports `memory.semantic` which top-level
+          # imports `sqlite_vec`; `tools/web_fetch.py` imports `readability`.
+          # We can't get away with just `[dev]` — the entire `memory` package
+          # would fail to import. `[semantic,web,report,mcp,dev]` is the
+          # minimum that keeps every test importable. We skip `[dashboard]`
+          # — streamlit + pandas are heavy and the regression tests don't
+          # need them.
+          pip install -e ".[semantic,web,report,mcp,dev]"
 
       - name: Default pytest (includes the 5 smoke regression cases)
         # This produces ~10s of run time and is the same suite a developer
