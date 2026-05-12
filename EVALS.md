@@ -20,8 +20,8 @@ Every LLM-judge prompt lives as a Markdown file under `evals/rubrics/`. PR diffs
 | `buyer_realism.md` | Query list from `generate_geo_query_list` | ≥70% of queries read like real buyer phrasing (not SEO-professional) |
 | `brief_specificity.md` | `ContentBrief` from `draft_content_brief` | Angle is specific + differentiated, not generic listicle-fodder |
 | `brand_voice_match.md` | `ContentBrief` × `CompanyDossier` | Brief's prose register matches the company's brand voice |
-
-*(Chunks 2+ add `search_intent_alignment.md` and `brief_actionability.md`.)*
+| `search_intent_alignment.md` | `ContentBrief` × `Priority` (query + framing) | Brief actually serves the priority query's intent (topical + framing), not an adjacent topic |
+| `brief_actionability.md` | `ContentBrief` (sections + key_points) | ≥80% of key_points are concrete directives, not category placeholders a writer would have to invent from |
 
 ## Adding a new judge
 

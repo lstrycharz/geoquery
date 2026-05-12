@@ -26,6 +26,8 @@ def _serp_analysis() -> SerpAnalysis:
 def test_draft_brief_with_serp_analysis(fake_client):
     fake_client.load_cassette("draft_content_brief")
     fake_client.load_cassette("judge_brief_specificity")
+    # BriefActionabilityJudge always runs on the drafter (no upstream gate).
+    fake_client.load_cassette("judge_brief_actionability")
     skill = DraftContentBrief(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
 
     result = skill.run(
@@ -48,6 +50,8 @@ def test_draft_brief_without_serp_analysis_still_works(fake_client):
     """Backward-compatible: callers pre-chunk-4 don't pass a SerpAnalysis."""
     fake_client.load_cassette("draft_content_brief")
     fake_client.load_cassette("judge_brief_specificity")
+    # BriefActionabilityJudge always runs on the drafter (no upstream gate).
+    fake_client.load_cassette("judge_brief_actionability")
     skill = DraftContentBrief(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
 
     result = skill.run(

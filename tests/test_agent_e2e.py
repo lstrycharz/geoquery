@@ -23,6 +23,8 @@ _OTHER_CASSETTES = (
     "judge_buyer_realism",
     "judge_brief_specificity",
     "judge_brand_voice_match",
+    "judge_search_intent_alignment",
+    "judge_brief_actionability",
 )
 _PIPELINE_CASSETTES = _SKILL_CASSETTES + _OTHER_CASSETTES
 

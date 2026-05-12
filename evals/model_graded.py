@@ -16,7 +16,7 @@ from dataclasses import dataclass
 from anthropic import Anthropic
 from pydantic import BaseModel, Field
 
-from contracts import BuyerJourney, CompanyDossier, ContentBrief
+from contracts import BuyerJourney, CompanyDossier, ContentBrief, Priority
 from evals.deterministic import EvalResult
 from evals.rubric_loader import load_rubric
 from guardrails import RunBudget
@@ -157,6 +157,82 @@ class BrandVoiceMatchJudge:
                 f"Dossier signals:\n{dossier_block}\n\n"
                 f"Brief to evaluate:\n{brief_block}\n\n"
                 "Decide pass/fail per the rubric. If fail, name off-brand phrases."
+            ),
+        )
+        return EvalResult(name=self.name, passed=verdict.passed, failures=verdict.failures)
+
+
+@dataclass
+class SearchIntentAlignmentJudge:
+    """Judges whether the brief serves the priority query's intent.
+
+    The Priority (selected query + framing) is baked in at construction so the
+    judge satisfies the standard Evaluator protocol — `evaluate(brief)` like
+    every other content-brief evaluator. Distinct from BriefSpecificityJudge:
+    specificity asks "is the angle sharp?"; this asks "does the sharp angle
+    actually serve THIS query's intent, or a related-but-different one?".
+    """
+
+    client: Anthropic
+    budget: RunBudget
+    priority: Priority
+    name: str = "judge_search_intent_alignment"
+    blocking: bool = False
+    rubric: str = "search_intent_alignment"
+
+    def evaluate(self, output: ContentBrief) -> EvalResult:
+        sq = self.priority.selected_query
+        intent_block = (
+            f"Priority query: {sq.query.text}\n"
+            f"Framing: {sq.query.framing}\n"
+            f"Refinement applied: {sq.query.refinement_applied}\n"
+            f"Selected because: {self.priority.rationale}"
+        )
+        brief_block = (
+            f"target_query: {output.target_query}\n"
+            f"Angle: {output.angle}\n"
+            f"Audience: {output.audience}\n"
+            f"Top key points: {' | '.join(output.key_points[:5])}"
+        )
+        verdict = _judge_call(
+            client=self.client,
+            budget=self.budget,
+            judge_name=self.name,
+            system_prompt=load_rubric(self.rubric),
+            user_message=(
+                f"Priority query intent:\n{intent_block}\n\n"
+                f"Brief to evaluate:\n{brief_block}\n\n"
+                "Decide pass/fail per the rubric. Name specific intent mismatches if fail."
+            ),
+        )
+        return EvalResult(name=self.name, passed=verdict.passed, failures=verdict.failures)
+
+
+@dataclass
+class BriefActionabilityJudge:
+    """Judges whether the brief's section key_points are concrete enough for a
+    writer to draft from, or fluffy/abstract category-placeholders. Pure shape
+    check on the brief — no upstream context needed."""
+
+    client: Anthropic
+    budget: RunBudget
+    name: str = "judge_brief_actionability"
+    blocking: bool = False
+    rubric: str = "brief_actionability"
+
+    def evaluate(self, output: ContentBrief) -> EvalResult:
+        sections_block = "\n\n".join(
+            f"### {s.heading}\n" + "\n".join(f"- {kp}" for kp in s.key_points)
+            for s in output.structure
+        )
+        verdict = _judge_call(
+            client=self.client,
+            budget=self.budget,
+            judge_name=self.name,
+            system_prompt=load_rubric(self.rubric),
+            user_message=(
+                f"Brief sections to evaluate:\n{sections_block}\n\n"
+                "Decide pass/fail per the rubric. Name fluffy key_points verbatim if fail."
             ),
         )
         return EvalResult(name=self.name, passed=verdict.passed, failures=verdict.failures)
