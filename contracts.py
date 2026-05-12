@@ -15,10 +15,21 @@ from pydantic import BaseModel, Field, field_validator
 def _coerce_json_list(v: Any) -> Any:
     """Some models occasionally serialize nested list-of-object fields as a
     JSON string instead of a real list. Coerce defensively so the contract
-    doesn't reject otherwise-valid output."""
-    if isinstance(v, str):
+    doesn't reject otherwise-valid output. Tolerates light wrapping (e.g.
+    `list([...])` or trailing parens) by extracting the bracketed substring."""
+    if not isinstance(v, str):
+        return v
+    try:
+        decoded = json.loads(v)
+        if isinstance(decoded, list):
+            return decoded
+    except json.JSONDecodeError:
+        pass
+    start = v.find("[")
+    end = v.rfind("]")
+    if start != -1 and end > start:
         try:
-            decoded = json.loads(v)
+            decoded = json.loads(v[start : end + 1])
             if isinstance(decoded, list):
                 return decoded
         except json.JSONDecodeError:
@@ -27,10 +38,27 @@ def _coerce_json_list(v: Any) -> Any:
 
 
 def _coerce_json_dict(v: Any) -> Any:
-    """Sibling to _coerce_json_list for dict-shaped fields (SWOT, Porter)."""
-    if isinstance(v, str):
+    """Sibling to _coerce_json_list for dict-shaped fields (SWOT, Porter).
+
+    Also tolerates light wrapping the model sometimes adds: a leading
+    `dict(` or trailing `)`, code-fence prefixes, etc. The strategy is:
+    try strict JSON first; if that fails, slice from the first `{` to the
+    last `}` and try again.
+    """
+    if not isinstance(v, str):
+        return v
+    try:
+        decoded = json.loads(v)
+        if isinstance(decoded, dict):
+            return decoded
+    except json.JSONDecodeError:
+        pass
+    # Fallback: extract the {...} substring and retry.
+    start = v.find("{")
+    end = v.rfind("}")
+    if start != -1 and end > start:
         try:
-            decoded = json.loads(v)
+            decoded = json.loads(v[start : end + 1])
             if isinstance(decoded, dict):
                 return decoded
         except json.JSONDecodeError:

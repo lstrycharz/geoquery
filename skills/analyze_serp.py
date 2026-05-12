@@ -25,7 +25,7 @@ class AnalyzeSerp(Skill[AnalyzeSerpInputs, SerpAnalysis]):
     name = "analyze_serp"
     model = "claude-sonnet-4-6"
     output_type = SerpAnalysis
-    max_output_tokens = 4096
+    max_output_tokens = 6144  # top-3 page content can push output past 4k
 
     def build_user_message(self, inputs: AnalyzeSerpInputs) -> str:
         blocks: list[str] = []
