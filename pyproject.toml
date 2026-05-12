@@ -42,7 +42,9 @@ web = [
 # Chunk 13: HTML eval reports.
 report = ["jinja2==3.1.4"]
 # Chunk 16: MCP server.
-mcp = ["mcp==1.1.2"]
+# 1.1.2 pre-dates the `mcp.server.fastmcp` module the server module imports.
+# 1.27.1 is the current stable; verified locally.
+mcp = ["mcp==1.27.1"]
 # v2 Chunk 1: Streamlit dashboard reading data/episodic.db.
 dashboard = [
     "streamlit==1.40.2",

@@ -125,7 +125,10 @@ def test_regression_dataset_has_at_least_one_case():
 
 def test_regression_dataset_dir_path_is_resolvable():
     assert REGRESSION_DATASET_DIR.name == "regression_dataset"
-    assert REGRESSION_DATASET_DIR.parent.name == "GEOQuery"
+    # Parent is the project root — its name varies by clone (`GEOQuery` locally,
+    # `geoquery` on the GitHub Actions runner). Assert it contains the expected
+    # sibling files instead of name-matching.
+    assert (REGRESSION_DATASET_DIR.parent / "pyproject.toml").is_file()
 
 
 def test_smoke_tier_has_expected_size():
