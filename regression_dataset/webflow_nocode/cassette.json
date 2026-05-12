@@ -1,7 +1,403 @@
 {
-  "02ac2277416e35bd021d475e8bf11e20589794763b1b8dfa2ebc5c23ef6a6713": {
-    "input_tokens": 1200,
-    "output_tokens": 60,
+  "33b485cb4af4429a57106ad61c7b3e4b836c09a2f326f73574116fe997886249": {
+    "input_tokens": 19404,
+    "output_tokens": 2301,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_serp_results",
+      "input": {
+        "results": [
+          {
+            "rank": 1,
+            "url": "https://www.waveon.io/en/blog/best-no-code-website-platforms-for-b2b-startups",
+            "title": "Best no-code website platforms for B2B startups and how to choose one | Waveon Blog",
+            "snippet": "A practical approach is to shortlist two or three tools that match your priorities\u2014design freedom, speed, content depth\u2014and run a small test project in each, like rebuilding your current homepage or a key landing page. Pay close attention not just to the final look but to how it feels to work inside the tool.",
+            "extracted_content": "Best no-code website platforms for B2B startups - comparing designer-oriented tools, AI-assisted builders, and template-driven platforms. Discusses SEO constraints, integrations, personalization, and hybrid approaches. Recommends no-code builders that support SEO controls, clean forms, solid integrations, and sensible roles/permissions. Emphasizes evaluating platforms based on real pain points (annoying vs costly vs blocking issues)."
+          },
+          {
+            "rank": 2,
+            "url": "https://www.weweb.io/blog/best-no-code-website-builder-platforms",
+            "title": "10 Best No Code Website Builder Platforms for 2026",
+            "snippet": "Elementor is for founders and agencies who want no-code WordPress with pro control. Great for marketing sites, landing pages, and WooCommerce stores, it supports beginner-friendly templates while offering advanced, scalable workflows, especially on managed cloud hosting.",
+            "extracted_content": "Features Elementor (WordPress-based with visual builder), Webflow (design-forward with CMS), Shopify (commerce-first), and WeWeb. Discusses no-code market growth ($28.11B in 2024 to $35.86B in 2025). Highlights speed advantages - development time reduced up to 90% vs traditional coding. Emphasizes production-grade platform selection for professional use."
+          },
+          {
+            "rank": 3,
+            "url": "https://blog.yaamwebsolutions.com/no-code-website-builder/",
+            "title": "7 Best No-Code Website Builders for Businesses in 2026",
+            "snippet": "It gives you CSS-level design control through a visual interface \u2014 meaning you can build genuinely unique layouts, not just template variations. The platform's CMS handles complex content structures \u2014 team pages, case studies, blog posts \u2014 all customizable in how they display.",
+            "extracted_content": "Comprehensive breakdown of 7 no-code platforms tested with real client projects. Highlights Webflow for design agencies, SaaS companies, B2B marketing sites with maximum design control. Discusses limitations of most platforms (no code export, scaling constraints). No-code market projected to exceed $187B by 2030. Notes professional website launch time reduced from 6-8 weeks to 2-5 days."
+          },
+          {
+            "rank": 4,
+            "url": "https://emergent.sh/learn/best-b2b-website-builders",
+            "title": "Top 5 B2B Website Builders That Actually Drive Leads in 2026",
+            "snippet": "B2B website builders serve very different segments of the market, from full-stack custom platforms to commerce-first solutions and design-driven builders. Some prioritize deep customization and system integration, while others focus on speed, templates, or commerce workflows.",
+            "extracted_content": "Compares Emergent (AI-powered full-stack for B2B revenue systems), Webflow (design-first with visual control), and Shopify (commerce-optimized with transaction management). Discusses critical B2B requirements: supporting product-led, sales-led, or commerce-driven buying journeys; CRM/analytics integration; and complex sales motions. Webflow lacks native backend logic and complex B2B workflows support."
+          },
+          {
+            "rank": 5,
+            "url": "https://www.cs-cart.com/no-code-marketplace-builder",
+            "title": "Best No-Code Marketplace Builder | CS-Cart Multi-Vendor Cloud",
+            "snippet": "CS-Cart Cloud fits this concept by providing ready storefronts, vendor portals, payment workflows, and monetization tools that can be configured through the admin panel.",
+            "extracted_content": "Multi-vendor marketplace platform with no-code configuration. Provides ready storefronts, vendor portals, payment workflows, automated transaction management. Supports multi-language (26), multi-currency, international taxes/shipping. CS-Cart Cloud is fully managed hosted solution for launching marketplaces without setup or coding."
+          },
+          {
+            "rank": 6,
+            "url": "https://www.growthmak.com/blog/how-no-code-websites-can-build-your-b2b-dream",
+            "title": "Empowering Non-Technical Founders: How No-Code Websites Can Build Your B2B Dream",
+            "snippet": "No-code websites have democratized access to online presence for non-technical B2B founders. You no longer need to be a coder to build a professional, functional, and scalable website.",
+            "extracted_content": "Discusses B2B no-code benefits including CRM integration (Salesforce, HubSpot) for lead capture and sales pipeline management. Addresses scalability planning from the beginning and options to migrate to more robust platforms if needed. Notes that no-code extends beyond websites to internal tools, workflow automation, and custom applications."
+          },
+          {
+            "rank": 7,
+            "url": "https://www.mindstudio.ai/blog/best-no-code-app-builders",
+            "title": "Best No-Code App Builders in 2026: An Honest Breakdown | MindStudio",
+            "snippet": "Bubble is the most capable option for this. There are real companies running on Bubble with thousands of users. The main challenges are performance at scale (which requires careful database design), cost at higher usage tiers, and the fact that you can't migrate your app off Bubble if you outgrow it.",
+            "extracted_content": "Distinguishes between Bubble (full-featured backend with database, workflows, authentication) and Webflow (visual design tool with CMS, no real application backend). Bubble suitable for complex applications; Webflow excellent for marketing sites/content-driven pages. Discusses Bubble limitations: scaling challenges, vendor lock-in. Webflow better for design-forward projects without complex backend needs."
+          },
+          {
+            "rank": 8,
+            "url": "https://www.websiteplanet.com/blog/best-b2b-ecommerce-platform/",
+            "title": "6 Best B2B E-commerce Platforms for Your Business in 2026",
+            "snippet": "Unlike many e-commerce platforms, Commerce Hub doesn't charge monthly fees. Instead, you'll only pay a small transaction fee on invoices \u2013 making it a cost-effective option.",
+            "extracted_content": "Covers B2B e-commerce platforms including Shopify with B2B-optimized theme (quick-order forms, bulk purchasing, advanced search), Wix (900+ templates, AI-powered design), Ecwid (volume-based pricing, automation tools). Shopify noted for simplicity/capability balance. Discusses importance of website design alignment with business goals for B2B success."
+          },
+          {
+            "rank": 9,
+            "url": "https://blog.nextinymarketing.com/no-code-ai-marketing-tools",
+            "title": "30+ AI & No-Code Marketing Tools in 2025",
+            "snippet": "For small businesses or personal projects, tools like Squarespace, Wix, and Weebly offer accessible and versatile options. For larger marketing efforts, HubSpot stands out as the ideal website-building solution.",
+            "extracted_content": "Recommends HubSpot for larger B2B marketing efforts (landing pages, pillar pages, blogs with 1,500+ app integrations). Lists Shopify for e-commerce with AI tool (Shopify Magic). Discusses no-code revolution in website building, design, blogging, SEO, and data analysis. Notes platforms enable unified dashboards integrating multiple data sources."
+          },
+          {
+            "rank": 10,
+            "url": "https://kissflow.com/no-code/no-code-company/",
+            "title": "15 Best No-Code Companies and Platforms (April 2026 Updated List)",
+            "snippet": "Creating a marketing website? Choose Webflow for design control and SEO. Managing data and collaborating? Choose Airtable for spreadsheet-database hybrid. Building native mobile apps? Choose FlutterFlow with code export option.",
+            "extracted_content": "Webflow identified as industry standard for visually stunning, professionally designed websites combining creative freedom with robust CMS and hosting. Lists quick recommendations by use case: Webflow for marketing sites (design control/SEO), Airtable for data/collaboration, FlutterFlow for mobile apps. Discusses cost considerations: licensing models, implementation/training, integration requirements, scaling costs."
+          }
+        ]
+      }
+    }
+  },
+  "3be96fb9e7e900e025d81e0ebdc1f078dc907fea7d4caaf30d0b4585e3fc907a": {
+    "input_tokens": 1927,
+    "output_tokens": 3780,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_research_company",
+      "input": {
+        "customer_segments": [
+          "Freelance web designers and independent consultants building client sites",
+          "In-house marketing teams at mid-market SaaS and tech companies",
+          "Digital agencies managing multi-client site production",
+          "Early-stage startups needing a branded web presence without engineering resources",
+          "Enterprise marketing teams seeking CMS-powered sites with developer guardrails",
+          "E-commerce operators running design-forward DTC brands (via Webflow Commerce)"
+        ],
+        "product_portfolio": [
+          "Webflow Designer \u2014 visual canvas that writes semantic HTML/CSS/JS in real time; core differentiator from drag-and-drop builders; no-abstraction-layer fidelity",
+          "Webflow CMS \u2014 structured content collections with Designer binding; targeted at marketers who need editorial control without touching code",
+          "Webflow Hosting \u2014 CDN-backed (Fastly) managed hosting bundled per site plan; tiered by bandwidth, form submissions, and CMS item limits",
+          "Webflow Commerce \u2014 product catalog, checkout, and order management built into the Designer; positioned for design-forward stores, not high-SKU merchants",
+          "Webflow Localization \u2014 multi-locale content and URL management launched 2023; targets global marketing teams",
+          "Webflow Apps & Marketplace \u2014 third-party integrations (Memberstack, Finsweet, Zapier, etc.) extending platform without native dev; launched full marketplace 2023",
+          "Workspace (Team) Plans \u2014 seat-based collaboration tier with shared asset libraries, client billing handoff, and role permissions; primary upsell for agencies and in-house teams",
+          "Webflow University / Templates \u2014 free educational content and a paid/free template marketplace that doubles as a top-of-funnel acquisition channel"
+        ],
+        "inferred_icp": "[\"De facto ICP (inferred from pricing architecture, template library depth, case studies, and community size): a marketing-side buyer at a 50\u2013500 person B2B SaaS or tech-adjacent company \u2014 typically a Head of Marketing, Brand, or Growth \u2014 who needs to ship and iterate on a high-fidelity, CMS-driven marketing site without queuing engineering tickets. They have enough design literacy to appreciate pixel control (or manage a contractor who does), are comfortable paying $40\u2013$200/month per site, and measure success by time-to-publish and brand consistency rather than raw transaction volume. Agencies serving exactly this buyer profile are the second-order ICP, acting as a distribution channel into the same end-market.\"]",
+        "icp_priorities": [
+          "Design fidelity and pixel-level control without writing code",
+          "Speed of iteration on marketing pages without engineering dependency",
+          "Clean CMS that non-developers can operate in production",
+          "Ownership of the output (exportable, semantic HTML \u2014 not locked markup)",
+          "Professional credibility of the finished site (not a 'template' look)",
+          "Reasonable hosting and CDN performance out of the box",
+          "Ecosystem of integrations and community-built solutions (Flowbase, Finsweet, etc.)",
+          "Client handoff workflows for agencies (Editor mode, white-labeling)"
+        ],
+        "competitors": [
+          "Squarespace \u2014 consumer-grade site builder; competes at the lower-fidelity, lower-price end; stronger in lifestyle/SMB",
+          "Wix (+ Wix Studio) \u2014 mass-market builder pivoting upmarket with Wix Studio targeting agencies; larger user base, weaker design ceiling",
+          "Framer \u2014 fastest-growing direct rival; design-first canvas, AI-first positioning, React output, strong momentum among product designers and startups",
+          "WordPress + Elementor/Divi \u2014 incumbent CMS stack; massive ecosystem, lower cost, but high maintenance overhead",
+          "WordPress + Gutenberg (headless) \u2014 enterprise CMS path; competes on flexibility, not visual parity",
+          "Contentful + Next.js (custom dev) \u2014 headless CMS + developer stack; competes for enterprise marketing sites where engineering is available",
+          "Sanity.io + custom front end \u2014 structured content platform used by teams that want editorial control with full dev ownership",
+          "Editor X / Wix Studio \u2014 Wix's professional tier; direct agency-market attack",
+          "Plasmic \u2014 visual builder for React components; targets developer-adjacent teams, competes on code-output quality",
+          "Unbounce / Instapage / Leadpages \u2014 landing-page-specific builders; compete on conversion optimization tooling for paid media teams",
+          "Hubspot CMS Hub \u2014 competes specifically for HubSpot-centric marketing teams wanting CMS + CRM in one",
+          "Shopify (+ Hydrogen/Dawn themes) \u2014 competes for the commerce segment; overwhelmingly stronger for high-SKU or high-GMV merchants"
+        ],
+        "company_advantages": [
+          "Output fidelity: Webflow's Designer produces valid, semantic, hand-code-quality HTML/CSS \u2014 competitors like Wix and Squarespace output bloated or non-portable markup",
+          "CMS-to-design binding: content fields can be bound directly to any visual property (color, size, visibility) \u2014 a capability Framer and Squarespace lack at comparable depth",
+          "Designer + CMS + Hosting in one authenticated surface: eliminates the plugin/glue-code tax of WordPress stacks",
+          "Webflow University and community ecosystem: one of the largest structured no-code learning libraries; reduces churn by increasing user competency",
+          "Agency channel depth: 'Client Billing' handoff, Editor mode, and white-label options create a sticky professional reseller layer that Framer and Squarespace lack",
+          "Exportable HTML/CSS: users can download clean code, reducing lock-in anxiety \u2014 a trust signal competitors (especially Squarespace/Wix) cannot match",
+          "Interactions & Animations engine: scroll-triggered, multi-step animations achievable without JavaScript libraries \u2014 a meaningful design ceiling unavailable in Wix or Squarespace"
+        ],
+        "competitor_advantages": [
+          "Framer: faster onboarding, AI-assisted layout generation (AI site builder), native React component output, and stronger product-designer mindshare \u2014 Webflow's learning curve is a real liability here",
+          "WordPress ecosystem: 60,000+ plugins, near-infinite theme market, self-hostable, and free at baseline \u2014 total cost of ownership can be lower for technically confident teams",
+          "Squarespace / Wix: dramatically lower learning curve; sufficient for the majority of SMB use cases at ~half the price point",
+          "Contentful / Sanity: superior for large editorial teams with complex content modeling needs, multi-channel content delivery (API-first), and enterprise compliance requirements",
+          "Shopify: Webflow Commerce cannot compete on payment gateway breadth, third-party app ecosystem, or operational tooling (inventory, fulfillment, B2B) for any serious e-commerce operation",
+          "HubSpot CMS: native CRM/CMS integration means zero data plumbing for HubSpot customers \u2014 Webflow requires third-party connectors",
+          "Plasmic: outputs directly into existing React codebases, making it more attractive to engineering-led teams who want visual editing without a separate hosting platform"
+        ],
+        "swot": {
+          "strengths": [
+            "Best-in-class visual-to-clean-code fidelity among no-code builders creates a durable quality moat for design-conscious buyers.",
+            "Deeply entrenched agency channel (~20% of revenue inferred) acts as a self-sustaining distribution and retention flywheel.",
+            "Webflow University and free template marketplace generate top-of-funnel SEO and reduce time-to-value, lowering CAC organically.",
+            "Interactions and animation engine lets designers achieve production-quality motion without JavaScript, a capability gap no direct competitor has closed.",
+            "Exportable HTML output reduces lock-in fear and is a credible enterprise trust signal competitors cannot easily replicate."
+          ],
+          "weaknesses": [
+            "Steep learning curve relative to Framer, Wix Studio, and Squarespace limits addressable market to design-literate users and excludes pure marketers.",
+            "Webflow Commerce is under-featured versus Shopify for any merchant above micro-scale, fragmenting the platform's commerce credibility.",
+            "No native AI-assisted design or content generation as of mid-2024, while Framer has shipped AI layout tools \u2014 a visible product gap.",
+            "Pricing can escalate quickly for agencies managing many client sites, creating churn risk at the portfolio edge.",
+            "Enterprise feature set (SSO, audit logs, SLA-backed uptime) lags behind Contentful and WordPress VIP for large-org procurement."
+          ],
+          "opportunities": [
+            "AI-assisted layout and copy generation (\u00e0 la Framer AI) could collapse the learning curve and reopen the SMB and non-designer market.",
+            "Webflow Localization is early-stage; deeper i18n tooling (translation memory, regional workflows) targets global enterprise marketing teams underserved by the current market.",
+            "Component and design-system tooling for in-house brand teams (brand kits, locked component libraries) could capture enterprise design-ops buyers.",
+            "Expanding the Apps Marketplace into a revenue-share ecosystem could increase ARPU and create Salesforce AppExchange-style lock-in.",
+            "Headless/API-first CMS mode would open Webflow to the Contentful/Sanity competitive set and enterprise content teams currently excluded."
+          ],
+          "threats": [
+            "Framer's AI-first, React-native positioning is capturing the next generation of product designers and early-stage startups \u2014 the pipeline of future Webflow power users.",
+            "WordPress + modern page builders (Bricks, Breakdance) continue to improve design ceilings while remaining self-hostable and free-at-core.",
+            "Figma's potential expansion into publishable web output (Figma Sites, announced 2024) could collapse the design-to-web handoff entirely, threatening Webflow's core workflow.",
+            "Enterprise CMS incumbents (Contentful, Adobe Experience Manager) are adding visual editing layers, eroding Webflow's differentiation at the top of market.",
+            "Economic pressure on agency budgets (Webflow's key channel) increases price sensitivity and accelerates evaluation of cheaper alternatives."
+          ]
+        },
+        "porter_five_forces": {
+          "buyer_power": "Moderate-to-high. SMB and freelance buyers face near-zero switching costs and can migrate to Framer, Wix Studio, or WordPress with effort measured in days. Mid-market and enterprise buyers have higher switching costs once CMS content, integrations, and team workflows are embedded, but the market has enough credible alternatives to give buyers real negotiating leverage on pricing tiers.",
+          "supplier_power": "Low. Webflow's infrastructure dependencies (Fastly CDN, AWS compute, Stripe for billing) are commodity services with competitive alternatives. No single supplier has meaningful pricing power over Webflow's core stack.",
+          "rivalry": "High and intensifying. Framer is growing faster among the design-forward segment; Wix Studio is investing heavily to capture agencies; Figma's announced web publishing capability is a potential category-level disruption. The market is not a duopoly \u2014 rivalry is broad, multi-front, and increasingly AI-driven.",
+          "new_entrants": "Moderate threat. The visual web builder space has low distribution barriers (Product Hunt, designer communities, YouTube tutorials) and AI is collapsing the engineering effort required to build a credible MVP builder. Framer itself was a new entrant five years ago. The incumbent moat is community depth and CMS maturity, not technology exclusivity.",
+          "substitutes": "High. 'Build it in Next.js + Vercel + Sanity' is a fully viable substitute for any team with one frontend engineer. Notion-based public pages, Carrd, and even Canva websites serve as substitutes at the low end. The substitute threat is asymmetric: Webflow is most defensible in the mid-market band where neither DIY nor full custom dev is efficient."
+        },
+        "strategic_recommendations": [
+          "1. Ship AI-assisted layout and content generation before Framer's head start compounds \u2014 even an MVP 'AI first draft from URL/brief' feature directly addresses the steepest adoption barrier (learning curve) and defends the startup/designer segment.",
+          "2. Reposition Webflow CMS as an enterprise-grade headless CMS with a visual front-end layer \u2014 adding a content delivery API and GraphQL endpoint would open the Contentful/Sanity competitive set and justify larger ACV enterprise contracts.",
+          "3. Invest in a locked component / design-token system for in-house brand and design-ops teams \u2014 this creates a new enterprise buyer persona (Brand/Design Ops) and a stickier, higher-ARPU seat model than the current per-site pricing.",
+          "4. Formalize an agency partner tier with revenue sharing or lead referral economics \u2014 the agency channel is already Webflow's most capital-efficient distribution path; structuring it with certified-partner badging and co-marketing would deepen it defensively against Wix Studio's agency push.",
+          "5. Deprecate or clearly ring-fence Webflow Commerce as 'design-forward micro-commerce' and build a first-class Shopify integration \u2014 this stops fragmenting product investment on a losing e-commerce battle and converts a weakness into a partnership distribution channel.",
+          "6. Pre-empt Figma Sites by launching a Figma-to-Webflow import plugin with high design fidelity \u2014 capturing the handoff workflow from within Figma's ecosystem turns a threat into a top-of-funnel acquisition motion."
+        ],
+        "executable_work_plan": [
+          "1. [Product Marketing] Audit every Framer case study and AI-builder comparison page published in the last 6 months; produce a competitive battle card and objection-handling guide for the sales/CS team within 30 days.",
+          "2. [Content/SEO] Publish a 10-piece 'Webflow vs. [Competitor]' comparison content cluster targeting high-intent bottom-of-funnel queries (e.g., 'Webflow vs Framer for marketing sites') \u2014 each page grounded in a verifiable feature matrix, not opinion.",
+          "3. [Demand Gen] Launch a LinkedIn and YouTube retargeting campaign aimed at Figma users and product designers highlighting Webflow's interaction engine and CMS binding \u2014 intercept the audience most likely to be evaluating Framer.",
+          "4. [Community/Partnerships] Identify the top 50 Webflow agency partners by client portfolio size; conduct 1:1 interviews to surface churn risks, unmet feature needs, and co-marketing opportunities; deliver findings to product and revenue leadership.",
+          "5. [Product Marketing] Create a 'Webflow for Marketing Teams' landing page and email nurture sequence explicitly addressing the 'no engineering required' value prop with video walkthroughs \u2014 target the Head of Marketing/Growth persona explicitly, not designers.",
+          "6. [Revenue/Sales] Design and pilot a formalized Agency Certified Partner program with tiered benefits (co-branded case studies, lead referrals, discounted seat pricing) and recruit 20 founding partners within 90 days.",
+          "7. [SEO/Content] Build a free interactive 'No-Code Stack Picker' tool on the Webflow blog \u2014 a quiz-style asset that recommends Webflow (or honestly admits alternatives) based on use case; drives backlinks and positions Webflow as a category authority.",
+          "8. [Product Marketing] Develop an enterprise one-pager and security/compliance FAQ (SOC 2, SSO, SLA) targeting IT/procurement stakeholders at 200\u20132,000 person companies where marketing has internal champions but procurement is the blocker.",
+          "9. [Growth/Lifecycle] Instrument a cohort analysis of free-plan users who reach 'Designer opened + CMS collection created' milestone vs. those who don't; build an in-product onboarding nudge sequence to push more users to that activation milestone within the first 7 days.",
+          "10. [Competitive Intel] Set up a weekly automated monitoring brief (using Feedly, SparkToro, or similar) tracking Framer, Wix Studio, and Figma product announcements, pricing changes, and share-of-voice shifts \u2014 route to product and marketing leadership every Monday."
+        ]
+      }
+    }
+  },
+  "4519982f2f17fb659c826e0bdb7cc9779431de8a50b2617987be36f46f06cb6e": {
+    "input_tokens": 1843,
+    "output_tokens": 1540,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_generate_geo_query_list",
+      "input": {
+        "schema_version": 1,
+        "queries": [
+          {
+            "position": 1,
+            "text": "no code design tool for marketing pages",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 2,
+            "text": "do I need a designer to build landing pages",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 3,
+            "text": "can marketers build websites without developers",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 4,
+            "text": "what's the difference between webflow and wordpress",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 5,
+            "text": "web design tool that doesn't require coding",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 6,
+            "text": "our team can't get marketing pages shipped without an engineering ticket",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 7,
+            "text": "we're waiting two sprints to launch a campaign page",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 8,
+            "text": "brand inconsistency across marketing website multiple contractors",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 9,
+            "text": "wordpress is eating up our engineering time with plugin conflicts",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 10,
+            "text": "need a single source of truth for marketing page designs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 11,
+            "text": "design platform with drag and drop landing page builder",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 12,
+            "text": "no code tool with responsive design controls",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 13,
+            "text": "marketing site builder that integrates with our CMS",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 14,
+            "text": "design tool that non-technical people can actually use",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 15,
+            "text": "webflow vs framer for marketing pages b2b saas",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 16,
+            "text": "no code design tool with CMS and sso",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 17,
+            "text": "alternatives to webflow for landing pages 2024",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 18,
+            "text": "webflow webflow webflow vs wordpress security and performance",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 19,
+            "text": "best no code platform for b2b marketing website rebuild",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 20,
+            "text": "no code design tool pricing per month 2024",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 21,
+            "text": "webflow pricing vs competitors how much does it cost",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 22,
+            "text": "cheap alternative to paying agencies 4k a month for landing pages",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 23,
+            "text": "marketing site builder under $500 month roi payback",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 24,
+            "text": "webflow framer figma design tool annual pricing comparison",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 25,
+            "text": "no code platform soc2 compliance audit log for b2b",
+            "framing": "power-user",
+            "refinement_applied": true
+          }
+        ],
+        "journey_arc_summary": "The buyer journey starts with foundational questions about whether no-code design tools exist and whether they can replace hired developers and agencies (positions 1\u20135), then shifts into naming specific pain points: sprint delays, engineering dependencies, brand fragmentation, and CMS maintenance overhead (positions 6\u201310). By the middle of the journey, the buyer is searching for implementation details like drag-and-drop builders, responsive controls, and CMS integration (positions 11\u201314). In the refined half (15\u201325), searches become highly specific\u2014comparing named platforms (Webflow vs. Framer), adding requirements like SSO and SOC2, and grounding decisions in pricing ROI (the \"$4k agency fee\" becomes explicit by position 22). This progression reflects a real head of marketing moving from \"do tools like this exist?\" to \"which exact platform saves us the most time and cost without breaking our security posture?\""
+      }
+    }
+  },
+  "4a5e45c286acfac2b64c437ec1d3440976bad989ebf944cde81e917cca318512": {
+    "input_tokens": 1395,
+    "output_tokens": 33,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_specificity",
+      "input": {
+        "passed": true
+      }
+    }
+  },
+  "51435d70c13d175abd1a89e62a65a68d7ccfcb9a301b3293a88be31fe8088517": {
+    "input_tokens": 3099,
+    "output_tokens": 33,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_actionability",
+      "input": {
+        "passed": true
+      }
+    }
+  },
+  "9c7d9a04d38ef80ed69f1c3408ccf5e85bdbfa280e4ca2157a6b1c7c39832053": {
+    "input_tokens": 1240,
+    "output_tokens": 50,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_judge_buyer_realism",
@@ -11,368 +407,310 @@
       }
     }
   },
-  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
-    "input_tokens": 1300,
-    "output_tokens": 40,
+  "a17ddd121cb10e70414ea52775420c0238355747aa6657888a0cb8007187450b": {
+    "input_tokens": 5884,
+    "output_tokens": 5492,
     "stop_reason": "tool_use",
     "tool_use": {
-      "name": "emit_judge_search_intent_alignment",
+      "name": "emit_define_icp",
       "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "3be96fb9e7e900e025d81e0ebdc1f078dc907fea7d4caaf30d0b4585e3fc907a": {
-    "input_tokens": 1400,
-    "output_tokens": 2800,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_research_company",
-      "input": {
-        "schema_version": 1,
-        "customer_segments": [
-          "Distributed engineering teams at 200-500-person dev shops",
-          "Ops/RevOps managers at 50-200-person B2B SaaS startups",
-          "Indie creators and consultants on the free tier"
-        ],
-        "product_portfolio": [
-          "Notion free tier (personal/team)",
-          "Notion Plus (small teams, $10/seat/mo)",
-          "Notion Business (mid-market, $18/seat/mo, SSO)",
-          "Notion Enterprise (SOC2 + advanced admin)",
-          "Notion AI add-on ($10/seat/mo)"
-        ],
-        "inferred_icp": "Notion's de facto ICP appears to be 50-300-person knowledge-driven teams (B2B SaaS, agencies, creator-economy companies) where the Director of Operations or VP of Engineering owns the tool-selection decision, prioritizes design and flexibility over enterprise hardening, and has outgrown a free wiki but isn't yet ready for Atlassian's complexity.",
-        "icp_priorities": [
-          "design polish",
-          "flexibility (databases + pages)",
-          "speed of setup",
-          "real-time collaboration",
-          "ease of templates/duplication"
-        ],
-        "competitors": [
-          "Confluence (Atlassian)",
-          "Outline (open-source, self-host friendly)",
-          "Coda",
-          "ClickUp Docs",
-          "GitBook",
-          "Slab",
-          "Almanac",
-          "Tettra",
-          "Stack Overflow for Teams"
-        ],
-        "company_advantages": [
-          "Best-in-class UI/UX for non-technical users",
-          "Powerful flexible-block model (mixes docs + databases)",
-          "Strong template marketplace and community",
-          "Real-time collaboration parity with Google Docs"
-        ],
-        "competitor_advantages": [
-          "Confluence integrates deeply with Jira and Atlassian admin",
-          "Outline offers Markdown source-of-truth and self-hosting (data sovereignty)",
-          "GitBook is better for technical documentation and code embeds",
-          "Coda has stronger spreadsheet-like formulas and automation"
-        ],
-        "swot": {
-          "strengths": [
-            "Dominant brand awareness among knowledge workers under 35",
-            "Network effects from template sharing and public pages",
-            "API + integrations ecosystem"
-          ],
-          "weaknesses": [
-            "Search at scale degrades visibly past 10K pages",
-            "Markdown export is lossy (a deal-breaker for engineering teams)",
-            "Pricing per-seat doesn't scale for 200+ engineer teams"
-          ],
-          "opportunities": [
-            "Engineering-team vertical with first-class Markdown source-of-truth",
-            "AI summarization + search to defuse the at-scale search issue",
-            "Enterprise governance features to defend against Confluence migration"
-          ],
-          "threats": [
-            "Outline + similar open-source alternatives winning on data sovereignty",
-            "GitHub Docs / GitBook owning the engineering-team niche",
-            "Recent price hikes triggering migration audits at incumbent customers"
-          ]
-        },
-        "porter_five_forces": {
-          "buyer_power": "Moderate-to-high \u2014 switching costs are real (re-importing docs is painful) but buyers have many credible alternatives, and IT teams can mandate a migration when budget cycles hit.",
-          "supplier_power": "Low \u2014 Notion controls its own platform end-to-end; no critical supplier dependencies beyond cloud infra.",
-          "rivalry": "Intense and rising \u2014 incumbents (Confluence) defending Atlassian-bundled accounts, open-source contenders (Outline) winning on data sovereignty, niche players (GitBook, Slab) splitting verticals.",
-          "new_entrants": "High threat \u2014 barriers are mostly UX and ecosystem, both of which AI-native startups are credibly attacking from scratch.",
-          "substitutes": "High \u2014 for many use cases, a combination of Google Docs + Slack channels + a sharepoint substitutes 'good enough' for free."
-        },
-        "strategic_recommendations": [
-          "Build a first-class Markdown source-of-truth export pipeline to neutralize engineering teams' top objection",
-          "Ship enterprise governance features (granular permissions, audit log, retention policies) to defend against Confluence",
-          "Open a small-but-credible 'Notion for Engineering' content track with technical-grade case studies",
-          "Tier AI features into a free band to defuse migration audits driven by Notion AI price increases"
-        ],
-        "executable_work_plan": [
-          "Run a 5-customer interview series with Directors of Engineering at 200-500-person dev shops to validate the Markdown-source-of-truth objection.",
-          "Audit the top 100 SERP results for engineering-doc queries to identify content gaps that a 'Notion for Engineering' content track could fill.",
-          "Publish a technical migration playbook for 'Confluence to Notion at 250 engineers' targeting BOFU vendor-comparing queries.",
-          "Commission a benchmark: search-hit-rate vs Outline and Confluence at 10K-page scale; publish results.",
-          "Engineering-specific landing page that names the Markdown source-of-truth concern head-on (don't dodge it).",
-          "Partner with 3 dev-tooling vendors for joint case studies (e.g. Linear + Notion for engineering ops).",
-          "Test pricing communication around the AI add-on; surface a 'no-AI tier' if the price-driven migration audits confirm the hypothesis.",
-          "Stand up an open-source Notion-to-Markdown export utility and host it on GitHub (defuses the lossy-export objection)."
-        ]
-      }
-    }
-  },
-  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
-    "input_tokens": 1800,
-    "output_tokens": 900,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_analyze_serp",
-      "input": {
-        "schema_version": 1,
-        "query_text": "alternatives to notion for engineering documentation",
-        "top_results": [
+        "segments": [
           {
-            "rank": 1,
-            "url": "https://example.com/notion-alternatives-engineering-2026",
-            "title": "10 Notion Alternatives for Engineering Teams (2026)",
-            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
-            "extracted_content": null
+            "segment_label": "In-House Marketing Team at Mid-Market B2B SaaS",
+            "schema_version": 1,
+            "firmographic": {
+              "industry_vertical": "B2B SaaS / tech-adjacent software (HR tech, fintech, devtools, martech)",
+              "company_size": "100\u2013500 employees; $10M\u2013$75M ARR; Series B or C",
+              "geography": "North America (primary), Western Europe (secondary); English-language web presence required",
+              "organizational_structure": "Marketing org of 4\u201312 people; no dedicated web engineer on the marketing team; design work done by a brand designer or outsourced to a contractor; engineering sits in product and is perpetually backlogged",
+              "buying_stage": "Problem-aware and actively evaluating \u2014 frustrated with current state (WordPress + Elementor, or an agency-owned site) and triggered into search by a specific pain event",
+              "strategic_pain_points": [
+                "Cannot ship landing pages or campaign pages without filing an engineering ticket and waiting 2\u20133 sprints",
+                "Brand inconsistency across pages because multiple contractors and devs have touched the codebase",
+                "WordPress plugin conflicts and maintenance overhead consuming non-trivial engineering time",
+                "CMS is either developer-only or so abstracted that marketers break layouts when editing content",
+                "Site performance and design quality feel below the company's current growth stage \u2014 embarrassing on analyst calls and in sales cycles"
+              ],
+              "trigger_events": [
+                "Upcoming product launch or rebrand that exposes how slow the current publishing workflow is",
+                "New Head of Marketing or VP of Growth hired who benchmarks the site against category leaders and finds it lacking",
+                "Engineering team formally deprioritizes marketing site work in favor of product roadmap",
+                "Series B/C fundraise completed \u2014 budget unlocked and 'professionalize the brand' becomes a Q1 priority",
+                "Lost a deal where a prospect mentioned the website looked outdated"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Head of Marketing / Director of Growth / VP Marketing",
+              "demographic_context": "Typically 32\u201342 years old; has managed agencies or freelancers before; design-literate but not a developer; has used HubSpot, Notion, Figma at least at a surface level; judges tools by speed-to-value and team adoption",
+              "motivations": [
+                "Own the website end-to-end without being blocked by engineering \u2014 personal credibility depends on shipping fast",
+                "Produce a site that looks like a Series C company, not a scrappy startup",
+                "Reduce the invisible tax of coordinating devs, designers, and agencies just to change a hero headline",
+                "Build a scalable content engine (blog, case studies, landing pages) that the team can operate without handholding"
+              ],
+              "decision_criteria": [
+                "Can a non-developer marketer edit CMS content and create new pages without breaking the design?",
+                "Is the visual output genuinely high-fidelity, or will it look like a template?",
+                "How fast can we migrate from our current WordPress site?",
+                "What does the total cost look like vs. our current agency retainer?",
+                "Do other SaaS companies we respect use this?"
+              ],
+              "language_patterns": [
+                "'We're basically paying our agency $4k/month to change button colors'",
+                "'Engineering won't touch the marketing site \u2014 it's not on the roadmap until Q3'",
+                "'I need to be able to launch a landing page in a day, not a sprint'",
+                "'Our site looks like we're pre-seed. We closed a $20M round six months ago'",
+                "'I don't need to know how to code \u2014 I just need the output to look like I do'"
+              ],
+              "frustrations": [
+                "Framer feels too designer-brained and lightweight on CMS; great for portfolios, not for a 200-page SaaS site",
+                "WordPress gives too much rope \u2014 every contractor leaves a different mess in the codebase",
+                "Squarespace and Wix look like templates no matter how much you customize them",
+                "HubSpot CMS is fine but only makes sense if you're all-in on HubSpot; we're not",
+                "Every tool promises 'no-code' but still requires a developer to set up and maintain"
+              ],
+              "downstream_use_cases": [
+                "Self-serve campaign landing page creation for paid media and ABM programs",
+                "Blog and case study publishing by content team without designer involvement",
+                "Rapid A/B testing of homepage messaging tied to GTM pivots",
+                "Localization of key pages for EMEA expansion (Webflow Localization)",
+                "Handing the site off cleanly to the next contractor or agency without a replatform"
+              ],
+              "information_sources": [
+                "Peer recommendations in Slack communities (Demand Curve, Exit Five, Pavilion)",
+                "G2 and Capterra reviews filtered by company size",
+                "Webflow showcase and customer case studies (Lattice, Jasper, Linear as social proof)",
+                "YouTube teardowns and 'Webflow vs. Framer' comparison videos",
+                "LinkedIn posts from growth/marketing ops peers"
+              ]
+            }
           },
           {
-            "rank": 2,
-            "url": "https://example.com/leaving-notion",
-            "title": "Why We Left Notion (and What We Switched To)",
-            "snippet": "A migration story from a 200-person dev shop.",
-            "extracted_content": null
+            "segment_label": "Digital Agency Managing Multi-Client Site Production",
+            "schema_version": 1,
+            "firmographic": {
+              "industry_vertical": "Digital design and web development agency; brand and creative studios; performance marketing agencies with web build capability",
+              "company_size": "5\u201350 employees; $500K\u2013$5M annual revenue; owner-led or small leadership team",
+              "geography": "English-speaking markets (US, UK, Australia, Canada); increasingly globally distributed remote teams",
+              "organizational_structure": "Flat or pod-based; Webflow developers double as designers; a lead developer or creative director is the internal Webflow champion; account managers handle client relationships but are not technical",
+              "buying_stage": "Already Webflow users or highly aware \u2014 evaluating whether to standardize the entire agency stack on Webflow, upgrade to Team/Enterprise plan, or add seats; the decision is expansion, not initial adoption",
+              "strategic_pain_points": [
+                "Client handoff is messy \u2014 clients inevitably break the site in WordPress and call the agency to fix it, creating unbillable support overhead",
+                "Scaling beyond 10 concurrent client projects exposes gaps in asset sharing, permissions, and version control across the workspace",
+                "Pricing per site scales poorly as portfolio grows \u2014 the economics of managing 30 client sites on individual plans are painful",
+                "Recruiting developers who know both design and code is hard; Webflow lets a strong visual designer ship production sites without a separate dev hire",
+                "Clients increasingly demand high-performance, CMS-editable sites that their team can operate \u2014 WordPress no longer justifies the maintenance cost"
+              ],
+              "trigger_events": [
+                "Agency wins a client contract that requires a CMS-editable, design-forward site at a quality level WordPress/Elementor cannot match",
+                "A key developer leaves and the agency realizes they need a tool the whole team can work in, not one person's specialty",
+                "Client complaints about not being able to edit their own WordPress site without breaking it",
+                "Agency principal attends a Webflow event or Webflow Conf and sees the agency partner ecosystem",
+                "Competitive loss to another agency that pitches Webflow as a differentiator in the proposal"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Agency Founder / Creative Director / Lead Webflow Developer",
+              "demographic_context": "28\u201345 years old; background in graphic design, front-end dev, or both; has run projects on WordPress and learned the hard way why plugins break; active in Webflow community (Webflow Forum, Twitter/X, YouTube); may hold Webflow certification or be pursuing it",
+              "motivations": [
+                "Build a productized service offering around Webflow that commands premium day rates ($150\u2013$300/hr) over commodity WordPress builds",
+                "Reduce post-launch client support tickets so the team can focus on billable new-build work",
+                "Create a defensible agency niche ('We are the Webflow agency for SaaS brands') that generates inbound referrals",
+                "Scale revenue without proportionally scaling headcount by building reusable component libraries and templates"
+              ],
+              "decision_criteria": [
+                "Does Webflow's client Editor mode genuinely keep clients from breaking the design?",
+                "Can we white-label the CMS dashboard or at least remove Webflow branding for client-facing handoffs?",
+                "Is the Workspace plan seat pricing economical at 8\u201315 active designers?",
+                "Does the platform support the animation and interaction complexity our top clients expect?",
+                "Is there a formal partner program with lead referrals or co-marketing?"
+              ],
+              "language_patterns": [
+                "'We don't do WordPress anymore \u2014 the maintenance tail kills our margins'",
+                "'Webflow is our competitive moat. Clients can't get this quality anywhere else at this price'",
+                "'The Editor mode is the sell \u2014 clients love that they can update copy without calling us'",
+                "'We built a component library in Webflow that lets us launch new client sites in 3 weeks instead of 8'",
+                "'Framer is fine for landing pages but it falls apart when clients have real content needs'"
+              ],
+              "frustrations": [
+                "Webflow's per-site hosting pricing erodes margin when managing large client portfolios",
+                "No native version control or visual diff \u2014 rolling back a client's accidental content change is painful",
+                "Enterprise clients sometimes balk at the Webflow brand on the CMS login; white-labeling is limited",
+                "Framer is eating into proposal wins for simpler, design-forward startup sites where Webflow feels heavyweight",
+                "The learning curve for junior designers onboarding to Webflow is still 2\u20134 weeks before they're productive"
+              ],
+              "downstream_use_cases": [
+                "Templated site builds for SaaS clients with reusable CMS collections and component libraries",
+                "Client Editor mode setup so marketing teams can publish blog posts and case studies autonomously",
+                "Webflow Interactions for scroll-triggered animations and micro-interactions that differentiate the agency's portfolio",
+                "Multi-site Workspace management with shared asset libraries across all client projects",
+                "Webflow Localization setup for clients expanding to new geographies"
+              ],
+              "information_sources": [
+                "Webflow Forum and official Webflow YouTube channel",
+                "Flowbase, Finsweet, and Cloneable community libraries",
+                "Twitter/X follows of prominent Webflow developers (Nelson Abalos Jr., Timothy Ricks, etc.)",
+                "Webflow Conf talks and partner webinars",
+                "Private agency Slack groups and Discord communities"
+              ]
+            }
           },
           {
-            "rank": 3,
-            "url": "https://example.com/notion-vs-outline-deep-dive",
-            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
-            "snippet": "Feature-by-feature comparison.",
-            "extracted_content": null
-          }
-        ],
-        "common_angles": [
-          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
-          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
-          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
-          "Editorial 'best of' picks with brief mini-reviews",
-          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
-        ],
-        "content_gaps": [
-          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
-          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
-          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
-          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
-        ],
-        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
-      }
-    }
-  },
-  "7d83236a0d4f62e8eeb6612b3079e2c9b53d8bb0e89cca3dc56dcaea8de18cf6": {
-    "input_tokens": 1400,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_actionability",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "80919f77920b34861fe4eee56254bf512949dbdb7263e352b2b7e979f65686d6": {
-    "input_tokens": 800,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_specificity",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "9279ed58a65f72913ec40b73ad1a438a19de78139953036bcb3f560eda541ec6": {
-    "input_tokens": 2400,
-    "output_tokens": 1800,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_draft_content_brief",
-      "input": {
-        "schema_version": 1,
-        "target_query": "alternatives to notion for engineering documentation",
-        "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
-        "angle": "How distributed engineering teams pick a Notion alternative when half the team writes in Markdown and half doesn't \u2014 a decision framework + 30-day pilot, framed around bus-factor risk rather than feature checklists.",
-        "audience": "Engineering Directors at 200\u2013500-person dev shops actively evaluating a Notion replacement, especially those whose teams are split between Markdown-source-of-truth and WYSIWYG factions.",
-        "structure": [
-          {
-            "heading": "The bus-factor problem the listicles don't mention",
-            "purpose": "Defuse the dominant listicle angle by reframing the decision around knowledge loss rather than features.",
-            "key_points": [
-              "Listicles compare features; the actual cost of the wrong choice is tribal-knowledge loss when senior engineers leave",
-              "Quantify bus factor \u2014 one or two engineers carrying critical decisions in their heads",
-              "Anchor in a real incident postmortem framing \u2014 what does a 'we couldn't find the docs' incident actually cost?"
-            ]
+            "segment_label": "Early-Stage Startup Founding Team Needing a Credible Web Presence Fast",
+            "schema_version": 1,
+            "firmographic": {
+              "industry_vertical": "SaaS, consumer tech, or AI-native startups across verticals; also applies to creator economy and productized-service businesses",
+              "company_size": "1\u201325 employees; pre-revenue to $1M ARR; Seed or pre-Seed; often founder-led with no dedicated marketing hire yet",
+              "geography": "Global; heavily concentrated in US tech hubs and remote-first distributed teams; English-language primary",
+              "organizational_structure": "Founder (often technical) makes all tooling decisions; may have a co-founder with design background or a part-time designer/contractor; no dedicated web team",
+              "buying_stage": "Early problem-aware; often lands on Webflow via a referral, template browse, or 'how did X startup build their site' Google search; evaluating Webflow against Framer, Carrd, and just building it in Next.js themselves",
+              "strategic_pain_points": [
+                "Need a site that looks VC-fundable and product-credible within days, not weeks",
+                "Founding engineer doesn't want to spend sprint cycles on a marketing site when the product is pre-launch",
+                "Carrd and Notion pages look amateurish past the 'idea' stage",
+                "Framer is tempting but the CMS limitations become a problem the moment they need a blog or changelog",
+                "Can't afford a design agency but also can't afford to look like they can't afford a design agency"
+              ],
+              "trigger_events": [
+                "Accepted to an accelerator (YC, Techstars) and need a professional site before demo day",
+                "Preparing a fundraising deck and investors ask for the website URL",
+                "Launching on Product Hunt and need the site to convert curious visitors into waitlist signups",
+                "Hired first marketing contractor who insists on a real CMS instead of a Notion-embedded blog",
+                "Competitor launches a slick site and the founding team feels the brand gap acutely"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Founder / CEO / Co-Founder (technical or product background)",
+              "demographic_context": "25\u201338 years old; technical enough to evaluate the output quality of HTML/CSS but unwilling to build the site themselves during early product development; has strong aesthetic opinions; follows design Twitter and Product Hunt closely; has seen Webflow showcased in 'how they built it' threads",
+              "motivations": [
+                "Ship a site that looks like a Series A company on a Seed budget",
+                "Maintain control over copy and messaging iteration without paying an agency every time the positioning changes",
+                "Avoid being locked into a platform they'll have to replatform off in 18 months when they hire a real marketing team",
+                "Get a working CMS blog up so they can start the SEO content flywheel early"
+              ],
+              "decision_criteria": [
+                "Can I (or a part-time designer) build something that looks like Linear or Vercel's site without custom code?",
+                "How fast can we go from zero to a live, CMS-connected site?",
+                "Is it exportable if we ever want to hand it to a dev team?",
+                "What's the cost at zero traffic vs. at 50K monthly visitors?",
+                "Does Framer do this just as well but faster?"
+              ],
+              "language_patterns": [
+                "'I want it to look like a real company, not a template'",
+                "'Our engineer refuses to touch the marketing site \u2014 fair enough, but someone has to'",
+                "'We need to launch something before demo day that doesn't embarrass us in front of investors'",
+                "'Framer looked easier but I couldn't figure out how to do a real blog on it'",
+                "'I just need to be able to change the headline myself at 11pm when I realize the positioning is wrong'"
+              ],
+              "frustrations": [
+                "Framer's AI builder gets you 80% there but the CMS and content modeling feel like afterthoughts",
+                "Webflow's learning curve is real \u2014 the Designer can feel overwhelming on first open without a template",
+                "Templates look like templates unless you heavily customize, which requires design skills they may not have",
+                "Pricing jumps significantly once you need CMS + hosting + custom domain at a professional tier",
+                "Webflow University is great but watching 4 hours of tutorials before launching is not compatible with a 2-week runway to demo day"
+              ],
+              "downstream_use_cases": [
+                "Waitlist and launch page with email capture integrated to a CRM or Zapier workflow",
+                "Blog / changelog for content marketing and SEO from day one",
+                "Pricing page and feature pages that the founder can update independently as positioning evolves",
+                "Investor-grade 'About' and team pages for fundraising credibility",
+                "Handoff-ready codebase when the company eventually hires a front-end engineer or agency"
+              ],
+              "information_sources": [
+                "Twitter/X threads on 'how we built our site' from respected founders",
+                "Product Hunt showcases and launch page teardowns",
+                "Webflow template marketplace \u2014 browsing is part of the evaluation",
+                "YC startup school resources and Hacker News 'Ask HN: best no-code site builder' threads",
+                "YouTube comparisons: 'Webflow vs Framer 2024'"
+              ]
+            }
           },
           {
-            "heading": "The Markdown vs WYSIWYG factional split is a workflow question, not a religious one",
-            "purpose": "Address the content gap the SERP misses \u2014 the Markdown/WYSIWYG factional reality inside engineering orgs.",
-            "key_points": [
-              "Half the team writes Markdown by reflex (engineers from dev-tools backgrounds); half wants WYSIWYG (designers, PMs, junior engineers)",
-              "Tooling that exports clean Markdown wins the long game regardless of authoring surface",
-              "Round-trip test: import a Markdown doc, edit it in the tool, export it back \u2014 diff should be trivial",
-              "Use the segment's exact phrase 'single source of truth' here verbatim"
-            ]
-          },
-          {
-            "heading": "Decision framework: the four tests an engineering director should actually run",
-            "purpose": "Give a concrete framework distinct from the SERP's generic feature comparisons.",
-            "key_points": [
-              "Real-time collab parity test (paired-doc concurrent edit, including conflict handling)",
-              "Markdown source-of-truth test (round-trip import/export)",
-              "API + automation test (try to drive an RFC template via CI)",
-              "Security review test (SSO + audit log for SOC 2 readiness)"
-            ]
-          },
-          {
-            "heading": "The 30-day pilot playbook",
-            "purpose": "Fill the content gap: every listicle says 'we switched'; almost none provides a phased pilot script the reader can socialize to their VP.",
-            "key_points": [
-              "Week 1: import 50 critical docs (most painful ones first \u2014 that's the real test)",
-              "Week 2: route RFCs through the new tool",
-              "Week 3: measure search-hit-rate vs the old baseline",
-              "Week 4: decision meeting with data, not feels"
-            ]
-          },
-          {
-            "heading": "When NOT to migrate \u2014 three failure modes that quietly kill these projects",
-            "purpose": "Build trust by naming the unsexy failure modes that listicles never cover.",
-            "key_points": [
-              "Tool sprawl: layering a fifth tool on top of four others guarantees split-brain",
-              "Custom-wiki temptation: maintenance cost compounds and tooling teams hate it",
-              "Half-rolled-out: split-brain across teams kills adoption regardless of tool quality"
-            ]
-          }
-        ],
-        "key_points": [
-          "Lead with bus-factor framing \u2014 that's the content gap. Do not lead with feature comparison.",
-          "Use the ICP's verbatim phrase 'single source of truth' in either the intro or an H2",
-          "Reference the Markdown vs WYSIWYG factional split as a known problem inside engineering orgs",
-          "Avoid the word 'tribal knowledge' in titles (overused in SERP); use it in body sparingly",
-          "Cite the SERP's #2 ('Why We Left Notion') as a foil \u2014 concede their pain, then go deeper",
-          "Recommended format per SERP analysis: decision-framework + migration-playbook hybrid"
-        ],
-        "sources": [
-          "https://example.com/leaving-notion",
-          "https://example.com/notion-vs-outline-deep-dive",
-          "https://example.com/wiki-tool-decision-framework",
-          "Internal incident postmortem (replace with the writer's real example before publish)"
-        ],
-        "recommended_length_words": 2400,
-        "internal_linking_suggestions": []
-      }
-    }
-  },
-  "a9baadce96322167149128aa2afe681f35c57acbea0fd8c3c6248ff642574361": {
-    "input_tokens": 800,
-    "output_tokens": 700,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_serp_results",
-      "input": {
-        "schema_version": 1,
-        "results": [
-          {
-            "rank": 1,
-            "url": "https://example.com/notion-alternatives-engineering-2026",
-            "title": "10 Notion Alternatives for Engineering Teams (2026)",
-            "snippet": "We tested 10 wiki tools with a 50-person engineering team. Confluence, Outline, BookStack, GitBook, Slab, Slite, Coda, Tettra, Stack Overflow for Teams, Almanac. Pricing and feature comparison.",
-            "extracted_content": null
-          },
-          {
-            "rank": 2,
-            "url": "https://example.com/leaving-notion",
-            "title": "Why We Left Notion (and What We Switched To)",
-            "snippet": "A migration story from a 200-person dev shop. Pain points: search, performance, Markdown export. Switched to a self-hosted Outline instance.",
-            "extracted_content": null
-          },
-          {
-            "rank": 3,
-            "url": "https://example.com/notion-vs-outline-deep-dive",
-            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
-            "snippet": "Feature-by-feature comparison: Markdown source, API, SSO, audit log, pricing. Recommends Outline for Markdown-first teams.",
-            "extracted_content": null
-          },
-          {
-            "rank": 4,
-            "url": "https://example.com/best-engineering-wiki",
-            "title": "Best Engineering Wikis of 2026: Editorial Picks",
-            "snippet": "Editorial roundup of the top engineering wiki tools. Covers Notion, Confluence, GitBook, Outline, Stack Overflow for Teams.",
-            "extracted_content": null
-          },
-          {
-            "rank": 5,
-            "url": "https://example.com/notion-pricing-engineering",
-            "title": "Is Notion Still Worth It for Engineering Teams?",
-            "snippet": "Cost analysis at 200 seats. Compares Plus, Business, Enterprise tiers. Concludes price-per-seat doesn't scale for engineering use cases.",
-            "extracted_content": null
-          },
-          {
-            "rank": 6,
-            "url": "https://example.com/confluence-vs-notion",
-            "title": "Confluence vs Notion for Software Teams",
-            "snippet": "Atlassian's Confluence vs Notion comparison. Confluence wins for Jira integration; Notion wins for flexibility and Markdown.",
-            "extracted_content": null
-          },
-          {
-            "rank": 7,
-            "url": "https://example.com/self-hosted-wikis",
-            "title": "Self-Hosted Knowledge Bases: BookStack, Outline, Wiki.js",
-            "snippet": "For teams that need data sovereignty. BookStack, Outline (self-hosted), Wiki.js compared on setup difficulty and feature set.",
-            "extracted_content": null
-          },
-          {
-            "rank": 8,
-            "url": "https://example.com/notion-api-engineering",
-            "title": "Building Engineering Workflows on the Notion API",
-            "snippet": "Tutorial on using Notion's API for RFC pipelines and automated doc generation. Notes that the API has limits for production use.",
-            "extracted_content": null
-          },
-          {
-            "rank": 9,
-            "url": "https://example.com/notion-pros-cons",
-            "title": "Notion for Engineering Documentation: Pros and Cons",
-            "snippet": "A balanced take. Pros: ease of use, real-time collab. Cons: search, performance at scale, Markdown export pain.",
-            "extracted_content": null
-          },
-          {
-            "rank": 10,
-            "url": "https://example.com/wiki-tool-decision-framework",
-            "title": "How to Pick a Wiki Tool: A Decision Framework",
-            "snippet": "Framework covering 5 axes: source-of-truth, collaboration, security, integration, total cost. Examples include Notion, Confluence, Outline.",
-            "extracted_content": null
+            "segment_label": "Enterprise Marketing Team Seeking CMS-Driven Sites with Governance",
+            "schema_version": 1,
+            "firmographic": {
+              "industry_vertical": "Enterprise B2B software, cloud infrastructure, professional services, or large-scale media/publishing with a digital marketing arm",
+              "company_size": "500\u20135,000 employees; $100M+ ARR or equivalent revenue; publicly traded or late-stage private",
+              "geography": "Multi-region \u2014 US headquarters with EMEA and/or APAC web properties requiring localization and regional brand governance",
+              "organizational_structure": "Dedicated web team (2\u20136 people) sitting inside the Marketing org; reports to CMO or VP of Brand/Digital; works alongside a central IT/security team that must approve vendors; procurement and legal involved in purchasing decisions",
+              "buying_stage": "Actively evaluating or in late-stage proof-of-concept \u2014 has already experienced the limitations of their current stack (often Contentful, WordPress VIP, or Sitecore) and is looking for a hybrid visual-editing + structured-CMS solution that doesn't require full dev involvement for every page update",
+              "strategic_pain_points": [
+                "Current headless CMS (Contentful, Sitecore) requires a developer to create any new page template \u2014 marketing team is perpetually blocked on content velocity",
+                "Brand inconsistency across regional sites managed by local marketing teams with varying design skill",
+                "Localization workflow is manual, error-prone, and doesn't scale to 10+ language variants",
+                "IT/security requires SSO, audit logs, and role-based permissions that most no-code builders don't provide",
+                "Procurement wants one vendor for CMS + hosting + CDN rather than the current 3-vendor patchwork"
+              ],
+              "trigger_events": [
+                "Major brand refresh or corporate rebrand requiring a full site rebuild \u2014 executive mandate to modernize",
+                "New CMO or VP Digital hired from a company that used Webflow; brings it as a known solution",
+                "Current CMS contract renewal prompts a formal market evaluation",
+                "Webflow Localization launch enables a global rollout use case that wasn't previously viable on the platform",
+                "A business unit within the enterprise uses Webflow successfully and the central team evaluates expanding the contract"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Director of Web / VP of Digital Experience / Senior Web Marketing Manager",
+              "demographic_context": "35\u201350 years old; has managed CMS implementations before (Contentful, Adobe Experience Manager, Sitecore); understands the dev-marketing interface deeply; manages a small internal web team plus vendor relationships; accountable to CMO for site performance and to IT for security compliance",
+              "motivations": [
+                "Give the marketing team autonomy to publish and iterate without opening a dev ticket for every page",
+                "Consolidate the web stack to reduce vendor complexity, SLA management, and integration maintenance",
+                "Establish a governed, scalable system where regional teams can localize content within brand guardrails \u2014 not a free-for-all",
+                "Justify the platform investment to the CMO with measurable gains in content velocity and time-to-publish"
+              ],
+              "decision_criteria": [
+                "Does it meet IT's requirements: SSO (SAML/OKTA), audit logs, role-based permissions, SOC 2 Type II?",
+                "Can marketing editors publish new content without a developer \u2014 reliably, at scale, across 20+ CMS collections?",
+                "Is there a viable Localization solution for 8\u201312 language variants with workflow automation?",
+                "What is the migration path from our current Contentful/WordPress setup \u2014 who owns the data portability?",
+                "Does Webflow have enterprise SLA commitments and a named CSM at our contract size?"
+              ],
+              "language_patterns": [
+                "'We have a 6-person web team but 80% of their time is ticket-taking for the marketing team'",
+                "'Our current CMS is incredibly powerful and incredibly unusable by anyone who isn't a developer'",
+                "'We need guardrails, not a blank canvas \u2014 regional teams will break things if there are no locked components'",
+                "'The CMO wants to be able to change the homepage hero without a CAB meeting'",
+                "'We've been on Contentful for four years and I've never seen a non-developer successfully create a new page template'"
+              ],
+              "frustrations": [
+                "Webflow's enterprise feature set (SSO, audit logs, uptime SLA) is still maturing compared to Contentful or WordPress VIP",
+                "No native multi-region CDN configuration or data residency controls for GDPR-sensitive European properties",
+                "Webflow's Localization product is promising but translation memory and professional workflow integrations are thin",
+                "The visual Designer is powerful but requires training investment for a team accustomed to WYSIWYG CMS editors",
+                "Pricing transparency at enterprise scale is opaque \u2014 hard to model total cost before getting on a sales call"
+              ],
+              "downstream_use_cases": [
+                "Centralized global site with regional localization managed by in-market teams within locked brand components",
+                "Content velocity for campaign microsites and product launch pages \u2014 shipped by marketing without dev involvement",
+                "CMS-driven resource center (blog, whitepapers, case studies) with structured content that feeds SEO and demand gen",
+                "Role-permissioned Editor access for regional and business-unit marketing teams with a central web team as gatekeepers",
+                "Integration with existing martech stack (Marketo, Salesforce, OneTrust) via Webflow Apps or custom embeds"
+              ],
+              "information_sources": [
+                "Gartner and Forrester DXP/CMS reports and Magic Quadrant positioning",
+                "Peer conversations in CMO/VP Digital networks (Pavilion, Gartner Peer Insights)",
+                "Webflow enterprise case studies and reference customer calls",
+                "Internal IT/security team vendor assessment checklists (SOC 2 documentation, DPA review)",
+                "Analyst briefings and G2 Enterprise track reviews"
+              ]
+            }
           }
         ]
       }
     }
   },
-  "ae7f11455cd6efd5a2a902f646abf90282a74d989b254b1b73613bf02327fdc8": {
-    "input_tokens": 2500,
-    "output_tokens": 2200,
+  "bd30eecd441a0978e60003d420e1af8e16a8ee14b69a36ec79b06e1c88567351": {
+    "input_tokens": 3522,
+    "output_tokens": 4600,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_score_queries",
       "input": {
-        "schema_version": 1,
         "scored": [
           {
-            "schema_version": 1,
             "query": {
               "position": 1,
-              "text": "what is a knowledge base for engineering teams",
+              "text": "no code design tool for marketing pages",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -384,16 +722,15 @@
             },
             "traffic_score": 7,
             "difficulty_score": 6,
-            "business_value_score": 3,
-            "composite": 3.6,
-            "competitor_urls": [],
-            "rationale": "Decent head-term traffic but very low intent for a 200-person dev shop already past the 'do I need this' stage."
+            "business_value_score": 4,
+            "composite": 4.9,
+            "rationale": "Model-estimated: moderate-to-high search volume for a broad head-term no-code query, but novice framing and generic intent mean low direct buying signal for this ICP segment.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
               "position": 2,
-              "text": "do i need a wiki for my engineering team",
+              "text": "do I need a designer to build landing pages",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -403,18 +740,17 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 4,
+            "traffic_score": 5,
             "difficulty_score": 4,
-            "business_value_score": 3,
-            "composite": 3.5,
-            "competitor_urls": [],
-            "rationale": "Low-funnel informational; not a buyer-ready query."
+            "business_value_score": 4,
+            "composite": 4.9,
+            "rationale": "Model-estimated: conversational question-format query has moderate volume and lower competition, but purely exploratory framing delivers minimal commercial intent for a mid-market B2B SaaS buyer.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
               "position": 3,
-              "text": "what does a knowledge base actually do",
+              "text": "can marketers build websites without developers",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -424,18 +760,17 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 4,
+            "traffic_score": 5,
             "difficulty_score": 4,
-            "business_value_score": 2,
-            "composite": 3.0,
-            "competitor_urls": [],
-            "rationale": "Defining-the-category query; almost no buying intent."
+            "business_value_score": 4,
+            "composite": 4.9,
+            "rationale": "Model-estimated: similar informational pattern to position 2 with no-code/dev-free framing; slightly relevant to ICP's core pain but still top-of-funnel and easily answered by blog content rather than a purchase.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
               "position": 4,
-              "text": "are engineering wikis still a thing in 2026",
+              "text": "what's the difference between webflow and wordpress",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -445,18 +780,17 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 2,
-            "difficulty_score": 3,
-            "business_value_score": 2,
-            "composite": 2.2,
-            "competitor_urls": [],
-            "rationale": "Niche skeptic query; tiny volume."
+            "traffic_score": 8,
+            "difficulty_score": 7,
+            "business_value_score": 5,
+            "composite": 5.3,
+            "rationale": "Model-estimated: brand-vs-brand comparison queries typically carry high volume and are well-contested by incumbent review sites; the named platform mention (Webflow vs. WordPress) nudges business value slightly higher than pure novice queries.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
               "position": 5,
-              "text": "knowledge management tool meaning",
+              "text": "web design tool that doesn't require coding",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -466,102 +800,17 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 5,
-            "difficulty_score": 5,
-            "business_value_score": 2,
-            "composite": 3.7,
-            "competitor_urls": [],
-            "rationale": "Definitional; sees traffic but no buying signal."
+            "traffic_score": 7,
+            "difficulty_score": 6,
+            "business_value_score": 4,
+            "composite": 4.9,
+            "rationale": "Model-estimated: a high-volume generic head term dominated by Wix/Squarespace/Webflow listicles; novice framing and absence of B2B or marketing-specific qualifier keeps business value low.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
               "position": 6,
-              "text": "our engineering team can't find docs",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 3,
-            "business_value_score": 6,
-            "composite": 5.5,
-            "competitor_urls": [],
-            "rationale": "Long-tail pain expression; low volume but high intent for problem-aware buyers."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 7,
-              "text": "engineering docs that nobody updates",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 3,
-            "business_value_score": 6,
-            "composite": 5.5,
-            "competitor_urls": [],
-            "rationale": "Same family as #6 \u2014 pain-named, low volume, high intent."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 8,
-              "text": "single source of truth for engineering docs",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 5,
-            "business_value_score": 7,
-            "composite": 6.6,
-            "competitor_urls": [],
-            "rationale": "Echoes the segment's exact language pattern; mid-funnel and ICP-resonant."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 9,
-              "text": "how to fix fragmented engineering documentation",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 4,
-            "business_value_score": 6,
-            "composite": 5.6,
-            "competitor_urls": [],
-            "rationale": "How-to framing; reasonable intent for actively-evaluating teams."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 10,
-              "text": "tooling teams hate maintaining custom wikis",
+              "text": "our team can't get marketing pages shipped without an engineering ticket",
               "framing": "problem-aware",
               "refinement_applied": false
             },
@@ -573,186 +822,97 @@
             },
             "traffic_score": 2,
             "difficulty_score": 2,
-            "business_value_score": 5,
-            "composite": 5.0,
-            "competitor_urls": [],
-            "rationale": "Narrow phrasing; tiny volume but strong implicit buying intent."
+            "business_value_score": 8,
+            "composite": 5.4,
+            "rationale": "Model-estimated: very low search volume for this conversational long-tail pain statement, but it precisely mirrors the ICP's #1 friction (engineering dependency) making it high business value if captured via thought-leadership content.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
+            "query": {
+              "position": 7,
+              "text": "we're waiting two sprints to launch a campaign page",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 1,
+            "difficulty_score": 1,
+            "business_value_score": 7,
+            "composite": 4.8,
+            "rationale": "Model-estimated: near-zero search volume for this highly specific internal-frustration phrasing, but the problem it describes (sprint delay bottleneck) is a core ICP decision trigger, giving it strong business value if targeted via paid or community channels.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 8,
+              "text": "brand inconsistency across marketing website multiple contractors",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 2,
+            "business_value_score": 7,
+            "composite": 5.3,
+            "rationale": "Model-estimated: low-volume long-tail phrase but directly names a real pain point (brand fragmentation from contractor sprawl) that aligns tightly with the ICP's decision criterion around design fidelity and control.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 9,
+              "text": "wordpress is eating up our engineering time with plugin conflicts",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 2,
+            "business_value_score": 8,
+            "composite": 5.7,
+            "rationale": "Model-estimated: slightly higher volume than pure internal-frustration queries because WordPress plugin pain is a documented community discussion topic; very high business value as it directly surfaces the migration rationale the ICP is weighing.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 10,
+              "text": "need a single source of truth for marketing page designs",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 2,
+            "business_value_score": 7,
+            "composite": 5.3,
+            "rationale": "Model-estimated: low search volume for this operational framing, but the desire for a centralized design system is a meaningful mid-funnel intent signal for a head of marketing evaluating no-code CMS platforms.",
+            "competitor_urls": []
+          },
+          {
             "query": {
               "position": 11,
-              "text": "self hosted knowledge base options",
+              "text": "design platform with drag and drop landing page builder",
               "framing": "power-user",
               "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 6,
-            "difficulty_score": 6,
-            "business_value_score": 7,
-            "composite": 6.3,
-            "competitor_urls": [],
-            "rationale": "Implementation-detail filter; clear power-user buying signal."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 12,
-              "text": "knowledge base with markdown source of truth",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 5,
-            "business_value_score": 8,
-            "composite": 6.4,
-            "competitor_urls": [],
-            "rationale": "Differentiated requirement maps to ICP decision criteria; high intent."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 13,
-              "text": "wiki with git style versioning",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 4,
-            "business_value_score": 7,
-            "composite": 5.7,
-            "competitor_urls": [],
-            "rationale": "Niche but high-fit for engineering ICP; few good answers exist."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 14,
-              "text": "best knowledge base for engineering teams 2026",
-              "framing": "vendor-comparing",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 9,
-            "difficulty_score": 9,
-            "business_value_score": 9,
-            "composite": 7.6,
-            "competitor_urls": [],
-            "rationale": "Head 'best X for Y' query \u2014 highest traffic in the journey, highest commercial intent, dominated by listicles."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 15,
-              "text": "api first wiki for engineering with webhook support",
-              "framing": "power-user",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 4,
-            "business_value_score": 8,
-            "composite": 6.3,
-            "competitor_urls": [],
-            "rationale": "Very specific requirement; small volume but the searcher is ready to buy."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 16,
-              "text": "knowledge base with sso and audit log for soc2",
-              "framing": "power-user",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 5,
-            "business_value_score": 9,
-            "composite": 6.9,
-            "competitor_urls": [],
-            "rationale": "Compliance + buyer-ready \u2014 bottom of funnel."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 17,
-              "text": "notion vs confluence for engineering teams",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 9,
-            "difficulty_score": 9,
-            "business_value_score": 8,
-            "composite": 7.1,
-            "competitor_urls": [],
-            "rationale": "Head vs query; high volume but brands themselves dominate the SERP."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 18,
-              "text": "outline vs notion engineering wiki",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 5,
-            "business_value_score": 8,
-            "composite": 6.5,
-            "competitor_urls": [],
-            "rationale": "Less-dominated vs query; defensible and high intent."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 19,
-              "text": "alternatives to notion for engineering documentation",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
             },
             "metrics": {
               "volume": null,
@@ -762,81 +922,17 @@
             },
             "traffic_score": 7,
             "difficulty_score": 7,
-            "business_value_score": 9,
-            "composite": 7.4,
-            "competitor_urls": [],
-            "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+            "business_value_score": 6,
+            "composite": 5.6,
+            "rationale": "Model-estimated: solid mid-funnel search volume for this feature-specific query with high competition from Unbounce, Instapage, and Webflow; power-user framing and feature specificity elevate business value above pure awareness queries.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
-              "position": 20,
-              "text": "bookstack vs notion for engineering team",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 4,
-            "business_value_score": 7,
-            "composite": 5.7,
-            "competitor_urls": [],
-            "rationale": "Niche vs query; small but ready-to-buy audience."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 21,
-              "text": "notion price hike 2026 alternatives",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 6,
-            "difficulty_score": 5,
-            "business_value_score": 9,
-            "composite": 7.1,
-            "competitor_urls": [],
-            "rationale": "Trigger-event driven; high intent and time-sensitive."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 22,
-              "text": "cheap knowledge base for 200 person engineering team",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 4,
-            "business_value_score": 7,
-            "composite": 5.7,
-            "competitor_urls": [],
-            "rationale": "Narrow size + price filter; small but actively-buying audience."
-          },
-          {
-            "schema_version": 1,
-            "query": {
-              "position": 23,
-              "text": "free wiki for engineering teams self hosted",
-              "framing": "price-driven",
-              "refinement_applied": true
+              "position": 12,
+              "text": "no code tool with responsive design controls",
+              "framing": "power-user",
+              "refinement_applied": false
             },
             "metrics": {
               "volume": null,
@@ -847,16 +943,55 @@
             "traffic_score": 5,
             "difficulty_score": 5,
             "business_value_score": 6,
-            "composite": 5.5,
-            "competitor_urls": [],
-            "rationale": "Free-tier hunters; modest commercial intent."
+            "composite": 5.3,
+            "rationale": "Model-estimated: moderate volume for a feature-qualified no-code query; the responsive design qualifier signals a more sophisticated buyer closer to evaluation, lifting business value compared to generic no-code terms.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
-              "position": 24,
-              "text": "notion pricing per seat 2026",
-              "framing": "price-driven",
+              "position": 13,
+              "text": "marketing site builder that integrates with our CMS",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.6,
+            "rationale": "Model-estimated: lower volume due to specificity but the CMS integration requirement is a hard decision criterion for this ICP, indicating an active evaluation mindset and driving higher business value.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 14,
+              "text": "design tool that non-technical people can actually use",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 6,
+            "composite": 5.3,
+            "rationale": "Model-estimated: mid-funnel query with moderate volume reflecting a near-universal marketer frustration; the emphasis on non-technical usability maps directly to the ICP's 'marketer-editable CMS' decision criterion.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 15,
+              "text": "webflow vs framer for marketing pages b2b saas",
+              "framing": "vendor-comparing",
               "refinement_applied": true
             },
             "metrics": {
@@ -865,19 +1000,18 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 7,
-            "difficulty_score": 8,
-            "business_value_score": 7,
-            "composite": 5.9,
-            "competitor_urls": [],
-            "rationale": "High traffic but Notion owns the SERP; tough to displace."
+            "traffic_score": 4,
+            "difficulty_score": 7,
+            "business_value_score": 9,
+            "composite": 6.1,
+            "rationale": "Model-estimated: lower absolute volume due to high specificity but extremely high business value \u2014 this query names two competing platforms plus the exact ICP vertical (B2B SaaS), placing the buyer squarely at bottom-of-funnel evaluation stage.",
+            "competitor_urls": []
           },
           {
-            "schema_version": 1,
             "query": {
-              "position": 25,
-              "text": "knowledge base under $500/month for engineering team",
-              "framing": "price-driven",
+              "position": 16,
+              "text": "no code design tool with CMS and sso",
+              "framing": "vendor-comparing",
               "refinement_applied": true
             },
             "metrics": {
@@ -888,29 +1022,428 @@
             },
             "traffic_score": 3,
             "difficulty_score": 4,
+            "business_value_score": 9,
+            "composite": 6.1,
+            "rationale": "Model-estimated: low volume but exceptional business value because SSO is an enterprise/mid-market security requirement that signals a serious, near-purchase evaluation rather than casual browsing.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 17,
+              "text": "alternatives to webflow for landing pages 2024",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 6,
+            "difficulty_score": 7,
+            "business_value_score": 8,
+            "composite": 6.0,
+            "rationale": "Model-estimated: 'alternatives to [named brand]' queries reliably carry strong mid-to-high volume and are aggressively targeted by competitors and review sites, but they capture an actively evaluating buyer making business value high.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 18,
+              "text": "webflow webflow webflow vs wordpress security and performance",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 7,
             "business_value_score": 7,
-            "composite": 5.7,
-            "competitor_urls": [],
-            "rationale": "Concrete budget threshold; small audience but commercial intent."
+            "composite": 5.4,
+            "rationale": "Model-estimated: the repeated brand token suggests a malformed query but the underlying Webflow vs. WordPress security/performance comparison has moderate search volume; security-qualified comparisons are meaningful for mid-market B2B buyers but dominated by established content.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 19,
+              "text": "best no code platform for b2b marketing website rebuild",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 6,
+            "business_value_score": 9,
+            "composite": 6.3,
+            "rationale": "Model-estimated: moderate volume with high competition from review aggregators, but the explicit B2B qualifier and 'rebuild' intent make this one of the highest business-value queries in the journey \u2014 the buyer is ready to make a platform decision.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 20,
+              "text": "no code design tool pricing per month 2024",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 6,
+            "business_value_score": 7,
+            "composite": 5.5,
+            "rationale": "Model-estimated: pricing queries carry solid volume and strong purchase intent; the generic category framing (not brand-specific) slightly reduces business value versus named-competitor pricing comparisons.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 21,
+              "text": "webflow pricing vs competitors how much does it cost",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 6,
+            "difficulty_score": 7,
+            "business_value_score": 8,
+            "composite": 6.0,
+            "rationale": "Model-estimated: brand-specific pricing comparison queries have higher volume and strong bottom-of-funnel intent; Webflow's brand dominance means heavy competition on this SERP, but capturing it converts well for the ICP.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 22,
+              "text": "cheap alternative to paying agencies 4k a month for landing pages",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 2,
+            "business_value_score": 9,
+            "composite": 5.4,
+            "rationale": "Model-estimated: very low search volume for this specific dollar-anchored phrase, but it perfectly captures the ICP's explicit ROI comparison criterion (agency retainer displacement) making it extremely high business value for targeted content or paid campaigns.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 23,
+              "text": "marketing site builder under $500 month roi payback",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 2,
+            "business_value_score": 8,
+            "composite": 5.6,
+            "rationale": "Model-estimated: near-zero organic search volume for this budget-constrained long-tail query, but the ROI framing and price ceiling are direct signals of a budget-holding decision-maker in active evaluation.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 24,
+              "text": "webflow framer figma design tool annual pricing comparison",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 6,
+            "business_value_score": 8,
+            "composite": 5.9,
+            "rationale": "Model-estimated: three named platforms in one query signals a buyer deep in shortlist evaluation; moderate volume for multi-brand comparisons with annual pricing focus indicating a procurement-stage decision.",
+            "competitor_urls": []
+          },
+          {
+            "query": {
+              "position": 25,
+              "text": "no code platform soc2 compliance audit log for b2b",
+              "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 3,
+            "business_value_score": 9,
+            "composite": 5.9,
+            "rationale": "Model-estimated: very low search volume for this security-specific long-tail query, but SOC2 and audit log requirements are hard blockers for mid-market B2B SaaS buyers, making this the highest business-value signal in the journey despite minimal traffic.",
+            "competitor_urls": []
           }
         ]
       }
     }
   },
-  "d382acd16fba702b659408d04efd31e8cfa3fafe995bab7c7d52a57f749ed5a7": {
-    "input_tokens": 3000,
-    "output_tokens": 600,
+  "c2596be9cf0b997dd7449235c32cf695e1d96cbfb0a248a0861d6d0c75742423": {
+    "input_tokens": 6021,
+    "output_tokens": 3573,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_draft_content_brief",
+      "input": {
+        "target_query": "best no code platform for b2b marketing website rebuild",
+        "icp_segment_label": "In-House Marketing Team at Mid-Market B2B SaaS",
+        "angle": "Unlike listicles that treat every B2B buyer as a blank-slate founder, this piece addresses the rebuild-specific reality: how a mid-market SaaS marketing team migrates SEO equity, CMS content, and publishing workflows away from a legacy WordPress or agency-owned site \u2014 and picks the no-code platform that won't put them back in an engineering queue six months later.",
+        "audience": "Heads of Marketing, Directors of Growth, and VPs of Marketing at Series B/C B2B SaaS companies (100\u2013500 employees) who already have a live site, are blocked by engineering or an agency to make changes, and need to build a case for switching platforms \u2014 not just pick one from a list.",
+        "structure": [
+          {
+            "heading": "Why 'Best No-Code Platform' Is the Wrong Question If You're Doing a Rebuild",
+            "purpose": "Reframe the decision from a tool-selection exercise to a migration and governance problem \u2014 differentiating this piece from every 'top 10 tools' listicle in the SERP. Validates the reader's frustration and earns credibility before making any recommendations.",
+            "key_points": [
+              "Acknowledge the trigger moment most readers are in: engineering has deprioritized the marketing site, a new hire has benchmarked the site against category leaders, or a deal was lost because the site looked pre-seed.",
+              "Name and dismiss the common-angle trap: the answer isn't 'Webflow is the industry standard' \u2014 the real question is whether the platform can absorb your existing content, preserve your SEO equity, and let your team operate it without a developer standing by.",
+              "Introduce the three dimensions that actually determine rebuild success: (1) migration complexity from your current stack, (2) day-two content governance for a distributed marketing team, and (3) total cost vs. current agency retainer.",
+              "Set reader expectation: this guide evaluates platforms through the lens of a team that already has a 50\u2013200 page WordPress or HubSpot CMS site, not a greenfield build."
+            ]
+          },
+          {
+            "heading": "The Migration Reality Check: What Moving Off WordPress (or Your Agency's Custom Stack) Actually Involves",
+            "purpose": "Address the single largest content gap in the SERP \u2014 the rebuild-specific migration angle. No competing result explains what happens to existing content, redirects, SEO authority, or CMS data. This section becomes genuinely useful to a buyer who has a live site and is afraid of breaking it.",
+            "key_points": [
+              "Redirect mapping and SEO equity: explain that domain authority and backlink equity stay with the domain, but page-level equity lives in the URL structure \u2014 any platform switch requires a comprehensive 301 redirect plan. Name tools (Screaming Frog, Ahrefs Site Audit) marketers can use without dev help.",
+              "CMS content migration paths: distinguish between platforms with structured import tools (Webflow's CSV CMS import, HubSpot's native migration service) vs. those that require manual recreation or a contractor. Quantify the effort honestly \u2014 a 150-post blog is not a weekend project.",
+              "What breaks silently: highlight the common migration failure modes \u2014 broken canonical tags, lost schema markup, image alt text stripped, internal links pointing to old slugs \u2014 and which platforms help you catch these in staging before go-live.",
+              "The agency handoff problem: if the current site is owned by an agency (proprietary theme, agency-managed hosting), document what 'getting the keys back' actually involves, including design assets, DNS, GA4/GTM configurations.",
+              "Recommended migration sequence: audit \u2192 map redirects \u2192 stage on new platform \u2192 QA SEO parity \u2192 cut over. This is the process framing the SERP's #1 result gestures at without providing."
+            ]
+          },
+          {
+            "heading": "Platform Comparison: Evaluated for the Team Doing the Rebuild, Not the Founder Starting from Scratch",
+            "purpose": "Deliver the platform comparison readers expect, but filtered through rebuild-specific and governance criteria rather than generic feature lists. Directly addresses ICP decision criteria: can a non-developer marketer create pages without breaking design, how fast is migration, what does cost look like vs. an agency retainer.",
+            "key_points": [
+              "Evaluate four platforms on rebuild-relevant axes only: Webflow, HubSpot CMS Hub, Framer, and WordPress + a modern theme (as the 'stay put and fix it' control case). Exclude commerce-first (Shopify) and marketplace (CS-Cart) options \u2014 they are irrelevant to this query and clutter the comparison.",
+              "Webflow: strongest on design fidelity and CMS flexibility for case studies, landing pages, and blog; CSV-based CMS import reduces migration lift; Editor role lets a non-developer marketer publish content without touching Designer; cite real SaaS social proof (Lattice, Jasper, Linear) rather than abstract claims. Flag honest limitations: Localization is an add-on cost; complex multi-locale setups require initial setup investment.",
+              "HubSpot CMS Hub: only the right answer if the team is already deep in HubSpot for CRM, email, and attribution \u2014 the 1,500-integration argument is a red herring if you're not using HubSpot as your system of record. Migration from HubSpot to HubSpot (e.g., portal consolidation) is seamless; migration from WordPress to HubSpot CMS is non-trivial.",
+              "Framer: excellent for a single product marketing page or a design-forward homepage; genuinely inadequate for a 100+ page SaaS site with structured CMS content \u2014 name this limitation directly using the ICP's own language: 'Framer feels too designer-brained and lightweight on CMS; great for portfolios, not for a 200-page SaaS site.'",
+              "WordPress (modernized): acknowledge it as a valid path if the problem is the theme and plugins, not the platform \u2014 but be honest that 'WordPress gives too much rope' and every contractor leaves a different mess in the codebase; the coordination tax doesn't go away.",
+              "Present a lightweight comparison matrix covering: migration effort (low/med/high), marketer self-sufficiency post-launch, design ceiling, CMS content governance, and indicative total cost range vs. a $4k/month agency retainer."
+            ]
+          },
+          {
+            "heading": "Content Governance After Go-Live: How Your Team Actually Operates the Site Without Filing Tickets",
+            "purpose": "Fill the governance gap that no SERP result addresses \u2014 what happens on day 60, not day 1. This section speaks directly to the ICP's downstream use cases (campaign landing pages, blog publishing, A/B testing) and their fear of recreating the same dependency on a new platform.",
+            "key_points": [
+              "Roles and permissions architecture: explain how Webflow's Editor/Designer/Admin role structure maps to a typical B2B marketing team \u2014 content writers publish in CMS Editor without touching layouts; demand gen creates landing pages from locked component templates; only one or two people need Designer access.",
+              "Component locking and design system governance: brand consistency breaks down post-launch when multiple people can edit global styles. Show how to use Webflow's style guide and symbol/component locking to prevent the 'every contractor leaves a different mess' problem.",
+              "Landing page velocity: quantify what 'launch a landing page in a day, not a sprint' actually looks like on each platform \u2014 template cloning, CMS collection pages, and whether a marketer needs to touch code to swap out a hero image or add a form.",
+              "Blog and case study publishing: who does it, what does the publishing workflow look like, and does it require a designer's involvement for each post? Platforms with structured CMS fields (Webflow, HubSpot) vs. freeform page builders are meaningfully different here.",
+              "Handoff-readiness: when the next contractor or agency inherits the site, what do they receive? A Webflow site with a documented component library is materially different from a WordPress site with 14 plugins and a custom child theme."
+            ]
+          },
+          {
+            "heading": "Building the Internal Business Case: ROI vs. Your Current Agency Retainer",
+            "purpose": "Address the mid-funnel buyer problem the SERP entirely ignores \u2014 this reader doesn't just need to pick a platform, they need to justify the switch to a CFO, a CTO, or a new CMO. Provide the framing and numbers to make that case.",
+            "key_points": [
+              "Quantify the current invisible tax: if the team is paying $4k/month to an agency primarily to make content changes and ship landing pages, that's $48k/year in operational overhead \u2014 frame the platform switch as a cost reallocation, not an additional expense.",
+              "Estimate one-time migration and implementation costs honestly: a well-scoped Webflow rebuild with a Webflow Partner agency runs $25k\u2013$60k for a mid-market SaaS site; HubSpot CMS implementation varies similarly. These numbers exist and buyers need them \u2014 vague 'contact for pricing' framing loses trust.",
+              "Speed-to-value ROI: a marketing team that can ship a landing page in one day instead of one sprint recovers the cost of implementation through faster campaign cycles \u2014 give a simplified worked example (e.g., 4 campaigns/quarter \u00d7 5 days saved per campaign \u00d7 a meaningful blended hourly cost).",
+              "Risk framing for engineering stakeholders: position the rebuild as reducing engineering toil, not adding a new system for them to support. On Webflow, the engineering team has no ongoing maintenance obligation \u2014 no plugin updates, no PHP version conflicts, no security patching.",
+              "What to include in the business case document: platform cost, implementation cost, migration cost, estimated time savings per quarter, and the brand-credibility argument (sites that look like a Series C company, not pre-seed) for leadership sign-off."
+            ]
+          },
+          {
+            "heading": "How to Run a Rebuild Evaluation Without Wasting Three Months",
+            "purpose": "Give the reader a concrete action framework \u2014 not the vague 'shortlist two or three tools and run a small test project' advice that ranks #1 in the SERP. This section converts intent into a repeatable process a marketing director can hand to their team.",
+            "key_points": [
+              "Define the evaluation scope in week one: how many page templates do you actually need (most B2B SaaS sites run on 8\u201312 templates), what integrations are non-negotiable (Marketo, HubSpot, Segment, Clearbit), and who internally needs to be able to use the CMS on day one.",
+              "The right test project is not rebuilding the homepage \u2014 it's rebuilding your highest-traffic, most CMS-dependent page type (usually a blog post or case study) because that exposes whether the platform's content model matches your team's actual workflow.",
+              "Involve the right stakeholders early: loop in the one engineer who will do the DNS cutover and GTM migration, and the content person who will publish weekly \u2014 their veto is the one that kills a platform choice six months post-launch.",
+              "Vendor evaluation red flags: any platform that requires a developer to set up form integrations, configure redirects, or publish a new blog post in its standard workflow is not truly no-code for a marketing team \u2014 test these specific flows, not the demo.",
+              "Decision timeline: a well-run evaluation should take 3\u20134 weeks (scoping, shortlist testing, stakeholder sign-off) not 3 months. If it's taking longer, the blocker is usually internal alignment, not platform complexity \u2014 name this and suggest how to break the logjam."
+            ]
+          }
+        ],
+        "key_points": [
+          "Never write for a blank-slate founder: every section must assume the reader has a live site, existing SEO equity, and a team already burned by a dependency on engineering or an agency. The SERP's dominant angle \u2014 'Webflow is the industry standard' delivered in a listicle \u2014 is not this piece.",
+          "Use ICP language patterns verbatim or near-verbatim where they naturally fit: 'launch a landing page in a day, not a sprint,' 'our site looks like we're pre-seed,' 'paying the agency to change button colors,' 'engineering won't touch the marketing site \u2014 it's not on the roadmap.' These phrases signal to the reader that this article was written for them specifically.",
+          "Every platform claim must be grounded: no 'actually drives leads' without a citation, benchmark, or named customer example. Use Webflow's own showcase (Lattice, Jasper, Linear) as social proof anchors. Cite real migration tool names (Screaming Frog, Ahrefs) and real cost ranges ($25k\u2013$60k implementation) rather than vague guidance.",
+          "The piece must explicitly address the internal justification problem: this reader is not making a solo decision. They are selling the rebuild to a CFO, a CTO, or a new CMO. The ROI section and the business case framing are as important as the platform comparison.",
+          "Framer must be named and disqualified for this use case \u2014 the ICP already suspects it. Doing this honestly (citing its genuine strengths for design-forward single pages, then naming the CMS limitation for a 100+ page SaaS site) builds more trust than ignoring it.",
+          "Avoid SEO platitudes entirely: no 'comprehensive guide,' no 'in today's digital landscape,' no 'take your marketing to the next level.' Write like a senior marketing ops peer who has done this migration before and is sharing what they wish they'd known."
+        ],
+        "sources": [
+          "https://www.waveon.io/en/blog/best-no-code-website-platforms-for-b2b-startups",
+          "https://www.mindstudio.ai/blog/best-no-code-app-builders",
+          "https://emergent.sh/learn/best-b2b-website-builders",
+          "https://kissflow.com/no-code/no-code-company/",
+          "https://www.growthmak.com/blog/how-no-code-websites-can-build-your-b2b-dream",
+          "https://webflow.com/customers",
+          "https://ahrefs.com/blog/seo-migration/",
+          "https://www.screamingfrog.co.uk/seo-spider/"
+        ],
+        "recommended_length_words": 2800,
+        "internal_linking_suggestions": []
+      }
+    }
+  },
+  "cf76324d8de30e75f5c194a0ac3cabf8614a5ece706e2e30b7dbb945d40dccca": {
+    "input_tokens": 2130,
+    "output_tokens": 33,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brand_voice_match",
+      "input": {
+        "passed": true
+      }
+    }
+  },
+  "d7282a5df4b4d3be6f55d2cf74649843961cb5c3d146cf6f8b848791f45beb8d": {
+    "input_tokens": 1960,
+    "output_tokens": 33,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_search_intent_alignment",
+      "input": {
+        "passed": true
+      }
+    }
+  },
+  "eef0909e005a54b875fc459d2567debb3802ac76c819573946a761cce3dde0d4": {
+    "input_tokens": 3041,
+    "output_tokens": 2701,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_analyze_serp",
+      "input": {
+        "query_text": "best no code platform for b2b marketing website rebuild",
+        "top_results": [
+          {
+            "rank": 1,
+            "url": "https://www.waveon.io/en/blog/best-no-code-website-platforms-for-b2b-startups",
+            "title": "Best no-code website platforms for B2B startups and how to choose one | Waveon Blog",
+            "snippet": "A practical approach is to shortlist two or three tools that match your priorities\u2014design freedom, speed, content depth\u2014and run a small test project in each, like rebuilding your current homepage or a key landing page. Pay close attention not just to the final look but to how it feels to work inside the tool."
+          },
+          {
+            "rank": 2,
+            "url": "https://www.weweb.io/blog/best-no-code-website-builder-platforms",
+            "title": "10 Best No Code Website Builder Platforms for 2026",
+            "snippet": "Elementor is for founders and agencies who want no-code WordPress with pro control. Great for marketing sites, landing pages, and WooCommerce stores, it supports beginner-friendly templates while offering advanced, scalable workflows, especially on managed cloud hosting."
+          },
+          {
+            "rank": 3,
+            "url": "https://blog.yaamwebsolutions.com/no-code-website-builder/",
+            "title": "7 Best No-Code Website Builders for Businesses in 2026",
+            "snippet": "It gives you CSS-level design control through a visual interface \u2014 meaning you can build genuinely unique layouts, not just template variations. The platform's CMS handles complex content structures \u2014 team pages, case studies, blog posts \u2014 all customizable in how they display."
+          },
+          {
+            "rank": 4,
+            "url": "https://emergent.sh/learn/best-b2b-website-builders",
+            "title": "Top 5 B2B Website Builders That Actually Drive Leads in 2026",
+            "snippet": "B2B website builders serve very different segments of the market, from full-stack custom platforms to commerce-first solutions and design-driven builders. Some prioritize deep customization and system integration, while others focus on speed, templates, or commerce workflows.",
+            "extracted_content": "Compares Emergent (AI-powered full-stack for B2B revenue systems), Webflow (design-first with visual control), and Shopify (commerce-optimized with transaction management). Discusses critical B2B requirements: supporting product-led, sales-led, or commerce-driven buying journeys; CRM/analytics integration; and complex sales motions. Webflow lacks native backend logic and complex B2B workflows support."
+          },
+          {
+            "rank": 5,
+            "url": "https://www.cs-cart.com/no-code-marketplace-builder",
+            "title": "Best No-Code Marketplace Builder | CS-Cart Multi-Vendor Cloud",
+            "snippet": "CS-Cart Cloud fits this concept by providing ready storefronts, vendor portals, payment workflows, and monetization tools that can be configured through the admin panel.",
+            "extracted_content": "Multi-vendor marketplace platform with no-code configuration. Provides ready storefronts, vendor portals, payment workflows, automated transaction management. Supports multi-language (26), multi-currency, international taxes/shipping. CS-Cart Cloud is fully managed hosted solution for launching marketplaces without coding."
+          },
+          {
+            "rank": 6,
+            "url": "https://www.growthmak.com/blog/how-no-code-websites-can-build-your-b2b-dream",
+            "title": "Empowering Non-Technical Founders: How No-Code Websites Can Build Your B2B Dream",
+            "snippet": "No-code websites have democratized access to online presence for non-technical B2B founders. You no longer need to be a coder to build a professional, functional, and scalable website.",
+            "extracted_content": "Discusses B2B no-code benefits including CRM integration (Salesforce, HubSpot) for lead capture and sales pipeline management. Addresses scalability planning from the beginning and options to migrate to more robust platforms if needed. Notes that no-code extends beyond websites to internal tools, workflow automation, and custom applications."
+          },
+          {
+            "rank": 7,
+            "url": "https://www.mindstudio.ai/blog/best-no-code-app-builders",
+            "title": "Best No-Code App Builders in 2026: An Honest Breakdown | MindStudio",
+            "snippet": "Bubble is the most capable option for this. There are real companies running on Bubble with thousands of users. The main challenges are performance at scale (which requires careful database design), cost at higher usage tiers, and the fact that you can't migrate your app off Bubble if you outgrow it.",
+            "extracted_content": "Distinguishes between Bubble (full-featured backend with database, workflows, authentication) and Webflow (visual design tool with CMS, no real application backend). Bubble suitable for complex applications; Webflow excellent for marketing sites/content-driven pages. Discusses Bubble limitations: scaling challenges, vendor lock-in. Webflow better for design-forward projects without complex backend needs."
+          },
+          {
+            "rank": 8,
+            "url": "https://www.websiteplanet.com/blog/best-b2b-ecommerce-platform/",
+            "title": "6 Best B2B E-commerce Platforms for Your Business in 2026",
+            "snippet": "Unlike many e-commerce platforms, Commerce Hub doesn't charge monthly fees. Instead, you'll only pay a small transaction fee on invoices \u2013 making it a cost-effective option.",
+            "extracted_content": "Covers B2B e-commerce platforms including Shopify with B2B-optimized theme (quick-order forms, bulk purchasing, advanced search), Wix (900+ templates, AI-powered design), Ecwid (volume-based pricing, automation tools). Shopify noted for simplicity/capability balance. Discusses importance of website design alignment with business goals for B2B success."
+          },
+          {
+            "rank": 9,
+            "url": "https://blog.nextinymarketing.com/no-code-ai-marketing-tools",
+            "title": "30+ AI & No-Code Marketing Tools in 2025",
+            "snippet": "For small businesses or personal projects, tools like Squarespace, Wix, and Weebly offer accessible and versatile options. For larger marketing efforts, HubSpot stands out as the ideal website-building solution.",
+            "extracted_content": "Recommends HubSpot for larger B2B marketing efforts (landing pages, pillar pages, blogs with 1,500+ app integrations). Lists Shopify for e-commerce with AI tool (Shopify Magic). Discusses no-code revolution in website building, design, SEO, and data analysis. Notes platforms enable unified dashboards integrating multiple data sources."
+          },
+          {
+            "rank": 10,
+            "url": "https://kissflow.com/no-code/no-code-company/",
+            "title": "15 Best No-Code Companies and Platforms (April 2026 Updated List)",
+            "snippet": "Creating a marketing website? Choose Webflow for design control and SEO. Managing data and collaborating? Choose Airtable for spreadsheet-database hybrid. Building native mobile apps? Choose FlutterFlow with code export option.",
+            "extracted_content": "Webflow identified as industry standard for visually stunning, professionally designed websites combining creative freedom with robust CMS and hosting. Lists quick recommendations by use case: Webflow for marketing sites (design control/SEO), Airtable for data/collaboration, FlutterFlow for mobile apps. Discusses cost considerations: licensing models, implementation/training, integration requirements, scaling costs."
+          }
+        ],
+        "common_angles": [
+          "Webflow-as-default recommendation for B2B marketing sites, framed around CSS-level design control, visual CMS for case studies/team pages/blogs, and SEO \u2014 echoed across ranks #3, #7, and #10 ('Webflow identified as industry standard for visually stunning, professionally designed websites')",
+          "Numbered listicle ranking 5\u201315 platforms with brief per-tool summaries, targeting founders/marketers evaluating options in 2025\u20132026 \u2014 the dominant structural format across ranks #1, #2, #3, #9, and #10",
+          "Platform segmentation by use-case archetype: design-driven (Webflow), commerce-first (Shopify), template-speed (Wix/Squarespace), and enterprise-scale (HubSpot) \u2014 framed as 'B2B website builders serve very different segments' (#4) rather than a single winner",
+          "CRM and marketing stack integration as a core B2B differentiator \u2014 HubSpot's 1,500+ integrations (#9) and Salesforce/HubSpot CRM compatibility (#6) cited as reasons to choose one platform over another",
+          "Test-before-you-commit evaluation framework: 'shortlist two or three tools... and run a small test project in each, like rebuilding your current homepage' (#1) \u2014 positioning the decision as a process, not a lookup",
+          "Bubble vs. Webflow distinction clarified for non-technical audiences: Webflow for marketing/content sites, Bubble for app backends \u2014 used to fence off the recommendation space (#7)"
+        ],
+        "content_gaps": [
+          "No result addresses the rebuild-specific migration angle: what to do with existing content, redirects, SEO equity, and CMS data migration when moving FROM a legacy CMS (WordPress, Drupal, HubSpot CMS) TO a no-code platform \u2014 the actual pain point for a B2B team doing a rebuild",
+          "Missing mid-funnel buyer perspective: content is written for founders evaluating from scratch, not for marketing managers who already have a site and need to justify a platform switch to engineering or leadership \u2014 no ROI framing, no 'rebuild vs. redesign' decision framework",
+          "No result evaluates ongoing content governance at scale \u2014 e.g., how a distributed B2B marketing team (demand gen, content, ops) manages roles/permissions, brand consistency, and publishing workflows inside these platforms post-launch",
+          "Concrete performance benchmarks and lead-gen outcomes are absent \u2014 claims like 'actually drive leads' (#4) appear in titles but the content doesn't back them up with conversion rate data, page speed scores, or real B2B customer case studies tied to pipeline impact",
+          "AI-assisted rebuild and CMS authoring capabilities are underexplored \u2014 only surface-level mentions of 'AI-powered design' (Wix, #8) with no deep comparison of how Webflow, HubSpot, or Framer handle AI content generation, SEO automation, or personalization for B2B use cases"
+        ],
+        "recommended_format": "Rebuild-oriented decision framework with platform comparison matrix, migration checklist, and B2B marketing team governance guide"
+      }
+    }
+  },
+  "ffc0e240db4d0926d77e9e66e40350235d1e10e8f3aa3a4f86d4347f13e1dc36": {
+    "input_tokens": 7158,
+    "output_tokens": 531,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_select_priority_query",
       "input": {
-        "schema_version": 1,
-        "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "selected_segment_label": "In-House Marketing Team at Mid-Market B2B SaaS",
         "selected_query": {
           "schema_version": 1,
           "query": {
             "position": 19,
-            "text": "alternatives to notion for engineering documentation",
+            "text": "best no code platform for b2b marketing website rebuild",
             "framing": "vendor-comparing",
             "refinement_applied": true
           },
@@ -920,313 +1453,14 @@
             "cpc": null,
             "serp_features": []
           },
-          "traffic_score": 7,
-          "difficulty_score": 7,
+          "traffic_score": 5,
+          "difficulty_score": 6,
           "business_value_score": 9,
-          "composite": 7.4,
+          "composite": 6.3,
           "competitor_urls": [],
-          "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+          "rationale": "Model-estimated: moderate volume with high competition from review aggregators, but the explicit B2B qualifier and 'rebuild' intent make this one of the highest business-value queries in the journey \u2014 the buyer is ready to make a platform decision."
         },
-        "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
-      }
-    }
-  },
-  "e18ef04a46fd6e72020f6f9300c758954fab6a0fc958d7c4206fb903c8aa20b6": {
-    "input_tokens": 1200,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brand_voice_match",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "f8f39763e80ddbadf62f9d237cde556f855b98bdaa4ceea778b5fae8bd9652e7": {
-    "input_tokens": 1500,
-    "output_tokens": 1100,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_generate_geo_query_list",
-      "input": {
-        "schema_version": 1,
-        "queries": [
-          {
-            "position": 1,
-            "text": "what is a knowledge base for engineering teams",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 2,
-            "text": "do i need a wiki for my engineering team",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 3,
-            "text": "what does a knowledge base actually do",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 4,
-            "text": "are engineering wikis still a thing in 2026",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 5,
-            "text": "knowledge management tool meaning",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 6,
-            "text": "our engineering team can't find docs",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 7,
-            "text": "engineering docs that nobody updates",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 8,
-            "text": "single source of truth for engineering docs",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 9,
-            "text": "how to fix fragmented engineering documentation",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 10,
-            "text": "tooling teams hate maintaining custom wikis",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 11,
-            "text": "self hosted knowledge base options",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 12,
-            "text": "knowledge base with markdown source of truth",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 13,
-            "text": "wiki with git style versioning",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 14,
-            "text": "best knowledge base for engineering teams 2026",
-            "framing": "vendor-comparing",
-            "refinement_applied": false
-          },
-          {
-            "position": 15,
-            "text": "api first wiki for engineering with webhook support",
-            "framing": "power-user",
-            "refinement_applied": true
-          },
-          {
-            "position": 16,
-            "text": "knowledge base with sso and audit log for soc2",
-            "framing": "power-user",
-            "refinement_applied": true
-          },
-          {
-            "position": 17,
-            "text": "notion vs confluence for engineering teams",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 18,
-            "text": "outline vs notion engineering wiki",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 19,
-            "text": "alternatives to notion for engineering documentation",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 20,
-            "text": "bookstack vs notion for engineering team",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 21,
-            "text": "notion price hike 2026 alternatives",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 22,
-            "text": "cheap knowledge base for 200 person engineering team",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 23,
-            "text": "free wiki for engineering teams self hosted",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 24,
-            "text": "notion pricing per seat 2026",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 25,
-            "text": "knowledge base under $500/month for engineering team",
-            "framing": "price-driven",
-            "refinement_applied": true
-          }
-        ],
-        "journey_arc_summary": "The buyer starts with conceptual queries about whether a knowledge base is even needed, drifts into pain-naming as they realize their team has the symptoms, then shifts into implementation requirements (markdown, git versioning, SSO). By position 15 they're naming specific products and weighing alternatives, and the journey ends in pricing and total-cost-of-ownership questions where the actual buying decision crystallizes."
-      }
-    }
-  },
-  "fa8a068f3b93f26078bf708588fdc59faa2c2996d587f5300e7ea41c3587daa4": {
-    "input_tokens": 1200,
-    "output_tokens": 1800,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_define_icp",
-      "input": {
-        "schema_version": 1,
-        "segments": [
-          {
-            "schema_version": 1,
-            "segment_label": "Distributed Engineering Lead at 200-500 dev shop",
-            "firmographic": {
-              "industry_vertical": "B2B SaaS \u2014 developer tooling",
-              "company_size": "200\u2013500 employees, $20M\u2013$100M ARR",
-              "geography": "North America + EMEA distributed",
-              "organizational_structure": "Engineering Director reports to VP Eng; KB tool selection runs through them",
-              "buying_stage": "Active evaluation after outgrowing free wiki",
-              "strategic_pain_points": [
-                "Search across docs is fragmented",
-                "New hires take 3+ months to find tribal knowledge",
-                "Markdown vs WYSIWYG factions on the team"
-              ],
-              "trigger_events": [
-                "Major incident traced to undocumented decision",
-                "Hired 20+ engineers in a quarter",
-                "Notion price hike or migration event"
-              ]
-            },
-            "persona": {
-              "role_job_title": "Director of Engineering",
-              "demographic_context": "32\u201345, 10+ years experience, technical IC background",
-              "motivations": [
-                "Reduce onboarding time",
-                "Lower bus-factor risk",
-                "Earn promotion to VP"
-              ],
-              "decision_criteria": [
-                "Real-time collab parity with Notion",
-                "Markdown source of truth",
-                "API + automation hooks",
-                "SSO + audit log"
-              ],
-              "language_patterns": [
-                "single source of truth",
-                "we keep losing tribal knowledge",
-                "search just doesn't work across our docs",
-                "it should integrate with our existing stack"
-              ],
-              "frustrations": [
-                "Notion search returns archived stuff",
-                "Confluence feels like 2010",
-                "Tooling teams hate maintaining a custom wiki"
-              ],
-              "downstream_use_cases": [
-                "RFC + ADR storage",
-                "Runbooks and incident postmortems",
-                "Onboarding paths per role"
-              ],
-              "information_sources": [
-                "r/engineeringmanagers",
-                "Hacker News",
-                "DevOps Slack communities",
-                "Lenny's Newsletter"
-              ]
-            }
-          },
-          {
-            "schema_version": 1,
-            "segment_label": "Ops/RevOps Manager at 50-200 startup",
-            "firmographic": {
-              "industry_vertical": "B2B SaaS \u2014 sales or marketing platform",
-              "company_size": "50\u2013200 employees, $5M\u2013$30M ARR",
-              "geography": "US-centric, remote-first",
-              "organizational_structure": "Reports to COO or CRO; cross-functional ownership of internal tooling",
-              "buying_stage": "Comparing 2-3 finalists with budget approved",
-              "strategic_pain_points": [
-                "Sales and CS rooms duplicate playbooks across tools",
-                "Marketing assets live in Drive, Notion, and Slack threads"
-              ],
-              "trigger_events": [
-                "New COO hire pushing on tool consolidation",
-                "Onboarding-cost review by exec team"
-              ]
-            },
-            "persona": {
-              "role_job_title": "RevOps Manager",
-              "demographic_context": "28\u201338, MBA optional, project-management mindset",
-              "motivations": [
-                "Be the person who fixes 'how we work'",
-                "Drive measurable onboarding-time reduction"
-              ],
-              "decision_criteria": [
-                "Templates for sales playbooks out of the box",
-                "Permissions granularity",
-                "Salesforce / HubSpot integration",
-                "Time-to-value under 30 days"
-              ],
-              "language_patterns": [
-                "we need one place for this",
-                "I'm tired of hunting in Slack",
-                "leadership wants visibility"
-              ],
-              "frustrations": [
-                "Sales reps don't update docs",
-                "Tool sprawl with overlapping subscriptions"
-              ],
-              "downstream_use_cases": [
-                "Sales playbooks",
-                "Onboarding checklists",
-                "Customer-facing handoff docs"
-              ],
-              "information_sources": [
-                "RevOps Co-op",
-                "Pavilion communities",
-                "LinkedIn long-form posts"
-              ]
-            }
-          }
-        ]
+        "rationale": "This query sits at the bottom of the funnel with the highest composite score (6.3) and maximum business value (9/10), but what makes it the strategic winner is the combination of three signals: the explicit \"B2B\" qualifier narrows the audience to exactly the ICP, \"rebuild\" signals an active project with budget and timeline attached, and \"no code\" confirms the buyer is already past the awareness stage. Unlike the closely scoring \"webflow vs framer for marketing pages b2b saas\" (position 15, composite 6.1), this query is platform-agnostic \u2014 meaning an independent content piece (e.g., a comparison guide or buyer checklist) has a genuine chance to rank and convert, rather than being dominated by Webflow's or Framer's own brand content. It also anchors a natural content cluster: sub-queries around CMS integrations, pricing, SSO/security, and agency-vs-tool ROI all orbit this parent intent, giving the content team a clear hub-and-spoke roadmap from this single brief."
       }
     }
   }

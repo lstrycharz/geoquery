@@ -42,16 +42,43 @@ from evals.regression import record_case_to_disk
 from tests.test_regression_record import _ALL_CASES
 
 
+def _resolve_live_key() -> str | None:
+    """Look for a real ANTHROPIC_API_KEY in (in order): shell env, then `.env`.
+
+    The conftest preempts shell env with a `sk-ant-test` stub for safety, so we
+    can't trust `os.environ` alone — we explicitly parse `.env` as a fallback.
+    Returns None if no real key is found, which makes the fixture skip the test.
+    """
+    shell_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if shell_key and not shell_key.startswith("sk-ant-test"):
+        return shell_key
+    dotenv = Path(__file__).resolve().parent.parent / ".env"
+    if not dotenv.is_file():
+        return None
+    for line in dotenv.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if "=" not in stripped:
+            continue
+        k, v = stripped.split("=", 1)
+        if k.strip() == "ANTHROPIC_API_KEY":
+            val = v.strip().strip('"').strip("'")
+            if val and not val.startswith("sk-ant-test"):
+                return val
+    return None
+
+
 @pytest.fixture
 def live_settings(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
-    """Isolated Settings that use the REAL ANTHROPIC_API_KEY from the env."""
+    """Isolated Settings that use the REAL ANTHROPIC_API_KEY from env or .env."""
     from config import Settings, reset_settings_for_tests
 
-    real_key = os.environ.get("ANTHROPIC_API_KEY", "")
-    if not real_key or real_key.startswith("sk-ant-test"):
+    real_key = _resolve_live_key()
+    if not real_key:
         pytest.skip(
-            "ANTHROPIC_API_KEY not set to a real key in environment "
-            "(or is the test stub); skipping live recording."
+            "no real ANTHROPIC_API_KEY found in shell env or .env; "
+            "skipping live recording."
         )
     monkeypatch.setenv("ANTHROPIC_API_KEY", real_key)
     monkeypatch.setenv("MAX_COST_USD", "1.50")
