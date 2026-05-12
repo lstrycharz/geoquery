@@ -1,0 +1,64 @@
+[
+  {
+    "id": "notion_b2b_saas_kb",
+    "company": "Notion",
+    "market": "B2B SaaS knowledge management",
+    "sitemap_url": null,
+    "expected_themes": {
+      "icp_role_keywords": [
+        "engineering",
+        "ops",
+        "director",
+        "head of"
+      ],
+      "brief_angle_keywords": [
+        "knowledge",
+        "documentation",
+        "single source"
+      ],
+      "rationale": "The Notion / KM market should surface engineering and ops leadership ICPs and briefs that talk about knowledge/documentation/single-source-of-truth framing."
+    }
+  },
+  {
+    "id": "linear_b2b_saas_pm",
+    "company": "Linear",
+    "market": "B2B SaaS engineering project management",
+    "sitemap_url": null,
+    "expected_themes": {
+      "icp_role_keywords": [
+        "engineering",
+        "cto",
+        "vp",
+        "tech lead"
+      ],
+      "brief_angle_keywords": [
+        "engineering",
+        "issue",
+        "sprint",
+        "jira"
+      ],
+      "rationale": "Linear/engineering project management should surface engineering leadership ICPs and briefs talking about issue tracking, sprints, Jira comparison, or workflow."
+    }
+  },
+  {
+    "id": "glossier_dtc_beauty",
+    "company": "Glossier",
+    "market": "DTC beauty / skincare",
+    "sitemap_url": null,
+    "expected_themes": {
+      "icp_role_keywords": [
+        "millennial",
+        "consumer",
+        "skincare",
+        "professional"
+      ],
+      "brief_angle_keywords": [
+        "skincare",
+        "ingredient",
+        "routine",
+        "beauty"
+      ],
+      "rationale": "Glossier/DTC beauty should surface consumer-leaning personas (millennials, urban professionals) and briefs about skincare routines/ingredients."
+    }
+  }
+]
