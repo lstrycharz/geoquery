@@ -35,6 +35,28 @@ def resolve_db_path() -> Path:
     return DEMO_DB
 
 
+def _render_drift_banner(db_path: Path) -> None:
+    """Top-of-dashboard banner that fires when any skill has regressed > 10
+    points week-over-week. Cheap to compute (a single grouped aggregate),
+    cheap to render — keeps drift visibility free even when the user never
+    navigates to the Drift page."""
+    try:
+        from evals.production import compute_drift_windows
+    except Exception:
+        return
+    try:
+        windows = compute_drift_windows(db_path)
+    except Exception:
+        return
+    drifting = [w for w in windows if w.drift_detected]
+    if drifting:
+        skills = ", ".join(w.skill_name for w in drifting)
+        st.error(
+            f"⚠️ Drift detected in {len(drifting)} skill(s): **{skills}**. "
+            "See the **Drift** page for the per-skill window breakdown."
+        )
+
+
 def main() -> None:
     st.set_page_config(page_title="GEOQuery — Runs", layout="wide")
     st.title("GEOQuery — Recent Runs")
@@ -46,6 +68,7 @@ def main() -> None:
             "to populate it, or commit `data/episodic.demo.db` to ship a demo."
         )
         return
+    _render_drift_banner(db_path)
     rows = recent_runs(db_path, limit=50)
     if not rows:
         st.info("No runs recorded yet. Run `geoquery brief …` to create one.")
