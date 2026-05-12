@@ -23,4 +23,8 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 - [x] **Chunk 16** — `mcp_server.py` exposes `generate_brief(company, market, sitemap?)` over MCP stdio (FastMCP). Same `run_brief` under the hood. Configure Claude Desktop / Code via `claude_desktop_config.json` — example in module docstring. 84/84 green.
 - [x] **Chunk 17** — Dockerfile (python:3.13-slim, bakes the fastembed model in for fast first-run) + docker-compose (mounts ./briefs and ./data, .env passthrough) + `.pre-commit-config.yaml` (ruff check + ruff format + pytest). One-time `ruff format .` pass cleaned 11 files. 84/84 still green.
 - [x] **Chunk 18** — 5 more example briefs generated (Stripe / Webflow / HubSpot / Vercel / Patagonia), 8 total across B2B SaaS, fintech, no-code, frontend cloud, DTC beauty, DTC outdoor. Total real-API spend: $3.85. Fixed `analyze_serp` token cap (4k → 6k now that page content lands in the prompt) + hardened `_coerce_json_dict/list` to tolerate model wrappers like `dict({...})`.
-- [ ] **Chunk 19** — Final README + ARCHITECTURE pass.
+- [x] **Chunk 19** — Final pass on README (live progress demo block + 8-brief table + Docker quickstart + MCP setup) and ARCHITECTURE (full per-layer write-ups + decision log with every architecturally significant call). 84/84 still green, ruff clean + formatted.
+
+---
+
+**v1.0 ships.** 19 chunks, 19 commits + 1 doc-only DataForSEO flip, 84 tests, 8 example briefs ($3.85 spent), 6 architectural layers populated end-to-end.
