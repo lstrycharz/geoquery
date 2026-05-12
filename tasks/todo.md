@@ -20,7 +20,7 @@ Each chunk: red → green → refactor → commit. Vertical-slice first (chunks 
 - [x] **Chunk 13** — Golden regression set (3 curated inputs in `tests/golden/inputs.json`) + `geoquery eval-golden [--report]` command. Haiku-based judge checks ICP role keywords + brief angle keywords (60% threshold). `--report` writes a self-contained HTML report to `eval_reports/<timestamp>.html`. Exits non-zero if pass rate < 80%. 77/77 green.
 - [x] **Chunk 14** — `geoquery feedback <run-id> --edited path.md` subcommand. Async outer loop: diffs the edited brief against the original, captures the unified diff into `human_edits`, and (if the Angle line changed) re-embeds the new angle into semantic memory so future similar runs surface it via RAG. 81/81 green.
 - [x] **Chunk 15** — Streaming + progress events. `agent.run_brief` takes `on_progress`; CLI passes a stderr echo so the user sees `→ skill / ✓ cost` per stage. `DraftContentBrief.streams = True` switches the drafter to `messages.stream()`, calling `progress_callback(chars_streamed)` per delta. Fake test client gained a minimal `stream()` context. 82/82 green.
-- [ ] **Chunk 16** — `mcp_server.py` (MCP stdio transport).
+- [x] **Chunk 16** — `mcp_server.py` exposes `generate_brief(company, market, sitemap?)` over MCP stdio (FastMCP). Same `run_brief` under the hood. Configure Claude Desktop / Code via `claude_desktop_config.json` — example in module docstring. 84/84 green.
 - [ ] **Chunk 17** — Dockerfile + docker-compose + pre-commit hook (ruff + pytest).
 - [ ] **Chunk 18** — Remaining 4–7 example briefs (target 5–10 total, distinct industries).
 - [ ] **Chunk 19** — Final README + ARCHITECTURE pass.
