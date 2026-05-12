@@ -32,6 +32,7 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
     model = "claude-sonnet-4-6"
     output_type = ContentBrief
     max_output_tokens = 6144
+    streams = True  # progress_callback emits partial-JSON char counts as the brief builds
 
     def build_user_message(self, inputs: DraftBriefInputs) -> str:
         icp_json = inputs.icp_segment.model_dump_json(indent=2)

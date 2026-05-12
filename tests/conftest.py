@@ -48,9 +48,38 @@ class FakeMessageResponse:
     stop_reason: str = "tool_use"
 
 
+class FakeStreamContext:
+    """Mimics the SDK's `client.messages.stream(...)` context-manager.
+
+    Yields no events (the test cassette already has the final response shape),
+    and `get_final_message()` returns that cassette response. This lets skills
+    with `streams=True` exercise the streaming path without us needing to
+    fabricate per-token deltas in every cassette.
+    """
+
+    def __init__(self, response: FakeMessageResponse) -> None:
+        self._response = response
+
+    def __enter__(self) -> FakeStreamContext:
+        return self
+
+    def __exit__(self, *args: Any) -> None:
+        return None
+
+    def __iter__(self):
+        return iter([])  # no progress events in the fake
+
+    def get_final_message(self) -> FakeMessageResponse:
+        return self._response
+
+
 @dataclass
 class FakeMessagesAPI:
     parent: FakeAnthropicClient
+
+    def stream(self, **kwargs: Any) -> FakeStreamContext:
+        # Reuse the same cassette-resolution logic as create().
+        return FakeStreamContext(self.create(**kwargs))
 
     def create(self, **kwargs: Any) -> FakeMessageResponse:
         tool_choice = kwargs.get("tool_choice") or {}

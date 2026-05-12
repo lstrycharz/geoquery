@@ -35,7 +35,12 @@ def brief(
     ),
 ) -> None:
     """Generate a content brief end-to-end."""
-    outcome = run_brief(company=company, market=market, sitemap_url=sitemap)
+    outcome = run_brief(
+        company=company,
+        market=market,
+        sitemap_url=sitemap,
+        on_progress=lambda msg: typer.echo(msg, err=True),
+    )
     if outcome.status == "completed":
         typer.echo(f"run_id: {outcome.run_id}")
         typer.echo(f"brief:  {outcome.brief_path}")

@@ -66,6 +66,40 @@ def test_run_brief_produces_brief_file_and_logs_each_skill(
     assert all(i["eval_passed"] == 1 for i in invocations)
 
 
+def test_progress_callback_fires_for_each_skill(
+    fake_client, tmp_settings, stub_embedder
+):
+    _load_pipeline(fake_client)
+    events: list[str] = []
+
+    outcome = run_brief(
+        company="Notion",
+        market="B2B SaaS knowledge management",
+        settings=tmp_settings,
+        client=fake_client,
+        embedder=stub_embedder,
+        fetch_page=lambda url: None,
+        on_progress=events.append,
+    )
+
+    assert outcome.status == "completed"
+    # Every skill should produce at least an arrow + a check (start + done).
+    starts = [e for e in events if e.startswith("→")]
+    dones = [e for e in events if e.startswith("  ✓")]
+    expected_skills = {
+        "research_company",
+        "define_icp",
+        "generate_geo_query_list",
+        "score_queries",
+        "select_priority_query",
+        "analyze_serp",
+        "draft_content_brief",
+    }
+    started = {s.split()[1] for s in starts}
+    assert expected_skills.issubset(started), f"missing starts: {expected_skills - started}"
+    assert any("draft_content_brief" in d for d in dones)
+
+
 def test_run_brief_records_aborted_cost_when_cap_is_too_low(
     fake_client, tmp_settings, monkeypatch, stub_embedder
 ):

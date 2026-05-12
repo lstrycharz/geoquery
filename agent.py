@@ -34,6 +34,8 @@ from tools.web_fetch import fetch_page as _default_fetch_page
 from tools.web_search import search_top_n
 
 PageFetcher = Callable[[str], str | None]
+ProgressCallback = Callable[[str], None]
+"""Called at each skill boundary with a status line. Optional; default no-op."""
 
 _EPISODIC_DB_NAME = "episodic.db"
 _SEMANTIC_DB_NAME = "semantic.db"
@@ -109,10 +111,12 @@ def run_brief(
     client: Anthropic | None = None,
     embedder: Embedder | None = None,
     fetch_page: PageFetcher | None = None,
+    on_progress: ProgressCallback | None = None,
 ) -> AgentOutcome:
     settings = settings or get_settings()
     client = client or Anthropic(api_key=settings.anthropic_api_key)
     fetch_page = fetch_page or _default_fetch_page
+    on_progress = on_progress or (lambda _: None)
 
     memory = EpisodicMemory(db_path=settings.data_dir / _EPISODIC_DB_NAME)
     semantic = SemanticMemory(
@@ -123,6 +127,7 @@ def run_brief(
 
     try:
         # Skill 1: research_company — CASINO dossier upstream of define_icp.
+        on_progress("→ research_company")
         research_skill = ResearchCompany(client=client, budget=budget)
         research_start = time.monotonic()
         research_started_at = _now()
@@ -147,7 +152,10 @@ def run_brief(
             )
         )
 
+        on_progress(f"  ✓ research_company  {research_result.cost_usd:.4f}$  attempt={research_result.attempt}")
+
         # Skill 2: define_icp (now consumes the dossier).
+        on_progress("→ define_icp")
         icp_skill = DefineIcp(client=client, budget=budget)
         icp_inputs = DefineIcpInputs(
             company=company, market=market, company_dossier=research_result.output
@@ -173,10 +181,13 @@ def run_brief(
             )
         )
 
+        on_progress(f"  ✓ define_icp  {icp_result.cost_usd:.4f}$  attempt={icp_result.attempt}")
+
         segments: ICPSegmentList = icp_result.output
         primary_segment = segments.segments[0]
 
         # Skill 2: generate_geo_query_list (Haiku)
+        on_progress("→ generate_geo_query_list  (Haiku)")
         queries_skill = GenerateGeoQueryList(client=client, budget=budget)
         queries_inputs = GenerateQueriesInputs(icp_segment=primary_segment, market=market)
         queries_start = time.monotonic()
@@ -201,10 +212,13 @@ def run_brief(
                 started_at=queries_started_at,
             )
         )
+        on_progress(f"  ✓ generate_geo_query_list  {queries_result.cost_usd:.4f}$")
         journey = queries_result.output
 
         # Tool (chunk 11, hybrid): DataForSEO keyword metrics. Returns {} when
         # credentials are unset; score_queries falls back to LLM estimation.
+        if settings.dataforseo_login:
+            on_progress("→ dataforseo (real metrics)")
         keyword_metrics = fetch_keyword_metrics(
             login=settings.dataforseo_login,
             password=settings.dataforseo_password,
@@ -212,7 +226,11 @@ def run_brief(
             budget=budget,
         )
 
+        if settings.dataforseo_login:
+            on_progress(f"  ✓ dataforseo  {len(keyword_metrics)}/{len(journey.queries)} queries hit")
+
         # Skill 3: score_queries
+        on_progress("→ score_queries")
         score_skill = ScoreQueries(client=client, budget=budget)
         score_inputs = ScoreQueriesInputs(
             journey=journey, icp_segment=primary_segment, keyword_metrics=keyword_metrics or None
@@ -240,7 +258,10 @@ def run_brief(
             )
         )
 
+        on_progress(f"  ✓ score_queries  {score_result.cost_usd:.4f}$")
+
         # Skill 4: select_priority_query
+        on_progress("→ select_priority_query")
         priority_skill = SelectPriorityQuery(client=client, budget=budget)
         priority_inputs = SelectPriorityInputs(
             scored=score_result.output, icp_segment=primary_segment
@@ -265,9 +286,12 @@ def run_brief(
                 started_at=priority_started_at,
             )
         )
+        on_progress(f"  ✓ select_priority_query  {priority_result.cost_usd:.4f}$")
         priority: Priority = priority_result.output
+        on_progress(f"    picked: {priority.selected_query.query.text!r}")
 
         # Tool: web_search — fetches top SERP results for the priority query.
+        on_progress("→ web_search + web_fetch (top-3 pages)")
         serp_results = search_top_n(
             client=client, budget=budget, query=priority.selected_query.query.text, n=10
         )
@@ -277,7 +301,11 @@ def run_brief(
         for r in serp_results[:3]:
             r.extracted_content = fetch_page(r.url)
 
+        fetched = sum(1 for r in serp_results[:3] if r.extracted_content)
+        on_progress(f"  ✓ fetched {fetched}/3 pages, {len(serp_results)} results total")
+
         # Skill 5: analyze_serp — synthesizes common angles + content gaps.
+        on_progress("→ analyze_serp")
         analyze_skill = AnalyzeSerp(client=client, budget=budget)
         analyze_inputs = AnalyzeSerpInputs(
             query_text=priority.selected_query.query.text,
@@ -320,12 +348,18 @@ def run_brief(
             )
         )
 
+        on_progress(f"  ✓ analyze_serp  {analyze_result.cost_usd:.4f}$")
+
         # Tool (chunk 12): sitemap-grounded internal linking. Empty tuple when
         # no --sitemap was supplied; the drafter then leaves the section blank.
         sitemap_entries = tuple(parse_sitemap(sitemap_url)) if sitemap_url else ()
+        if sitemap_url:
+            on_progress(f"  ✓ sitemap parsed: {len(sitemap_entries)} URLs available")
 
         # Skill 6: draft_content_brief — SERP-informed + RAG-injected + sitemap.
+        on_progress(f"→ draft_content_brief  (streaming, similar={len(similar)})")
         draft_skill = DraftContentBrief(client=client, budget=budget)
+        draft_skill.progress_callback = lambda chars: on_progress(f"    ...streamed {chars} chars")
         draft_inputs = DraftBriefInputs(
             target_query=priority.selected_query.query.text,
             icp_segment=primary_segment,
@@ -360,6 +394,8 @@ def run_brief(
                 started_at=draft_started_at,
             )
         )
+
+        on_progress(f"  ✓ draft_content_brief  {draft_result.cost_usd:.4f}$")
 
         brief_path = _write_brief(
             draft_result.output, run.id, company, market, settings.output_dir

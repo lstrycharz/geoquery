@@ -14,10 +14,11 @@ and a list of evaluators (chunk 6+). The base class enforces:
 
 from __future__ import annotations
 
+import contextlib
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import TYPE_CHECKING, ClassVar, Generic, TypeVar
+from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar
 
 from anthropic import Anthropic
 from pydantic import BaseModel, ValidationError
@@ -71,15 +72,27 @@ class SkillResult(Generic[OutputT]):
     eval_failures: list[str] = field(default_factory=list)
 
 
+ProgressCallback = Any  # Callable[[int], None] | None — kept Any to dodge import cycles
+
+
 class Skill(ABC, Generic[InputT, OutputT]):
     name: ClassVar[str]
     model: ClassVar[str]
     output_type: ClassVar[type[BaseModel]]
     max_output_tokens: ClassVar[int] = 4096
+    # When True, run() routes the underlying call through messages.stream and
+    # emits partial-JSON deltas to `progress_callback`. Used by the drafter so
+    # the CLI can show "tokens streamed: N" while the brief is being assembled.
+    streams: ClassVar[bool] = False
 
     def __init__(self, client: Anthropic, budget: RunBudget) -> None:
         self.client = client
         self.budget = budget
+        # Optional progress sink (set by callers that want token-level streaming
+        # feedback). Callable[[int], None] — receives running partial-JSON char
+        # count. Skill subclasses with streams=True read this; everything else
+        # ignores it.
+        self.progress_callback: Any = None
 
     @abstractmethod
     def build_user_message(self, inputs: InputT) -> str:
@@ -153,22 +166,26 @@ class Skill(ABC, Generic[InputT, OutputT]):
         )
 
         tool_name = f"emit_{self.name}"
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_output_tokens,
-            system=system_blocks,
-            messages=[
+        create_kwargs = {
+            "model": self.model,
+            "max_tokens": self.max_output_tokens,
+            "system": system_blocks,
+            "messages": [
                 {"role": "user", "content": self.build_user_message(inputs)},
             ],
-            tools=[
+            "tools": [
                 {
                     "name": tool_name,
                     "description": f"Emit the structured output for the {self.name} skill.",
                     "input_schema": self.output_type.model_json_schema(),
                 }
             ],
-            tool_choice={"type": "tool", "name": tool_name},
-        )
+            "tool_choice": {"type": "tool", "name": tool_name},
+        }
+        if self.streams and self.progress_callback is not None:
+            response = self._stream_call(create_kwargs)
+        else:
+            response = self.client.messages.create(**create_kwargs)
 
         cost = estimate_cost(self.model, response.usage.input_tokens, response.usage.output_tokens)
         self.budget.record_spend(cost)
@@ -206,6 +223,22 @@ class Skill(ABC, Generic[InputT, OutputT]):
         prompt. Cheap to overestimate — the actual cost is recorded afterward.
         """
         return estimate_cost(self.model, 4000, self.max_output_tokens)
+
+    def _stream_call(self, create_kwargs: dict):
+        """Streaming variant: emit partial-JSON char counts to progress_callback
+        as the model assembles the tool_use input. Returns the final message
+        object with the same shape `create()` would return."""
+        chars_seen = 0
+        with self.client.messages.stream(**create_kwargs) as stream:
+            for event in stream:
+                if event.type == "content_block_delta":
+                    delta = event.delta
+                    partial = getattr(delta, "partial_json", None) or getattr(delta, "text", None)
+                    if partial:
+                        chars_seen += len(partial)
+                        with contextlib.suppress(Exception):
+                            self.progress_callback(chars_seen)
+            return stream.get_final_message()
 
 
 def _format_revision_header(failures: list[str], attempt: int) -> str:
