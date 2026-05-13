@@ -14,11 +14,21 @@ unit-tested without Streamlit. Future pages live under `dashboard/pages/`.
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
-import streamlit as st
+# Streamlit Cloud runs `streamlit run dashboard/app.py` from the repo root but
+# puts the script's directory on `sys.path[0]`, not the repo root. Prepend the
+# repo root so `from dashboard.X import …` resolves on Cloud the same way it
+# does locally under `pip install -e .`. No-op locally if the path is already
+# present.
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
-from dashboard.data import recent_runs
+import streamlit as st  # noqa: E402
+
+from dashboard.data import recent_runs  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DB = PROJECT_ROOT / "data" / "episodic.db"
