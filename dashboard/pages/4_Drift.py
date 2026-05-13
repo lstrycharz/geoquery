@@ -2,11 +2,20 @@
 
 from __future__ import annotations
 
-import pandas as pd
-import streamlit as st
+import sys
+from pathlib import Path
 
-from dashboard.app import resolve_db_path
-from evals.production import (
+# Cloud's `streamlit run` puts the script dir on sys.path[0]; we need the repo
+# root so `from dashboard.X import …` resolves. See dashboard/app.py for context.
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+import pandas as pd  # noqa: E402
+import streamlit as st  # noqa: E402
+
+from dashboard.app import resolve_db_path  # noqa: E402
+from evals.production import (  # noqa: E402
     DEFAULT_DRIFT_THRESHOLD,
     compute_drift_windows,
     compute_judge_human_divergence,

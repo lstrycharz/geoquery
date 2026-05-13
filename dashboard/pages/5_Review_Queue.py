@@ -9,11 +9,19 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import sys
+from pathlib import Path
 
-import streamlit as st
+# Cloud's `streamlit run` puts the script dir on sys.path[0]; we need the repo
+# root so `from dashboard.X import …` resolves. See dashboard/app.py for context.
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
-from dashboard.app import resolve_db_path
-from dashboard.data import judge_outcomes_for_run, pending_reviews
+import streamlit as st  # noqa: E402
+
+from dashboard.app import resolve_db_path  # noqa: E402
+from dashboard.data import judge_outcomes_for_run, pending_reviews  # noqa: E402
 
 st.set_page_config(page_title="GEOQuery · Review Queue", layout="wide")
 st.title("Review Queue — pending sampled runs")
