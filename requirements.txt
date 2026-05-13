@@ -1,13 +1,30 @@
 # Streamlit Cloud reads this file when it deploys the dashboard. We don't
-# track requirements.txt for local development — pyproject.toml is the
-# authoritative dependency manifest. This file exists ONLY because Streamlit
-# Cloud's installer doesn't resolve pyproject.toml's [project.optional-dependencies]
-# automatically; it needs `requirements.txt` to know to install the dashboard
-# extra (streamlit + pandas) plus the runtime extras the agent code transitively
-# imports at top-level (memory.semantic → sqlite_vec/fastembed,
-# tools.web_fetch → readability-lxml).
+# track it for local development — pyproject.toml is the authoritative
+# manifest. This is a FLAT list of third-party deps (no self-reference)
+# because Cloud's installer is poetry-based and poetry rejects `.[extras]`
+# syntax as a self-dependency loop.
 #
-# `.[dashboard,semantic,web,report]` tells pip: install the local package
-# (geoquery) plus those four extras. Pinned versions still come from
-# pyproject.toml so the deploy reproduces local versions.
-.[dashboard,semantic,web,report]
+# Versions mirror pyproject.toml. Bump in lockstep when bumping there.
+
+# Base (always required by the agent code that the dashboard imports)
+anthropic==0.101.0
+pydantic==2.13.4
+pydantic-settings==2.14.1
+typer==0.25.1
+httpx==0.28.1
+
+# semantic — memory.semantic top-level imports
+sqlite-vec==0.1.6
+fastembed==0.5.1
+
+# web — tools.web_fetch top-level imports readability + lxml
+readability-lxml==0.8.1
+lxml==5.3.0
+lxml_html_clean==0.4.4
+
+# report — jinja2 (eval HTML reports)
+jinja2==3.1.4
+
+# dashboard — Streamlit + pandas
+streamlit==1.40.2
+pandas==2.2.3
