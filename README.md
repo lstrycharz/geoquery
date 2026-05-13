@@ -10,6 +10,8 @@ Out comes a finished brief that a writer can use to draft the article: who it's 
 
 It costs about **30 to 60 cents** per brief and takes **5 to 10 minutes**. There are [eight real examples](./briefs/) in the repo across very different industries — knowledge software, payments, beauty, outdoor apparel, and more — that show what you actually get.
 
+You can also see the agent's live performance dashboard at **[geoquery.streamlit.app](https://geoquery.streamlit.app)** — pass rates, costs, and quality trends over time.
+
 ---
 
 ## What it actually does
@@ -40,7 +42,9 @@ This one is built like a **small assembly line**. Each station does exactly one 
 
 That's the interesting bit. The brief is a useful byproduct of demonstrating that you can build agents this way — transparently, testably, and a piece at a time.
 
-**If you're trying to learn how to build agents that aren't black boxes,** the repo is meant to be read. The code is small (a few hundred lines per layer), every architectural choice is named, and [`ARCHITECTURE.md`](./ARCHITECTURE.md) explains *why* each one was made.
+And on top of the assembly line, there's a whole **trust layer** — inspectors, a test box, an automatic doorman, a sampling room, and a dashboard — that makes the system catch its own regressions before they reach a real run. ([See "How we know it actually works"](#how-we-know-it-actually-works) below.)
+
+**If you're trying to learn how to build agents that aren't black boxes,** the repo is meant to be read. The code is small (a few hundred lines per layer), every architectural choice is named, and [`ARCHITECTURE.md`](./ARCHITECTURE.md) explains *why* each one was made. [`EVALS.md`](./EVALS.md) covers the trust layer in detail.
 
 ---
 
@@ -63,6 +67,42 @@ Each brief is about 100 lines of markdown — open one and you can see what the 
 
 ---
 
+## How we know it actually works
+
+Most AI tools you can install today are like a bakery with no health inspector. They produce bread, sometimes good, sometimes terrible, and you only find out by eating it.
+
+This one has five things that turn "hope it's OK" into "we'd notice immediately if it wasn't":
+
+### 1. Quality inspectors at every station
+
+**Five inspectors** look at each finished brief for specific things — does it sound like the brand actually talks? does it answer the right question? are the bullet points concrete or vague? They log everything they find so we can review later. (They give advice; they don't block briefs. Their notes show up in the dashboard so we can spot patterns.)
+
+The inspectors' instructions are written in plain English in [`evals/rubrics/`](./evals/rubrics/) — anyone can read them, anyone can change them, every change shows up clearly in a code review.
+
+### 2. A 30-piece test box
+
+Thirty known-good products sit in a sealed box. Any change to the factory — tweak a worker's instructions, swap a recipe — has to run those 30 products through. If even one comes out different from what's in the box, the change is rejected.
+
+The box is in [`regression_dataset/`](./regression_dataset/) and the comparison runs in 30 seconds.
+
+### 3. An automatic doorman
+
+A robot guard runs every time someone tries to update the factory ([on every pull request](https://github.com/lstrycharz/geoquery/actions/workflows/regression.yml)). He runs the 30-piece test box. Nothing gets in without his sign-off — GitHub's branch protection physically blocks the merge button until he approves.
+
+We deliberately broke a worker on camera to see if he caught it. He did, in **14 seconds**, then opened back up when we fixed it. The procedure is in [`docs/regression_gate_demo.md`](./docs/regression_gate_demo.md) — run it yourself in a minute.
+
+### 4. A sampling room
+
+**1 in every 10 finished products** is pulled aside for a human to look at. The human rates it 1-to-5 and writes notes. The dashboard then compares what the inspectors said to what the human said.
+
+If the inspectors keep saying "ship it" but humans keep saying "this is bad," we know the inspectors need retraining. The dashboard flags any inspector who disagrees with humans too often.
+
+### 5. A live dashboard
+
+A web page at **[geoquery.streamlit.app](https://geoquery.streamlit.app)** that shows everything happening on the factory floor: how many briefs the factory made, what each one cost, which inspectors flagged what, whether quality is slipping vs. last week, and the queue of briefs waiting for human review.
+
+---
+
 ## Try it yourself
 
 You need an [Anthropic API key](https://console.anthropic.com/) (a few dollars goes a long way). Optionally, a [DataForSEO](https://dataforseo.com/) account if you want real keyword data instead of LLM estimates.
@@ -81,12 +121,20 @@ docker compose run --rm geoquery brief \
 ```bash
 git clone https://github.com/lstrycharz/geoquery && cd geoquery
 python3.13 -m venv .venv && source .venv/bin/activate
-pip install -e ".[semantic,web,report,mcp,dev]"
+pip install -e ".[semantic,web,report,mcp,dashboard,dev]"
 cp .env.example .env       # paste your ANTHROPIC_API_KEY
 geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
 ```
 
 The agent will print a live commentary as it works (one line per stage), then a path to the finished brief.
+
+**To run the dashboard locally** (against your own runs instead of the cloud demo data):
+
+```bash
+streamlit run dashboard/app.py
+```
+
+Opens at `http://localhost:8501` with all six pages.
 
 ---
 
@@ -97,6 +145,8 @@ The agent will print a live commentary as it works (one line per stage), then a 
 - `geoquery show <run-id>` — inspect what each stage of a past run did, what it cost, and how long it took.
 - `geoquery feedback <run-id> --edited path/to/your-edited-brief.md` — once you've edited a brief by hand, this captures the change. Next time you ask for a brief in a similar market, the agent will see your preferred angle and try harder to match it.
 - `geoquery eval-golden` — runs the agent against a fixed set of test inputs and grades the output. Useful when you've tweaked the prompts and want to make sure you didn't break anything.
+- `pytest -m regression_smoke` — runs the 5-case smoke test box (~7 seconds, $0).
+- `pytest -m regression_full` — runs the full 30-case test box (~30 seconds, $0).
 
 It can also be used from inside Claude Desktop or Claude Code as a tool — see [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the MCP setup.
 
@@ -104,26 +154,24 @@ It can also be used from inside Claude Desktop or Claude Code as a tool — see 
 
 ## For engineers reading the code
 
-The full architecture write-up is in [**`ARCHITECTURE.md`**](./ARCHITECTURE.md). Short version: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP), built incrementally over 19 commits each leaving the repo in a working state. Every layer has tests. ~130 of them at v2. They run in ~10 seconds and cost $0.
+Two write-ups cover everything:
+- [**`ARCHITECTURE.md`**](./ARCHITECTURE.md) — the agent itself: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP).
+- [**`EVALS.md`**](./EVALS.md) — the trust layer: four eval layers (deterministic + LLM-judge + regression suite + production monitoring), the CI regression gate, the Streamlit dashboard.
+
+Built incrementally — v1 in 19 commits, v2 in 12 more (with 4 follow-up CI/deploy fixes). Every commit leaves the repo in a working state. Tests run in ~10 seconds and cost $0.
 
 ```bash
-pytest -q     # default suite (~130 tests, includes the 5 regression smoke cases), $0
+pytest -q     # default suite — 159 tests, includes the 5 regression smoke cases
 ruff check .  # lint
 ```
 
-The v2 eval framework is documented in [**`EVALS.md`**](./EVALS.md): four-layer eval system (deterministic + LLM-judge + regression suite + production monitoring), a CI regression gate, and a Streamlit dashboard.
-
 ### Regression gate
 
-Every PR runs the regression suite via [`.github/workflows/regression.yml`](./.github/workflows/regression.yml): the default pytest pass (smoke tier, 5 cases) plus the full tier (25 cases). Both replay recorded cassettes — deterministic, no API spend. Cassettes are keyed by `sha256(system_prompt + user_message + model)`, so prompt edits force a "stale cassette" failure that surfaces in a per-PR comment with the per-case pass/fail diff. Re-record locally with `pytest -m regression_record` (free) or `pytest -m regression_record_live` (real Anthropic, ~$0.50/case).
+Every PR runs the regression suite via [`.github/workflows/regression.yml`](./.github/workflows/regression.yml): the default pytest pass (smoke tier, 5 cases) plus the full tier (25 cases). Both replay recorded cassettes — deterministic, no API spend.
 
-To make the gate blocking, set up branch protection on `main`:
+Cassettes are keyed by `sha256(system_prompt + user_message + model)`, so prompt edits force a "stale cassette" failure that surfaces in a per-PR comment with the per-case pass/fail diff. Re-record locally with `pytest -m regression_record` (free) or `pytest -m regression_record_live` (real Anthropic, ~$0.50/case).
 
-1. GitHub → repo Settings → Branches → "Add branch protection rule"
-2. Branch name pattern: `main`
-3. Check "Require status checks to pass before merging"
-4. Search for and select `regression / regression`
-5. Save
+The gate is already wired up on this repo via GitHub Rulesets. If you fork, set it up under Settings → Rules → Rulesets → "Require status checks" → add `regression`.
 
 ---
 
