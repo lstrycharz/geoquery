@@ -104,10 +104,10 @@ It can also be used from inside Claude Desktop or Claude Code as a tool — see 
 
 ## For engineers reading the code
 
-The full architecture write-up is in [**`ARCHITECTURE.md`**](./ARCHITECTURE.md). Short version: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP), built incrementally over 19 commits each leaving the repo in a working state. Every layer has tests. ~130 of them at v2. They run in ~10 seconds and cost $0.
+The full architecture write-up is in [**`ARCHITECTURE.md`**](./ARCHITECTURE.md). Short version: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP), built incrementally over 19 commits each leaving the repo in a working state. Every layer has tests. ~160 of them at v2. They run in ~10 seconds and cost $0.
 
 ```bash
-pytest -q     # default suite (~130 tests, includes the 5 regression smoke cases), $0
+pytest -q     # default suite (~160 tests, includes the 5 regression smoke cases), $0
 ruff check .  # lint
 ```
 
