@@ -1,0 +1,13 @@
+# Streamlit Cloud reads this file when it deploys the dashboard. We don't
+# track requirements.txt for local development — pyproject.toml is the
+# authoritative dependency manifest. This file exists ONLY because Streamlit
+# Cloud's installer doesn't resolve pyproject.toml's [project.optional-dependencies]
+# automatically; it needs `requirements.txt` to know to install the dashboard
+# extra (streamlit + pandas) plus the runtime extras the agent code transitively
+# imports at top-level (memory.semantic → sqlite_vec/fastembed,
+# tools.web_fetch → readability-lxml).
+#
+# `.[dashboard,semantic,web,report]` tells pip: install the local package
+# (geoquery) plus those four extras. Pinned versions still come from
+# pyproject.toml so the deploy reproduces local versions.
+.[dashboard,semantic,web,report]
