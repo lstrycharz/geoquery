@@ -59,10 +59,11 @@ dev = [
     "ruff==0.8.4",
     "pre-commit==4.0.1",
 ]
-# Convenience: everything.
-all = [
-    "geoquery[semantic,web,report,mcp,dashboard,dev]",
-]
+# NOTE: previously had a `[all]` extra that re-listed `geoquery[...]` as a
+# convenience. Removed because Streamlit Cloud's installer (and a few
+# stricter pip resolvers) parse the recursion as a self-dependency loop
+# and refuse to install. To install everything locally, list the extras
+# explicitly: `pip install -e ".[semantic,web,report,mcp,dashboard,dev]"`.
 
 [project.scripts]
 geoquery = "cli:app"
