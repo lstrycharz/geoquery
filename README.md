@@ -2,8 +2,8 @@
 
 **You type two things in. Ten minutes later you get a complete article plan out.**
 
-```
-$ geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
+```bash
+geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
 ```
 
 Out comes a finished brief that a writer can use to draft the article: who it's for, the specific angle to take, what sections to write, what to cover in each one, what sources to cite, how long it should be, and which pages on your own site to link to.
@@ -143,6 +143,8 @@ pip install -e ".[semantic,web,report,mcp,dashboard,dev]"
 cp .env.example .env       # paste your ANTHROPIC_API_KEY
 geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
 ```
+
+In any **new terminal session**, re-activate the environment first — `cd geoquery && source .venv/bin/activate` — then `geoquery …` is on your path again.
 
 The agent will print a live commentary as it works (one line per stage), then a path to the finished brief.
 
