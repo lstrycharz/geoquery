@@ -12,7 +12,7 @@ Out comes a finished brief that a writer can use to draft the article: who it's 
 
 It costs about **30 to 60 cents** per brief and takes **5 to 10 minutes**. There are [eight real examples](./briefs/) in the repo across very different industries — knowledge software, payments, beauty, outdoor apparel, and more — that show what you actually get.
 
-You can also see the agent's live performance dashboard at **[geoquery.streamlit.app](https://geoquery.streamlit.app)** — pass rates, costs, and quality trends over time.
+You can also explore a **demo dashboard** at **[geoquery.streamlit.app](https://geoquery.streamlit.app)** — pass rates, costs, and quality trends over a seeded sample of runs. (It's a fixed showcase; your own runs show up in the dashboard you run locally — see [Getting Started](#getting-started).)
 
 ---
 
@@ -198,9 +198,9 @@ We deliberately broke a worker on camera to see if he caught it. He did, in **14
 
 If the inspectors keep saying "ship it" but humans keep saying "this is bad," we know the inspectors need retraining. The dashboard flags any inspector who disagrees with humans too often.
 
-### 5. A live dashboard
+### 5. A dashboard
 
-A web page at **[geoquery.streamlit.app](https://geoquery.streamlit.app)** that shows everything happening on the factory floor: how many briefs the factory made, what each one cost, which inspectors flagged what, whether quality is slipping vs. last week, and the queue of briefs waiting for human review.
+A web page that shows everything happening on the factory floor: how many briefs the factory made, what each one cost, which inspectors flagged what, whether quality is slipping vs. last week, and the queue of briefs waiting for human review. Run it locally (`streamlit run dashboard/app.py`) and it reads *your* runs; the hosted **[demo at geoquery.streamlit.app](https://geoquery.streamlit.app)** is a fixed showcase on seeded data, since Streamlit Cloud has no access to your machine.
 
 ---
 
