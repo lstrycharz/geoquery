@@ -44,7 +44,9 @@ That's the interesting bit. The brief is a useful byproduct of demonstrating tha
 
 And on top of the assembly line, there's a whole **trust layer** — inspectors, a test box, an automatic doorman, a sampling room, and a dashboard — that makes the system catch its own regressions before they reach a real run. ([See "How we know it actually works"](#how-we-know-it-actually-works) below.)
 
-**If you're trying to learn how to build agents that aren't black boxes,** the repo is meant to be read. The code is small (a few hundred lines per layer), every architectural choice is named, and [`ARCHITECTURE.md`](./ARCHITECTURE.md) explains *why* each one was made. [`EVALS.md`](./EVALS.md) covers the trust layer in detail.
+And on top of *that*, a **self-improvement layer** — the factory studies its own track record, learns from its best work, and a meta-agent proposes its own fixes as pull requests. The hard part is stopping it from cheating its own inspectors; that defense is the actual point. ([See "It gets better on its own"](#it-gets-better-on-its-own) below.)
+
+**If you're trying to learn how to build agents that aren't black boxes,** the repo is meant to be read. The code is small (a few hundred lines per layer), every architectural choice is named, and [`ARCHITECTURE.md`](./ARCHITECTURE.md) explains *why* each one was made. [`EVALS.md`](./EVALS.md) covers the trust layer in detail, and [`SELF_IMPROVEMENT.md`](./SELF_IMPROVEMENT.md) covers the self-improvement layer and its reward-hacking defense.
 
 ---
 
@@ -150,7 +152,7 @@ The agent will print a live commentary as it works (one line per stage), then a 
 streamlit run dashboard/app.py
 ```
 
-Opens at `http://localhost:8501` with all six pages.
+Opens at `http://localhost:8501` with all seven pages — including the **Learning Curve**.
 
 ---
 
@@ -161,6 +163,9 @@ Opens at `http://localhost:8501` with all six pages.
 - `geoquery show <run-id>` — inspect what each stage of a past run did, what it cost, and how long it took.
 - `geoquery feedback <run-id> --edited path/to/your-edited-brief.md` — once you've edited a brief by hand, this captures the change. Next time you ask for a brief in a similar market, the agent will see your preferred angle and try harder to match it.
 - `geoquery eval-golden` — runs the agent against a fixed set of test inputs and grades the output. Useful when you've tweaked the prompts and want to make sure you didn't break anything.
+- `geoquery extract-patterns` — distils the structural patterns common to your highest-scoring past briefs and feeds them back into the drafter as guidance.
+- `geoquery predict-outcomes` — runs the (simulated) 30-day outcome judge over a sample of past briefs. See [`SELF_IMPROVEMENT.md`](./SELF_IMPROVEMENT.md) for why it's labelled *simulated*.
+- `python -m meta.run --dry-run` — shows the change the meta-agent would propose this week, without opening a PR.
 - `pytest -m regression_smoke` — runs the 5-case smoke test box (~7 seconds, $0).
 - `pytest -m regression_full` — runs the full 30-case test box (~30 seconds, $0).
 
