@@ -1,0 +1,22 @@
+{
+  "target_query": "video conferencing tool",
+  "icp_segment_label": "remote-team lead",
+  "angle": "",
+  "audience": "everyone",
+  "structure": [
+    {
+      "heading": "why enterprise crm advice fails small teams",
+      "purpose": "frame the buyer's real problem",
+      "key_points": [
+        "enterprise crms over-serve",
+        "setup cost dominates ROI"
+      ]
+    }
+  ],
+  "key_points": [
+    "small teams need 3 features not 30"
+  ],
+  "sources": [],
+  "recommended_length_words": 500,
+  "internal_linking_suggestions": []
+}

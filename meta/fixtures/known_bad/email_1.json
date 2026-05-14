@@ -1,0 +1,32 @@
+{
+  "target_query": "email marketing platform",
+  "icp_segment_label": "marketing manager",
+  "angle": "a generic overview",
+  "audience": "everyone",
+  "structure": [
+    {
+      "heading": "why enterprise crm advice fails small teams",
+      "purpose": "frame the buyer's real problem",
+      "key_points": [
+        "enterprise crms over-serve",
+        "setup cost dominates ROI"
+      ]
+    },
+    {
+      "heading": "the three capabilities that matter",
+      "purpose": "deliver the core answer",
+      "key_points": [
+        "contact timeline",
+        "pipeline view",
+        "two-way email sync"
+      ]
+    }
+  ],
+  "key_points": [
+    "small teams need 3 features not 30",
+    "setup time is the real cost"
+  ],
+  "sources": [],
+  "recommended_length_words": 500,
+  "internal_linking_suggestions": []
+}
