@@ -100,6 +100,22 @@ CREATE TABLE IF NOT EXISTS escalations (
 CREATE INDEX IF NOT EXISTS idx_escalations_run_id ON escalations(run_id);
 CREATE INDEX IF NOT EXISTS idx_escalations_skill ON escalations(skill_name);
 
+-- Outcome predictions (v3 chunk 7, Mechanism 3). A *simulated* 30-day outcome
+-- signal: an Opus call predicts whether a brief would have produced a top-10
+-- article. NOT real ranking data — see SELF_IMPROVEMENT.md. Populated by the
+-- `geoquery predict-outcomes` batch command over a sampled subset of runs.
+CREATE TABLE IF NOT EXISTS outcome_predictions (
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id           TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE,
+    predicted_top10  INTEGER NOT NULL,   -- 0/1
+    confidence       REAL NOT NULL,      -- 0-1
+    reasoning        TEXT NOT NULL,
+    model            TEXT NOT NULL,
+    created_at       TEXT NOT NULL,
+    schema_version   INTEGER NOT NULL DEFAULT 1
+);
+CREATE INDEX IF NOT EXISTS idx_outcome_predictions_run_id ON outcome_predictions(run_id);
+
 -- Winning patterns (v3 chunk 5). Each row is one periodic extraction:
 -- structural patterns common to the top-N highest-scoring briefs ("high-
 -- scorers name a specific persona pain in the angle; 5-6 sections; ..."),

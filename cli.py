@@ -144,6 +144,69 @@ def eval_golden(
     raise typer.Exit(code=0 if result.pass_rate >= 0.8 else 1)
 
 
+@app.command(name="predict-outcomes")
+def predict_outcomes(
+    limit: int = typer.Option(
+        10, "--limit", "-n", help="Max runs to score this batch (Opus is expensive)."
+    ),
+    high_score: float = typer.Option(
+        0.9,
+        "--high-score",
+        help="Also score un-sampled runs whose eval composite is at least this.",
+    ),
+) -> None:
+    """Predict 30-day search outcomes for a sampled subset of past briefs (v3
+    Mechanism 3). SIMULATED signal — not real ranking data; see SELF_IMPROVEMENT.md.
+    """
+    import json as _json
+
+    from anthropic import Anthropic
+
+    from contracts import ContentBrief
+    from guardrails import RunBudget
+    from skills.predict_outcome import PredictOutcome, PredictOutcomeInputs
+
+    settings = get_settings()
+    client = Anthropic(api_key=settings.anthropic_api_key)
+    episodic = EpisodicMemory(db_path=settings.data_dir / "episodic.db")
+    budget = RunBudget(max_cost_usd=settings.max_cost_usd)
+    skill = PredictOutcome(client=client, budget=budget)
+
+    scored = 0
+    for run in episodic.runs_pending_outcome_prediction():
+        if scored >= limit:
+            break
+        # Score the sampled 10% plus any already-high-scoring run — the
+        # candidates worth a second opinion. Skip the rest: Opus isn't free.
+        eval_score = episodic.compute_run_eval_score(run["id"])
+        if not run["sampled"] and eval_score < high_score:
+            continue
+        draft = next(
+            (
+                inv
+                for inv in reversed(episodic.get_invocations(run["id"]))
+                if inv["skill_name"] == "draft_content_brief" and inv["output_json"]
+            ),
+            None,
+        )
+        if draft is None:
+            continue
+        brief = ContentBrief.model_validate(_json.loads(draft["output_json"]))
+        result = skill.run(PredictOutcomeInputs(brief=brief, market=run["market"]))
+        episodic.record_outcome_prediction(
+            run_id=run["id"],
+            predicted_top10=result.output.predicted_top10,
+            confidence=result.output.confidence,
+            reasoning=result.output.reasoning,
+            model=result.model,
+        )
+        scored += 1
+        verdict = "top-10" if result.output.predicted_top10 else "not top-10"
+        typer.echo(f"  {run['company']}: {verdict} (confidence {result.output.confidence:.2f})")
+
+    typer.echo(f"scored {scored} run(s); cost ${budget.spent_usd:.4f}")
+
+
 @app.command(name="extract-patterns")
 def extract_patterns(
     top_n: int = typer.Option(

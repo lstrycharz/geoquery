@@ -269,6 +269,78 @@ class EpisodicMemory:
             return int(cur.lastrowid)
 
     # ------------------------------------------------------------------
+    # Outcome predictions (v3 chunk 7)
+    # ------------------------------------------------------------------
+
+    def record_outcome_prediction(
+        self,
+        *,
+        run_id: str,
+        predicted_top10: bool,
+        confidence: float,
+        reasoning: str,
+        model: str,
+        created_at: str | None = None,
+    ) -> int:
+        """Append a (simulated) 30-day outcome prediction for a run's brief."""
+        with self._connect() as conn:
+            cur = conn.execute(
+                "INSERT INTO outcome_predictions "
+                "(run_id, predicted_top10, confidence, reasoning, model, created_at) "
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    run_id,
+                    1 if predicted_top10 else 0,
+                    confidence,
+                    reasoning,
+                    model,
+                    created_at or _now(),
+                ),
+            )
+            return int(cur.lastrowid)
+
+    def get_outcome_prediction(self, run_id: str) -> dict[str, Any] | None:
+        """The most recent outcome prediction for a run, or None."""
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM outcome_predictions WHERE run_id = ? "
+                "ORDER BY created_at DESC, id DESC LIMIT 1",
+                (run_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        record = dict(row)
+        record["predicted_top10"] = bool(record["predicted_top10"])
+        return record
+
+    def runs_pending_outcome_prediction(self) -> list[dict[str, Any]]:
+        """Completed runs that have a drafted brief and no outcome prediction yet.
+
+        Each row carries a `sampled` flag (True when the run was picked by the
+        human-review sampler) so the batch command can score the sampled subset
+        plus any already-high-scoring run, not every brief — Opus is expensive.
+        """
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT r.*, (hr.id IS NOT NULL) AS sampled "
+                "FROM runs r "
+                "LEFT JOIN human_reviews hr ON hr.run_id = r.id "
+                "WHERE r.status = 'completed' "
+                "  AND r.id NOT IN (SELECT run_id FROM outcome_predictions) "
+                "  AND r.id IN ("
+                "      SELECT run_id FROM skill_invocations "
+                "      WHERE skill_name = 'draft_content_brief') "
+                "GROUP BY r.id "
+                "ORDER BY r.started_at DESC"
+            ).fetchall()
+        out: list[dict[str, Any]] = []
+        for row in rows:
+            record = dict(row)
+            record["sampled"] = bool(record["sampled"])
+            out.append(record)
+        return out
+
+    # ------------------------------------------------------------------
     # Escalations (v3 chunk 6)
     # ------------------------------------------------------------------
 
