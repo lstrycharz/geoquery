@@ -382,6 +382,84 @@ class EpisodicMemory:
             out.append(record)
         return out
 
+    def get_meta_proposal(self, proposal_id: int) -> dict[str, Any] | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM meta_proposals WHERE id = ?", (proposal_id,)
+            ).fetchone()
+        return dict(row) if row else None
+
+    def list_meta_proposals(self, *, status: str | None = None) -> list[dict[str, Any]]:
+        """All meta-proposals, optionally filtered by status, newest first."""
+        with self._connect() as conn:
+            if status is None:
+                rows = conn.execute("SELECT * FROM meta_proposals ORDER BY id DESC").fetchall()
+            else:
+                rows = conn.execute(
+                    "SELECT * FROM meta_proposals WHERE status = ? ORDER BY id DESC",
+                    (status,),
+                ).fetchall()
+        return [dict(r) for r in rows]
+
+    def get_meta_proposal_by_pr(self, pr_number: int) -> dict[str, Any] | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM meta_proposals WHERE pr_number = ? ORDER BY id DESC LIMIT 1",
+                (pr_number,),
+            ).fetchone()
+        return dict(row) if row else None
+
+    _META_PROPOSAL_UPDATABLE = (
+        "status",
+        "branch",
+        "pr_number",
+        "merged_at",
+        "baseline_regression_pass_rate",
+        "baseline_window_json",
+    )
+
+    def update_meta_proposal(self, proposal_id: int, **fields: Any) -> None:
+        """Update only the named columns on a meta_proposals row. Used by the
+        measurement step to record merge + measurement outcomes."""
+        unknown = set(fields) - set(self._META_PROPOSAL_UPDATABLE)
+        if unknown:
+            raise ValueError(f"non-updatable meta_proposals fields: {sorted(unknown)}")
+        if not fields:
+            return
+        assignments = ", ".join(f"{name} = ?" for name in fields)
+        with self._connect() as conn:
+            conn.execute(
+                f"UPDATE meta_proposals SET {assignments} WHERE id = ?",
+                (*fields.values(), proposal_id),
+            )
+
+    def completed_run_scores(
+        self,
+        *,
+        before: str | None = None,
+        after: str | None = None,
+        limit: int | None = None,
+    ) -> list[float]:
+        """Eval-score composites of completed runs, optionally windowed by
+        `started_at` (`before`: strictly earlier; `after`: at or later), most
+        recent first. The meta-agent's measurement step compares a pre-merge
+        window against a post-merge one."""
+        clauses = ["status = 'completed'"]
+        params: list[Any] = []
+        if before is not None:
+            clauses.append("started_at < ?")
+            params.append(before)
+        if after is not None:
+            clauses.append("started_at >= ?")
+            params.append(after)
+        sql = "SELECT id FROM runs WHERE " + " AND ".join(clauses) + " ORDER BY started_at DESC"
+        if limit is not None:
+            sql += " LIMIT ?"
+            params.append(limit)
+        with self._connect() as conn:
+            ids = [r["id"] for r in conn.execute(sql, params).fetchall()]
+        return [self.compute_run_eval_score(run_id) for run_id in ids]
+
     # ------------------------------------------------------------------
     # Winning patterns (v3 chunk 5)
     # ------------------------------------------------------------------
