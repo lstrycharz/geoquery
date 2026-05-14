@@ -164,11 +164,14 @@ def predict_outcomes(
 
     from contracts import ContentBrief
     from guardrails import RunBudget
+    from memory import SemanticMemory
+    from memory.episodic import blend_eval_score
     from skills.predict_outcome import PredictOutcome, PredictOutcomeInputs
 
     settings = get_settings()
     client = Anthropic(api_key=settings.anthropic_api_key)
     episodic = EpisodicMemory(db_path=settings.data_dir / "episodic.db")
+    semantic = SemanticMemory(db_path=settings.data_dir / "semantic.db")
     budget = RunBudget(max_cost_usd=settings.max_cost_usd)
     skill = PredictOutcome(client=client, budget=budget)
 
@@ -199,6 +202,16 @@ def predict_outcomes(
             confidence=result.output.confidence,
             reasoning=result.output.reasoning,
             model=result.model,
+        )
+        # v3 chunk 8: blend the prediction into the brief's stored eval_score so
+        # M2 retrieval + winning-patterns extraction rank on the blend.
+        semantic.update_eval_score(
+            run["id"],
+            blend_eval_score(
+                eval_score,
+                predicted_top10=result.output.predicted_top10,
+                confidence=result.output.confidence,
+            ),
         )
         scored += 1
         verdict = "top-10" if result.output.predicted_top10 else "not top-10"

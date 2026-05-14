@@ -179,3 +179,40 @@ def test_analyze_does_not_flag_a_single_escalation(tmp_path: Path):
         escalated_at=_iso(3),
     )
     assert analyze(mem.db_path, now=_NOW) == []
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 8 — predicted-outcome signal
+# ---------------------------------------------------------------------------
+
+
+def _seed_predictions(mem: EpisodicMemory, *, n: int, top10: int) -> None:
+    run = mem.start_run("Acme", "project management")
+    for i in range(n):
+        mem.record_outcome_prediction(
+            run_id=run.id,
+            predicted_top10=i < top10,
+            confidence=0.7,
+            reasoning="r",
+            model="claude-opus-4-7",
+            created_at=_iso(2),
+        )
+
+
+def test_analyze_flags_low_predicted_outcomes(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    _seed_predictions(mem, n=6, top10=1)  # ~17% top-10 rate
+    patterns = analyze(mem.db_path, now=_NOW)
+    assert [p.signal_id for p in patterns] == ["outcome:low_top10_rate"]
+
+
+def test_analyze_no_outcome_signal_when_healthy(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    _seed_predictions(mem, n=6, top10=5)  # ~83% top-10 rate
+    assert analyze(mem.db_path, now=_NOW) == []
+
+
+def test_analyze_no_outcome_signal_below_min_sample(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    _seed_predictions(mem, n=3, top10=0)  # too few predictions to act on
+    assert analyze(mem.db_path, now=_NOW) == []

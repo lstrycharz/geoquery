@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from memory import EpisodicMemory, SkillInvocationRecord
 from memory.episodic import _now
 
@@ -203,3 +205,31 @@ def test_runs_pending_outcome_prediction_selects_unscored_completed_runs(tmp_pat
     assert set(by_id) == {pending.id, sampled.id}
     assert by_id[pending.id]["sampled"] is False
     assert by_id[sampled.id]["sampled"] is True
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 8 — outcome feedback blend
+# ---------------------------------------------------------------------------
+
+
+def test_blend_eval_score_unchanged_without_a_prediction():
+    from memory.episodic import blend_eval_score
+
+    assert blend_eval_score(0.7) == 0.7
+
+
+def test_blend_eval_score_top10_prediction_pulls_score_up():
+    from memory.episodic import blend_eval_score
+
+    # judge 0.5, prediction top-10 @ 0.9 confidence -> 0.6*0.5 + 0.4*0.9 = 0.66
+    blended = blend_eval_score(0.5, predicted_top10=True, confidence=0.9)
+    assert blended == pytest.approx(0.66)
+
+
+def test_blend_eval_score_negative_prediction_pulls_score_down():
+    from memory.episodic import blend_eval_score
+
+    # judge 0.8, prediction NOT top-10 @ 0.9 confidence -> outcome score 0.1
+    # -> 0.6*0.8 + 0.4*0.1 = 0.52
+    blended = blend_eval_score(0.8, predicted_top10=False, confidence=0.9)
+    assert blended == pytest.approx(0.52)

@@ -212,6 +212,16 @@ class SemanticMemory:
             briefs.sort(key=lambda b: (-b.eval_score, b.distance))
         return briefs[:k]
 
+    def update_eval_score(self, run_id: str, eval_score: float) -> None:
+        """Overwrite the stored eval_score for a run's indexed brief(s).
+
+        Used by the outcome-feedback loop (v3 chunk 8): once `predict-outcomes`
+        has a prediction for a run, it blends that into the score and writes
+        the blend back here, so M2 retrieval and winning-patterns extraction
+        rank on the blended value automatically."""
+        with _connect(self.db_path) as conn:
+            conn.execute("UPDATE briefs SET eval_score = ? WHERE run_id = ?", (eval_score, run_id))
+
     def top_scoring_briefs(self, limit: int = 10) -> list[SimilarBrief]:
         """The globally highest-scoring indexed briefs, ranked by eval_score.
 
