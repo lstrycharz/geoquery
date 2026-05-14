@@ -1,0 +1,9 @@
+{
+  "input": {
+    "predicted_top10": true,
+    "confidence": 0.68,
+    "reasoning": "The angle stakes out a specific persona pain rather than a category overview, and the section structure answers the comparison intent behind the target query directly. Depth is solid but the differentiation from the current top results is only moderate, so confidence is held below 0.8."
+  },
+  "input_tokens": 1600,
+  "output_tokens": 210
+}

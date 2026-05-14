@@ -310,3 +310,16 @@ class ContentBrief(BaseModel):
     @classmethod
     def _decode_brief_lists(cls, v):
         return _coerce_json_list(v)
+
+
+class OutcomePrediction(BaseModel):
+    """v3 chunk 7 (Mechanism 3) — a *simulated* 30-day search-outcome signal.
+
+    NOT real ranking data: an Opus "outcome judge" predicts whether an article
+    written to a brief would have reached the top 10. See SELF_IMPROVEMENT.md.
+    """
+
+    schema_version: int = 1
+    predicted_top10: bool
+    confidence: float = Field(ge=0.0, le=1.0)
+    reasoning: str

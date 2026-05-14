@@ -134,3 +134,72 @@ def test_get_escalations_empty_when_none_recorded(tmp_path):
     mem = EpisodicMemory(db_path=tmp_path / "ep.db")
     run = mem.start_run("Acme", "m")
     assert mem.get_escalations(run.id) == []
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 7 — outcome predictions
+# ---------------------------------------------------------------------------
+
+
+def test_record_and_get_outcome_prediction(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    run = mem.start_run("Acme", "project management")
+    mem.record_outcome_prediction(
+        run_id=run.id,
+        predicted_top10=True,
+        confidence=0.72,
+        reasoning="specific angle, strong intent match",
+        model="claude-opus-4-7",
+    )
+    pred = mem.get_outcome_prediction(run.id)
+    assert pred is not None
+    assert pred["predicted_top10"] is True
+    assert pred["confidence"] == 0.72
+    assert pred["model"] == "claude-opus-4-7"
+
+
+def test_get_outcome_prediction_none_when_absent(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    run = mem.start_run("Acme", "m")
+    assert mem.get_outcome_prediction(run.id) is None
+
+
+def _completed_run_with_brief(mem, company):
+    run = mem.start_run(company, "project management")
+    mem.log_skill_invocation(
+        SkillInvocationRecord(
+            run_id=run.id,
+            skill_name="draft_content_brief",
+            attempt=1,
+            model="claude-sonnet-4-6",
+            input_json="{}",
+            output_json='{"angle": "x"}',
+            started_at=_now(),
+        )
+    )
+    mem.finish_run(run.id, "completed", 1.0, "/briefs/x.md")
+    return run
+
+
+def test_runs_pending_outcome_prediction_selects_unscored_completed_runs(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    pending = _completed_run_with_brief(mem, "Pending")
+    sampled = _completed_run_with_brief(mem, "Sampled")
+    mem.start_human_review(run_id=sampled.id)
+    already = _completed_run_with_brief(mem, "Already")
+    mem.record_outcome_prediction(
+        run_id=already.id,
+        predicted_top10=False,
+        confidence=0.3,
+        reasoning="r",
+        model="claude-opus-4-7",
+    )
+    # An in-progress run with no brief — must be excluded.
+    mem.start_run("InProgress", "m")
+
+    rows = mem.runs_pending_outcome_prediction()
+    by_id = {r["id"]: r for r in rows}
+
+    assert set(by_id) == {pending.id, sampled.id}
+    assert by_id[pending.id]["sampled"] is False
+    assert by_id[sampled.id]["sampled"] is True
