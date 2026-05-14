@@ -1,0 +1,50 @@
+name: meta-agent-gate
+
+# The 6 meta-evals run on every `meta-agent/*` PR. This is the reward-hacking
+# gate: a proposal that touches a protected path, adds a trivial eval, loosens
+# a rubric, or balloons the diff is blocked here.
+
+on:
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: meta-agent-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  meta-evals:
+    # Only meta-agent branches go through this gate. A normal PR skips it.
+    if: startsWith(github.head_ref, 'meta-agent/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Need full history so `git diff origin/<base>...HEAD` resolves.
+          fetch-depth: 0
+
+      - name: Restore the trusted gate code from the base branch
+        # `meta/` is on the meta-agent's denylist — a legitimate proposal never
+        # touches it. Restoring it from the BASE ref (never the PR head)
+        # guarantees the gate and edit_surface.py run the trusted copy even if
+        # the PR tried to widen its own allowlist. The proposal's actual diff
+        # is still read via `git diff origin/<base>...HEAD`, which compares
+        # commits, so this working-tree restore doesn't hide anything.
+        run: git checkout "origin/${{ github.base_ref }}" -- meta/
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package + extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[semantic,web,report,mcp,dev]"
+
+      - name: Run the meta-evals
+        run: python -m meta.gate

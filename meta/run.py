@@ -1,20 +1,25 @@
 """Public entry point for the meta-agent — `python -m meta.run [--dry-run]`.
 
-Chunk 2 wires the read-only path end to end: analyze the episodic DB, propose
-one change for the top-ranked pattern, and emit the proposal as Markdown.
-Opening a real PR (non-dry-run) lands in chunk 4.
+`--dry-run` analyzes the episodic DB, proposes one change for the top-ranked
+pattern, and prints the proposal Markdown. Without it, the meta-agent opens a
+real PR on a `meta-agent/*` branch (PyGithub, PR-write-only token) and records
+the proposal in the `meta_proposals` table. The 6 meta-evals gate that PR via
+`.github/workflows/meta-agent-gate.yml`; a human is the merge gate.
 """
 
 from __future__ import annotations
 
 import argparse
+import os
 from datetime import datetime
 from pathlib import Path
 
 from anthropic import Anthropic
 
 from guardrails import RunBudget
+from memory import EpisodicMemory
 from meta.analyze import Pattern, analyze
+from meta.github_pr import GitHubPRPublisher, PRPublisher, branch_name, build_pr_body
 from meta.propose import Proposal, propose
 
 # The committed, anonymized demo DB — the meta-agent's default data source so
@@ -23,7 +28,7 @@ DEFAULT_DB_PATH = Path("data/episodic.demo.db")
 
 
 def format_proposal_markdown(pattern: Pattern, proposal: Proposal) -> str:
-    """Render a Proposal as the Markdown body of a (future) PR."""
+    """Render a Proposal as the Markdown body of a PR."""
     paths = "\n".join(f"- `{p}`" for p in proposal.edit_paths)
     return (
         f"# Meta-agent proposal — `{pattern.signal_id}`\n\n"
@@ -45,11 +50,13 @@ def run_meta_agent(
     budget: RunBudget,
     dry_run: bool = True,
     now: datetime | None = None,
+    publisher: PRPublisher | None = None,
+    memory: EpisodicMemory | None = None,
 ) -> str | None:
-    """Analyze → propose → render. Returns the proposal Markdown, or None when
-    `analyze` finds no actionable pattern.
+    """Analyze → propose → (dry-run: render | live: open a PR).
 
-    `dry_run=False` (open a real PR) is not wired until chunk 4.
+    Returns the proposal Markdown on `dry_run`, the opened PR URL otherwise,
+    or None when `analyze` finds no actionable pattern.
     """
     patterns = analyze(db_path, now=now)
     if not patterns:
@@ -57,9 +64,28 @@ def run_meta_agent(
     top = patterns[0]
     proposal = propose(top, client=client, budget=budget, db_path=db_path)
     markdown = format_proposal_markdown(top, proposal)
-    if not dry_run:
-        raise NotImplementedError("opening a PR is not wired until v3 chunk 4")
-    return markdown
+    if dry_run:
+        return markdown
+
+    if publisher is None:
+        raise ValueError("non-dry-run requires a publisher")
+    branch = branch_name(top.signal_id, now=now)
+    opened = publisher.publish(
+        branch=branch,
+        title=f"meta-agent: {top.signal_id}",
+        body=build_pr_body(markdown),
+        diff=proposal.diff,
+    )
+    mem = memory or EpisodicMemory(db_path)
+    mem.record_meta_proposal(
+        target_pattern=top.signal_id,
+        change_type=proposal.change_type,
+        hypothesis=proposal.hypothesis,
+        branch=opened.branch,
+        pr_number=opened.number,
+        status="proposed",
+    )
+    return opened.url
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -83,11 +109,21 @@ def main(argv: list[str] | None = None) -> int:
     client = Anthropic(api_key=settings.anthropic_api_key)
     budget = RunBudget(max_cost_usd=settings.max_cost_usd)
 
-    markdown = run_meta_agent(args.db, client=client, budget=budget, dry_run=args.dry_run)
-    if markdown is None:
+    publisher: PRPublisher | None = None
+    if not args.dry_run:
+        token = os.getenv("GITHUB_META_AGENT_TOKEN", "")
+        repo_slug = os.getenv("GITHUB_REPO", "")
+        if not token or not repo_slug:
+            parser.error("non-dry-run needs GITHUB_META_AGENT_TOKEN and GITHUB_REPO set")
+        publisher = GitHubPRPublisher(repo_root=Path.cwd(), token=token, repo_slug=repo_slug)
+
+    result = run_meta_agent(
+        args.db, client=client, budget=budget, dry_run=args.dry_run, publisher=publisher
+    )
+    if result is None:
         print("meta-agent: no actionable pattern found — nothing to propose.")
         return 0
-    print(markdown)
+    print(result)
     return 0
 
 
