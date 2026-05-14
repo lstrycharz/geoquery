@@ -8,8 +8,8 @@
     "score_queries": true,
     "select_priority_query": true
   },
-  "notes": "Bootstrapped against FakeAnthropicClient \u2014 same fake response per skill. Replace with `pytest -m regression_record_live` (real Anthropic, ~$0.50/case) to enable real-prompt regression for this slug.",
-  "source": "bootstrap-fake-client",
+  "notes": "Recorded against the live Anthropic API. Cassette captures real model responses for the prompts present at recording time. Any prompt change will force a hash miss; re-record with `pytest -m regression_record_live`.",
+  "source": "live-anthropic",
   "status": "completed",
   "tier": "smoke"
 }

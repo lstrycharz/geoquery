@@ -37,6 +37,13 @@ WINNING_PATTERNS_MAX_AGE_DAYS = 14
 ESCALATION_CLUSTER_WINDOW_DAYS = 14
 _MIN_ESCALATIONS_FOR_CLUSTER = 2
 
+# Predicted-outcome signal (v3 chunk 8). When the (simulated) outcome judge
+# predicts a low rate of top-10 briefs over a meaningful sample, the drafter
+# itself is the systematic problem.
+OUTCOME_WINDOW_DAYS = 30
+_MIN_PREDICTIONS_FOR_SIGNAL = 5
+_LOW_TOP10_RATE_THRESHOLD = 0.5
+
 
 @dataclass(frozen=True)
 class Pattern:
@@ -199,6 +206,44 @@ def _escalation_patterns(db_path: Path, now: datetime) -> list[Pattern]:
     ]
 
 
+def _low_outcome_pattern(db_path: Path, now: datetime) -> list[Pattern]:
+    """Flag a systematically low predicted-outcome rate — the (simulated)
+    outcome judge thinks most recent briefs wouldn't rank. That points at the
+    drafter, not at any one upstream skill."""
+    cutoff = (now - timedelta(days=OUTCOME_WINDOW_DAYS)).isoformat()
+    with _ro_connect(db_path) as conn:
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if "outcome_predictions" not in tables:  # pre-v3 DB
+            return []
+        row = conn.execute(
+            "SELECT COUNT(*) AS n, COALESCE(SUM(predicted_top10), 0) AS top10 "
+            "FROM outcome_predictions WHERE created_at >= ?",
+            (cutoff,),
+        ).fetchone()
+    n = row["n"]
+    if n < _MIN_PREDICTIONS_FOR_SIGNAL:
+        return []
+    top10_rate = row["top10"] / n
+    if top10_rate >= _LOW_TOP10_RATE_THRESHOLD:
+        return []
+    return [
+        Pattern(
+            kind="low_predicted_outcome",
+            signal_id="outcome:low_top10_rate",
+            summary=(
+                f"only {top10_rate:.0%} of the last {n} briefs are predicted to "
+                f"reach the top 10 (simulated outcome signal)"
+            ),
+            severity=min(1.0, 0.4 + (_LOW_TOP10_RATE_THRESHOLD - top10_rate)),
+            evidence={
+                "predictions": n,
+                "predicted_top10_rate": top10_rate,
+                "window_days": OUTCOME_WINDOW_DAYS,
+            },
+        )
+    ]
+
+
 def analyze(db_path: Path, *, now: datetime | None = None) -> list[Pattern]:
     """Read-only, deterministic. Returns patterns ranked by severity (desc).
 
@@ -212,6 +257,7 @@ def analyze(db_path: Path, *, now: datetime | None = None) -> list[Pattern]:
         _drift_patterns(db_path, now)
         + _divergence_patterns(db_path, now)
         + _escalation_patterns(db_path, now)
+        + _low_outcome_pattern(db_path, now)
         + _winning_patterns_stale(db_path, now)
     )
     patterns = [p for p in patterns if p.signal_id not in skipped]

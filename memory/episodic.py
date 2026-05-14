@@ -424,6 +424,31 @@ class EpisodicMemory:
         return record
 
 
+# v3 chunk 8: the (simulated) outcome signal informs the blended eval score
+# but doesn't dominate the real judge-pass-rate signal.
+_OUTCOME_WEIGHT = 0.4
+
+
+def blend_eval_score(
+    judge_score: float,
+    *,
+    predicted_top10: bool | None = None,
+    confidence: float | None = None,
+) -> float:
+    """Blend the judge-pass-rate score with the (simulated) predicted-outcome
+    signal (v3 chunk 8, Mechanism 3 feedback loop).
+
+    With no prediction the judge score stands unchanged. With one, the
+    prediction becomes a 0-1 "likely to succeed" score (`confidence` when
+    top-10 is predicted, `1 - confidence` otherwise) and is mixed in at
+    `_OUTCOME_WEIGHT` — informative, but the real judge signal stays primary.
+    """
+    if predicted_top10 is None or confidence is None:
+        return judge_score
+    outcome_score = confidence if predicted_top10 else (1.0 - confidence)
+    return (1.0 - _OUTCOME_WEIGHT) * judge_score + _OUTCOME_WEIGHT * outcome_score
+
+
 def serialize_for_log(value: Any) -> str:
     """Best-effort JSON serialization for skill inputs/outputs."""
     try:

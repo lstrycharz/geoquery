@@ -189,3 +189,10 @@ def test_top_scoring_briefs_orders_by_eval_score_desc(tmp_path: Path, stub_embed
 def test_top_scoring_briefs_returns_empty_on_empty_store(tmp_path: Path, stub_embedder):
     mem = SemanticMemory(db_path=tmp_path / "sem.db", embedder=stub_embedder)
     assert mem.top_scoring_briefs(limit=5) == []
+
+
+def test_update_eval_score_overwrites_the_stored_value(tmp_path: Path, stub_embedder):
+    mem = SemanticMemory(db_path=tmp_path / "sem.db", embedder=stub_embedder)
+    _index(mem, "r1", "m", "i", "a", eval_score=0.40)
+    mem.update_eval_score("r1", 0.92)
+    assert mem.top_scoring_briefs(limit=1)[0].eval_score == 0.92

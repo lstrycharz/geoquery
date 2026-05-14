@@ -37,13 +37,48 @@ def _coerce_json_list(v: Any) -> Any:
     return v
 
 
+def _first_balanced_object(s: str) -> str | None:
+    """Return the first balanced ``{...}`` substring, respecting JSON string
+    literals so braces inside strings don't confuse the depth count.
+
+    A naive first-``{`` / last-``}`` slice breaks on the two wrappers the
+    model actually emits: a *trailing extra brace* (``{...}}``) and a value
+    that itself contains a ``}``. A depth scan handles both.
+    """
+    start = s.find("{")
+    if start == -1:
+        return None
+    depth = 0
+    in_str = False
+    escaped = False
+    for i in range(start, len(s)):
+        c = s[i]
+        if in_str:
+            if escaped:
+                escaped = False
+            elif c == "\\":
+                escaped = True
+            elif c == '"':
+                in_str = False
+            continue
+        if c == '"':
+            in_str = True
+        elif c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                return s[start : i + 1]
+    return None
+
+
 def _coerce_json_dict(v: Any) -> Any:
     """Sibling to _coerce_json_list for dict-shaped fields (SWOT, Porter).
 
     Also tolerates light wrapping the model sometimes adds: a leading
-    `dict(` or trailing `)`, code-fence prefixes, etc. The strategy is:
-    try strict JSON first; if that fails, slice from the first `{` to the
-    last `}` and try again.
+    `dict(` or trailing `)`, a stray trailing `}`, code-fence prefixes, etc.
+    The strategy is: try strict JSON first; if that fails, extract the first
+    balanced `{...}` object and try again.
     """
     if not isinstance(v, str):
         return v
@@ -53,12 +88,10 @@ def _coerce_json_dict(v: Any) -> Any:
             return decoded
     except json.JSONDecodeError:
         pass
-    # Fallback: extract the {...} substring and retry.
-    start = v.find("{")
-    end = v.rfind("}")
-    if start != -1 and end > start:
+    candidate = _first_balanced_object(v)
+    if candidate is not None:
         try:
-            decoded = json.loads(v[start : end + 1])
+            decoded = json.loads(candidate)
             if isinstance(decoded, dict):
                 return decoded
         except json.JSONDecodeError:

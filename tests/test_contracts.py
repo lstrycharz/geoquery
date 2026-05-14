@@ -71,3 +71,44 @@ def test_buyer_journey_enforces_minimum_count():
     ]
     with pytest.raises(ValidationError):
         BuyerJourney(queries=queries, journey_arc_summary="…")
+
+
+# ---------------------------------------------------------------------------
+# _coerce_json_dict robustness (regression: live re-record surfaced a model
+# double-encoding `swot` as a string with a trailing extra `}`)
+# ---------------------------------------------------------------------------
+
+
+def test_coerce_json_dict_passes_through_real_dicts():
+    from contracts import _coerce_json_dict
+
+    d = {"strengths": ["a"], "weaknesses": ["b"]}
+    assert _coerce_json_dict(d) is d
+
+
+def test_coerce_json_dict_decodes_a_clean_json_string():
+    from contracts import _coerce_json_dict
+
+    assert _coerce_json_dict('{"strengths": ["a"]}') == {"strengths": ["a"]}
+
+
+def test_coerce_json_dict_tolerates_a_trailing_extra_brace():
+    """The model occasionally emits `{...}}` — a balanced-brace scan must stop
+    at the first balanced close and ignore the stray trailing brace."""
+    from contracts import _coerce_json_dict
+
+    raw = '{"strengths": ["plg"], "weaknesses": ["x"]}}'
+    assert _coerce_json_dict(raw) == {"strengths": ["plg"], "weaknesses": ["x"]}
+
+
+def test_coerce_json_dict_tolerates_a_dict_wrapper():
+    from contracts import _coerce_json_dict
+
+    assert _coerce_json_dict('dict({"a": ["1"]})') == {"a": ["1"]}
+
+
+def test_coerce_json_dict_ignores_braces_inside_strings():
+    from contracts import _coerce_json_dict
+
+    raw = '{"strengths": ["uses {curly} braces"]}}'
+    assert _coerce_json_dict(raw) == {"strengths": ["uses {curly} braces"]}
