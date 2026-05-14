@@ -103,6 +103,22 @@ A web page at **[geoquery.streamlit.app](https://geoquery.streamlit.app)** that 
 
 ---
 
+## It gets better on its own
+
+The factory doesn't just run — it studies its own track record and improves.
+
+**It learns from its best work.** Every finished brief is filed with a quality score. When the factory starts a new brief, it pulls up its *highest-scoring* past briefs on similar topics — not just similar ones — as worked examples. A weekly pass also distils what the best briefs have in common ("they name a specific reader's pain in the angle; they have 5-6 sections") and feeds that back in as a checklist.
+
+**It predicts whether the work would actually land.** A second, stronger reviewer looks at a sample of briefs and predicts whether an article written to each one would reach the top 10 search results. That's a *prediction, not real data* — and it's labelled that way everywhere — but a calibrated guess still tells you something the rubric inspectors can't: *would this actually work?*
+
+**It proposes its own fixes.** Once a week, a meta-agent reads the whole eval history, finds the one most systematic problem, and opens a pull request with a single fix — a prompt tweak, a tightened rubric, a new check. A human reviews and merges it. After 20 runs, the factory measures whether the change actually helped — and if it clearly *hurt*, it opens an automatic revert. The improvement loop closes in both directions.
+
+**And it can't cheat.** This is the hard part. An agent told to "improve the scores" will, left unchecked, just weaken the inspectors. So the meta-agent is boxed in: it can only edit a short allowlist of files (never the graders, never the test box), it never even *sees* the inspectors' instructions when it writes a fix (so it can't write to the test instead of to the work), and six separate guards run on every proposal it makes — checking that it didn't loosen a rubric, didn't add a do-nothing inspector, didn't touch the sealed test box. The guards run from *trusted* copies of themselves, so the meta-agent can't disable its own guards. The full design is in [**`SELF_IMPROVEMENT.md`**](./SELF_IMPROVEMENT.md).
+
+The **Learning Curve** page on the dashboard shows it all in one chart: brief quality over time, with a marker for every meta-agent change that merged along the way.
+
+---
+
 ## Try it yourself
 
 You need an [Anthropic API key](https://console.anthropic.com/) (a few dollars goes a long way). Optionally, a [DataForSEO](https://dataforseo.com/) account if you want real keyword data instead of LLM estimates.
@@ -154,14 +170,15 @@ It can also be used from inside Claude Desktop or Claude Code as a tool — see 
 
 ## For engineers reading the code
 
-Two write-ups cover everything:
+Three write-ups cover everything:
 - [**`ARCHITECTURE.md`**](./ARCHITECTURE.md) — the agent itself: six layers (skills, tools, evals, guardrails, memory, feedback), seven skills, five tools, two interfaces (CLI + MCP).
 - [**`EVALS.md`**](./EVALS.md) — the trust layer: four eval layers (deterministic + LLM-judge + regression suite + production monitoring), the CI regression gate, the Streamlit dashboard.
+- [**`SELF_IMPROVEMENT.md`**](./SELF_IMPROVEMENT.md) — the self-improvement layer: the four learning mechanisms, the meta-agent, and the nine-part reward-hacking defense that stops it from gaming its own evals.
 
-Built incrementally — v1 in 19 commits, v2 in 12 more (with 4 follow-up CI/deploy fixes). Every commit leaves the repo in a working state. Tests run in ~10 seconds and cost $0.
+Built incrementally — v1 in 19 commits, v2 in 12 more, v3 in 11 chunks. Every commit leaves the repo in a working state. Tests run in ~11 seconds and cost $0.
 
 ```bash
-pytest -q     # default suite — 159 tests, includes the 5 regression smoke cases
+pytest -q     # default suite — 290 tests, includes the 5 regression smoke cases
 ruff check .  # lint
 ```
 

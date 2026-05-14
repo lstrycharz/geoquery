@@ -170,6 +170,28 @@ def _seed(rng: random.Random, memory: EpisodicMemory) -> None:
     # loop closes both directions, and the demo shows that.
     _seed_meta_proposals(memory, now)
 
+    # v3 chunk 11: a small escalation cluster on one skill so `meta.run
+    # --dry-run` against the demo DB surfaces a real pattern to propose
+    # against — the headline path, demonstrated on committed data.
+    _seed_escalations(memory, completed_run_ids, now)
+
+
+def _seed_escalations(memory: EpisodicMemory, completed_run_ids: list[str], now: datetime) -> None:
+    # Two analyze_serp escalations in the last few days — a cluster
+    # `meta/analyze.py` will rank as the top pattern.
+    for i, run_id in enumerate(completed_run_ids[:2]):
+        memory.record_escalation(
+            run_id=run_id,
+            skill_name="analyze_serp",
+            attempt_failures=[
+                ["[serp_results_present] no extracted_content on any result"],
+                ["[serp_results_present] no extracted_content on any result"],
+                ["[serp_results_present] no extracted_content on any result"],
+            ],
+            final_output_json='{"top_results": []}',
+            escalated_at=(now - timedelta(days=3 + i)).isoformat(),
+        )
+
 
 def _seed_meta_proposals(memory: EpisodicMemory, now: datetime) -> None:
     proposals = [
