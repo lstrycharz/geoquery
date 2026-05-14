@@ -1,27 +1,584 @@
 {
-  "00245b62e74f5a832c6500ce059cde74ec5bddc5be00142c3d6efa7725d805be": {
-    "input_tokens": 1186,
-    "output_tokens": 33,
+  "02ac2277416e35bd021d475e8bf11e20589794763b1b8dfa2ebc5c23ef6a6713": {
+    "input_tokens": 1200,
+    "output_tokens": 60,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_judge_buyer_realism",
       "input": {
-        "passed": true
+        "passed": true,
+        "failures": []
       }
     }
   },
-  "0f88877bde6e5af670aeeb2af8ddc6068ff232ba851ddb87418c7e61cf462db2": {
-    "input_tokens": 3488,
-    "output_tokens": 4285,
+  "043dfca85365f17daef9cc0e9dad347e25f5d81bf6143bbb0de87b995f3e3aa2": {
+    "input_tokens": 1500,
+    "output_tokens": 1100,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_generate_geo_query_list",
+      "input": {
+        "schema_version": 1,
+        "queries": [
+          {
+            "position": 1,
+            "text": "what is a knowledge base for engineering teams",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 2,
+            "text": "do i need a wiki for my engineering team",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 3,
+            "text": "what does a knowledge base actually do",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 4,
+            "text": "are engineering wikis still a thing in 2026",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 5,
+            "text": "knowledge management tool meaning",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 6,
+            "text": "our engineering team can't find docs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 7,
+            "text": "engineering docs that nobody updates",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 8,
+            "text": "single source of truth for engineering docs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 9,
+            "text": "how to fix fragmented engineering documentation",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 10,
+            "text": "tooling teams hate maintaining custom wikis",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 11,
+            "text": "self hosted knowledge base options",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 12,
+            "text": "knowledge base with markdown source of truth",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 13,
+            "text": "wiki with git style versioning",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 14,
+            "text": "best knowledge base for engineering teams 2026",
+            "framing": "vendor-comparing",
+            "refinement_applied": false
+          },
+          {
+            "position": 15,
+            "text": "api first wiki for engineering with webhook support",
+            "framing": "power-user",
+            "refinement_applied": true
+          },
+          {
+            "position": 16,
+            "text": "knowledge base with sso and audit log for soc2",
+            "framing": "power-user",
+            "refinement_applied": true
+          },
+          {
+            "position": 17,
+            "text": "notion vs confluence for engineering teams",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 18,
+            "text": "outline vs notion engineering wiki",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 20,
+            "text": "bookstack vs notion for engineering team",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 21,
+            "text": "notion price hike 2026 alternatives",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 22,
+            "text": "cheap knowledge base for 200 person engineering team",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 23,
+            "text": "free wiki for engineering teams self hosted",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 24,
+            "text": "notion pricing per seat 2026",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 25,
+            "text": "knowledge base under $500/month for engineering team",
+            "framing": "price-driven",
+            "refinement_applied": true
+          }
+        ],
+        "journey_arc_summary": "The buyer starts with conceptual queries about whether a knowledge base is even needed, drifts into pain-naming as they realize their team has the symptoms, then shifts into implementation requirements (markdown, git versioning, SSO). By position 15 they're naming specific products and weighing alternatives, and the journey ends in pricing and total-cost-of-ownership questions where the actual buying decision crystallizes."
+      }
+    }
+  },
+  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
+    "input_tokens": 1300,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_search_intent_alignment",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "2d5cf2b4066da6c57c5f111694b7ab7a18e23c1aa64afd585c7f3c645a2103f6": {
+    "input_tokens": 1400,
+    "output_tokens": 2800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_research_company",
+      "input": {
+        "schema_version": 1,
+        "customer_segments": [
+          "Distributed engineering teams at 200-500-person dev shops",
+          "Ops/RevOps managers at 50-200-person B2B SaaS startups",
+          "Indie creators and consultants on the free tier"
+        ],
+        "product_portfolio": [
+          "Notion free tier (personal/team)",
+          "Notion Plus (small teams, $10/seat/mo)",
+          "Notion Business (mid-market, $18/seat/mo, SSO)",
+          "Notion Enterprise (SOC2 + advanced admin)",
+          "Notion AI add-on ($10/seat/mo)"
+        ],
+        "inferred_icp": "Notion's de facto ICP appears to be 50-300-person knowledge-driven teams (B2B SaaS, agencies, creator-economy companies) where the Director of Operations or VP of Engineering owns the tool-selection decision, prioritizes design and flexibility over enterprise hardening, and has outgrown a free wiki but isn't yet ready for Atlassian's complexity.",
+        "icp_priorities": [
+          "design polish",
+          "flexibility (databases + pages)",
+          "speed of setup",
+          "real-time collaboration",
+          "ease of templates/duplication"
+        ],
+        "competitors": [
+          "Confluence (Atlassian)",
+          "Outline (open-source, self-host friendly)",
+          "Coda",
+          "ClickUp Docs",
+          "GitBook",
+          "Slab",
+          "Almanac",
+          "Tettra",
+          "Stack Overflow for Teams"
+        ],
+        "company_advantages": [
+          "Best-in-class UI/UX for non-technical users",
+          "Powerful flexible-block model (mixes docs + databases)",
+          "Strong template marketplace and community",
+          "Real-time collaboration parity with Google Docs"
+        ],
+        "competitor_advantages": [
+          "Confluence integrates deeply with Jira and Atlassian admin",
+          "Outline offers Markdown source-of-truth and self-hosting (data sovereignty)",
+          "GitBook is better for technical documentation and code embeds",
+          "Coda has stronger spreadsheet-like formulas and automation"
+        ],
+        "swot": {
+          "strengths": [
+            "Dominant brand awareness among knowledge workers under 35",
+            "Network effects from template sharing and public pages",
+            "API + integrations ecosystem"
+          ],
+          "weaknesses": [
+            "Search at scale degrades visibly past 10K pages",
+            "Markdown export is lossy (a deal-breaker for engineering teams)",
+            "Pricing per-seat doesn't scale for 200+ engineer teams"
+          ],
+          "opportunities": [
+            "Engineering-team vertical with first-class Markdown source-of-truth",
+            "AI summarization + search to defuse the at-scale search issue",
+            "Enterprise governance features to defend against Confluence migration"
+          ],
+          "threats": [
+            "Outline + similar open-source alternatives winning on data sovereignty",
+            "GitHub Docs / GitBook owning the engineering-team niche",
+            "Recent price hikes triggering migration audits at incumbent customers"
+          ]
+        },
+        "porter_five_forces": {
+          "buyer_power": "Moderate-to-high \u2014 switching costs are real (re-importing docs is painful) but buyers have many credible alternatives, and IT teams can mandate a migration when budget cycles hit.",
+          "supplier_power": "Low \u2014 Notion controls its own platform end-to-end; no critical supplier dependencies beyond cloud infra.",
+          "rivalry": "Intense and rising \u2014 incumbents (Confluence) defending Atlassian-bundled accounts, open-source contenders (Outline) winning on data sovereignty, niche players (GitBook, Slab) splitting verticals.",
+          "new_entrants": "High threat \u2014 barriers are mostly UX and ecosystem, both of which AI-native startups are credibly attacking from scratch.",
+          "substitutes": "High \u2014 for many use cases, a combination of Google Docs + Slack channels + a sharepoint substitutes 'good enough' for free."
+        },
+        "strategic_recommendations": [
+          "Build a first-class Markdown source-of-truth export pipeline to neutralize engineering teams' top objection",
+          "Ship enterprise governance features (granular permissions, audit log, retention policies) to defend against Confluence",
+          "Open a small-but-credible 'Notion for Engineering' content track with technical-grade case studies",
+          "Tier AI features into a free band to defuse migration audits driven by Notion AI price increases"
+        ],
+        "executable_work_plan": [
+          "Run a 5-customer interview series with Directors of Engineering at 200-500-person dev shops to validate the Markdown-source-of-truth objection.",
+          "Audit the top 100 SERP results for engineering-doc queries to identify content gaps that a 'Notion for Engineering' content track could fill.",
+          "Publish a technical migration playbook for 'Confluence to Notion at 250 engineers' targeting BOFU vendor-comparing queries.",
+          "Commission a benchmark: search-hit-rate vs Outline and Confluence at 10K-page scale; publish results.",
+          "Engineering-specific landing page that names the Markdown source-of-truth concern head-on (don't dodge it).",
+          "Partner with 3 dev-tooling vendors for joint case studies (e.g. Linear + Notion for engineering ops).",
+          "Test pricing communication around the AI add-on; surface a 'no-AI tier' if the price-driven migration audits confirm the hypothesis.",
+          "Stand up an open-source Notion-to-Markdown export utility and host it on GitHub (defuses the lossy-export objection)."
+        ]
+      }
+    }
+  },
+  "36ce17a26361e73954dd393069b1e79e1704af2e95513d3f37df02f94fd4c86e": {
+    "input_tokens": 1200,
+    "output_tokens": 1800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_define_icp",
+      "input": {
+        "schema_version": 1,
+        "segments": [
+          {
+            "schema_version": 1,
+            "segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+            "firmographic": {
+              "industry_vertical": "B2B SaaS \u2014 developer tooling",
+              "company_size": "200\u2013500 employees, $20M\u2013$100M ARR",
+              "geography": "North America + EMEA distributed",
+              "organizational_structure": "Engineering Director reports to VP Eng; KB tool selection runs through them",
+              "buying_stage": "Active evaluation after outgrowing free wiki",
+              "strategic_pain_points": [
+                "Search across docs is fragmented",
+                "New hires take 3+ months to find tribal knowledge",
+                "Markdown vs WYSIWYG factions on the team"
+              ],
+              "trigger_events": [
+                "Major incident traced to undocumented decision",
+                "Hired 20+ engineers in a quarter",
+                "Notion price hike or migration event"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Director of Engineering",
+              "demographic_context": "32\u201345, 10+ years experience, technical IC background",
+              "motivations": [
+                "Reduce onboarding time",
+                "Lower bus-factor risk",
+                "Earn promotion to VP"
+              ],
+              "decision_criteria": [
+                "Real-time collab parity with Notion",
+                "Markdown source of truth",
+                "API + automation hooks",
+                "SSO + audit log"
+              ],
+              "language_patterns": [
+                "single source of truth",
+                "we keep losing tribal knowledge",
+                "search just doesn't work across our docs",
+                "it should integrate with our existing stack"
+              ],
+              "frustrations": [
+                "Notion search returns archived stuff",
+                "Confluence feels like 2010",
+                "Tooling teams hate maintaining a custom wiki"
+              ],
+              "downstream_use_cases": [
+                "RFC + ADR storage",
+                "Runbooks and incident postmortems",
+                "Onboarding paths per role"
+              ],
+              "information_sources": [
+                "r/engineeringmanagers",
+                "Hacker News",
+                "DevOps Slack communities",
+                "Lenny's Newsletter"
+              ]
+            }
+          },
+          {
+            "schema_version": 1,
+            "segment_label": "Ops/RevOps Manager at 50-200 startup",
+            "firmographic": {
+              "industry_vertical": "B2B SaaS \u2014 sales or marketing platform",
+              "company_size": "50\u2013200 employees, $5M\u2013$30M ARR",
+              "geography": "US-centric, remote-first",
+              "organizational_structure": "Reports to COO or CRO; cross-functional ownership of internal tooling",
+              "buying_stage": "Comparing 2-3 finalists with budget approved",
+              "strategic_pain_points": [
+                "Sales and CS rooms duplicate playbooks across tools",
+                "Marketing assets live in Drive, Notion, and Slack threads"
+              ],
+              "trigger_events": [
+                "New COO hire pushing on tool consolidation",
+                "Onboarding-cost review by exec team"
+              ]
+            },
+            "persona": {
+              "role_job_title": "RevOps Manager",
+              "demographic_context": "28\u201338, MBA optional, project-management mindset",
+              "motivations": [
+                "Be the person who fixes 'how we work'",
+                "Drive measurable onboarding-time reduction"
+              ],
+              "decision_criteria": [
+                "Templates for sales playbooks out of the box",
+                "Permissions granularity",
+                "Salesforce / HubSpot integration",
+                "Time-to-value under 30 days"
+              ],
+              "language_patterns": [
+                "we need one place for this",
+                "I'm tired of hunting in Slack",
+                "leadership wants visibility"
+              ],
+              "frustrations": [
+                "Sales reps don't update docs",
+                "Tool sprawl with overlapping subscriptions"
+              ],
+              "downstream_use_cases": [
+                "Sales playbooks",
+                "Onboarding checklists",
+                "Customer-facing handoff docs"
+              ],
+              "information_sources": [
+                "RevOps Co-op",
+                "Pavilion communities",
+                "LinkedIn long-form posts"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
+    "input_tokens": 1800,
+    "output_tokens": 900,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_analyze_serp",
+      "input": {
+        "schema_version": 1,
+        "query_text": "alternatives to notion for engineering documentation",
+        "top_results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison.",
+            "extracted_content": null
+          }
+        ],
+        "common_angles": [
+          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
+          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
+          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
+          "Editorial 'best of' picks with brief mini-reviews",
+          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
+        ],
+        "content_gaps": [
+          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
+          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
+          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
+          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
+        ],
+        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
+      }
+    }
+  },
+  "7d83236a0d4f62e8eeb6612b3079e2c9b53d8bb0e89cca3dc56dcaea8de18cf6": {
+    "input_tokens": 1400,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_actionability",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "80919f77920b34861fe4eee56254bf512949dbdb7263e352b2b7e979f65686d6": {
+    "input_tokens": 800,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_specificity",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "a9baadce96322167149128aa2afe681f35c57acbea0fd8c3c6248ff642574361": {
+    "input_tokens": 800,
+    "output_tokens": 700,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_serp_results",
+      "input": {
+        "schema_version": 1,
+        "results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team. Confluence, Outline, BookStack, GitBook, Slab, Slite, Coda, Tettra, Stack Overflow for Teams, Almanac. Pricing and feature comparison.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop. Pain points: search, performance, Markdown export. Switched to a self-hosted Outline instance.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison: Markdown source, API, SSO, audit log, pricing. Recommends Outline for Markdown-first teams.",
+            "extracted_content": null
+          },
+          {
+            "rank": 4,
+            "url": "https://example.com/best-engineering-wiki",
+            "title": "Best Engineering Wikis of 2026: Editorial Picks",
+            "snippet": "Editorial roundup of the top engineering wiki tools. Covers Notion, Confluence, GitBook, Outline, Stack Overflow for Teams.",
+            "extracted_content": null
+          },
+          {
+            "rank": 5,
+            "url": "https://example.com/notion-pricing-engineering",
+            "title": "Is Notion Still Worth It for Engineering Teams?",
+            "snippet": "Cost analysis at 200 seats. Compares Plus, Business, Enterprise tiers. Concludes price-per-seat doesn't scale for engineering use cases.",
+            "extracted_content": null
+          },
+          {
+            "rank": 6,
+            "url": "https://example.com/confluence-vs-notion",
+            "title": "Confluence vs Notion for Software Teams",
+            "snippet": "Atlassian's Confluence vs Notion comparison. Confluence wins for Jira integration; Notion wins for flexibility and Markdown.",
+            "extracted_content": null
+          },
+          {
+            "rank": 7,
+            "url": "https://example.com/self-hosted-wikis",
+            "title": "Self-Hosted Knowledge Bases: BookStack, Outline, Wiki.js",
+            "snippet": "For teams that need data sovereignty. BookStack, Outline (self-hosted), Wiki.js compared on setup difficulty and feature set.",
+            "extracted_content": null
+          },
+          {
+            "rank": 8,
+            "url": "https://example.com/notion-api-engineering",
+            "title": "Building Engineering Workflows on the Notion API",
+            "snippet": "Tutorial on using Notion's API for RFC pipelines and automated doc generation. Notes that the API has limits for production use.",
+            "extracted_content": null
+          },
+          {
+            "rank": 9,
+            "url": "https://example.com/notion-pros-cons",
+            "title": "Notion for Engineering Documentation: Pros and Cons",
+            "snippet": "A balanced take. Pros: ease of use, real-time collab. Cons: search, performance at scale, Markdown export pain.",
+            "extracted_content": null
+          },
+          {
+            "rank": 10,
+            "url": "https://example.com/wiki-tool-decision-framework",
+            "title": "How to Pick a Wiki Tool: A Decision Framework",
+            "snippet": "Framework covering 5 axes: source-of-truth, collaboration, security, integration, total cost. Examples include Notion, Confluence, Outline.",
+            "extracted_content": null
+          }
+        ]
+      }
+    }
+  },
+  "ae7f11455cd6efd5a2a902f646abf90282a74d989b254b1b73613bf02327fdc8": {
+    "input_tokens": 2500,
+    "output_tokens": 2200,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_score_queries",
       "input": {
+        "schema_version": 1,
         "scored": [
           {
+            "schema_version": 1,
             "query": {
               "position": 1,
-              "text": "knowledge management for startups",
+              "text": "what is a knowledge base for engineering teams",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -34,34 +591,15 @@
             "traffic_score": 7,
             "difficulty_score": 6,
             "business_value_score": 3,
-            "composite": 4.1,
-            "rationale": "Model-estimated: decent head-term volume for a category-level query but very early-funnel framing maps poorly to a buying decision for this ops-led ICP.",
-            "competitor_urls": []
+            "composite": 3.6,
+            "competitor_urls": [],
+            "rationale": "Decent head-term traffic but very low intent for a 200-person dev shop already past the 'do I need this' stage."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 2,
-              "text": "how to organize internal documentation",
-              "framing": "novice",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 7,
-            "difficulty_score": 5,
-            "business_value_score": 3,
-            "composite": 4.2,
-            "rationale": "Model-estimated: broad how-to query with solid search volume but answers intent with guides rather than vendor selection, limiting business value for this segment.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 3,
-              "text": "do I need a wiki tool",
+              "text": "do i need a wiki for my engineering team",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -75,13 +613,35 @@
             "difficulty_score": 4,
             "business_value_score": 3,
             "composite": 3.5,
-            "rationale": "Model-estimated: low-volume conversational query at the earliest awareness stage with negligible purchase intent for an ops buyer.",
-            "competitor_urls": []
+            "competitor_urls": [],
+            "rationale": "Low-funnel informational; not a buyer-ready query."
           },
           {
+            "schema_version": 1,
+            "query": {
+              "position": 3,
+              "text": "what does a knowledge base actually do",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 2,
+            "composite": 3.0,
+            "competitor_urls": [],
+            "rationale": "Defining-the-category query; almost no buying intent."
+          },
+          {
+            "schema_version": 1,
             "query": {
               "position": 4,
-              "text": "best way to centralize company docs",
+              "text": "are engineering wikis still a thing in 2026",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -91,17 +651,18 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 6,
-            "difficulty_score": 5,
-            "business_value_score": 4,
-            "composite": 4.3,
-            "rationale": "Model-estimated: slightly more intent-rich than pure awareness queries and implies dissatisfaction with current state, nudging business value up slightly.",
-            "competitor_urls": []
+            "traffic_score": 2,
+            "difficulty_score": 3,
+            "business_value_score": 2,
+            "composite": 2.2,
+            "competitor_urls": [],
+            "rationale": "Niche skeptic query; tiny volume."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 5,
-              "text": "alternative to having docs everywhere",
+              "text": "knowledge management tool meaning",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -111,17 +672,18 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 4,
-            "difficulty_score": 3,
-            "business_value_score": 4,
-            "composite": 3.8,
-            "rationale": "Model-estimated: low-volume conversational phrasing but the pain signal ('docs everywhere') aligns with this ICP's consolidation need, modestly lifting business value.",
-            "competitor_urls": []
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 2,
+            "composite": 3.7,
+            "competitor_urls": [],
+            "rationale": "Definitional; sees traffic but no buying signal."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 6,
-              "text": "our documentation is scattered everywhere",
+              "text": "our engineering team can't find docs",
               "framing": "problem-aware",
               "refinement_applied": false
             },
@@ -132,16 +694,17 @@
               "serp_features": []
             },
             "traffic_score": 3,
-            "difficulty_score": 2,
-            "business_value_score": 5,
-            "composite": 4.3,
-            "rationale": "Model-estimated: very long-tail with low volume but directly mirrors this buyer's core pain statement, making it a high-intent capture opportunity despite limited traffic.",
-            "competitor_urls": []
+            "difficulty_score": 3,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Long-tail pain expression; low volume but high intent for problem-aware buyers."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 7,
-              "text": "Confluence is too expensive and nobody uses it",
+              "text": "engineering docs that nobody updates",
               "framing": "problem-aware",
               "refinement_applied": false
             },
@@ -151,98 +714,19 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 5,
-            "difficulty_score": 5,
-            "business_value_score": 8,
-            "composite": 6.0,
-            "rationale": "Model-estimated: a named-competitor pain query strongly signals active switching intent and directly echoes the ICP's stated Confluence frustration, yielding high business value.",
-            "competitor_urls": []
+            "traffic_score": 3,
+            "difficulty_score": 3,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Same family as #6 \u2014 pain-named, low volume, high intent."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 8,
-              "text": "we need a single source of truth for docs",
+              "text": "single source of truth for engineering docs",
               "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 4,
-            "business_value_score": 6,
-            "composite": 5.15,
-            "rationale": "Model-estimated: 'single source of truth' is a recognizable ops-leader phrase with moderate volume; the consolidation framing maps well to this ICP's decision criteria.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 9,
-              "text": "onboarding takes forever because knowledge is tribal",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 2,
-            "business_value_score": 7,
-            "composite": 5.3,
-            "rationale": "Model-estimated: very specific long-tail phrase with low volume but exceptionally tight alignment to this buyer's onboarding pain point, making content targeting it unusually high-value per visitor.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 10,
-              "text": "docs are scattered across Notion Google Docs Slack",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 3,
-            "business_value_score": 7,
-            "composite": 5.4,
-            "rationale": "Model-estimated: names the exact tool stack this ICP is trying to escape, making it a precision-signal query with strong business value despite niche volume.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 11,
-              "text": "wiki that manages itself without manual updates",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 3,
-            "business_value_score": 7,
-            "composite": 5.4,
-            "rationale": "Model-estimated: automation-first framing closely mirrors the Head of Ops 'no-engineer setup' criterion and signals a buyer who has thought beyond basic tooling.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 12,
-              "text": "knowledge management with Slack integration",
-              "framing": "power-user",
               "refinement_applied": false
             },
             "metrics": {
@@ -253,57 +737,18 @@
             },
             "traffic_score": 5,
             "difficulty_score": 5,
-            "business_value_score": 6,
-            "composite": 5.0,
-            "rationale": "Model-estimated: Slack integration is a near-universal SaaS startup requirement and a moderate-volume feature query that connects directly to the ICP's consolidation goal.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 13,
-              "text": "can I build automated documentation without engineers",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 3,
-            "business_value_score": 8,
-            "composite": 5.8,
-            "rationale": "Model-estimated: 'without engineers' perfectly echoes the buyer's no-dedicated-project constraint and signals readiness to adopt a solution that clears that bar.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 14,
-              "text": "knowledge base that replaces project tracking tool",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 3,
             "business_value_score": 7,
-            "composite": 5.2,
-            "rationale": "Model-estimated: consolidation language ('replaces') directly mirrors the ICP's 'replacing three tools' framing, indicating late-awareness purchase intent despite modest volume.",
-            "competitor_urls": []
+            "composite": 6.6,
+            "competitor_urls": [],
+            "rationale": "Echoes the segment's exact language pattern; mid-funnel and ICP-resonant."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 15,
-              "text": "Notion vs Confluence for startups 2026",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
+              "position": 9,
+              "text": "how to fix fragmented engineering documentation",
+              "framing": "problem-aware",
+              "refinement_applied": false
             },
             "metrics": {
               "volume": null,
@@ -311,19 +756,20 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 8,
-            "difficulty_score": 8,
-            "business_value_score": 9,
-            "composite": 7.1,
-            "rationale": "Model-estimated: head-to-head branded comparison queries carry high volume and strong purchase intent but are dominated by established review sites and vendor content, making difficulty high.",
-            "competitor_urls": []
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 6,
+            "composite": 5.6,
+            "competitor_urls": [],
+            "rationale": "How-to framing; reasonable intent for actively-evaluating teams."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 16,
-              "text": "Notion alternatives that aren't expensive",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
+              "position": 10,
+              "text": "tooling teams hate maintaining custom wikis",
+              "framing": "problem-aware",
+              "refinement_applied": false
             },
             "metrics": {
               "volume": null,
@@ -331,19 +777,20 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 7,
-            "difficulty_score": 7,
-            "business_value_score": 8,
-            "composite": 6.5,
-            "rationale": "Model-estimated: brand-plus-alternatives queries attract high competitor-content competition but strong buyer intent; the cost qualifier directly reflects this ICP's CFO sign-off concern.",
-            "competitor_urls": []
+            "traffic_score": 2,
+            "difficulty_score": 2,
+            "business_value_score": 5,
+            "composite": 5.0,
+            "competitor_urls": [],
+            "rationale": "Narrow phrasing; tiny volume but strong implicit buying intent."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 17,
-              "text": "best wiki tool with AI search",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
+              "position": 11,
+              "text": "self hosted knowledge base options",
+              "framing": "power-user",
+              "refinement_applied": false
             },
             "metrics": {
               "volume": null,
@@ -353,15 +800,142 @@
             },
             "traffic_score": 6,
             "difficulty_score": 6,
-            "business_value_score": 8,
-            "composite": 6.2,
-            "rationale": "Model-estimated: AI search is an emerging must-have feature for this buyer persona; moderate volume with growing competition as AI-wiki content proliferates.",
-            "competitor_urls": []
+            "business_value_score": 7,
+            "composite": 6.3,
+            "competitor_urls": [],
+            "rationale": "Implementation-detail filter; clear power-user buying signal."
           },
           {
+            "schema_version": 1,
+            "query": {
+              "position": 12,
+              "text": "knowledge base with markdown source of truth",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 5,
+            "business_value_score": 8,
+            "composite": 6.4,
+            "competitor_urls": [],
+            "rationale": "Differentiated requirement maps to ICP decision criteria; high intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 13,
+              "text": "wiki with git style versioning",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Niche but high-fit for engineering ICP; few good answers exist."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 14,
+              "text": "best knowledge base for engineering teams 2026",
+              "framing": "vendor-comparing",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 9,
+            "difficulty_score": 9,
+            "business_value_score": 9,
+            "composite": 7.6,
+            "competitor_urls": [],
+            "rationale": "Head 'best X for Y' query \u2014 highest traffic in the journey, highest commercial intent, dominated by listicles."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 15,
+              "text": "api first wiki for engineering with webhook support",
+              "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 8,
+            "composite": 6.3,
+            "competitor_urls": [],
+            "rationale": "Very specific requirement; small volume but the searcher is ready to buy."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 16,
+              "text": "knowledge base with sso and audit log for soc2",
+              "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 5,
+            "business_value_score": 9,
+            "composite": 6.9,
+            "competitor_urls": [],
+            "rationale": "Compliance + buyer-ready \u2014 bottom of funnel."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 17,
+              "text": "notion vs confluence for engineering teams",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 9,
+            "difficulty_score": 9,
+            "business_value_score": 8,
+            "composite": 7.1,
+            "competitor_urls": [],
+            "rationale": "Head vs query; high volume but brands themselves dominate the SERP."
+          },
+          {
+            "schema_version": 1,
             "query": {
               "position": 18,
-              "text": "Slite vs Confluence vs Notion comparison",
+              "text": "outline vs notion engineering wiki",
               "framing": "vendor-comparing",
               "refinement_applied": true
             },
@@ -372,16 +946,38 @@
               "serp_features": []
             },
             "traffic_score": 5,
-            "difficulty_score": 7,
-            "business_value_score": 9,
-            "composite": 6.3,
-            "rationale": "Model-estimated: three-way named comparison is a high-intent, bottom-of-funnel query; lower volume than two-way comparisons but extremely close to a purchase decision for this ICP.",
-            "competitor_urls": []
+            "difficulty_score": 5,
+            "business_value_score": 8,
+            "composite": 6.5,
+            "competitor_urls": [],
+            "rationale": "Less-dominated vs query; defensible and high intent."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 19,
-              "text": "knowledge management tool that consolidates three tools into one",
+              "text": "alternatives to notion for engineering documentation",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 7,
+            "difficulty_score": 7,
+            "business_value_score": 9,
+            "composite": 7.4,
+            "competitor_urls": [],
+            "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 20,
+              "text": "bookstack vs notion for engineering team",
               "framing": "vendor-comparing",
               "refinement_applied": true
             },
@@ -392,16 +988,80 @@
               "serp_features": []
             },
             "traffic_score": 3,
-            "difficulty_score": 3,
-            "business_value_score": 9,
-            "composite": 5.9,
-            "rationale": "Model-estimated: very specific long-tail with low volume but almost verbatim restatement of this ICP's core buying rationale ('replacing three tools'), making conversion rate unusually high.",
-            "competitor_urls": []
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Niche vs query; small but ready-to-buy audience."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 20,
-              "text": "free knowledge management tool for startups",
+              "position": 21,
+              "text": "notion price hike 2026 alternatives",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 6,
+            "difficulty_score": 5,
+            "business_value_score": 9,
+            "composite": 7.1,
+            "competitor_urls": [],
+            "rationale": "Trigger-event driven; high intent and time-sensitive."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 22,
+              "text": "cheap knowledge base for 200 person engineering team",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Narrow size + price filter; small but actively-buying audience."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 23,
+              "text": "free wiki for engineering teams self hosted",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Free-tier hunters; modest commercial intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 24,
+              "text": "notion pricing per seat 2026",
               "framing": "price-driven",
               "refinement_applied": true
             },
@@ -412,96 +1072,17 @@
               "serp_features": []
             },
             "traffic_score": 7,
-            "difficulty_score": 6,
-            "business_value_score": 5,
-            "composite": 5.1,
-            "rationale": "Model-estimated: 'free' qualifier attracts high traffic but lowers business value for a 50-seat Series A buyer who has budget \u2014 signals pre-budget-approval friction rather than true price sensitivity.",
-            "competitor_urls": []
+            "difficulty_score": 8,
+            "business_value_score": 7,
+            "composite": 5.9,
+            "competitor_urls": [],
+            "rationale": "High traffic but Notion owns the SERP; tough to displace."
           },
           {
-            "query": {
-              "position": 21,
-              "text": "Confluence pricing vs alternatives cost",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 6,
-            "difficulty_score": 6,
-            "business_value_score": 8,
-            "composite": 6.2,
-            "rationale": "Model-estimated: pricing-comparison queries with a named incumbent signal active vendor evaluation and directly address the ICP's CFO sign-off threshold decision criteria.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 22,
-              "text": "wiki tool under $500 month for 50 person team",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 2,
-            "business_value_score": 9,
-            "composite": 5.5,
-            "rationale": "Model-estimated: extremely specific budget-and-headcount query with near-zero volume but perfect alignment to the ICP's 50-seat, no-CFO-approval price ceiling \u2014 high conversion potential per visit.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 23,
-              "text": "how much does Notion per seat cost vs Confluence",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 6,
-            "difficulty_score": 6,
-            "business_value_score": 8,
-            "composite": 6.2,
-            "rationale": "Model-estimated: per-seat cost comparison is the exact calculation this buyer needs to avoid CFO escalation; moderate volume with strong competitive SERP from both vendors.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 24,
-              "text": "knowledge management ROI for Series A startups",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 3,
-            "difficulty_score": 3,
-            "business_value_score": 8,
-            "composite": 5.3,
-            "rationale": "Model-estimated: ROI framing with a specific funding-stage qualifier is ultra-niche but precisely matches the ICP's need to justify consolidation spend internally \u2014 high per-visitor business value.",
-            "competitor_urls": []
-          },
-          {
+            "schema_version": 1,
             "query": {
               "position": 25,
-              "text": "cheapest way to stop using five documentation tools",
+              "text": "knowledge base under $500/month for engineering team",
               "framing": "price-driven",
               "refinement_applied": true
             },
@@ -512,172 +1093,32 @@
               "serp_features": []
             },
             "traffic_score": 3,
-            "difficulty_score": 2,
-            "business_value_score": 8,
-            "composite": 5.3,
-            "rationale": "Model-estimated: long-tail consolidation + price query mirrors the ICP's 'I'm replacing three tools' rationale almost exactly; low volume but extremely purchase-ready phrasing.",
-            "competitor_urls": []
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Concrete budget threshold; small audience but commercial intent."
           }
         ]
       }
     }
   },
-  "12aa8350299982961b7f345f3b093853baf7a3a403d2c5ea07f2cadfb7bf30ec": {
-    "input_tokens": 2150,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brand_voice_match",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "2d5cf2b4066da6c57c5f111694b7ab7a18e23c1aa64afd585c7f3c645a2103f6": {
-    "input_tokens": 1929,
-    "output_tokens": 4122,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_research_company",
-      "input": {
-        "customer_segments": [
-          "Series A\u2013C B2B SaaS startups using Notion as their internal wiki and project OS",
-          "SMB and mid-market tech companies (50\u2013500 employees) consolidating docs, wikis, and task tracking",
-          "Product and engineering teams replacing Confluence + Jira with a lighter-weight stack",
-          "Indie creators, solopreneurs, and consultants using Notion for client portals and personal knowledge bases",
-          "Universities and students using free/Plus tier for notes and coursework",
-          "Enterprise accounts (1,000+ seats) piloting Notion AI and Notion Projects for cross-functional ops"
-        ],
-        "product_portfolio": [
-          "Notion Free \u2014 unlimited personal pages, limited block trials for guests; primary acquisition vehicle for bottom-up PLG motion",
-          "Notion Plus ($10/member/mo) \u2014 unlimited blocks, unlimited file uploads, 30-day version history; targets small teams and power solo users",
-          "Notion Business ($15/member/mo) \u2014 SAML SSO, private teamspaces, bulk PDF export, 90-day version history; targets ops-conscious SMBs",
-          "Notion Enterprise (custom pricing) \u2014 advanced permission audit logs, unlimited version history, customer success, SCIM provisioning; targets security- and compliance-sensitive large orgs",
-          "Notion AI (add-on, $8\u201310/member/mo) \u2014 AI writing assistant, summarization, autofill database properties, Q&A over workspace content; positioned as a productivity layer across all tiers",
-          "Notion Calendar (free, standalone + integrated) \u2014 acquired Cron in 2022, rebranded 2024; deeply integrated with Google Calendar and Notion databases; targets time-management-heavy knowledge workers",
-          "Notion Sites (launched 2024) \u2014 publish Notion pages as public-facing websites with custom domains; targets no-code builders and teams wanting lightweight public docs or landing pages",
-          "Notion Projects (bundled, 2023) \u2014 Gantt-style timelines, sprints, sub-items; positions Notion against Asana/Linear for lightweight project management"
-        ],
-        "inferred_icp": "[\"De facto ICP (inferred from pricing tiers, case studies, and content marketing surface): a 10\u2013200 person tech-forward company \u2014 most commonly a B2B SaaS startup at Series A or B \u2014 where a technical or ops-minded champion (head of product, engineering lead, or Chief of Staff) is consolidating scattered documentation, project tracking, and internal wikis into a single flexible workspace. This buyer is allergic to per-seat Atlassian-style licensing, values fast setup over deep configurability, and has already rejected Confluence on aesthetic and UX grounds. They are comfortable building their own Notion systems and often do so before any formal IT procurement motion. Enterprise deals are won by landing in a high-velocity team and expanding, not by top-down CIO sales \u2014 suggesting the true ICP remains the empowered individual contributor or team lead, not a traditional enterprise IT buyer.\"]",
-        "icp_priorities": [
-          "Consolidation of tools (docs + wiki + tasks in one surface)",
-          "Fast time-to-value without IT involvement",
-          "Aesthetic quality and UX polish over feature depth",
-          "Flexible, block-based data modeling that adapts to team workflows",
-          "Bottom-up adoption with low per-seat cost at small scale",
-          "AI-native productivity without switching to a new app",
-          "Avoiding Atlassian/Microsoft lock-in and licensing complexity"
-        ],
-        "competitors": [
-          "Confluence (Atlassian) \u2014 dominant enterprise wiki incumbent; deeply embedded in Jira-heavy engineering orgs",
-          "Coda \u2014 closest structural competitor; doc + database + automation in one canvas; stronger formula and automation layer than Notion",
-          "Obsidian \u2014 local-first, Markdown-native PKM; wins power users who prioritize data ownership and offline access",
-          "Craft \u2014 polished Apple-ecosystem doc tool; strong design sensibility, targets individual knowledge workers on macOS/iOS",
-          "Outline \u2014 open-source, self-hostable team wiki; wins data-sovereignty-focused engineering teams",
-          "Slite \u2014 async-first team wiki; simpler than Notion, targets remote SMBs who find Notion over-engineered",
-          "Guru \u2014 knowledge management specifically for customer-facing teams; integrates with CRMs and support tools",
-          "Tettra \u2014 lightweight internal wiki for small teams; integrates natively with Slack and Google Workspace",
-          "ClickUp \u2014 aggressive all-in-one project+docs+goals platform; competes on breadth and aggressive pricing",
-          "Linear \u2014 not a direct competitor but wins eng teams away from Notion Projects for issue tracking",
-          "Microsoft Loop \u2014 Microsoft 365-native collaborative canvas; serious long-term threat in enterprise via bundling",
-          "Google Workspace (Docs + Sites + Keep) \u2014 default fallback for cost-sensitive buyers already on Google",
-          "Mem \u2014 AI-first personal knowledge base; early but signals where AI-native PKM is heading",
-          "Capacities + Roam Research \u2014 niche graph-based PKM tools capturing Notion's power-user defectors"
-        ],
-        "company_advantages": [
-          "Block-based data model is the most flexible on the market \u2014 a single 'page' can be a doc, a database, a kanban board, or all three simultaneously, without switching apps",
-          "PLG flywheel is exceptionally strong: free tier + template gallery drives viral organic acquisition with near-zero CAC for the SMB segment",
-          "Template ecosystem (10,000+ community templates) creates network-effect switching costs and lowers onboarding friction better than any competitor",
-          "Notion AI's Q&A-over-workspace feature is natively integrated with structured databases, not just unstructured text \u2014 a technical moat competitors have not yet closed",
-          "Brand and design equity is disproportionately strong for a B2B tool \u2014 Notion is aspirationally chosen, not just functionally evaluated",
-          "Notion Calendar (Cron) integration gives Notion a time-management surface that pure wiki tools entirely lack",
-          "Cross-platform parity (web, Mac, Windows, iOS, Android) is consistently high \u2014 no meaningful feature gaps across surfaces"
-        ],
-        "competitor_advantages": [
-          "Confluence owns deep Jira integration that Notion cannot replicate without a full project-management rebuild \u2014 engineering orgs on Jira Data Center will not migrate",
-          "Coda's formula engine and 'packs' (native integrations) are meaningfully more powerful than Notion's database relations and automations for ops-heavy workflows",
-          "Outline and Obsidian offer true data sovereignty (self-hosted or local-first) that Notion's cloud-only architecture cannot match \u2014 a hard blocker for regulated industries and security-conscious engineers",
-          "ClickUp's pricing aggression (free tier + deeply discounted annual contracts) and breadth (goals, whiteboards, time tracking) makes it a credible 'one tool' pitch to cost-sensitive buyers",
-          "Microsoft Loop benefits from zero incremental cost for M365 enterprise customers \u2014 a bundling advantage Notion cannot fight on price",
-          "Linear's issue-tracking UX is so superior for engineering sprints that Notion Projects does not win eng teams already on Linear",
-          "Google Workspace's default presence on Chromebooks and in edu accounts makes it the zero-effort fallback that Notion must actively displace",
-          "Guru and Tettra have purpose-built CRM/Slack integrations that Notion's generic API approach cannot match for customer-success and support team use cases"
-        ],
-        "swot": {
-          "strengths": [
-            "Flexible block-based architecture enables a single product to replace 3\u20134 category tools, reducing the competitive surface area a buyer must evaluate.",
-            "PLG motion with a best-in-class free tier generates compounding organic growth with low CAC and high top-of-funnel volume.",
-            "Community template ecosystem (10,000+ templates) creates genuine switching costs and shortens time-to-value for new users.",
-            "Notion AI is natively embedded in structured databases, giving it a technical depth advantage over bolt-on AI features in legacy wikis.",
-            "Brand perception is uniquely aspirational for a B2B tool \u2014 it is chosen for identity reasons in addition to functional ones, which improves retention."
-          ],
-          "weaknesses": [
-            "Offline and self-hosted functionality is absent, blocking adoption in regulated industries (healthcare, finance, defense) and sovereignty-sensitive markets.",
-            "Performance degrades noticeably on very large workspaces (1,000+ pages, complex databases), creating a ceiling for enterprise scalability.",
-            "Notion's 'infinite flexibility' is also its biggest onboarding liability \u2014 new teams frequently fail to build effective systems and churn before realizing value.",
-            "Version history and granular permission controls remain weaker than Confluence at equivalent or higher price points, slowing enterprise security reviews.",
-            "Automations and formula logic are less powerful than Coda's, limiting appeal for operations teams with complex data workflows."
-          ],
-          "opportunities": [
-            "Notion Sites positions the product as a no-code web publishing tool \u2014 a large adjacent market where the existing user base already has high intent.",
-            "Notion AI Q&A over workspace content is early-stage infrastructure for a future 'company brain' positioning that no incumbent has credibly captured yet.",
-            "Mid-market enterprise (200\u20132,000 employees) is underpenetrated: existing PLG champions in these orgs have budget authority but no formal Notion rollout program to pull from.",
-            "API ecosystem expansion (native Slack, Salesforce, GitHub bi-directional sync) could close the integration gap with Guru and Tettra for customer-facing teams.",
-            "International expansion (APAC, LATAM) is organic-growth-ready given the multilingual template community and low localization cost relative to competitors."
-          ],
-          "threats": [
-            "Microsoft Loop, bundled into M365, removes the 'cost of switching' calculation entirely for enterprise accounts already on Microsoft \u2014 a structural threat Notion cannot price-compete against.",
-            "Atlassian's continued Confluence modernization (whiteboards, smart links, AI) could re-win mid-market teams that had been migrating to Notion.",
-            "AI-native PKM startups (Mem, Notion-killers from the LLM ecosystem) could leapfrog Notion's AI layer with purpose-built architectures rather than retrofits.",
-            "Notion's reliance on a cloud-only, VC-backed model creates enterprise risk perception \u2014 data residency regulations (GDPR, DPDP) are tightening globally.",
-            "PLG saturation: as free-tier users age without converting, CAC for paid expansion rises and the top-of-funnel advantage erodes without new surface areas to monetize."
-          ]
-        },
-        "porter_five_forces": {
-          "buyer_power": "Moderate-to-high. SMB and startup buyers have low switching costs at the individual level \u2014 exporting Notion pages to Markdown or CSV is feasible, and competitors actively publish migration guides. However, at the team level, embedded templates, cross-linked databases, and Notion AI training on workspace content create meaningful stickiness. Enterprise buyers have more leverage due to seat volume, but Notion's PLG origin means contracts often follow adoption rather than precede it, softening buyer negotiating power.",
-          "supplier_power": "Low-to-moderate. Notion's primary infrastructure dependencies are cloud hyperscalers (AWS) and LLM providers (inferred: OpenAI API for Notion AI features). AWS has standard enterprise pricing with limited negotiation room for mid-scale SaaS, but is not a strategic bottleneck. LLM dependency is a more acute risk: if OpenAI raises API pricing or restricts usage, Notion AI margins compress. Notion has no disclosed multi-model strategy to hedge this.",
-          "rivalry": "High. The knowledge management and collaborative workspace category is intensely contested across three tiers: legacy incumbents (Confluence, Google Workspace) with distribution moats; well-funded direct competitors (Coda, ClickUp) competing on features and price; and niche specialists (Outline, Guru, Linear) winning specific use-case segments. Differentiation is increasingly difficult as all players add AI features, and 'all-in-one' positioning is now table stakes rather than a differentiator.",
-          "new_entrants": "Moderate. The SaaS knowledge management layer has low code-barrier to entry for MVP products, as evidenced by the proliferation of PKM tools. However, distribution moats (template ecosystems, PLG flywheels, brand recognition) raise the effective barrier for scale. The most credible new entrant threat comes from AI-native startups building from an LLM-first architecture rather than bolting AI onto an existing block editor \u2014 these could redefine the category UX before Notion can respond.",
-          "substitutes": "High. The functional jobs Notion performs \u2014 documenting, organizing, planning, publishing \u2014 are served by a wide array of substitutes at zero marginal cost: Google Docs + Sheets + Sites, Microsoft Word + SharePoint, GitHub wikis, Basecamp, email threads, and Slack Canvas. For any given team, the activation energy to 'just use Google Docs' remains the single largest churn trigger Notion faces, especially at the free tier where switching cost is near zero."
-        },
-        "strategic_recommendations": [
-          "1. [HIGHEST IMPACT] Launch a structured mid-market expansion program: identify existing PLG champions inside 200\u20132,000 person companies, instrument product signals for 'expansion-ready' workspaces, and assign a lightweight enterprise success motion to convert bottom-up usage into company-wide contracts \u2014 this is where Notion's next $100M ARR cohort lives.",
-          "2. Build and publish a Notion AI 'company brain' narrative backed by 3\u20135 detailed case studies showing measurable knowledge retrieval time reduction \u2014 this differentiates Notion AI from generic writing assistants and reframes the AI add-on as infrastructure, not a feature.",
-          "3. Invest in offline mode and EU/APAC data residency (dedicated cloud regions) to remove the two hardest enterprise procurement blockers and unlock regulated-industry segments currently off-limits.",
-          "4. Deepen the Notion Sites product surface (custom domains, SEO metadata, analytics, CMS-style collections) to compete with Webflow and Ghost for documentation and content sites \u2014 the existing user base has high intent and zero additional CAC.",
-          "5. Develop a 'Certified Notion Partner' program for consultants and ops professionals who build and sell Notion systems \u2014 formalizing the existing community flywheel into a channel that accelerates enterprise onboarding and reduces churn from the 'too flexible' failure mode.",
-          "6. Build native bi-directional sync with GitHub and Jira (not just API) to neutralize Confluence's engineering-team moat and give Notion Projects a credible path into eng orgs that currently reject it due to toolchain fragmentation."
-        ],
-        "executable_work_plan": [
-          "1. [Week 1\u20132] RevOps: instrument Notion's product analytics to flag 'expansion-ready' signals (workspace size >50 pages, 5+ active members, database usage >3 linked DBs) and pipe flagged accounts into a CRM expansion queue for outbound sequencing.",
-          "2. [Week 2\u20134] Content/PMM: commission 3 detailed Notion AI case studies with quantified outcomes (e.g., 'reduced onboarding doc search time by 60%') from existing enterprise customers; publish as gated assets and seed in community forums and G2/Capterra.",
-          "3. [Week 3\u20136] Demand Gen: build a 'Notion vs. Confluence' and 'Notion vs. ClickUp' SEO comparison content cluster targeting high-intent mid-funnel queries; include migration guides with downloadable templates to capture competitor-defector traffic.",
-          "4. [Week 4\u20136] Partner Program: draft a tiered Notion Certified Partner framework (Consultant, Agency, Enterprise Integrator), publish an interest form, and recruit 20 seed partners from the existing template-creator community to pilot the program.",
-          "5. [Week 4\u20138] PMM: develop an enterprise security one-pager addressing data residency, SOC 2 Type II status, SCIM, and SSO \u2014 formatted for IT/security reviewers, not end users \u2014 to reduce friction in enterprise procurement reviews.",
-          "6. [Week 5\u20138] Growth: launch a 'Team Setup in 30 Minutes' onboarding email sequence triggered at team workspace creation, using template recommendations personalized by team type (engineering, product, ops, marketing) to reduce early churn from setup failure.",
-          "7. [Week 6\u201310] BD/Partnerships: initiate exploratory conversations with 2\u20133 Jira/GitHub integration partners for deeper bi-directional sync; scope a native GitHub Issues \u2194 Notion Projects sync as a 'Projects for Engineering' GTM wedge.",
-          "8. [Week 8\u201312] Events/Community: host a virtual 'Notion for Operations' summit targeting Chief of Staff, RevOps, and BizOps personas \u2014 featuring customer speakers, template drops, and Notion AI demos \u2014 to build pipeline in the under-served mid-market ops buyer segment.",
-          "9. [Week 8\u201312] Paid Acquisition: launch targeted LinkedIn campaigns against Confluence and ClickUp users (job-title + tool-stack targeting) with a 'switch to Notion' offer (migration template + 3-month Plus discount) to capture competitor churn cycles.",
-          "10. [Week 10\u201312] Product Marketing: co-develop a 'Notion Sites for Docs' positioning brief with the product team ahead of any Sites feature expansion, defining the ICP (developer-tool companies, consultancies, open-source projects) and the competitive frame vs. Gitbook and Readme.io."
-        ]
-      }
-    }
-  },
-  "321bca9e0344864c3f409f0b2dd8ea3ecfc0d5b742231a95b6365692eda92251": {
-    "input_tokens": 6843,
-    "output_tokens": 537,
+  "d382acd16fba702b659408d04efd31e8cfa3fafe995bab7c7d52a57f749ed5a7": {
+    "input_tokens": 3000,
+    "output_tokens": 600,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_select_priority_query",
       "input": {
-        "selected_segment_label": "Series A/B SaaS Startup \u2014 Ops-Led Tool Consolidation",
+        "schema_version": 1,
+        "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
         "selected_query": {
           "schema_version": 1,
           "query": {
-            "position": 7,
-            "text": "Confluence is too expensive and nobody uses it",
-            "framing": "problem-aware",
-            "refinement_applied": false
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
           },
           "metrics": {
             "volume": null,
@@ -685,767 +1126,107 @@
             "cpc": null,
             "serp_features": []
           },
-          "traffic_score": 5,
-          "difficulty_score": 5,
-          "business_value_score": 8,
-          "composite": 6.0,
+          "traffic_score": 7,
+          "difficulty_score": 7,
+          "business_value_score": 9,
+          "composite": 7.4,
           "competitor_urls": [],
-          "rationale": "Model-estimated: a named-competitor pain query strongly signals active switching intent and directly echoes the ICP's stated Confluence frustration, yielding high business value."
+          "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
         },
-        "rationale": "This query is the clearest switching-intent signal in the set: a buyer who has already named Confluence as the failed incumbent and is actively looking for a way out \u2014 which is precisely the ops-led consolidation trigger this ICP segment is built around. Critically, it is a problem-aware, conversational phrase rather than a branded comparison query, which means established review-site content dominates it far less than it would a \"Notion vs Confluence\" head-to-head; an independent, empathetic content piece has a genuine chance to rank and convert. It also anchors a natural content cluster \u2014 \"Confluence alternatives,\" \"why teams stop using Confluence,\" \"knowledge base migration guide,\" \"Confluence pricing vs alternatives\" \u2014 giving it compounding cluster value beyond a single article. The runner-up was \"Notion vs Confluence for startups 2026\" (composite 7.1), which scores higher mechanically, but its difficulty score of 8 reflects a SERP wall of G2, Capterra, and vendor-owned content that makes defensibility very low for a new content piece; the strategic upside doesn't justify the near-zero chance of ranking."
+        "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
       }
     }
   },
-  "4190d9aa22f6ce1af80a8467ce14c2779442a1a70b7e27b73350df22262c01d1": {
-    "input_tokens": 6234,
-    "output_tokens": 5732,
+  "e18ef04a46fd6e72020f6f9300c758954fab6a0fc958d7c4206fb903c8aa20b6": {
+    "input_tokens": 1200,
+    "output_tokens": 40,
     "stop_reason": "tool_use",
     "tool_use": {
-      "name": "emit_define_icp",
+      "name": "emit_judge_brand_voice_match",
       "input": {
-        "segments": [
-          {
-            "segment_label": "Series A/B SaaS Startup \u2014 Ops-Led Tool Consolidation",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "B2B SaaS (vertical-agnostic, typically DevTools, HR Tech, FinTech, or MarTech)",
-              "company_size": "25\u2013120 employees; post-Series A through mid-Series B; $3M\u2013$20M ARR",
-              "geography": "US (SF Bay Area, NYC, Austin); secondary: London, Berlin, Toronto",
-              "organizational_structure": "Flat or matrixed; no dedicated IT function; Head of Ops or Chief of Staff owns tooling decisions alongside a technical co-founder; buying unit is a 2\u20134 person informal coalition (ops + eng lead + CEO)",
-              "buying_stage": "Problem-aware and solution-exploring \u2014 team has already felt the pain of Confluence or scattered Google Docs and is actively piloting alternatives, often with a Notion workspace already in use by 3\u201310 people",
-              "strategic_pain_points": [
-                "Documentation lives in five places at once (Confluence, Notion free, Google Docs, Slite trial, Slack pins) and nobody knows which is canonical",
-                "Onboarding new hires takes 2\u20133 weeks because internal knowledge is unstructured and tribal",
-                "Confluence licensing cost balloons with headcount and the UX kills adoption \u2014 engineers refuse to use it",
-                "Project tracking, product specs, and company wiki are in separate tools with no cross-linking, creating context-switching overhead",
-                "Notion AI is seen as a shortcut to surfacing buried institutional knowledge without a dedicated knowledge manager"
-              ],
-              "trigger_events": [
-                "Series A close \u2014 headcount doubling within 6 months forces a documentation reckoning",
-                "A new VP of Engineering or Chief of Staff joins and declares 'we need a single source of truth'",
-                "Failed Confluence rollout: low adoption, high cost, mounting complaints from product and design teams",
-                "A costly onboarding failure (key hire churns early, citing information chaos) lands on leadership's radar",
-                "Competitor or peer startup publicly shares their Notion OS on Twitter/LinkedIn, triggering FOMO"
-              ]
-            },
-            "persona": {
-              "role_job_title": "Head of Operations / Chief of Staff",
-              "demographic_context": "28\u201338 years old; former consultant, analyst, or ops generalist at a larger tech company; first or second ops hire at this startup; typically reports to CEO; technically literate but not an engineer",
-              "motivations": [
-                "Wants to be known internally as the person who 'fixed how we work' \u2014 a visible operational win that justifies their seat at the leadership table",
-                "Personally motivated to avoid re-litigating tool decisions every six months; wants a durable system they can hand off",
-                "Building a portfolio of operational credibility ahead of a future COO title or their own company"
-              ],
-              "decision_criteria": [
-                "Can we migrate out of Confluence in under two weeks without a dedicated project?",
-                "Is the per-seat cost low enough that I don't need a CFO sign-off for 50 seats?",
-                "Will engineers actually use this, or will I be the only one who cares in 90 days?",
-                "Does Notion AI actually surface answers from our existing content, or is it just a writing assistant?",
-                "Are there templates for the exact things we need \u2014 onboarding checklists, product specs, meeting notes?"
-              ],
-              "language_patterns": [
-                "'We need a single source of truth \u2014 right now everything lives everywhere and nowhere.'",
-                "'I don't want to manage a wiki. I want the wiki to manage itself.'",
-                "'Our Confluence is a graveyard. Nobody updates it and nobody reads it.'",
-                "'Can I build this without bugging an engineer?'",
-                "'I'm not buying another tool \u2014 I'm replacing three of them.'"
-              ],
-              "frustrations": [
-                "Notion's flexibility is a double-edged sword \u2014 without a strong template to start from, teams build inconsistent systems that become their own form of chaos",
-                "Notion AI's Q&A quality degrades when the underlying workspace is poorly structured \u2014 the tool rewards prior investment that this persona hasn't had time to make",
-                "Permissions and teamspace management is more complex than expected at 80+ seats, requiring IT-adjacent thinking from a non-IT person",
-                "No native Jira integration means eng teams maintain a parallel system, undermining the 'single source of truth' goal"
-              ],
-              "downstream_use_cases": [
-                "Company-wide internal wiki replacing Confluence or scattered Google Docs",
-                "New hire onboarding portal with role-specific content tracks",
-                "Weekly team standup and meeting notes database with AI-generated summaries",
-                "Product spec and PRD repository cross-linked to project tracker",
-                "Notion AI as a first-line answer engine for recurring internal questions ('Where is the PTO policy?')"
-              ],
-              "information_sources": [
-                "Twitter/X and LinkedIn posts from ops-community thought leaders (Lenny's Newsletter, FirstRound Review)",
-                "Notion's own template gallery and YouTube walkthroughs",
-                "Peer Slack communities (Superpath, Ops Nation, SaaStr community channels)",
-                "G2 reviews filtered by company size; Reddit r/Notion",
-                "Word of mouth from a peer Chief of Staff at a portfolio company of the same VC"
-              ]
-            }
-          },
-          {
-            "segment_label": "Mid-Market Tech Company \u2014 Engineering-Led Confluence Replacement",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "Technology (SaaS, cloud infrastructure, developer tooling); secondarily: digital-native media and e-commerce",
-              "company_size": "150\u2013600 employees; $20M\u2013$100M ARR; typically Series C through pre-IPO or bootstrapped-profitable",
-              "geography": "US (distributed/remote-first or hub-and-spoke); UK and Canada as secondary clusters",
-              "organizational_structure": "Formal but lightweight IT function exists; Engineering org is 40\u2013120 people split across product squads; VP Engineering or a senior Engineering Manager is the de facto internal champion; IT may be a gatekeeper but is rarely the initiator",
-              "buying_stage": "Actively evaluating \u2014 a dissatisfied squad has been running a Notion pilot for 60\u201390 days and the champion is now building a business case for a broader migration, seeking security/IT sign-off and a cost comparison vs. Confluence renewal",
-              "strategic_pain_points": [
-                "Confluence renewal cost is increasing 20\u201340% YoY as headcount grows; leadership is questioning the ROI",
-                "Confluence's editor UX is widely hated by product and design teams, driving shadow IT adoption of Notion and Google Docs",
-                "Documentation debt is compounding: specs are written in Confluence, discussed in Notion, decided in Slack, and no one knows the canonical version",
-                "Notion Projects lacks native Jira integration, so eng teams running sprints are being asked to maintain two systems",
-                "Security and IT teams flag Notion's permission model as opaque compared to Confluence's group-based access controls"
-              ],
-              "trigger_events": [
-                "Confluence annual renewal comes up \u2014 finance asks if this can be cut or consolidated",
-                "A VP Engineering joins from a Notion-native startup and immediately advocates for the switch",
-                "Product team conducts an internal NPS-style tool survey; Confluence scores near the bottom",
-                "An engineering squad migrates independently, demonstrates a working Notion system, and other squads request the same",
-                "Board or Series C investor asks why the company is paying Atlassian $X when 'everyone uses Notion now'"
-              ]
-            },
-            "persona": {
-              "role_job_title": "VP of Engineering / Senior Engineering Manager",
-              "demographic_context": "32\u201345 years old; 8\u201315 years in software engineering with a management transition in the last 3\u20135 years; engineering-first mindset applied to tooling decisions; comfortable evaluating APIs, permission models, and migration paths; unlikely to be influenced by marketing collateral alone",
-              "motivations": [
-                "Wants to reduce the cognitive tax on engineers \u2014 fewer tools, less context-switching, more time in flow state",
-                "Personally accountable for developer productivity metrics; a documentation upgrade is a defensible productivity investment",
-                "Wants to eliminate the 'where is that doc?' question from standups and retrospectives once and for all"
-              ],
-              "decision_criteria": [
-                "Can we get SAML SSO and SCIM provisioning without going Enterprise tier?",
-                "What does a real migration from Confluence look like \u2014 page structure, permissions, attachments?",
-                "Will Notion Projects ever have native Jira sync, or do we need to keep Jira running in parallel indefinitely?",
-                "Is Notion AI actually useful for summarizing long-form technical RFCs, or is it just marketing copy?",
-                "What's the total cost of ownership at 200 seats vs. our current Confluence + Jira bundle?"
-              ],
-              "language_patterns": [
-                "'Confluence is where documentation goes to die. Nobody reads it because nobody writes it.'",
-                "'I don't want a wiki. I want a living system that engineers actually maintain.'",
-                "'The tool shouldn't require a workshop to learn. If I need to train people on it, I've already lost.'",
-                "'Show me a real migration, not a sales deck. How long does it actually take?'",
-                "'My engineers are already using Notion for their own stuff. I'm just formalizing what's already happening.'"
-              ],
-              "frustrations": [
-                "Notion Projects is not yet a credible Jira replacement \u2014 sprint burndown, issue dependencies, and CI/CD integration are too thin, forcing a hybrid stack",
-                "Version history limitations on lower tiers are a blocker for teams with compliance requirements",
-                "Notion's API, while functional, requires bespoke work to achieve the GitHub/Jira integrations the team expects as table stakes",
-                "IT and security teams slow the rollout because Notion's audit log and access review features are weaker than Confluence's at comparable price points"
-              ],
-              "downstream_use_cases": [
-                "Engineering wiki: architecture decision records (ADRs), runbooks, incident post-mortems",
-                "Product spec database cross-linked to sprint tasks in Notion Projects",
-                "Onboarding checklist for new engineering hires with auto-assigned task templates",
-                "RFC (request for comment) process replacing long email threads",
-                "Notion AI for summarizing long RFCs, surfacing related decisions, and drafting changelog entries"
-              ],
-              "information_sources": [
-                "Hacker News threads on productivity tooling and Confluence migration experiences",
-                "GitHub-adjacent communities and engineering blogs (Increment, Lenny's Newsletter for eng leaders)",
-                "Peer VPs in VC portfolio Slack groups or personal networks",
-                "Notion's own engineering blog and changelog; API documentation evaluated directly",
-                "G2 and TrustRadius reviews filtered by 'mid-market' and 'engineering' tags"
-              ]
-            }
-          },
-          {
-            "segment_label": "Enterprise Account \u2014 PLG-Grown Cross-Functional Ops Expansion",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "Enterprise SaaS, FinTech, or digital-native retail; companies with a tech-forward culture but an established IT governance layer",
-              "company_size": "1,000\u20135,000 employees; public or late-stage private; $150M+ ARR",
-              "geography": "US (primary); UK and DACH as secondary; APAC emerging",
-              "organizational_structure": "Notion arrived bottom-up \u2014 1\u20133 high-velocity teams (product, design, or marketing) adopted it without IT approval; a BizOps, RevOps, or Strategy function now wants to formalize it company-wide; IT and InfoSec are newly involved and acting as gatekeepers; the buying coalition spans a VP-level champion, a CIO or IT Director who must sign off, and a legal/compliance reviewer",
-              "buying_stage": "Late-stage evaluation / active procurement \u2014 bottom-up usage has reached a tipping point (200\u2013800 shadow seats), and the champion has been tasked by a C-suite executive to either formalize the contract or consolidate back to Microsoft/Google; a competitive bake-off with Microsoft Loop or an incumbent SharePoint/Confluence renewal is in progress",
-              "strategic_pain_points": [
-                "Shadow IT exposure: hundreds of employees are on personal or team Notion accounts containing sensitive company data, outside IT visibility",
-                "No centralized permission model across the existing Notion usage \u2014 different teams have built incompatible workspace architectures",
-                "Microsoft Loop is being pushed by IT as a zero-cost alternative because the company already pays for M365; champion must justify Notion's incremental cost",
-                "Data residency and GDPR compliance requirements may block a Notion Enterprise deal if EU data region is unavailable",
-                "Existing Notion workspaces have years of unstructured content \u2014 the Q&A quality of Notion AI depends on a cleanup project no one has budgeted"
-              ],
-              "trigger_events": [
-                "InfoSec audit surfaces unmanaged Notion accounts holding confidential roadmap or customer data",
-                "A Notion-heavy team grows to 100+ seats and the cost of uncoordinated Plus subscriptions exceeds an Enterprise quote",
-                "M365 renewal prompts IT to push Microsoft Loop as the 'free' alternative, forcing the Notion champion to make a formal case",
-                "A new Chief of Staff or VP Operations joins and inherits the tool chaos as their first mandate to fix",
-                "Notion's customer success team proactively identifies the account as expansion-ready based on usage signals and initiates an outbound touch"
-              ]
-            },
-            "persona": {
-              "role_job_title": "Chief of Staff / VP of Business Operations / Head of Strategy & Operations",
-              "demographic_context": "33\u201346 years old; MBA or ex-consulting background common; operates as a force-multiplier for the CEO or COO; owns cross-functional operating cadence (OKRs, QBRs, board prep); politically skilled and comfortable navigating IT, Legal, and Finance simultaneously",
-              "motivations": [
-                "Wants to be the person who brought coherent operational infrastructure to a company that previously ran on tribal knowledge and heroics",
-                "Personally invested in Notion as a tool \u2014 likely built the company's Notion system themselves before this procurement process \u2014 and is defending a bet they already made",
-                "Needs a win that is attributable: 'We went from scattered wikis to a single operating system and here are the metrics.'"
-              ],
-              "decision_criteria": [
-                "Does Notion Enterprise satisfy InfoSec's requirements: SSO, SCIM, audit logs, and a SOC 2 Type II certificate I can hand to Legal?",
-                "Can we consolidate all existing shadow Notion accounts under one Enterprise contract without losing any content?",
-                "What is the realistic TCO argument against Microsoft Loop when IT frames it as 'already paid for'?",
-                "Is there a customer success resource who will help us build a governance model, or are we on our own?",
-                "Can Notion AI be scoped to specific teamspaces so sensitive HR or Finance content doesn't bleed into general Q&A?"
-              ],
-              "language_patterns": [
-                "'We already have Notion everywhere \u2014 I just need to make it official before InfoSec shuts it down.'",
-                "'IT keeps telling me Loop is free. Help me explain why free isn't actually free.'",
-                "'I'm not buying a tool. I'm buying the operating system for how this company thinks and works.'",
-                "'If I can't show the CISO a SOC 2 report and an audit log, this deal doesn't happen.'",
-                "'The content is already there. I just need AI that can actually find it and surface the right answer.'"
-              ],
-              "frustrations": [
-                "Notion's audit log and granular permission controls are still materially weaker than Confluence or SharePoint at this company size \u2014 a real blocker with InfoSec",
-                "EU data residency is not yet available in a first-class form, which stalls procurement in GDPR-governed subsidiaries",
-                "Notion's customer success motion is underdeveloped for enterprise complexity \u2014 getting a governance framework built requires significant self-service effort",
-                "Microsoft Loop bundling argument from IT is hard to counter on price alone; Notion must win on adoption and UX quality, which is harder to quantify in a procurement slide"
-              ],
-              "downstream_use_cases": [
-                "Company-wide OKR and goal-tracking system linked to department project databases",
-                "Cross-functional meeting operating cadence: weekly leadership sync, QBR templates, board prep wikis",
-                "Centralized policy and process documentation hub replacing SharePoint for non-regulated content",
-                "Notion AI as an executive briefing tool: summarize last quarter's decisions, surface relevant prior discussions before a board meeting",
-                "New employee onboarding at scale: role-specific Notion portals assigned automatically via SCIM"
-              ],
-              "information_sources": [
-                "Notion's enterprise case study library and webinars (seeking peer examples at similar company size)",
-                "Gartner and Forrester reports on knowledge management and digital workspace platforms",
-                "Peer Chief of Staff networks (CSO Alliance, private Slack groups for Ops leaders)",
-                "Analyst briefings from Notion's enterprise sales team; direct engagement with a Notion AE or CSM",
-                "G2 Enterprise reviews; conversations with peers at companies that have completed a Confluence-to-Notion migration at scale"
-              ]
-            }
-          },
-          {
-            "segment_label": "Boutique Consultancy / Agency \u2014 Client-Facing Knowledge Delivery",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "Management consulting, digital marketing agencies, UX/design studios, RevOps consultancies, and fractional executive practices",
-              "company_size": "5\u201350 employees (or solopreneur with contractors); revenue $500K\u2013$10M; typically bootstrapped or lightly funded",
-              "geography": "US, UK, Australia \u2014 predominantly remote-first and geo-distributed",
-              "organizational_structure": "Founder-led or partner-led; no IT function; the founder or a senior ops/project manager is both champion and buyer; decision is made by one person in under two weeks",
-              "buying_stage": "Problem-aware, fast-moving \u2014 has already tried Google Docs + Slides for client deliverables and found it unprofessional or unsustainable; may have seen a peer consultancy's Notion client portal and immediately wants to replicate it; purchase decision is often made within days of discovery",
-              "strategic_pain_points": [
-                "Client deliverables live across Google Drive folders, email attachments, and Slack threads \u2014 clients can never find the latest version",
-                "There is no repeatable system for onboarding a new client; every engagement is rebuilt from scratch",
-                "Sharing internal work product with clients requires either sloppy Google Drive permissions or expensive client portal tools",
-                "Knowledge built during an engagement (research, frameworks, decisions) evaporates when the project ends because there is no structured repository",
-                "Notion Sites now offers a way to publish a professional-looking client portal or documentation site without hiring a developer"
-              ],
-              "trigger_events": [
-                "A client complains they can't find the deliverable shared two weeks ago \u2014 founder hits a breaking point",
-                "A peer consultant shares their Notion client portal template on Twitter or in a community newsletter",
-                "The agency wins a larger retainer client who explicitly asks for a 'shared project workspace'",
-                "Founder discovers Notion Sites and realizes they can publish a lightweight documentation or knowledge site without Webflow or a developer",
-                "A new contractor joins and the founder realizes there is no written system for how the business operates"
-              ]
-            },
-            "persona": {
-              "role_job_title": "Founder / Managing Consultant / Director of Client Services",
-              "demographic_context": "28\u201342 years old; left a larger agency or in-house role to go independent 1\u20135 years ago; high digital literacy; values aesthetics and perceived professionalism as much as function; often has a personal Notion workspace and is extending it into client work",
-              "motivations": [
-                "Wants client-facing work to look premium and organized \u2014 Notion's design quality signals professionalism without requiring a developer",
-                "Personally driven to stop rebuilding the same onboarding doc for every new client and instead run on repeatable systems",
-                "Sees Notion as a competitive differentiator \u2014 'we run on Notion' is a signal of operational maturity to tech-forward clients"
-              ],
-              "decision_criteria": [
-                "Can I publish a clean, branded client portal without writing code or paying for another tool?",
-                "Can clients view and comment on shared pages without needing a Notion account?",
-                "Is the template I can start from good enough that I'm not building from scratch?",
-                "Will this impress a Series B SaaS client or look like a scrappy freelancer solution?",
-                "What's the total monthly cost for me plus 2\u20133 internal collaborators?"
-              ],
-              "language_patterns": [
-                "'I want my clients to feel like they hired a $500/hr firm, not a freelancer.'",
-                "'Google Drive is a dumping ground. I need something that looks like a real client portal.'",
-                "'I've been rebuilding the same onboarding doc for three years. I need a system, not a document.'",
-                "'If I can publish it as a website, I don't need to pay for a separate documentation tool.'",
-                "'My best clients are technical. They'll actually appreciate a clean Notion workspace over a PDF.'"
-              ],
-              "frustrations": [
-                "Guest permissions require clients to create a Notion account \u2014 adds friction for non-technical or executive-level clients who just want a link that works",
-                "Notion Sites lacks CMS-style collections and basic SEO metadata, limiting its utility for anything beyond a simple published page",
-                "There is no native client approval or e-signature workflow \u2014 external tools (Docusign, Loom) must be embedded manually",
-                "Notion's branding customization is limited \u2014 white-labeling is effectively unavailable, which matters for agencies selling premium positioning",
-                "Automations are too limited to replace a real project management tool for complex multi-phase engagements"
-              ],
-              "downstream_use_cases": [
-                "Client onboarding portal: welcome page, project timeline, deliverable tracker, and shared resource library \u2014 all in one Notion link",
-                "Notion Sites as a lightweight public-facing knowledge base or documentation site for a client product",
-                "Internal agency wiki: service offerings, pricing, proposal templates, contractor onboarding",
-                "Weekly status report template auto-populated via Notion database, shared with client via a guest link",
-                "Notion AI for drafting first-pass deliverables, summarizing client interview notes, and generating status update copy"
-              ],
-              "information_sources": [
-                "Twitter/X and LinkedIn: Notion power users and consultant-creators sharing templates and systems",
-                "YouTube: Thomas Frank Explains, August Bradley, and other Notion productivity creators",
-                "Indie Hackers, Designer News, and Product Hunt for tool discovery",
-                "Notion's template gallery \u2014 often the first and last stop before purchase",
-                "Peer communities: agency owner Slack groups, Superpath, Every.to newsletter ecosystem"
-              ]
-            }
-          }
-        ]
+        "passed": true,
+        "failures": []
       }
     }
   },
-  "73c370027d0491c107b0bf0fe6731956b6774ea286a2d5f5024d58452b99fd73": {
-    "input_tokens": 2684,
-    "output_tokens": 1990,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_analyze_serp",
-      "input": {
-        "query_text": "Confluence is too expensive and nobody uses it",
-        "top_results": [
-          {
-            "rank": 1,
-            "url": "https://www.featurebase.app/blog/confluence-pricing",
-            "title": "Confluence Pricing 2026: Plans, Costs, and Real-W...",
-            "snippet": "Confluence pricing plans (Free, Standard, Premium, Enterprise) are priced per user/month and are mostly billed annually. Real-world costs often start at $1,000\u2013$5,000/year, depending on user tiers, add-ons, and team size."
-          },
-          {
-            "rank": 2,
-            "url": "https://massivegrid.com/blog/confluence-per-user-pricing-true-cost/",
-            "title": "The True Cost of Confluence Per-User Pricing at Enterprise Scale | MassiveGRID Blog",
-            "snippet": "With Atlassian's pattern of annual increases, a five-year projection at 5,000 users could comfortably exceed $2 million in total Confluence spending."
-          },
-          {
-            "rank": 3,
-            "url": "https://bunnydesk.ai/blog/atlassian-confluence-pricing/",
-            "title": "Confluence Pricing in 2026: Every Plan, Cost, and Hidden Fee Explained | BunnyDesk Blog",
-            "snippet": "Confluence pricing rewards large enterprises already locked into the Atlassian ecosystem. For everyone else, the combination of per-user scaling, add-on costs, and manual documentation maintenance creates a ceiling on efficiency that grows more expensive over time."
-          },
-          {
-            "rank": 4,
-            "url": "https://softgile.com/en/confluence-pricing-2026/",
-            "title": "Confluence Pricing 2026: Complete Guide to Plans, Enterprise Costs and Hidden Fees \u2013 Softgile",
-            "snippet": "Confluence pricing depends on various factors including user quantity, volume-based discounts, storage requirements, third-party integrations, and support tiers.",
-            "extracted_content": "Depending on the quantity of users, the subscription will change and reflect that need. But Confluence offers a volume-based discount, that is if the number of sites increases, the Confluence cost per user decreases."
-          },
-          {
-            "rank": 5,
-            "url": "https://www.peerspot.com/questions/what-is-your-experience-regarding-pricing-and-costs-for-atlassian-confluence",
-            "title": "What is your experience regarding pricing and costs for Atlassian Confluence?",
-            "snippet": "Real user feedback on Confluence pricing shows mixed opinions, with some finding it good value and others considering it expensive, particularly regarding add-on costs and scaling.",
-            "extracted_content": "The Confluence pricing is good. The only challenge we have experienced is with Jira and the add ons we use that need to be paid for separately. I find the solution to be expensive. We pay $350 a month to use the solution."
-          },
-          {
-            "rank": 6,
-            "url": "https://www.trustradius.com/products/atlassian-confluence/pricing",
-            "title": "Atlassian Confluence Pricing 2026",
-            "snippet": "Verified user reviews indicate that Confluence is slightly on the expensive side and pricing increases as the team grows.",
-            "extracted_content": "The only major negative impact is that Atlassian Confluence is slightly on the expensive side and the pricing increases as the team grows."
-          },
-          {
-            "rank": 7,
-            "url": "https://www.empyra.com/confluence-pricing",
-            "title": "Confluence Pricing & Plans 2026 | Compare Features & Costs",
-            "snippet": "Confluence pricing is based on a per-user subscription model, with Free, Standard, Premium, and Enterprise plans available. Costs vary by plan and team size, with higher tiers offering advanced permissions, analytics, automation, and enterprise-grade security.",
-            "extracted_content": "Confluence pricing is based on a per-user subscription model, with Free, Standard, Premium, and Enterprise plans available. Costs vary by plan and team size, with higher tiers offering advanced permissions, analytics, automation, and enterprise-grade security. Pricing is billed monthly or annually and scales as you add users."
-          },
-          {
-            "rank": 8,
-            "url": "https://www.eesel.ai/blog/confluence-pricing",
-            "title": "A complete guide to Confluence pricing in 2026 | eesel AI",
-            "snippet": "Confluence Cloud offers tiered pricing with the Free plan for small teams, Standard plan at $6.40/user/month, and Premium plan at $12.30/user/month with volume and annual discounts available.",
-            "extracted_content": "For most people, Confluence Cloud is the way to go. It's a SaaS (Software as a Service) product, which means Atlassian handles all the backend stuff like hosting, security, and updates. The pricing is based on how many users you have, and it's split into four main tiers."
-          },
-          {
-            "rank": 9,
-            "url": "https://www.capterra.com/p/136446/Confluence/",
-            "title": "Confluence Software 2026: Features, Integrations, Pros & Cons | Capterra",
-            "snippet": "One of the drawbacks of Confluence is its pricing structure, which can be expensive for smaller businesses or tanks.",
-            "extracted_content": "One of the drawbacks of Confluence is its pricing structure, which can be expensive for smaller businesses or teams."
-          },
-          {
-            "rank": 10,
-            "url": "https://ones.com/blog/comprehensive-guide-to-confluence-pricing-in/",
-            "title": "Comprehensive Guide to Confluence Pricing in 2025",
-            "snippet": "Confluence offers tiered pricing with Standard at $8.33/user/month, Premium at $10/user/month. The platform is designed for teams of all sizes but may require evaluating alternatives based on specific needs.",
-            "extracted_content": "Confluence offers a tiered pricing system, with the Standard plan costing $8.33 per user per month, the Premium plan costing $10.00 per user per month, and the Server plan costing $10.00."
-          }
-        ],
-        "common_angles": [
-          "Per-user pricing breakdown by plan tier (Free \u2192 Standard \u2192 Premium \u2192 Enterprise), anchored on specific $/user/month figures like '$6.40' and '$12.30', framing the piece as a definitive pricing reference",
-          "Hidden and compounding cost exposure: add-on fees, storage tiers, third-party integrations, and Atlassian's pattern of annual price increases \u2014 as BunnyDesk notes, 'a ceiling on efficiency that grows more expensive over time'",
-          "Enterprise-scale cost horror stories: MassiveGRID's five-year, 5,000-user projection 'comfortably exceeding $2 million' used to dramatize how per-user scaling punishes growth",
-          "SMB/non-enterprise pain framing: Capterra and BunnyDesk both call out that Confluence 'rewards large enterprises already locked into the Atlassian ecosystem' while smaller teams bear disproportionate cost",
-          "Volume discount and annual billing as mitigating factors, presented neutrally to appear balanced without meaningfully addressing the adoption/ROI problem"
-        ],
-        "content_gaps": [
-          "The 'nobody uses it' half of the query is entirely unaddressed \u2014 zero results tackle low adoption rates, page staleness, or the ROI problem of paying for seats where active contributors are a small fraction of licensed users",
-          "No results quantify the cost-per-value ratio: what teams actually get out of Confluence relative to spend, or how to audit and right-size licenses based on real usage data (e.g., monthly active editors vs. total seats)",
-          "Missing decision-stage content for the buyer actively evaluating an exit: no result provides a structured 'stay vs. switch' framework, migration cost estimates, or a checklist for identifying when Confluence has truly failed a team",
-          "No coverage of the organizational/behavioral side \u2014 why documentation tools go unused (search friction, page hierarchy complexity, lack of accountability), which is the root cause driving the 'nobody uses it' frustration",
-          "Competitor alternatives are mentioned in passing but never benchmarked head-to-head on TCO (total cost of ownership) across realistic team sizes, leaving the frustrated buyer without an actionable next step"
-        ],
-        "recommended_format": "TCO audit framework combining usage-reality diagnosis (\"nobody uses it\") with a tiered stay-vs-switch cost comparison across 3\u20134 named alternatives"
-      }
-    }
-  },
-  "7f12ec3b84edccf375b6a51492d86aab8c6861b2965e4b677f3d027d5fcfa8f4": {
-    "input_tokens": 2872,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_actionability",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "b90f9c7733edb1656dd91843bd3cba948a28b3f680c86f67187f78cd0cf39d44": {
-    "input_tokens": 5538,
-    "output_tokens": 3257,
+  "f310560ea4ee68af722f96310acd1d2baca4494729103280f14acab52d678454": {
+    "input_tokens": 2400,
+    "output_tokens": 1800,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_draft_content_brief",
       "input": {
-        "target_query": "Confluence is too expensive and nobody uses it",
-        "icp_segment_label": "Series A/B SaaS Startup \u2014 Ops-Led Tool Consolidation",
-        "angle": "Rather than another Confluence pricing breakdown, this piece treats \"nobody uses it\" as the primary cost problem \u2014 showing ops leaders at 25\u2013120-person SaaS startups how to audit real usage data, calculate a true cost-per-active-contributor ratio, and run a structured stay-vs-switch decision against 3 named alternatives before their next renewal date.",
-        "audience": "Heads of Operations and Chiefs of Staff at post-Series-A SaaS startups (25\u2013120 employees) who already suspect their Confluence is a graveyard and need a defensible, CFO-ready framework to either fix it or replace it \u2014 ideally without looping in an engineer.",
+        "schema_version": 1,
+        "target_query": "alternatives to notion for engineering documentation",
+        "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "angle": "How distributed engineering teams pick a Notion alternative when half the team writes in Markdown and half doesn't \u2014 a decision framework + 30-day pilot, framed around bus-factor risk rather than feature checklists.",
+        "audience": "Engineering Directors at 200\u2013500-person dev shops actively evaluating a Notion replacement, especially those whose teams are split between Markdown-source-of-truth and WYSIWYG factions.",
         "structure": [
           {
-            "heading": "Your Confluence Is a Graveyard \u2014 Here's How to Prove It in 20 Minutes",
-            "purpose": "Validate and name the 'nobody uses it' frustration that the entire SERP ignores. Establish credibility by leading with the behavioral/organizational problem, not the pricing table. This is the hook that separates the piece from every 'Confluence costs $6.40/user' article ranking above us.",
+            "heading": "The bus-factor problem the listicles don't mention",
+            "purpose": "Defuse the dominant listicle angle by reframing the decision around knowledge loss rather than features.",
             "key_points": [
-              "Introduce the concept of the 'active contributor ratio': total licensed seats \u00f7 monthly active editors (people who created or meaningfully edited a page in the last 30 days). Most teams discover this is 10\u201325% of paid seats.",
-              "Walk through exactly where to find this data in Confluence: Admin > Analytics > Space Activity (Standard/Premium plans) or Atlassian Access admin panel. Give the literal click path so the reader can check right now.",
-              "Call out the three behavioral failure modes that kill Confluence adoption at startups: page hierarchy paralysis (nobody knows where to create a page), stale search results that erode trust, and zero accountability for page ownership.",
-              "Use the ICP's own language: 'Our Confluence is a graveyard. Nobody updates it and nobody reads it.' Frame this as a structurally predictable outcome for flat-org startups, not a failure of effort."
+              "Listicles compare features; the actual cost of the wrong choice is tribal-knowledge loss when senior engineers leave",
+              "Quantify bus factor \u2014 one or two engineers carrying critical decisions in their heads",
+              "Anchor in a real incident postmortem framing \u2014 what does a 'we couldn't find the docs' incident actually cost?"
             ]
           },
           {
-            "heading": "The Real Number: What You're Actually Paying Per Person Who Uses It",
-            "purpose": "Introduce the cost-per-active-contributor (CPAC) metric \u2014 the content gap no SERP result addresses. This reframes the pricing conversation from headline $/seat to a ratio that exposes the true ROI problem and gives the ops leader a number they can put in front of their CEO.",
+            "heading": "The Markdown vs WYSIWYG factional split is a workflow question, not a religious one",
+            "purpose": "Address the content gap the SERP misses \u2014 the Markdown/WYSIWYG factional reality inside engineering orgs.",
             "key_points": [
-              "Provide a simple CPAC formula: (annual Confluence spend including add-ons) \u00f7 (monthly active contributors \u00d7 12). Show a worked example for a 60-seat Standard plan team where only 12 people edit regularly \u2014 the effective cost jumps from ~$6.40 to ~$32/user/month.",
-              "Surface the compounding cost layer the SERP mentions but never applies to startups: Atlassian Access (SSO/SAML, ~$4/user/month), popular add-ons like Gliffy or Table Filter (often $3\u20138/user/month), and the fact that these add-ons also charge per seat regardless of usage.",
-              "Include a mini cost-audit table the writer should build: Line items for base plan, Atlassian Access, top 2\u20133 add-ons, and annual price-increase buffer (Atlassian has raised prices 8\u201315% in recent renewal cycles). Total = 'what you're actually spending.'",
-              "Explicitly contrast with the SERP's common angle: unlike the '$2M at 5,000 users' enterprise horror story, this section sizes the pain at 40\u201380 seats \u2014 the range where startup ops leaders are making real decisions today."
+              "Half the team writes Markdown by reflex (engineers from dev-tools backgrounds); half wants WYSIWYG (designers, PMs, junior engineers)",
+              "Tooling that exports clean Markdown wins the long game regardless of authoring surface",
+              "Round-trip test: import a Markdown doc, edit it in the tool, export it back \u2014 diff should be trivial",
+              "Use the segment's exact phrase 'single source of truth' here verbatim"
             ]
           },
           {
-            "heading": "Stay-vs-Switch Framework: Three Questions Before You Touch Anything",
-            "purpose": "Deliver the decision-stage content the SERP completely omits. Buyers searching 'Confluence is too expensive' are not looking for another pricing table \u2014 they are mid-decision and need a structured framework to justify action (or inaction) to their CEO and CFO.",
+            "heading": "Decision framework: the four tests an engineering director should actually run",
+            "purpose": "Give a concrete framework distinct from the SERP's generic feature comparisons.",
             "key_points": [
-              "Question 1 \u2014 Is the adoption problem fixable? Present two conditions that make a fix viable: (a) you have one owner willing to enforce page templates and quarterly audits, and (b) your engineering team uses Jira, making the Atlassian ecosystem genuinely sticky. If neither is true, staying is subsidizing a graveyard.",
-              "Question 2 \u2014 What is the real migration cost? Break this into three buckets: content migration (Confluence export \u2192 target tool import, typically a weekend project with tools like Notion's Confluence importer or Markdown export scripts), re-training time (2\u20134 hours per team, not a 'dedicated project'), and the 30-day parallel-run period. Explicitly answer the ICP's decision criterion: 'Can we migrate out of Confluence in under two weeks without a dedicated project?' \u2014 and give an honest yes/no with conditions.",
-              "Question 3 \u2014 Will engineers actually use the replacement? Name this as the make-or-break adoption criterion. Flag that any tool requiring a separate Jira-style integration to win over eng teams carries the same adoption risk as Confluence. This criterion should filter the alternatives list in the next section.",
-              "Give the reader a simple scorecard (3 questions, 0\u20132 points each) with a threshold: score 4\u20136 means switch, 2\u20133 means fix first, 0\u20131 means the problem is process, not tool."
+              "Real-time collab parity test (paired-doc concurrent edit, including conflict handling)",
+              "Markdown source-of-truth test (round-trip import/export)",
+              "API + automation test (try to drive an RFC template via CI)",
+              "Security review test (SSO + audit log for SOC 2 readiness)"
             ]
           },
           {
-            "heading": "TCO Comparison: Confluence vs. Three Realistic Alternatives at 40, 60, and 100 Seats",
-            "purpose": "Provide the head-to-head TCO benchmark the SERP entirely skips. This is the most actionable section for a buyer in active evaluation mode. Naming alternatives and showing real numbers at startup-relevant seat counts converts the piece from informational to decisional.",
+            "heading": "The 30-day pilot playbook",
+            "purpose": "Fill the content gap: every listicle says 'we switched'; almost none provides a phased pilot script the reader can socialize to their VP.",
             "key_points": [
-              "Cover exactly three alternatives \u2014 Notion, Outline, and Coda \u2014 selected because they map to the ICP's actual consideration set (Notion is already in use by 3\u201310 people at most of these companies; Outline is the eng-team-friendly open-source option; Coda is the 'replacing three tools' candidate).",
-              "Build a TCO table with columns: Tool, 40-seat annual cost, 60-seat annual cost, 100-seat annual cost, notable add-on or hidden costs, and one-line adoption risk flag. Use public pricing; note where pricing is custom/sales-required.",
-              "For Notion specifically, address the ICP's live frustration: per-seat cost is lower, but answer the question 'Does Notion AI actually surface answers from our existing content, or is it just a writing assistant?' honestly \u2014 it depends on whether the workspace is structured. Don't oversell.",
-              "Flag the 'I'm not buying another tool \u2014 I'm replacing three of them' use case: identify which alternative best consolidates wiki + meeting notes + lightweight project tracking, with a concrete example of what that consolidation looks like.",
-              "Include a 'CFO row': which option does NOT require CFO sign-off at 50 seats, based on the ICP's threshold (typically <$5,000/year or under a standard SaaS procurement limit)."
+              "Week 1: import 50 critical docs (most painful ones first \u2014 that's the real test)",
+              "Week 2: route RFCs through the new tool",
+              "Week 3: measure search-hit-rate vs the old baseline",
+              "Week 4: decision meeting with data, not feels"
             ]
           },
           {
-            "heading": "If You're Staying: The Minimum Viable Confluence Fix (Without Bugging an Engineer)",
-            "purpose": "Serve the segment of readers who score 'fix first' on the framework \u2014 and prevent the piece from feeling like a one-sided switch pitch. This section builds trust and reduces bounce from readers not yet ready to migrate. It also directly uses an ICP language pattern as a heading concept.",
+            "heading": "When NOT to migrate \u2014 three failure modes that quietly kill these projects",
+            "purpose": "Build trust by naming the unsexy failure modes that listicles never cover.",
             "key_points": [
-              "Three-step triage: (1) Archive every page not edited in 12 months using Confluence's bulk archive feature. (2) Flatten the page hierarchy to a maximum of two levels \u2014 this alone resolves most 'I don't know where to find anything' complaints. (3) Assign a single 'Page Owner' label to every top-level space, with a monthly Slack reminder bot (no engineer needed \u2014 use Confluence's built-in automation).",
-              "Address the 'Can I build this without bugging an engineer?' criterion directly: the entire fix should be executable by an ops generalist in a single afternoon using native Confluence features, with no Marketplace add-ons required.",
-              "Recommend one structural change that has an outsized adoption impact: switching from space-based organization to a single 'Home' page with curated 'Start Here' links for each team, modeled on a pinned Slack channel rather than a file directory.",
-              "Set honest expectations: this fix addresses search trust and page hygiene, but it does not solve the Jira-integration gap for eng teams or the per-seat cost problem. If those are the core pain points, the fix is temporary."
-            ]
-          },
-          {
-            "heading": "Making the Call: A 30-Day Exit Plan for Teams Ready to Switch",
-            "purpose": "Close the piece with the highest-conviction action path for the buyer who has already decided. This is a conversion section \u2014 it reduces perceived switching risk and gives the ops leader a concrete plan they can share with their CEO and eng lead today.",
-            "key_points": [
-              "Lay out a literal 30-day timeline: Week 1 = export and audit Confluence content (identify the 20% of pages that actually matter); Week 2 = import to new tool and set up core templates (onboarding checklist, product spec, meeting notes); Week 3 = pilot with one team (not the whole company); Week 4 = announce deprecation of Confluence and set a hard cutover date.",
-              "Name the three templates the ICP needs on Day 1 in the new tool: new hire onboarding portal, product spec/PRD template, and a weekly standup/meeting notes database. These map directly to the ICP's downstream use cases and remove the 'blank page paralysis' that kills new tool adoption.",
-              "Address the renewal-date forcing function: if the team is within 60 days of Atlassian renewal, flag that cancellation notice periods vary (typically 30 days for Cloud). Provide the cancellation path so the reader knows the practical deadline.",
-              "Frame the outcome in the ICP's motivational language: this is 'the operational win' \u2014 the visible system fix that justifies their seat at the leadership table and that they can hand off without re-litigating tool decisions in six months."
+              "Tool sprawl: layering a fifth tool on top of four others guarantees split-brain",
+              "Custom-wiki temptation: maintenance cost compounds and tooling teams hate it",
+              "Half-rolled-out: split-brain across teams kills adoption regardless of tool quality"
             ]
           }
         ],
         "key_points": [
-          "The piece must address the 'nobody uses it' half of the query as the PRIMARY frame \u2014 every SERP competitor ignores this entirely and treats the query as a pricing research question. The adoption failure is the cost problem.",
-          "Use the ICP's exact language patterns naturally in the body copy: 'Our Confluence is a graveyard,' 'I don't want to manage a wiki \u2014 I want the wiki to manage itself,' 'Can I build this without bugging an engineer?' and 'I'm not buying another tool \u2014 I'm replacing three of them.' These are not paraphrases; use them as direct voice-of-customer.",
-          "Introduce and define the 'cost-per-active-contributor' (CPAC) metric in section 2 and use it consistently throughout. This is the single most differentiated analytical concept in the piece and should feel like a proprietary framework.",
-          "All pricing figures cited must reflect public pricing at the time of writing; note the plan tier and billing frequency. Do not cite specific $/user/month figures without the caveat that Atlassian has raised prices at renewal \u2014 this is a known pattern the ICP has experienced.",
-          "Avoid all SEO platitudes: no 'in today's fast-paced business environment,' no 'it's important to consider,' no 'there are many options available.' Write as if addressing one specific person \u2014 a 32-year-old ops lead at a 60-person SaaS company in SF who has already exported the Confluence admin report and is reading this on a Tuesday afternoon.",
-          "The tone is peer-level and direct, not vendor-neutral to the point of being useless. The piece should have a point of view: low adoption is the actual ROI killer, and most teams don't have a pricing problem \u2014 they have an accountability and architecture problem inside their wiki."
+          "Lead with bus-factor framing \u2014 that's the content gap. Do not lead with feature comparison.",
+          "Use the ICP's verbatim phrase 'single source of truth' in either the intro or an H2",
+          "Reference the Markdown vs WYSIWYG factional split as a known problem inside engineering orgs",
+          "Avoid the word 'tribal knowledge' in titles (overused in SERP); use it in body sparingly",
+          "Cite the SERP's #2 ('Why We Left Notion') as a foil \u2014 concede their pain, then go deeper",
+          "Recommended format per SERP analysis: decision-framework + migration-playbook hybrid"
         ],
         "sources": [
-          "https://www.featurebase.app/blog/confluence-pricing",
-          "https://bunnydesk.ai/blog/atlassian-confluence-pricing/",
-          "https://massivegrid.com/blog/confluence-per-user-pricing-true-cost/",
-          "https://www.peerspot.com/questions/what-is-your-experience-regarding-pricing-and-costs-for-atlassian-confluence",
-          "https://www.capterra.com/p/136446/Confluence/",
-          "https://www.eesel.ai/blog/confluence-pricing"
+          "https://example.com/leaving-notion",
+          "https://example.com/notion-vs-outline-deep-dive",
+          "https://example.com/wiki-tool-decision-framework",
+          "Internal incident postmortem (replace with the writer's real example before publish)"
         ],
-        "recommended_length_words": 2600,
+        "recommended_length_words": 2400,
         "internal_linking_suggestions": []
-      }
-    }
-  },
-  "bfb17abcee8ad3c445ecc51be0070da65db8ee11808029b790cb56b4a86ad765": {
-    "input_tokens": 1857,
-    "output_tokens": 1455,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_generate_geo_query_list",
-      "input": {
-        "queries": [
-          {
-            "position": 1,
-            "text": "knowledge management for startups",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 2,
-            "text": "how to organize internal documentation",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 3,
-            "text": "do I need a wiki tool",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 4,
-            "text": "best way to centralize company docs",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 5,
-            "text": "alternative to having docs everywhere",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 6,
-            "text": "our documentation is scattered everywhere",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 7,
-            "text": "Confluence is too expensive and nobody uses it",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 8,
-            "text": "we need a single source of truth for docs",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 9,
-            "text": "onboarding takes forever because knowledge is tribal",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 10,
-            "text": "docs are scattered across Notion Google Docs Slack",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 11,
-            "text": "wiki that manages itself without manual updates",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 12,
-            "text": "knowledge management with Slack integration",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 13,
-            "text": "can I build automated documentation without engineers",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 14,
-            "text": "knowledge base that replaces project tracking tool",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 15,
-            "text": "Notion vs Confluence for startups 2026",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 16,
-            "text": "Notion alternatives that aren't expensive",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 17,
-            "text": "best wiki tool with AI search",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 18,
-            "text": "Slite vs Confluence vs Notion comparison",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 19,
-            "text": "knowledge management tool that consolidates three tools into one",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 20,
-            "text": "free knowledge management tool for startups",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 21,
-            "text": "Confluence pricing vs alternatives cost",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 22,
-            "text": "wiki tool under $500 month for 50 person team",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 23,
-            "text": "how much does Notion per seat cost vs Confluence",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 24,
-            "text": "knowledge management ROI for Series A startups",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 25,
-            "text": "cheapest way to stop using five documentation tools",
-            "framing": "price-driven",
-            "refinement_applied": true
-          }
-        ],
-        "journey_arc_summary": "The buyer starts with fuzzy, category-level questions (\"knowledge management for startups\", \"do I need a wiki tool\") before naming the acute pain\u2014scattered docs, Confluence's failure to scale, and tribal knowledge blocking onboarding. Around position 11\u201314, they shift to power-user concerns: automation, no-engineer setup, and tool consolidation (replacing multiple systems). By position 15, they name competitors directly (Notion, Confluence, Slite) and start comparing. The final arc (20\u201325) is all pricing and ROI\u2014they want to quantify the cost of staying fragmented versus buying one platform that kills three separate subscriptions. Throughout, the language mirrors their stated framing: \"single source of truth,\" \"wiki that manages itself,\" and the core objection \"I'm not buying another tool, I'm replacing three.\""
-      }
-    }
-  },
-  "dfe245c553d3984f37c6cd76592e8a0815bc8a5bdf29358d9b227fbd579b1064": {
-    "input_tokens": 21459,
-    "output_tokens": 1915,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_serp_results",
-      "input": {
-        "results": [
-          {
-            "rank": 1,
-            "url": "https://www.featurebase.app/blog/confluence-pricing",
-            "title": "Confluence Pricing 2026: Plans, Costs, and Real-W...",
-            "snippet": "Confluence pricing plans (Free, Standard, Premium, Enterprise) are priced per user/month and are mostly billed annually. Real-world costs often start at $1,000\u2013$5,000/year, depending on user tiers, add-ons, and team size.",
-            "extracted_content": "Confluence pricing plans (Free, Standard, Premium, Enterprise) are priced per user/month and are mostly billed annually. Features like automation, advanced analytics, and enhanced security are only available in the paid Standard and Premium plans. Marketplace apps for diagrams, reporting, or workflow tools are not included in base pricing. Real-world costs often start at $1,000\u2013$5,000/year, depending on user tiers, add-ons, and team size."
-          },
-          {
-            "rank": 2,
-            "url": "https://massivegrid.com/blog/confluence-per-user-pricing-true-cost/",
-            "title": "The True Cost of Confluence Per-User Pricing at Enterprise Scale | MassiveGRID Blog",
-            "snippet": "With Atlassian's pattern of annual increases, a five-year projection at 5,000 users could comfortably exceed $2 million in total Confluence spending.",
-            "extracted_content": "The fundamental problem with per-user pricing for a knowledge management platform is that it creates an economic incentive that directly contradicts the platform's purpose. A wiki exists to democratize access to information \u2014 to ensure that every person in an organization can find, read, and contribute to the collective knowledge base. With Atlassian's pattern of annual increases, a five-year projection at 5,000 users could comfortably exceed $2 million in total Confluence spending."
-          },
-          {
-            "rank": 3,
-            "url": "https://bunnydesk.ai/blog/atlassian-confluence-pricing/",
-            "title": "Confluence Pricing in 2026: Every Plan, Cost, and Hidden Fee Explained | BunnyDesk Blog",
-            "snippet": "Confluence pricing rewards large enterprises already locked into the Atlassian ecosystem. For everyone else, the combination of per-user scaling, add-on costs, and manual documentation maintenance creates a ceiling on efficiency that grows more expensive over time.",
-            "extracted_content": "Confluence pricing rewards large enterprises already locked into the Atlassian ecosystem. For everyone else, the combination of per-user scaling, add-on costs, and manual documentation maintenance creates a ceiling on efficiency that grows more expensive over time."
-          },
-          {
-            "rank": 4,
-            "url": "https://softgile.com/en/confluence-pricing-2026/",
-            "title": "Confluence Pricing 2026: Complete Guide to Plans, Enterprise Costs and Hidden Fees \u2013 Softgile",
-            "snippet": "Confluence pricing depends on various factors including user quantity, volume-based discounts, storage requirements, third-party integrations, and support tiers.",
-            "extracted_content": "Depending on the quantity of users, the subscription will change and reflect that need. But Confluence offers a volume-based discount, that is if the number of sites increases, the Confluence cost per user decreases."
-          },
-          {
-            "rank": 5,
-            "url": "https://www.peerspot.com/questions/what-is-your-experience-regarding-pricing-and-costs-for-atlassian-confluence",
-            "title": "What is your experience regarding pricing and costs for Atlassian Confluence?",
-            "snippet": "Real user feedback on Confluence pricing shows mixed opinions, with some finding it good value and others considering it expensive, particularly regarding add-on costs and scaling.",
-            "extracted_content": "The Confluence pricing is good. The only challenge we have experienced is with Jira and the add ons we use that need to be paid for separately. I find the solution to be expensive. We pay $350 a month to use the solution."
-          },
-          {
-            "rank": 6,
-            "url": "https://www.trustradius.com/products/atlassian-confluence/pricing",
-            "title": "Atlassian Confluence Pricing 2026",
-            "snippet": "Verified user reviews indicate that Confluence is slightly on the expensive side and pricing increases as the team grows.",
-            "extracted_content": "The only major negative impact is that Atlassian Confluence is slightly on the expensive side and the pricing increases as the team grows."
-          },
-          {
-            "rank": 7,
-            "url": "https://www.empyra.com/confluence-pricing",
-            "title": "Confluence Pricing & Plans 2026 | Compare Features & Costs",
-            "snippet": "Confluence pricing is based on a per-user subscription model, with Free, Standard, Premium, and Enterprise plans available. Costs vary by plan and team size, with higher tiers offering advanced permissions, analytics, automation, and enterprise-grade security.",
-            "extracted_content": "Confluence pricing is based on a per-user subscription model, with Free, Standard, Premium, and Enterprise plans available. Costs vary by plan and team size, with higher tiers offering advanced permissions, analytics, automation, and enterprise-grade security. Pricing is billed monthly or annually and scales as you add users."
-          },
-          {
-            "rank": 8,
-            "url": "https://www.eesel.ai/blog/confluence-pricing",
-            "title": "A complete guide to Confluence pricing in 2026 | eesel AI",
-            "snippet": "Confluence Cloud offers tiered pricing with the Free plan for small teams, Standard plan at $6.40/user/month, and Premium plan at $12.30/user/month with volume and annual discounts available.",
-            "extracted_content": "For most people, Confluence Cloud is the way to go. It's a SaaS (Software as a Service) product, which means Atlassian handles all the backend stuff like hosting, security, and updates. The pricing is based on how many users you have, and it's split into four main tiers."
-          },
-          {
-            "rank": 9,
-            "url": "https://www.capterra.com/p/136446/Confluence/",
-            "title": "Confluence Software 2026: Features, Integrations, Pros & Cons | Capterra",
-            "snippet": "One of the drawbacks of Confluence is its pricing structure, which can be expensive for smaller businesses or teams.",
-            "extracted_content": "One of the drawbacks of Confluence is its pricing structure, which can be expensive for smaller businesses or teams."
-          },
-          {
-            "rank": 10,
-            "url": "https://ones.com/blog/comprehensive-guide-to-confluence-pricing-in/",
-            "title": "Comprehensive Guide to Confluence Pricing in 2025",
-            "snippet": "Confluence offers tiered pricing with Standard at $8.33/user/month, Premium at $10/user/month. The platform is designed for teams of all sizes but may require evaluating alternatives based on specific needs.",
-            "extracted_content": "Confluence offers a tiered pricing system, with the Standard plan costing $8.33 per user per month, the Premium plan costing $10.00 per user per month, and the Server plan costing $10.00."
-          }
-        ]
-      }
-    }
-  },
-  "e32a56af3b4f996fa1abf49098a84e3b6c37065078bb4d72fc3d3f3b817d2c85": {
-    "input_tokens": 1356,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_specificity",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "f78fd32551df0363f317bb0501b37d830d60aa67e75ba5bd47a7225facc9a7cf": {
-    "input_tokens": 1937,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_search_intent_alignment",
-      "input": {
-        "passed": true
       }
     }
   }

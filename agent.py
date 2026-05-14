@@ -337,14 +337,17 @@ def run_brief(
             )
         )
 
-        # Semantic-memory RAG: retrieve top-3 similar past briefs.
+        # Semantic-memory RAG (v3 chunk 1): retrieve top-5 *highest-scoring*
+        # similar past briefs — score-aware, not just distance-nearest. The
+        # drafter gets high-performing briefs as few-shot examples.
         icp_sig = _icp_summary(primary_segment)
         similar = tuple(
             semantic.find_similar(
                 market=market,
                 icp_summary=icp_sig,
                 angle_hint=priority.selected_query.query.text,
-                k=3,
+                k=5,
+                rank_by_eval_score=True,
             )
         )
 
@@ -401,12 +404,21 @@ def run_brief(
 
         brief_path = _write_brief(draft_result.output, run.id, company, market, settings.output_dir)
         # Index this run's brief into semantic memory for future RAG retrieval.
+        # v3 chunk 1: tag it with the run's eval-score composite + a section
+        # skeleton, so future runs can retrieve *high-performing* briefs (and
+        # show their shape) rather than merely nearby ones. All skill
+        # invocations are already logged at this point, so the score is final.
+        run_eval_score = memory.compute_run_eval_score(run.id)
+        section_skeleton = " | ".join(s.heading for s in draft_result.output.structure)
         semantic.index_brief(
             run_id=run.id,
             market=market,
             icp_summary=icp_sig,
             angle=draft_result.output.angle,
             brief_path=str(brief_path),
+            eval_score=run_eval_score,
+            eval_details_json=serialize_for_log(draft_result.eval_failures),
+            section_skeleton=section_skeleton,
         )
         memory.finish_run(
             run_id=run.id,

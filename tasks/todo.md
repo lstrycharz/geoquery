@@ -51,3 +51,24 @@ Plan: see `/Users/lukaszstrycharz/.claude/plans/here-is-a-new-synchronous-wirth.
 ---
 
 **v2.0 ships.** 9 chunks, 11 commits (chunks 4 took 3 for path-1 + path-2-infra + path-2-live), ~$2.45 real-API spend on live cassettes, 159+ tests, 30 regression cases (3 live + 27 bootstrap), 5 dashboard pages, full CI regression gate, production sample stream, drift detection, judge-vs-human divergence loop. v1.0 untouched except for the additive `make_evaluators(inputs)` API change + the `human_reviews` schema migration.
+
+---
+
+# v3: Self-Improving Loops
+
+Plan: see `/Users/lukaszstrycharz/.claude/plans/here-is-a-new-synchronous-wirth.md` (v3 section).
+
+## Vertical slice
+- [x] **Chunk 1 — Score-aware memory (tracer bullet).** `memory/semantic.py`: additive ALTER-TABLE migration adds `eval_score` / `eval_details_json` / `section_skeleton` to the `briefs` table (pre-v3 semantic.db files migrate on open). `index_brief` takes the three new fields (eval_score defaults 1.0 for backward-compat). `find_similar` gains `rank_by_eval_score` — pulls a `k*4` distance-candidate pool, re-ranks by eval_score desc (distance tie-break), returns top-k. `SimilarBrief` carries `eval_score` + `section_skeleton`. `memory/episodic.py::compute_run_eval_score` — a run's 0-1 composite (fraction of skill invocations that passed cleanly, advisory failures included). `agent.py` computes the score post-run, threads it + a section-heading skeleton into `index_brief`, and switches the drafter's RAG from top-3-by-distance to **top-5-by-eval-score**. `skills/draft_content_brief.py` slims the few-shot payload to `[eval_score] angle + section skeleton` (~200 tokens each, not the ~1.5k-token full bodies). 9 new semantic-memory tests; 165 total green; all 30 regression cassettes re-recorded (the drafter-prompt change tripped them — intentional). **Note:** the 3 live cassettes (Notion/Stripe/Webflow) reverted to bootstrap during the all-fake re-record; re-record them live once v3's drafter-prompt changes settle (~chunk 8).
+- [ ] **Chunk 2** — Meta-agent skeleton (`meta/analyze.py` rule-based, `meta/propose.py` single LLM call not shown rubric prose, `meta/edit_surface.py`, `meta_proposals` table, `python -m meta.run --dry-run`).
+- [ ] **Chunk 3** — The 6 meta-evals + `meta/baseline.json` + fixtures.
+- [ ] **Chunk 4** — PR opening (PyGithub) + `meta-agent-gate.yml` CI workflow.
+
+## Stretches
+- [ ] **Chunk 5** — Winning patterns extractor + drafter injection.
+- [ ] **Chunk 6** — Inner-loop strengthening (consensus-gated judges + `escalations` table).
+- [ ] **Chunk 7** — Outcome prediction (Opus 30-day-outcome judge, sampled subset).
+- [ ] **Chunk 8** — Outcome feedback blend into `eval_score`.
+- [ ] **Chunk 9** — Cron + measurement + auto-revert.
+- [ ] **Chunk 10** — Learning-curve dashboard page (Plotly).
+- [ ] **Chunk 11** — `SELF_IMPROVEMENT.md` + README v3 + final docs.

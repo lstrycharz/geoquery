@@ -1,236 +1,665 @@
 {
-  "10e26614407a98dd6b5431b3fe9de8f6df655242b54d1022fd2e87b79d5162ec": {
-    "input_tokens": 2238,
-    "output_tokens": 1869,
+  "027b216beac2f337191ac0c8180340a8a34c89d63588ee9c22a89b84cb5c71a9": {
+    "input_tokens": 1200,
+    "output_tokens": 1800,
     "stop_reason": "tool_use",
     "tool_use": {
-      "name": "emit_analyze_serp",
+      "name": "emit_define_icp",
       "input": {
-        "query_text": "usage-based billing architecture for SaaS",
-        "top_results": [
+        "schema_version": 1,
+        "segments": [
           {
-            "rank": 1,
-            "url": "https://schematichq.com/blog/why-usage-based-billing-is-taking-over-saas",
-            "title": "Usage-Based Billing Explained for SaaS Teams (2026 Guide)",
-            "snippet": "If you run a SaaS product, usage-based pricing can help you align revenue with customer value and manage costs through a more customer-centric approach."
+            "schema_version": 1,
+            "segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+            "firmographic": {
+              "industry_vertical": "B2B SaaS \u2014 developer tooling",
+              "company_size": "200\u2013500 employees, $20M\u2013$100M ARR",
+              "geography": "North America + EMEA distributed",
+              "organizational_structure": "Engineering Director reports to VP Eng; KB tool selection runs through them",
+              "buying_stage": "Active evaluation after outgrowing free wiki",
+              "strategic_pain_points": [
+                "Search across docs is fragmented",
+                "New hires take 3+ months to find tribal knowledge",
+                "Markdown vs WYSIWYG factions on the team"
+              ],
+              "trigger_events": [
+                "Major incident traced to undocumented decision",
+                "Hired 20+ engineers in a quarter",
+                "Notion price hike or migration event"
+              ]
+            },
+            "persona": {
+              "role_job_title": "Director of Engineering",
+              "demographic_context": "32\u201345, 10+ years experience, technical IC background",
+              "motivations": [
+                "Reduce onboarding time",
+                "Lower bus-factor risk",
+                "Earn promotion to VP"
+              ],
+              "decision_criteria": [
+                "Real-time collab parity with Notion",
+                "Markdown source of truth",
+                "API + automation hooks",
+                "SSO + audit log"
+              ],
+              "language_patterns": [
+                "single source of truth",
+                "we keep losing tribal knowledge",
+                "search just doesn't work across our docs",
+                "it should integrate with our existing stack"
+              ],
+              "frustrations": [
+                "Notion search returns archived stuff",
+                "Confluence feels like 2010",
+                "Tooling teams hate maintaining a custom wiki"
+              ],
+              "downstream_use_cases": [
+                "RFC + ADR storage",
+                "Runbooks and incident postmortems",
+                "Onboarding paths per role"
+              ],
+              "information_sources": [
+                "r/engineeringmanagers",
+                "Hacker News",
+                "DevOps Slack communities",
+                "Lenny's Newsletter"
+              ]
+            }
           },
           {
-            "rank": 2,
-            "url": "https://www.maxio.com/blog/consumption-based-billing",
-            "title": "Consumption-Based Billing: The Ultimate Guide for SaaS Pricing Models | Maxio",
-            "snippet": "This usage-based model not only aligns the cost of software to the value customers receive, but it also provides SaaS businesses with recurring revenue streams that grow organically with customer adoption."
-          },
-          {
-            "rank": 3,
-            "url": "https://www.maxio.com/blog/usage-based-billing-saas",
-            "title": "What is Usage-Based Billing in SaaS? Benefits & Guide | Maxio",
-            "snippet": "Unlike traditional, static pricing models, this approach allows businesses to charge customers based on real-time customer usage, creating a more tailored customer experience."
-          },
-          {
-            "rank": 4,
-            "url": "https://www.withorb.com/blog/usage-billing-guide",
-            "title": "Usage-based billing for SaaS companies: How it works ... - Orb",
-            "snippet": "Usage-based billing requires precise tracking of how customers interact with a product. Billing solutions with a scalable API and a raw event architecture are able to process large volumes of usage data and do not drop events."
-          },
-          {
-            "rank": 5,
-            "url": "https://stripe.com/resources/more/usage-based-pricing-for-saas-how-to-make-the-most-of-this-pricing-model",
-            "title": "Usage-based pricing for SaaS: A guide | Stripe",
-            "snippet": "With usage-based pricing for SaaS, customers pay based on how much they actually use the service rather than paying a flat fee."
-          },
-          {
-            "rank": 6,
-            "url": "https://billingplatform.com/blog/your-guide-to-usage-based-billing-for-saas",
-            "title": "Your Guide to Usage-Based Billing for SaaS | BillingPlatform",
-            "snippet": "Also called pay-as-you-go or metered billing, a usage-based pricing model allows customers to only pay for the products or services used."
-          },
-          {
-            "rank": 7,
-            "url": "https://www.withorb.com/blog/billing-architecture",
-            "title": "Orb | Billing system architecture for SaaS 101",
-            "snippet": "In a microservices architecture, the billing system is decomposed into smaller, independent services that communicate with each other through APIs. This transition to microservices allows each service to be developed, deployed, and scaled independently."
-          },
-          {
-            "rank": 8,
-            "url": "https://www.reliabills.com/blog/usage-based-billing-guide/",
-            "title": "What Is Usage-Based Billing? Saas Billing Paradigm | ReliaBills",
-            "snippet": "In the simplest explanation, usage-based billing is a method that allows you to track how much each of your customers 'use' your product or service."
-          },
-          {
-            "rank": 9,
-            "url": "https://getlago.com/blog/usage-based-billing-for-saas",
-            "title": "Lago Blog | The how and why of usage-based billing for SaaS",
-            "snippet": "Usage-based billing charges customers based on what they actually use \u2014 e.g., $0.01 per API call."
-          },
-          {
-            "rank": 10,
-            "url": "https://unibee.dev/blog/12-best-usage-based-billing-software-for-saas-2025/",
-            "title": "12 Best Usage-Based Billing Software for SaaS 2025 | UniBee",
-            "snippet": "Many billing tools treat usage as an add-on to subscriptions. UniBee flips that model. Its architecture is built from the ground up to measure, meter, and monetize consumption."
+            "schema_version": 1,
+            "segment_label": "Ops/RevOps Manager at 50-200 startup",
+            "firmographic": {
+              "industry_vertical": "B2B SaaS \u2014 sales or marketing platform",
+              "company_size": "50\u2013200 employees, $5M\u2013$30M ARR",
+              "geography": "US-centric, remote-first",
+              "organizational_structure": "Reports to COO or CRO; cross-functional ownership of internal tooling",
+              "buying_stage": "Comparing 2-3 finalists with budget approved",
+              "strategic_pain_points": [
+                "Sales and CS rooms duplicate playbooks across tools",
+                "Marketing assets live in Drive, Notion, and Slack threads"
+              ],
+              "trigger_events": [
+                "New COO hire pushing on tool consolidation",
+                "Onboarding-cost review by exec team"
+              ]
+            },
+            "persona": {
+              "role_job_title": "RevOps Manager",
+              "demographic_context": "28\u201338, MBA optional, project-management mindset",
+              "motivations": [
+                "Be the person who fixes 'how we work'",
+                "Drive measurable onboarding-time reduction"
+              ],
+              "decision_criteria": [
+                "Templates for sales playbooks out of the box",
+                "Permissions granularity",
+                "Salesforce / HubSpot integration",
+                "Time-to-value under 30 days"
+              ],
+              "language_patterns": [
+                "we need one place for this",
+                "I'm tired of hunting in Slack",
+                "leadership wants visibility"
+              ],
+              "frustrations": [
+                "Sales reps don't update docs",
+                "Tool sprawl with overlapping subscriptions"
+              ],
+              "downstream_use_cases": [
+                "Sales playbooks",
+                "Onboarding checklists",
+                "Customer-facing handoff docs"
+              ],
+              "information_sources": [
+                "RevOps Co-op",
+                "Pavilion communities",
+                "LinkedIn long-form posts"
+              ]
+            }
           }
-        ],
-        "common_angles": [
-          "Value-alignment framing: nearly every result (Schematic, Maxio \u00d72, Stripe, Lago) leads with the same narrative \u2014 UBB 'aligns the cost of software to the value customers receive' \u2014 rather than technical implementation details.",
-          "Pay-as-you-go / metered billing definition and terminology primer: most results (BillingPlatform, ReliaBills, Lago, Maxio) spend significant space defining UBB synonyms and basic mechanics before any architecture discussion.",
-          "Business-case and revenue-growth angle: results frame UBB as a growth lever \u2014 'recurring revenue streams that grow organically with customer adoption' (Maxio) \u2014 targeting executives and product managers, not engineers.",
-          "High-level event ingestion mention without depth: Orb (#4) briefly notes 'scalable API and a raw event architecture...do not drop events,' and Orb (#7) introduces microservices decomposition, but both stop short of diagrammatic or implementation-level guidance.",
-          "Vendor-led content / software roundup: results are predominantly written by billing platform vendors (Orb, Maxio, Lago, BillingPlatform, UniBee) positioning their own tools, with UniBee explicitly claiming its 'architecture is built from the ground up to measure, meter, and monetize consumption.'"
-        ],
-        "content_gaps": [
-          "No hands-on architectural blueprint: only Orb (#7) touches microservices decomposition, but no result provides a concrete system design \u2014 event pipeline (Kafka/Kinesis), metering service, aggregation layer, rating engine, invoice generation \u2014 with component responsibilities and data flow diagrams.",
-          "Missing failure-mode and reliability engineering coverage: Orb (#4) warns that pipelines 'do not drop events' but no result addresses idempotency, at-least-once vs. exactly-once delivery, late-arriving events, or reconciliation strategies that engineering teams actually need to solve.",
-          "No build-vs-buy decision framework for engineering teams: results either sell a specific vendor or generically define UBB; none walk a CTO/engineering lead through a structured evaluation of in-house metering infrastructure vs. third-party metering APIs with real cost and complexity trade-offs.",
-          "Hybrid pricing model architecture is absent: real SaaS companies combine seat-based commitments with usage overages; no result addresses how to architect a billing system that handles mixed pricing models, proration, and mid-cycle plan changes simultaneously.",
-          "No coverage of the downstream data contract: how metering events flow into finance systems (ERP, revenue recognition under ASC 606), data warehouses, and customer-facing usage dashboards is entirely missing \u2014 a critical concern for scaling SaaS finance and RevOps teams."
-        ],
-        "recommended_format": "Engineering-focused system design deep dive with component architecture diagram, failure-mode analysis, and build-vs-buy decision matrix"
-      }
-    }
-  },
-  "17f1c9ec258afbd7409df953622d6dbe9f5107634ed670ecef370aadf0e53e9f": {
-    "input_tokens": 1923,
-    "output_tokens": 4106,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_research_company",
-      "input": {
-        "customer_segments": [
-          "Early-stage startups (pre-seed to Series A) building their first payment flow",
-          "High-growth B2B and B2C SaaS companies monetizing via subscriptions",
-          "Marketplace and platform businesses routing payments between buyers and sellers (Stripe Connect)",
-          "Enterprise software companies and large-scale e-commerce operators requiring custom payment orchestration",
-          "Fintech builders embedding financial services (cards, lending, treasury) into their own products",
-          "Gig economy and creator platforms disbursing payouts to large contractor networks",
-          "Global enterprises needing multi-currency, multi-entity payment infrastructure across jurisdictions"
-        ],
-        "product_portfolio": [
-          "Stripe Payments \u2014 core card-acceptance API; supports 135+ currencies, 3D Secure, network tokens; positioned as the lowest-integration-friction path to global card acceptance",
-          "Stripe Billing \u2014 subscription and usage-based billing engine; supports proration, metered billing, trials, and dunning; competes directly with Chargebee and Recurly at the product layer",
-          "Stripe Connect \u2014 split-payment and multi-party payout infrastructure for platforms and marketplaces; three account types (Standard, Express, Custom) for varying degrees of platform control",
-          "Stripe Radar \u2014 ML-based fraud detection trained on the full Stripe network; included free at a baseline, paid tier adds custom rules and deeper review workflows",
-          "Stripe Terminal \u2014 in-person payment hardware (BBPOS WisePOS E, Reader S700) plus SDK for unified online/offline commerce; positioned against Square and Adyen Terminal",
-          "Stripe Issuing \u2014 programmatic card issuance (physical + virtual); targets fintechs and expense-management builders; competes with Marqeta",
-          "Stripe Treasury \u2014 BaaS layer offering FDIC-pass-through bank accounts, money movement (ACH, wires), and balance management via partner banks; targets platforms wanting to hold funds",
-          "Stripe Capital \u2014 revenue-based financing offered to Stripe-verified merchants; underwriting uses Stripe payment data as a proxy for creditworthiness",
-          "Stripe Tax \u2014 automated tax calculation and filing across 50+ countries; competes with Avalara and TaxJar",
-          "Stripe Identity \u2014 document-based identity verification API; positioned for platforms with KYC obligations",
-          "Stripe Sigma \u2014 SQL-based analytics over a merchant's full Stripe dataset; self-serve BI without data export; priced as a paid add-on",
-          "Stripe Data Pipeline \u2014 replication of Stripe data to Snowflake or Redshift; targets data-mature teams wanting Stripe data in their warehouse",
-          "Stripe Apps & Marketplace \u2014 third-party integrations and no-code tools built on the Stripe platform; expands ecosystem stickiness"
-        ],
-        "inferred_icp": "[\"De facto ICP (inferred from pricing structure, documentation depth, developer marketing, and published case studies): a technically sophisticated founding team or growth-stage engineering org at a software-first company \u2014 typically Series A to Series C, $1M\u2013$50M ARR \u2014 that is building a product where payments are a core revenue mechanism, not a back-office afterthought. These buyers prioritize API quality, reliability SLAs, and the ability to iterate fast without renegotiating contracts. Pricing at 2.9% + 30\u00a2 with no monthly minimums signals a deliberate land-and-expand motion targeting companies at the moment they write their first checkout line of code. The breadth of the product suite (Billing, Connect, Issuing, Treasury) signals Stripe's strategic intent to expand wallet share as those companies scale \u2014 but the on-ramp is clearly built for the developer evaluating docs at midnight, not a procurement committee.\"]",
-        "icp_priorities": [
-          "API quality and documentation completeness",
-          "Time-to-first-transaction (minimal integration friction)",
-          "Reliability and uptime (five-nines expectation)",
-          "Breadth of product suite to avoid stitching multiple vendors",
-          "Network-level fraud intelligence (Radar)",
-          "Global currency and payment method coverage out of the box",
-          "Transparent, predictable pricing with no long-term lock-in at early stages",
-          "Composability with existing SaaS stack (Salesforce, NetSuite, Snowflake)",
-          "Regulatory and compliance abstraction (PCI, PSD2, KYC)"
-        ],
-        "competitors": [
-          "Adyen \u2014 enterprise-first, unified commerce (online + in-person + issuing) on a single platform; direct competitor for mid-market and enterprise deals",
-          "Braintree (PayPal) \u2014 legacy developer-friendly gateway, strong PayPal/Venmo wallet integration; competitive on volume discounts for large merchants",
-          "Square \u2014 SMB-focused POS and payments ecosystem; competes primarily on Stripe Terminal and SMB checkout use cases",
-          "Checkout.com \u2014 enterprise and high-volume merchant focus; aggressive on interchange-plus pricing and dedicated account management",
-          "PayPal (direct, non-Braintree) \u2014 ubiquitous consumer wallet; competes at the checkout conversion layer with Stripe Payment Links and Checkout",
-          "Chargebee \u2014 subscription billing specialist; competes narrowly but deeply against Stripe Billing for SaaS finance teams",
-          "Recurly \u2014 subscription management with dunning focus; overlaps Stripe Billing for mid-market SaaS",
-          "Marqeta \u2014 card issuing infrastructure; direct competitor to Stripe Issuing for fintech builders",
-          "Zuora \u2014 enterprise revenue management and quoting-to-cash; competes with Stripe Billing + Revenue Recognition at the enterprise tier",
-          "Plaid \u2014 bank account data and ACH initiation; adjacent competitor in the fintech data infrastructure layer",
-          "Modern Treasury \u2014 payment operations and ledger infrastructure; competes with Stripe Treasury for fintech-native builders",
-          "Rapyd \u2014 payments-as-a-service with strong emerging-market coverage; competes on geographic breadth",
-          "Primer \u2014 payment orchestration layer sitting above PSPs; competes by offering PSP-agnostic routing including Stripe as a downstream option"
-        ],
-        "company_advantages": [
-          "Network effect on fraud data: Stripe Radar is trained on transaction signals from millions of businesses across the network, making its ML fraud models materially harder to replicate from a cold start",
-          "Developer experience moat: Stripe's API design, documentation, SDKs, and changelog discipline are consistently rated best-in-class by engineering teams; the docs alone drive organic adoption",
-          "Full-stack financial infrastructure: no other single vendor offers the same depth across acceptance, billing, issuing, treasury, lending, identity, and tax \u2014 reducing the integration surface area for builders",
-          "Land-and-expand pricing mechanics: zero monthly minimums and per-transaction pricing let Stripe acquire companies at day one and grow revenue proportionally with customer success",
-          "Stripe Atlas and ecosystem flywheel: incorporation, banking, and payments in one motion creates stickiness from company formation; a customer acquired at incorporation is structurally unlikely to migrate",
-          "Global payment method coverage: 135+ currencies and local payment methods (SEPA, iDEAL, Alipay, etc.) configurable via a single API integration, reducing geographic go-to-market friction for customers",
-          "Speed of product iteration: Stripe ships meaningful API changes and new products faster than any incumbent PSP, evidenced by the breadth of the portfolio built in under 15 years"
-        ],
-        "competitor_advantages": [
-          "Adyen offers a single, vertically integrated acquiring stack (gateway + acquirer + scheme connection) that eliminates third-party acquirer fees and provides superior interchange-plus economics at high volume \u2014 Stripe still relies on partner acquiring in many markets",
-          "Checkout.com provides dedicated enterprise account management and custom pricing negotiations that Stripe's self-serve model structurally de-prioritizes",
-          "Braintree/PayPal bundles PayPal and Venmo wallet acceptance at no incremental cost, which meaningfully lifts checkout conversion in consumer markets where those wallets have high penetration",
-          "Square has a deeply integrated POS hardware + software ecosystem for physical retail that Stripe Terminal cannot yet match on out-of-box merchant experience",
-          "Chargebee and Recurly offer finance-team-friendly subscription management UIs with deeper revenue recognition, dunning analytics, and CPQ features that Stripe Billing lacks at the product layer",
-          "Marqeta offers more granular just-in-time card issuance controls and spend management logic than Stripe Issuing, making it preferred for complex fintech card programs",
-          "Adyen and Checkout.com have deeper direct acquiring licenses in more jurisdictions, giving them a structural cost and latency advantage for enterprise cross-border volumes"
-        ],
-        "swot": {
-          "strengths": [
-            "Stripe's unified API surface spanning 13+ products eliminates the multi-vendor integration complexity that plagues enterprise payment stacks, creating deep switching costs.",
-            "The Radar fraud network, trained on a disproportionate share of global internet commerce transaction data, compounds in accuracy as the network grows \u2014 a durable moat.",
-            "Developer-first brand equity means engineering teams advocate for Stripe internally, shortening sales cycles and reducing dependence on top-down enterprise sales motions.",
-            "Stripe's balance sheet (last valued at $65B; profitable as of 2023 per public reporting) enables continued investment in regulated infrastructure like banking and lending that requires patient capital."
-          ],
-          "weaknesses": [
-            "Per-transaction pricing (2.9% + 30\u00a2 standard) becomes uncompetitive at high volumes compared to interchange-plus models offered by Adyen and Checkout.com, creating churn risk at the enterprise tier.",
-            "Stripe's self-serve support model (documentation-first, limited live support tiers) is a friction point for enterprise procurement teams accustomed to dedicated account management.",
-            "Dependence on partner banks for Treasury and acquiring in several markets introduces counterparty risk and regulatory complexity that Adyen's owned-infrastructure model avoids.",
-            "Stripe's product breadth can create internal complexity: customers report inconsistent UX and documentation quality across newer products (e.g., Tax, Identity) versus core Payments."
-          ],
-          "opportunities": [
-            "The global shift to SaaS and usage-based pricing models structurally expands the addressable market for Stripe Billing and Revenue Recognition products.",
-            "Embedded finance adoption by non-fintech verticals (healthcare, logistics, real estate) represents a greenfield opportunity for Stripe Issuing and Treasury.",
-            "AI-native startups represent a new cohort of developer-first companies building metered, consumption-based businesses \u2014 a natural fit for Stripe's billing and infrastructure stack.",
-            "Expansion of direct acquiring licenses in high-volume markets (EU, APAC) would structurally improve Stripe's unit economics and competitive position against Adyen at enterprise scale."
-          ],
-          "threats": [
-            "Adyen's continued enterprise market share gains among high-volume merchants \u2014 combined with Stripe's pricing disadvantage at scale \u2014 risk accelerating churn of Stripe's most valuable accounts.",
-            "Regulatory fragmentation (EU Digital Markets Act, PSD3, CFPB rules, India RBI requirements) could impose compliance costs and market access restrictions that disproportionately affect a US-headquartered PSP.",
-            "Big Tech payment infrastructure (Apple Pay, Google Pay, Amazon Pay, and potentially Meta) could disintermediate the checkout layer, compressing the surface area where Stripe adds value.",
-            "Open banking and A2A payment rails (FedNow, UK Faster Payments, EU SEPA Instant) reduce card-network dependence and could erode the card-acceptance revenue base that funds Stripe's R&D."
-          ]
-        },
-        "porter_five_forces": {
-          "buyer_power": "Moderate-to-high for enterprise and high-volume merchants: above ~$1M in annual processing volume, buyers have credible alternatives (Adyen, Checkout.com) and sufficient negotiating leverage to demand custom interchange-plus pricing. For SMBs and startups, buyer power is low \u2014 Stripe's self-serve model, switching costs, and integration depth make migration painful and economically irrational at small scale.",
-          "supplier_power": "Moderate: Stripe depends on card networks (Visa, Mastercard) for scheme rules and interchange economics, giving networks structural pricing power. Partner banks for Treasury and acquiring add further dependency. However, Stripe's transaction volume gives it meaningful leverage in network negotiations, and ongoing investment in direct acquiring licenses is a deliberate strategy to reduce supplier concentration.",
-          "rivalry": "High and intensifying: the market has no single dominant player across all segments. Adyen is gaining enterprise share; Braintree competes on wallet integration; Checkout.com is aggressive on pricing; and vertical-specific rivals (Chargebee, Marqeta) attack individual product lines. Differentiation is real but eroding as competitors improve their developer experience and API quality.",
-          "new_entrants": "Low threat at the platform layer: acquiring licenses, compliance infrastructure (PCI DSS, PSD2, AML), and the cold-start fraud-data problem create high barriers to entry for new full-stack PSPs. Threat is higher at the point-solution layer \u2014 new entrants regularly attack single products (billing, issuing, identity) with more focused tooling, as seen with Modern Treasury, Primer, and Payrails.",
-          "substitutes": "Growing: A2A payment rails (FedNow, SEPA Instant, UPI) represent a structural substitute for card-based payments, particularly in B2B and high-ticket consumer contexts where card interchange is economically unjustifiable. Crypto/stablecoin payment rails are a longer-dated but non-trivial substitute, especially for cross-border disbursements. Buy-now-pay-later networks (Affirm, Klarna) partially substitute card acceptance at checkout."
-        },
-        "strategic_recommendations": [
-          "Accelerate direct acquiring license acquisition in the EU and APAC to structurally improve unit economics at high volumes and close the pricing gap with Adyen for enterprise accounts \u2014 this is the single highest-impact competitive move available.",
-          "Launch a formal enterprise tier with dedicated account management, SLA-backed support, and negotiated pricing to stem churn of high-volume merchants currently migrating to Adyen and Checkout.com.",
-          "Double down on AI-native company acquisition by creating a 'Stripe for AI' go-to-market motion \u2014 metered billing, consumption pricing templates, and usage-based revenue recognition are a natural fit for LLM API companies and AI SaaS builders.",
-          "Consolidate the product experience across newer SKUs (Tax, Identity, Sigma) to match the documentation and DX quality of core Payments \u2014 inconsistent product quality creates internal champions who advocate for point solutions over the full Stripe suite.",
-          "Invest in A2A and real-time payment rail coverage (FedNow, Pay by Bank) as a proactive hedge against card-network fee pressure and to capture the B2B payments market where ACH/bank transfer is the dominant modality.",
-          "Deepen the Stripe Apps marketplace and partner ecosystem to extend platform stickiness, particularly by integrating tightly with ERP and CRM systems (NetSuite, Salesforce) that enterprise finance teams already operate in."
-        ],
-        "executable_work_plan": [
-          "[Content/PMM] Publish a 'Stripe for AI Companies' landing page and companion guide within 30 days, mapping metered billing, usage-based pricing, and Revenue Recognition to the specific workflows of LLM API and AI SaaS builders \u2014 target organic search terms already generating volume from this cohort.",
-          "[Demand Gen] Build a competitive displacement campaign targeting Chargebee and Recurly customers using Stripe Billing's feature parity messaging; create a migration guide with a side-by-side feature matrix and a scripted 2-week migration playbook.",
-          "[Sales Enablement] Instrument a high-volume merchant early-warning model in Salesforce/CRM that flags accounts processing >$500K/month as 'at-risk for Adyen migration' based on support ticket themes and product usage signals; route to a dedicated retention pod.",
-          "[Product Marketing] Commission and publish three enterprise case studies (one marketplace/Connect, one SaaS/Billing, one fintech/Issuing) with quantified ROI metrics \u2014 authorization rate lift, fraud loss reduction, engineering hours saved \u2014 to support enterprise sales cycles.",
-          "[SEO/Content] Audit and rewrite documentation and marketing pages for Stripe Tax and Stripe Identity to close the quality gap with core Payments docs; prioritize pages with high impressions but low click-through in Google Search Console.",
-          "[Partnerships] Identify and co-market with three NetSuite or Salesforce implementation partners to create Stripe-certified integration playbooks, targeting CFO and RevOps buyers at $10M\u2013$200M ARR companies.",
-          "[Events/Community] Sponsor or host a developer-focused payments event (virtual or in-person) anchored to the 'AI-native payments' narrative within 60 days to seed community conversation and generate top-of-funnel pipeline.",
-          "[Pricing/Sales] Design and pilot a volume-tiered pricing track for merchants processing $1M\u2013$10M/year that narrows the price gap with Adyen interchange-plus without fully cannibalizing self-serve margins \u2014 validate with 10 at-risk accounts before broad rollout.",
-          "[CRM/Lifecycle] Deploy an automated onboarding email sequence for new Stripe Billing activations that introduces Stripe Revenue Recognition, Sigma, and Data Pipeline within the first 60 days \u2014 increasing multi-product attach rate before competitors land.",
-          "[Analyst Relations] Brief Gartner and Forrester analysts on Stripe's enterprise roadmap and direct acquiring strategy to influence Wave/Magic Quadrant positioning, which is a gating factor in formal enterprise RFPs where Stripe currently underpunches."
         ]
       }
     }
   },
-  "2416e925425822d3ebe4c0935ca6fbc09d9a3f5a728dfe2f4d038ecfa23d34e7": {
-    "input_tokens": 3515,
-    "output_tokens": 4533,
+  "02ac2277416e35bd021d475e8bf11e20589794763b1b8dfa2ebc5c23ef6a6713": {
+    "input_tokens": 1200,
+    "output_tokens": 60,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_buyer_realism",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "17f1c9ec258afbd7409df953622d6dbe9f5107634ed670ecef370aadf0e53e9f": {
+    "input_tokens": 1400,
+    "output_tokens": 2800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_research_company",
+      "input": {
+        "schema_version": 1,
+        "customer_segments": [
+          "Distributed engineering teams at 200-500-person dev shops",
+          "Ops/RevOps managers at 50-200-person B2B SaaS startups",
+          "Indie creators and consultants on the free tier"
+        ],
+        "product_portfolio": [
+          "Notion free tier (personal/team)",
+          "Notion Plus (small teams, $10/seat/mo)",
+          "Notion Business (mid-market, $18/seat/mo, SSO)",
+          "Notion Enterprise (SOC2 + advanced admin)",
+          "Notion AI add-on ($10/seat/mo)"
+        ],
+        "inferred_icp": "Notion's de facto ICP appears to be 50-300-person knowledge-driven teams (B2B SaaS, agencies, creator-economy companies) where the Director of Operations or VP of Engineering owns the tool-selection decision, prioritizes design and flexibility over enterprise hardening, and has outgrown a free wiki but isn't yet ready for Atlassian's complexity.",
+        "icp_priorities": [
+          "design polish",
+          "flexibility (databases + pages)",
+          "speed of setup",
+          "real-time collaboration",
+          "ease of templates/duplication"
+        ],
+        "competitors": [
+          "Confluence (Atlassian)",
+          "Outline (open-source, self-host friendly)",
+          "Coda",
+          "ClickUp Docs",
+          "GitBook",
+          "Slab",
+          "Almanac",
+          "Tettra",
+          "Stack Overflow for Teams"
+        ],
+        "company_advantages": [
+          "Best-in-class UI/UX for non-technical users",
+          "Powerful flexible-block model (mixes docs + databases)",
+          "Strong template marketplace and community",
+          "Real-time collaboration parity with Google Docs"
+        ],
+        "competitor_advantages": [
+          "Confluence integrates deeply with Jira and Atlassian admin",
+          "Outline offers Markdown source-of-truth and self-hosting (data sovereignty)",
+          "GitBook is better for technical documentation and code embeds",
+          "Coda has stronger spreadsheet-like formulas and automation"
+        ],
+        "swot": {
+          "strengths": [
+            "Dominant brand awareness among knowledge workers under 35",
+            "Network effects from template sharing and public pages",
+            "API + integrations ecosystem"
+          ],
+          "weaknesses": [
+            "Search at scale degrades visibly past 10K pages",
+            "Markdown export is lossy (a deal-breaker for engineering teams)",
+            "Pricing per-seat doesn't scale for 200+ engineer teams"
+          ],
+          "opportunities": [
+            "Engineering-team vertical with first-class Markdown source-of-truth",
+            "AI summarization + search to defuse the at-scale search issue",
+            "Enterprise governance features to defend against Confluence migration"
+          ],
+          "threats": [
+            "Outline + similar open-source alternatives winning on data sovereignty",
+            "GitHub Docs / GitBook owning the engineering-team niche",
+            "Recent price hikes triggering migration audits at incumbent customers"
+          ]
+        },
+        "porter_five_forces": {
+          "buyer_power": "Moderate-to-high \u2014 switching costs are real (re-importing docs is painful) but buyers have many credible alternatives, and IT teams can mandate a migration when budget cycles hit.",
+          "supplier_power": "Low \u2014 Notion controls its own platform end-to-end; no critical supplier dependencies beyond cloud infra.",
+          "rivalry": "Intense and rising \u2014 incumbents (Confluence) defending Atlassian-bundled accounts, open-source contenders (Outline) winning on data sovereignty, niche players (GitBook, Slab) splitting verticals.",
+          "new_entrants": "High threat \u2014 barriers are mostly UX and ecosystem, both of which AI-native startups are credibly attacking from scratch.",
+          "substitutes": "High \u2014 for many use cases, a combination of Google Docs + Slack channels + a sharepoint substitutes 'good enough' for free."
+        },
+        "strategic_recommendations": [
+          "Build a first-class Markdown source-of-truth export pipeline to neutralize engineering teams' top objection",
+          "Ship enterprise governance features (granular permissions, audit log, retention policies) to defend against Confluence",
+          "Open a small-but-credible 'Notion for Engineering' content track with technical-grade case studies",
+          "Tier AI features into a free band to defuse migration audits driven by Notion AI price increases"
+        ],
+        "executable_work_plan": [
+          "Run a 5-customer interview series with Directors of Engineering at 200-500-person dev shops to validate the Markdown-source-of-truth objection.",
+          "Audit the top 100 SERP results for engineering-doc queries to identify content gaps that a 'Notion for Engineering' content track could fill.",
+          "Publish a technical migration playbook for 'Confluence to Notion at 250 engineers' targeting BOFU vendor-comparing queries.",
+          "Commission a benchmark: search-hit-rate vs Outline and Confluence at 10K-page scale; publish results.",
+          "Engineering-specific landing page that names the Markdown source-of-truth concern head-on (don't dodge it).",
+          "Partner with 3 dev-tooling vendors for joint case studies (e.g. Linear + Notion for engineering ops).",
+          "Test pricing communication around the AI add-on; surface a 'no-AI tier' if the price-driven migration audits confirm the hypothesis.",
+          "Stand up an open-source Notion-to-Markdown export utility and host it on GitHub (defuses the lossy-export objection)."
+        ]
+      }
+    }
+  },
+  "196df5caf84e6ea5da84f873894df1de6c673e0ad7cfee2b54852905d7673cc0": {
+    "input_tokens": 1500,
+    "output_tokens": 1100,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_generate_geo_query_list",
+      "input": {
+        "schema_version": 1,
+        "queries": [
+          {
+            "position": 1,
+            "text": "what is a knowledge base for engineering teams",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 2,
+            "text": "do i need a wiki for my engineering team",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 3,
+            "text": "what does a knowledge base actually do",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 4,
+            "text": "are engineering wikis still a thing in 2026",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 5,
+            "text": "knowledge management tool meaning",
+            "framing": "novice",
+            "refinement_applied": false
+          },
+          {
+            "position": 6,
+            "text": "our engineering team can't find docs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 7,
+            "text": "engineering docs that nobody updates",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 8,
+            "text": "single source of truth for engineering docs",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 9,
+            "text": "how to fix fragmented engineering documentation",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 10,
+            "text": "tooling teams hate maintaining custom wikis",
+            "framing": "problem-aware",
+            "refinement_applied": false
+          },
+          {
+            "position": 11,
+            "text": "self hosted knowledge base options",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 12,
+            "text": "knowledge base with markdown source of truth",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 13,
+            "text": "wiki with git style versioning",
+            "framing": "power-user",
+            "refinement_applied": false
+          },
+          {
+            "position": 14,
+            "text": "best knowledge base for engineering teams 2026",
+            "framing": "vendor-comparing",
+            "refinement_applied": false
+          },
+          {
+            "position": 15,
+            "text": "api first wiki for engineering with webhook support",
+            "framing": "power-user",
+            "refinement_applied": true
+          },
+          {
+            "position": 16,
+            "text": "knowledge base with sso and audit log for soc2",
+            "framing": "power-user",
+            "refinement_applied": true
+          },
+          {
+            "position": 17,
+            "text": "notion vs confluence for engineering teams",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 18,
+            "text": "outline vs notion engineering wiki",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 20,
+            "text": "bookstack vs notion for engineering team",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          {
+            "position": 21,
+            "text": "notion price hike 2026 alternatives",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 22,
+            "text": "cheap knowledge base for 200 person engineering team",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 23,
+            "text": "free wiki for engineering teams self hosted",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 24,
+            "text": "notion pricing per seat 2026",
+            "framing": "price-driven",
+            "refinement_applied": true
+          },
+          {
+            "position": 25,
+            "text": "knowledge base under $500/month for engineering team",
+            "framing": "price-driven",
+            "refinement_applied": true
+          }
+        ],
+        "journey_arc_summary": "The buyer starts with conceptual queries about whether a knowledge base is even needed, drifts into pain-naming as they realize their team has the symptoms, then shifts into implementation requirements (markdown, git versioning, SSO). By position 15 they're naming specific products and weighing alternatives, and the journey ends in pricing and total-cost-of-ownership questions where the actual buying decision crystallizes."
+      }
+    }
+  },
+  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
+    "input_tokens": 1300,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_search_intent_alignment",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "3f450e6bcf7a95d6e08dcbe515c9909f82a07624ddf5d429fe9abb2fec8e536c": {
+    "input_tokens": 2400,
+    "output_tokens": 1800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_draft_content_brief",
+      "input": {
+        "schema_version": 1,
+        "target_query": "alternatives to notion for engineering documentation",
+        "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "angle": "How distributed engineering teams pick a Notion alternative when half the team writes in Markdown and half doesn't \u2014 a decision framework + 30-day pilot, framed around bus-factor risk rather than feature checklists.",
+        "audience": "Engineering Directors at 200\u2013500-person dev shops actively evaluating a Notion replacement, especially those whose teams are split between Markdown-source-of-truth and WYSIWYG factions.",
+        "structure": [
+          {
+            "heading": "The bus-factor problem the listicles don't mention",
+            "purpose": "Defuse the dominant listicle angle by reframing the decision around knowledge loss rather than features.",
+            "key_points": [
+              "Listicles compare features; the actual cost of the wrong choice is tribal-knowledge loss when senior engineers leave",
+              "Quantify bus factor \u2014 one or two engineers carrying critical decisions in their heads",
+              "Anchor in a real incident postmortem framing \u2014 what does a 'we couldn't find the docs' incident actually cost?"
+            ]
+          },
+          {
+            "heading": "The Markdown vs WYSIWYG factional split is a workflow question, not a religious one",
+            "purpose": "Address the content gap the SERP misses \u2014 the Markdown/WYSIWYG factional reality inside engineering orgs.",
+            "key_points": [
+              "Half the team writes Markdown by reflex (engineers from dev-tools backgrounds); half wants WYSIWYG (designers, PMs, junior engineers)",
+              "Tooling that exports clean Markdown wins the long game regardless of authoring surface",
+              "Round-trip test: import a Markdown doc, edit it in the tool, export it back \u2014 diff should be trivial",
+              "Use the segment's exact phrase 'single source of truth' here verbatim"
+            ]
+          },
+          {
+            "heading": "Decision framework: the four tests an engineering director should actually run",
+            "purpose": "Give a concrete framework distinct from the SERP's generic feature comparisons.",
+            "key_points": [
+              "Real-time collab parity test (paired-doc concurrent edit, including conflict handling)",
+              "Markdown source-of-truth test (round-trip import/export)",
+              "API + automation test (try to drive an RFC template via CI)",
+              "Security review test (SSO + audit log for SOC 2 readiness)"
+            ]
+          },
+          {
+            "heading": "The 30-day pilot playbook",
+            "purpose": "Fill the content gap: every listicle says 'we switched'; almost none provides a phased pilot script the reader can socialize to their VP.",
+            "key_points": [
+              "Week 1: import 50 critical docs (most painful ones first \u2014 that's the real test)",
+              "Week 2: route RFCs through the new tool",
+              "Week 3: measure search-hit-rate vs the old baseline",
+              "Week 4: decision meeting with data, not feels"
+            ]
+          },
+          {
+            "heading": "When NOT to migrate \u2014 three failure modes that quietly kill these projects",
+            "purpose": "Build trust by naming the unsexy failure modes that listicles never cover.",
+            "key_points": [
+              "Tool sprawl: layering a fifth tool on top of four others guarantees split-brain",
+              "Custom-wiki temptation: maintenance cost compounds and tooling teams hate it",
+              "Half-rolled-out: split-brain across teams kills adoption regardless of tool quality"
+            ]
+          }
+        ],
+        "key_points": [
+          "Lead with bus-factor framing \u2014 that's the content gap. Do not lead with feature comparison.",
+          "Use the ICP's verbatim phrase 'single source of truth' in either the intro or an H2",
+          "Reference the Markdown vs WYSIWYG factional split as a known problem inside engineering orgs",
+          "Avoid the word 'tribal knowledge' in titles (overused in SERP); use it in body sparingly",
+          "Cite the SERP's #2 ('Why We Left Notion') as a foil \u2014 concede their pain, then go deeper",
+          "Recommended format per SERP analysis: decision-framework + migration-playbook hybrid"
+        ],
+        "sources": [
+          "https://example.com/leaving-notion",
+          "https://example.com/notion-vs-outline-deep-dive",
+          "https://example.com/wiki-tool-decision-framework",
+          "Internal incident postmortem (replace with the writer's real example before publish)"
+        ],
+        "recommended_length_words": 2400,
+        "internal_linking_suggestions": []
+      }
+    }
+  },
+  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
+    "input_tokens": 1800,
+    "output_tokens": 900,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_analyze_serp",
+      "input": {
+        "schema_version": 1,
+        "query_text": "alternatives to notion for engineering documentation",
+        "top_results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison.",
+            "extracted_content": null
+          }
+        ],
+        "common_angles": [
+          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
+          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
+          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
+          "Editorial 'best of' picks with brief mini-reviews",
+          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
+        ],
+        "content_gaps": [
+          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
+          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
+          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
+          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
+        ],
+        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
+      }
+    }
+  },
+  "7d83236a0d4f62e8eeb6612b3079e2c9b53d8bb0e89cca3dc56dcaea8de18cf6": {
+    "input_tokens": 1400,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_actionability",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "80919f77920b34861fe4eee56254bf512949dbdb7263e352b2b7e979f65686d6": {
+    "input_tokens": 800,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_specificity",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "a9baadce96322167149128aa2afe681f35c57acbea0fd8c3c6248ff642574361": {
+    "input_tokens": 800,
+    "output_tokens": 700,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_serp_results",
+      "input": {
+        "schema_version": 1,
+        "results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team. Confluence, Outline, BookStack, GitBook, Slab, Slite, Coda, Tettra, Stack Overflow for Teams, Almanac. Pricing and feature comparison.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop. Pain points: search, performance, Markdown export. Switched to a self-hosted Outline instance.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison: Markdown source, API, SSO, audit log, pricing. Recommends Outline for Markdown-first teams.",
+            "extracted_content": null
+          },
+          {
+            "rank": 4,
+            "url": "https://example.com/best-engineering-wiki",
+            "title": "Best Engineering Wikis of 2026: Editorial Picks",
+            "snippet": "Editorial roundup of the top engineering wiki tools. Covers Notion, Confluence, GitBook, Outline, Stack Overflow for Teams.",
+            "extracted_content": null
+          },
+          {
+            "rank": 5,
+            "url": "https://example.com/notion-pricing-engineering",
+            "title": "Is Notion Still Worth It for Engineering Teams?",
+            "snippet": "Cost analysis at 200 seats. Compares Plus, Business, Enterprise tiers. Concludes price-per-seat doesn't scale for engineering use cases.",
+            "extracted_content": null
+          },
+          {
+            "rank": 6,
+            "url": "https://example.com/confluence-vs-notion",
+            "title": "Confluence vs Notion for Software Teams",
+            "snippet": "Atlassian's Confluence vs Notion comparison. Confluence wins for Jira integration; Notion wins for flexibility and Markdown.",
+            "extracted_content": null
+          },
+          {
+            "rank": 7,
+            "url": "https://example.com/self-hosted-wikis",
+            "title": "Self-Hosted Knowledge Bases: BookStack, Outline, Wiki.js",
+            "snippet": "For teams that need data sovereignty. BookStack, Outline (self-hosted), Wiki.js compared on setup difficulty and feature set.",
+            "extracted_content": null
+          },
+          {
+            "rank": 8,
+            "url": "https://example.com/notion-api-engineering",
+            "title": "Building Engineering Workflows on the Notion API",
+            "snippet": "Tutorial on using Notion's API for RFC pipelines and automated doc generation. Notes that the API has limits for production use.",
+            "extracted_content": null
+          },
+          {
+            "rank": 9,
+            "url": "https://example.com/notion-pros-cons",
+            "title": "Notion for Engineering Documentation: Pros and Cons",
+            "snippet": "A balanced take. Pros: ease of use, real-time collab. Cons: search, performance at scale, Markdown export pain.",
+            "extracted_content": null
+          },
+          {
+            "rank": 10,
+            "url": "https://example.com/wiki-tool-decision-framework",
+            "title": "How to Pick a Wiki Tool: A Decision Framework",
+            "snippet": "Framework covering 5 axes: source-of-truth, collaboration, security, integration, total cost. Examples include Notion, Confluence, Outline.",
+            "extracted_content": null
+          }
+        ]
+      }
+    }
+  },
+  "ae7f11455cd6efd5a2a902f646abf90282a74d989b254b1b73613bf02327fdc8": {
+    "input_tokens": 2500,
+    "output_tokens": 2200,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_score_queries",
       "input": {
+        "schema_version": 1,
         "scored": [
           {
+            "schema_version": 1,
             "query": {
               "position": 1,
-              "text": "how do we add billing to our saas",
+              "text": "what is a knowledge base for engineering teams",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -240,57 +669,18 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 6,
-            "difficulty_score": 5,
+            "traffic_score": 7,
+            "difficulty_score": 6,
             "business_value_score": 3,
-            "composite": 4.1,
-            "rationale": "Model-estimated: moderate head-term volume for a broad how-to query, but novice framing and no vendor intent makes business value low for a billing platform targeting CTOs mid-evaluation.",
-            "competitor_urls": []
+            "composite": 3.6,
+            "competitor_urls": [],
+            "rationale": "Decent head-term traffic but very low intent for a 200-person dev shop already past the 'do I need this' stage."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 2,
-              "text": "what is metered billing for software",
-              "framing": "novice",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 4,
-            "business_value_score": 3,
-            "composite": 3.9,
-            "rationale": "Model-estimated: definitional query with decent search demand from early-stage teams, but purely educational framing yields low business value as no purchase decision is imminent.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 3,
-              "text": "do we need to build our own payment system",
-              "framing": "novice",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 4,
-            "business_value_score": 4,
-            "composite": 4.1,
-            "rationale": "Model-estimated: this build-vs-buy framing slightly lifts business value above pure definitions since it signals the team is weighing outsourcing, but it's still early-funnel with limited purchase proximity.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 4,
-              "text": "subscription billing infrastructure explained",
+              "text": "do i need a wiki for my engineering team",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -304,13 +694,14 @@
             "difficulty_score": 4,
             "business_value_score": 3,
             "composite": 3.5,
-            "rationale": "Model-estimated: long-tail informational query with lower volume than head terms, and the purely explanatory framing keeps business value low despite being relevant to the ICP.",
-            "competitor_urls": []
+            "competitor_urls": [],
+            "rationale": "Low-funnel informational; not a buyer-ready query."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 5,
-              "text": "how long does it take to implement billing",
+              "position": 3,
+              "text": "what does a knowledge base actually do",
               "framing": "novice",
               "refinement_applied": false
             },
@@ -321,76 +712,59 @@
               "serp_features": []
             },
             "traffic_score": 4,
-            "difficulty_score": 3,
-            "business_value_score": 4,
-            "composite": 3.8,
-            "rationale": "Model-estimated: time-to-value question implicitly primes the reader for a faster external solution, nudging business value up slightly, but volume is modest and intent is still pre-decision.",
-            "competitor_urls": []
+            "difficulty_score": 4,
+            "business_value_score": 2,
+            "composite": 3.0,
+            "competitor_urls": [],
+            "rationale": "Defining-the-category query; almost no buying intent."
           },
           {
+            "schema_version": 1,
+            "query": {
+              "position": 4,
+              "text": "are engineering wikis still a thing in 2026",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 2,
+            "difficulty_score": 3,
+            "business_value_score": 2,
+            "composite": 2.2,
+            "competitor_urls": [],
+            "rationale": "Niche skeptic query; tiny volume."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 5,
+              "text": "knowledge management tool meaning",
+              "framing": "novice",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 2,
+            "composite": 3.7,
+            "competitor_urls": [],
+            "rationale": "Definitional; sees traffic but no buying signal."
+          },
+          {
+            "schema_version": 1,
             "query": {
               "position": 6,
-              "text": "our billing logic is already a mess and we're only at 200 customers",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 2,
-            "difficulty_score": 2,
-            "business_value_score": 6,
-            "composite": 4.4,
-            "rationale": "Model-estimated: highly conversational long-tail phrase has very low search volume but strong pain-signal framing that maps directly to the ICP's early-scaling crisis, lifting business value meaningfully.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 7,
-              "text": "handling proration and failed payment retries is killing us",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 2,
-            "difficulty_score": 2,
-            "business_value_score": 7,
-            "composite": 5.1,
-            "rationale": "Model-estimated: ultra-specific pain phrase with negligible search volume but very high business value since it names two exact features (proration, dunning) that billing platforms directly solve for this ICP.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 8,
-              "text": "we need metered billing and I'm not writing that from scratch",
-              "framing": "problem-aware",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 2,
-            "difficulty_score": 2,
-            "business_value_score": 8,
-            "composite": 5.6,
-            "rationale": "Model-estimated: the explicit rejection of DIY development makes this one of the highest business-value problem-aware phrases in the journey, directly telegraphing intent to adopt a third-party billing platform.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 9,
-              "text": "our subscription system doesn't handle international payments",
+              "text": "our engineering team can't find docs",
               "framing": "problem-aware",
               "refinement_applied": false
             },
@@ -403,14 +777,78 @@
             "traffic_score": 3,
             "difficulty_score": 3,
             "business_value_score": 6,
-            "composite": 4.5,
-            "rationale": "Model-estimated: international payments is a recognized pain point with slightly more search volume than niche proration phrases, and directly maps to a platform capability decision criterion for this ICP.",
-            "competitor_urls": []
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Long-tail pain expression; low volume but high intent for problem-aware buyers."
           },
           {
+            "schema_version": 1,
+            "query": {
+              "position": 7,
+              "text": "engineering docs that nobody updates",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 3,
+            "business_value_score": 6,
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Same family as #6 \u2014 pain-named, low volume, high intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 8,
+              "text": "single source of truth for engineering docs",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 5,
+            "difficulty_score": 5,
+            "business_value_score": 7,
+            "composite": 6.6,
+            "competitor_urls": [],
+            "rationale": "Echoes the segment's exact language pattern; mid-funnel and ICP-resonant."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 9,
+              "text": "how to fix fragmented engineering documentation",
+              "framing": "problem-aware",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 4,
+            "business_value_score": 6,
+            "composite": 5.6,
+            "competitor_urls": [],
+            "rationale": "How-to framing; reasonable intent for actively-evaluating teams."
+          },
+          {
+            "schema_version": 1,
             "query": {
               "position": 10,
-              "text": "we keep losing track of failed charges and revenue",
+              "text": "tooling teams hate maintaining custom wikis",
               "framing": "problem-aware",
               "refinement_applied": false
             },
@@ -422,75 +860,16 @@
             },
             "traffic_score": 2,
             "difficulty_score": 2,
-            "business_value_score": 6,
-            "composite": 4.4,
-            "rationale": "Model-estimated: revenue leakage and dunning failures are core billing platform value propositions, keeping business value solid despite very low estimated search volume for this conversational phrasing.",
-            "competitor_urls": []
+            "business_value_score": 5,
+            "composite": 5.0,
+            "competitor_urls": [],
+            "rationale": "Narrow phrasing; tiny volume but strong implicit buying intent."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 11,
-              "text": "stripe webhook integration best practices",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 7,
-            "difficulty_score": 7,
-            "business_value_score": 5,
-            "composite": 4.7,
-            "rationale": "Model-estimated: a high-volume technical query dominated by Stripe's own docs and engineering blogs; moderate business value since it signals DIY intent rather than platform evaluation, but competitive difficulty is high.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 12,
-              "text": "implementing dunning logic for failed payments",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 5,
-            "business_value_score": 6,
-            "composite": 5.2,
-            "rationale": "Model-estimated: dunning is a well-known billing problem with moderate search volume; the implementation framing signals active technical evaluation, which maps well to a platform's out-of-the-box dunning capability.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 13,
-              "text": "how to handle proration and mid-cycle upgrades",
-              "framing": "power-user",
-              "refinement_applied": false
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 5,
-            "difficulty_score": 5,
-            "business_value_score": 6,
-            "composite": 5.2,
-            "rationale": "Model-estimated: proration and mid-cycle upgrades are a common SaaS billing edge case with decent search demand; power-user framing indicates engineering depth and aligns with ICP decision criteria around API design quality.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 14,
-              "text": "usage-based billing architecture for SaaS",
+              "text": "self hosted knowledge base options",
               "framing": "power-user",
               "refinement_applied": false
             },
@@ -503,15 +882,142 @@
             "traffic_score": 6,
             "difficulty_score": 6,
             "business_value_score": 7,
-            "composite": 5.8,
-            "rationale": "Model-estimated: usage-based billing is a high-momentum topic with growing search demand; architecture framing at this stage signals the ICP is actively designing a system, making it high-value for a metered billing platform.",
-            "competitor_urls": []
+            "composite": 6.3,
+            "competitor_urls": [],
+            "rationale": "Implementation-detail filter; clear power-user buying signal."
           },
           {
+            "schema_version": 1,
+            "query": {
+              "position": 12,
+              "text": "knowledge base with markdown source of truth",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 5,
+            "business_value_score": 8,
+            "composite": 6.4,
+            "competitor_urls": [],
+            "rationale": "Differentiated requirement maps to ICP decision criteria; high intent."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 13,
+              "text": "wiki with git style versioning",
+              "framing": "power-user",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Niche but high-fit for engineering ICP; few good answers exist."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 14,
+              "text": "best knowledge base for engineering teams 2026",
+              "framing": "vendor-comparing",
+              "refinement_applied": false
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 9,
+            "difficulty_score": 9,
+            "business_value_score": 9,
+            "composite": 7.6,
+            "competitor_urls": [],
+            "rationale": "Head 'best X for Y' query \u2014 highest traffic in the journey, highest commercial intent, dominated by listicles."
+          },
+          {
+            "schema_version": 1,
             "query": {
               "position": 15,
-              "text": "billing platform that doesn't require coding",
+              "text": "api first wiki for engineering with webhook support",
               "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 8,
+            "composite": 6.3,
+            "competitor_urls": [],
+            "rationale": "Very specific requirement; small volume but the searcher is ready to buy."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 16,
+              "text": "knowledge base with sso and audit log for soc2",
+              "framing": "power-user",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 4,
+            "difficulty_score": 5,
+            "business_value_score": 9,
+            "composite": 6.9,
+            "competitor_urls": [],
+            "rationale": "Compliance + buyer-ready \u2014 bottom of funnel."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 17,
+              "text": "notion vs confluence for engineering teams",
+              "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 9,
+            "difficulty_score": 9,
+            "business_value_score": 8,
+            "composite": 7.1,
+            "competitor_urls": [],
+            "rationale": "Head vs query; high volume but brands themselves dominate the SERP."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 18,
+              "text": "outline vs notion engineering wiki",
+              "framing": "vendor-comparing",
               "refinement_applied": true
             },
             "metrics": {
@@ -522,15 +1028,16 @@
             },
             "traffic_score": 5,
             "difficulty_score": 5,
-            "business_value_score": 5,
-            "composite": 4.5,
-            "rationale": "Model-estimated: refinement shifts toward no-code tooling which slightly misaligns with the CTO/engineer ICP who values API quality, capping business value; moderate volume and competition expected in the no-code billing space.",
-            "competitor_urls": []
+            "business_value_score": 8,
+            "composite": 6.5,
+            "competitor_urls": [],
+            "rationale": "Less-dominated vs query; defensible and high intent."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 16,
-              "text": "stripe vs dedicated billing platform",
+              "position": 19,
+              "text": "alternatives to notion for engineering documentation",
               "framing": "vendor-comparing",
               "refinement_applied": true
             },
@@ -541,17 +1048,81 @@
               "serp_features": []
             },
             "traffic_score": 7,
-            "difficulty_score": 8,
+            "difficulty_score": 7,
             "business_value_score": 9,
-            "composite": 7.1,
-            "rationale": "Model-estimated: head comparison query with high volume and very high business value \u2014 the ICP is explicitly weighing whether to use Stripe alone or adopt a billing layer \u2014 but difficulty is high as Stripe and major competitors own the SERP.",
-            "competitor_urls": []
+            "composite": 7.4,
+            "competitor_urls": [],
+            "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
           },
           {
+            "schema_version": 1,
             "query": {
-              "position": 17,
-              "text": "best billing infrastructure for metered pricing 2026",
+              "position": 20,
+              "text": "bookstack vs notion for engineering team",
               "framing": "vendor-comparing",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Niche vs query; small but ready-to-buy audience."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 21,
+              "text": "notion price hike 2026 alternatives",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 6,
+            "difficulty_score": 5,
+            "business_value_score": 9,
+            "composite": 7.1,
+            "competitor_urls": [],
+            "rationale": "Trigger-event driven; high intent and time-sensitive."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 22,
+              "text": "cheap knowledge base for 200 person engineering team",
+              "framing": "price-driven",
+              "refinement_applied": true
+            },
+            "metrics": {
+              "volume": null,
+              "kd": null,
+              "cpc": null,
+              "serp_features": []
+            },
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Narrow size + price filter; small but actively-buying audience."
+          },
+          {
+            "schema_version": 1,
+            "query": {
+              "position": 23,
+              "text": "free wiki for engineering teams self hosted",
+              "framing": "price-driven",
               "refinement_applied": true
             },
             "metrics": {
@@ -562,135 +1133,16 @@
             },
             "traffic_score": 5,
             "difficulty_score": 5,
-            "business_value_score": 9,
-            "composite": 7.0,
-            "rationale": "Model-estimated: year-tagged best-of query with strong commercial intent and direct alignment to metered billing capability \u2014 a core ICP decision criterion \u2014 with moderate difficulty since freshness advantage helps newer content rank.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 18,
-              "text": "if the docs are bad I'm out \u2014 I don't have time to reverse-engineer an API",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 1,
-            "difficulty_score": 1,
-            "business_value_score": 8,
-            "composite": 4.3,
-            "rationale": "Model-estimated: essentially zero search volume for this verbatim phrase, but it articulates the ICP's #1 documented decision criterion (documentation quality), making it extremely high signal for content and positioning strategy even if not a rankable query.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 19,
-              "text": "billing platform with SEPA and iDEAL support",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 4,
-            "business_value_score": 8,
-            "composite": 6.0,
-            "rationale": "Model-estimated: niche but high-intent query targeting European payment method support \u2014 a specific ICP need \u2014 with lower competition than broad comparison terms and strong purchase proximity for teams expanding internationally.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 20,
-              "text": "we'll outgrow this setup the moment we add a second pricing tier",
-              "framing": "vendor-comparing",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 1,
-            "difficulty_score": 2,
-            "business_value_score": 7,
-            "composite": 3.9,
-            "rationale": "Model-estimated: near-zero rankable search volume for this conversational phrase, but it captures the scalability anxiety that is a core ICP decision criterion; better used as a content theme or landing-page copy hook than a target keyword.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 21,
-              "text": "cheap billing API with metered usage tracking",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 5,
-            "business_value_score": 7,
-            "composite": 5.5,
-            "rationale": "Model-estimated: price-modified API query with reasonable niche volume; the metered usage qualifier tightens ICP alignment and the price sensitivity aligns with the no-minimum contract criterion, making business value solid.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 22,
-              "text": "I don't want to rebuild Stripe \u2014 I just want to use Stripe",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 1,
-            "difficulty_score": 1,
-            "business_value_score": 7,
-            "composite": 3.9,
-            "rationale": "Model-estimated: verbatim search volume is negligible but this phrase crystallizes the ICP's frustration with over-engineering billing \u2014 a strong content and messaging signal, though not a practical ranking target.",
-            "competitor_urls": []
-          },
-          {
-            "query": {
-              "position": 23,
-              "text": "free tier billing platform 2026",
-              "framing": "price-driven",
-              "refinement_applied": true
-            },
-            "metrics": {
-              "volume": null,
-              "kd": null,
-              "cpc": null,
-              "serp_features": []
-            },
-            "traffic_score": 4,
-            "difficulty_score": 4,
             "business_value_score": 6,
-            "composite": 4.6,
-            "rationale": "Model-estimated: year-tagged free-tier query has moderate volume from budget-sensitive early-stage teams; business value is reasonable since free-tier availability directly maps to the ICP's no-minimum contract decision criterion.",
-            "competitor_urls": []
+            "composite": 5.5,
+            "competitor_urls": [],
+            "rationale": "Free-tier hunters; modest commercial intent."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 24,
-              "text": "billing platform pricing under $500 month",
+              "text": "notion pricing per seat 2026",
               "framing": "price-driven",
               "refinement_applied": true
             },
@@ -700,17 +1152,18 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 4,
-            "difficulty_score": 4,
+            "traffic_score": 7,
+            "difficulty_score": 8,
             "business_value_score": 7,
-            "composite": 5.5,
-            "rationale": "Model-estimated: explicit price-ceiling query signals bottom-of-funnel purchase readiness and aligns with the ICP's no-long-term-contract criterion; moderate competition since review sites like G2 and Capterra typically dominate this SERP.",
-            "competitor_urls": []
+            "composite": 5.9,
+            "competitor_urls": [],
+            "rationale": "High traffic but Notion owns the SERP; tough to displace."
           },
           {
+            "schema_version": 1,
             "query": {
               "position": 25,
-              "text": "single source of truth for billing and revenue recognition",
+              "text": "knowledge base under $500/month for engineering team",
               "framing": "price-driven",
               "refinement_applied": true
             },
@@ -720,606 +1173,33 @@
               "cpc": null,
               "serp_features": []
             },
-            "traffic_score": 4,
-            "difficulty_score": 5,
-            "business_value_score": 8,
-            "composite": 6.1,
-            "rationale": "Model-estimated: despite a price-driven framing label, this query reflects the highest-maturity intent in the journey \u2014 revenue recognition and a unified data layer are C-suite concerns \u2014 and directly maps to a billing platform's core value proposition for scaling SaaS companies.",
-            "competitor_urls": []
+            "traffic_score": 3,
+            "difficulty_score": 4,
+            "business_value_score": 7,
+            "composite": 5.7,
+            "competitor_urls": [],
+            "rationale": "Concrete budget threshold; small audience but commercial intent."
           }
         ]
       }
     }
   },
-  "257ea9057af28634975122d0dc74c9c365f7d2f05dfd251f56fb3cb671c58f66": {
-    "input_tokens": 1232,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_buyer_realism",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "37fd4271e78e64abe03193b8a66972694c0d9c50c101dd7f9a213a3c3d125120": {
-    "input_tokens": 1806,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_search_intent_alignment",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "58640d117615c51e07e78c0710c3dfd5fecd9aa5d1b7da95531ead177c147cd5": {
-    "input_tokens": 1849,
-    "output_tokens": 1523,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_generate_geo_query_list",
-      "input": {
-        "schema_version": 1,
-        "queries": [
-          {
-            "position": 1,
-            "text": "how do we add billing to our saas",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 2,
-            "text": "what is metered billing for software",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 3,
-            "text": "do we need to build our own payment system",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 4,
-            "text": "subscription billing infrastructure explained",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 5,
-            "text": "how long does it take to implement billing",
-            "framing": "novice",
-            "refinement_applied": false
-          },
-          {
-            "position": 6,
-            "text": "our billing logic is already a mess and we're only at 200 customers",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 7,
-            "text": "handling proration and failed payment retries is killing us",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 8,
-            "text": "we need metered billing and I'm not writing that from scratch",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 9,
-            "text": "our subscription system doesn't handle international payments",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 10,
-            "text": "we keep losing track of failed charges and revenue",
-            "framing": "problem-aware",
-            "refinement_applied": false
-          },
-          {
-            "position": 11,
-            "text": "stripe webhook integration best practices",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 12,
-            "text": "implementing dunning logic for failed payments",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 13,
-            "text": "how to handle proration and mid-cycle upgrades",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 14,
-            "text": "usage-based billing architecture for SaaS",
-            "framing": "power-user",
-            "refinement_applied": false
-          },
-          {
-            "position": 15,
-            "text": "billing platform that doesn't require coding",
-            "framing": "power-user",
-            "refinement_applied": true
-          },
-          {
-            "position": 16,
-            "text": "stripe vs dedicated billing platform",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 17,
-            "text": "best billing infrastructure for metered pricing 2026",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 18,
-            "text": "if the docs are bad I'm out \u2014 I don't have time to reverse-engineer an API",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 19,
-            "text": "billing platform with SEPA and iDEAL support",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 20,
-            "text": "we'll outgrow this setup the moment we add a second pricing tier",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          {
-            "position": 21,
-            "text": "cheap billing API with metered usage tracking",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 22,
-            "text": "I don't want to rebuild Stripe \u2014 I just want to use Stripe",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 23,
-            "text": "free tier billing platform 2026",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 24,
-            "text": "billing platform pricing under $500 month",
-            "framing": "price-driven",
-            "refinement_applied": true
-          },
-          {
-            "position": 25,
-            "text": "single source of truth for billing and revenue recognition",
-            "framing": "price-driven",
-            "refinement_applied": true
-          }
-        ],
-        "journey_arc_summary": "A Series A\u2013C founder starts by asking *what* billing infrastructure means and whether they even need external solutions (positions 1\u20135). Once they encounter the reality of implementation\u2014messy logic, international complexity, payment failures\u2014their searches become grounded in real pain (positions 6\u201310). They then pivot to technical detail (webhooks, dunning, proration) expecting that engineering skill can solve the problem (positions 11\u201315). Frustration with the depth of undifferentiated work drives them to compare concrete alternatives and demand good documentation (positions 16\u201320), and finally land on price and total-cost-of-ownership as the tiebreaker (positions 21\u201325). By the end, they're not asking \"what is billing\" anymore\u2014they're asking whether a platform gives them a true single source of truth without forcing them to reinvent Stripe."
-      }
-    }
-  },
-  "5be5078cef6e6e8d079cb115fe2ed28c584848a91022ce764c40d9161f40c339": {
-    "input_tokens": 1244,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_specificity",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "74089d65ecf4781fcd9ded76f6a629bf18ec3244946440cc8040bf6aca61f77c": {
-    "input_tokens": 2045,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brand_voice_match",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "933741d2729ee851b73c9b43596250b46ab57f9bbdcd2a5c3623ef0844706392": {
-    "input_tokens": 19159,
-    "output_tokens": 1229,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_serp_results",
-      "input": {
-        "results": [
-          {
-            "rank": 1,
-            "url": "https://schematichq.com/blog/why-usage-based-billing-is-taking-over-saas",
-            "title": "Usage-Based Billing Explained for SaaS Teams (2026 Guide)",
-            "snippet": "If you run a SaaS product, usage-based pricing can help you align revenue with customer value and manage costs through a more customer-centric approach."
-          },
-          {
-            "rank": 2,
-            "url": "https://www.maxio.com/blog/consumption-based-billing",
-            "title": "Consumption-Based Billing: The Ultimate Guide for SaaS Pricing Models | Maxio",
-            "snippet": "This usage-based model not only aligns the cost of software to the value customers receive, but it also provides SaaS businesses with recurring revenue streams that grow organically with customer adoption."
-          },
-          {
-            "rank": 3,
-            "url": "https://www.maxio.com/blog/usage-based-billing-saas",
-            "title": "What is Usage-Based Billing in SaaS? Benefits & Guide | Maxio",
-            "snippet": "Unlike traditional, static pricing models, this approach allows businesses to charge customers based on real-time customer usage, creating a more tailored customer experience."
-          },
-          {
-            "rank": 4,
-            "url": "https://www.withorb.com/blog/usage-billing-guide",
-            "title": "Usage-based billing for SaaS companies: How it works ... - Orb",
-            "snippet": "Usage-based billing requires precise tracking of how customers interact with a product. Billing solutions with a scalable API and a raw event architecture are able to process large volumes of usage data and do not drop events."
-          },
-          {
-            "rank": 5,
-            "url": "https://stripe.com/resources/more/usage-based-pricing-for-saas-how-to-make-the-most-of-this-pricing-model",
-            "title": "Usage-based pricing for SaaS: A guide | Stripe",
-            "snippet": "With usage-based pricing for SaaS, customers pay based on how much they actually use the service rather than paying a flat fee."
-          },
-          {
-            "rank": 6,
-            "url": "https://billingplatform.com/blog/your-guide-to-usage-based-billing-for-saas",
-            "title": "Your Guide to Usage-Based Billing for SaaS | BillingPlatform",
-            "snippet": "Also called pay-as-you-go or metered billing, a usage-based pricing model allows customers to only pay for the products or services used."
-          },
-          {
-            "rank": 7,
-            "url": "https://www.withorb.com/blog/billing-architecture",
-            "title": "Orb | Billing system architecture for SaaS 101",
-            "snippet": "In a microservices architecture, the billing system is decomposed into smaller, independent services that communicate with each other through APIs. This transition to microservices allows each service to be developed, deployed, and scaled independently."
-          },
-          {
-            "rank": 8,
-            "url": "https://www.reliabills.com/blog/usage-based-billing-guide/",
-            "title": "What Is Usage-Based Billing? Saas Billing Paradigm | ReliaBills",
-            "snippet": "In the simplest explanation, usage-based billing is a method that allows you to track how much each of your customers \"use\" your product or service."
-          },
-          {
-            "rank": 9,
-            "url": "https://getlago.com/blog/usage-based-billing-for-saas",
-            "title": "Lago Blog | The how and why of usage-based billing for SaaS",
-            "snippet": "Usage-based billing charges customers based on what they actually use \u2014 e.g., $0.01 per API call."
-          },
-          {
-            "rank": 10,
-            "url": "https://unibee.dev/blog/12-best-usage-based-billing-software-for-saas-2025/",
-            "title": "12 Best Usage-Based Billing Software for SaaS 2025 | UniBee",
-            "snippet": "Many billing tools treat usage as an add-on to subscriptions. UniBee flips that model. Its architecture is built from the ground up to measure, meter, and monetize consumption."
-          }
-        ]
-      }
-    }
-  },
-  "bad05f2435420c2845bfb2b9d48fa6627e5169ccdc7fc5157d69773c34b24442": {
-    "input_tokens": 6214,
-    "output_tokens": 5648,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_define_icp",
-      "input": {
-        "segments": [
-          {
-            "segment_label": "Series A\u2013C SaaS Founder / CTO Building Core Monetization",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "B2B or B2C SaaS \u2014 productivity, vertical software, dev tools, or AI-native applications",
-              "company_size": "15\u2013150 employees; $1M\u2013$20M ARR; Series A or B funded",
-              "geography": "North America (primary); Western Europe (secondary); increasingly global-first from day one",
-              "organizational_structure": "Engineering-led buying unit; CTO or founding engineer is the de facto decision-maker; Finance/CFO consulted only at contract stage; no dedicated procurement function",
-              "buying_stage": "Problem-aware and solution-aware; evaluating Stripe at the moment of writing the first billing or checkout feature, often before a formal RFP exists",
-              "strategic_pain_points": [
-                "Building a subscription or usage-based billing system from scratch is a 3\u20136 month engineering detour that delays core product work",
-                "Handling proration, dunning, failed-payment retries, and revenue recognition logic is undifferentiated infrastructure they don't want to own",
-                "Global expansion requires payment method coverage (SEPA, iDEAL, Alipay) they can't negotiate piecemeal",
-                "PCI DSS compliance and SCA/3DS2 obligations are regulatory surface area the team has no bandwidth to manage"
-              ],
-              "trigger_events": [
-                "Deciding to monetize for the first time after a free or beta period",
-                "Migrating off a no-code tool (Webflow, Bubble) that can't support custom billing logic",
-                "Adding a second pricing tier, usage-based component, or annual prepay option that breaks their current homegrown billing code",
-                "A Series A investor pushing for clean MRR reporting and investor-grade revenue metrics",
-                "Hiring the first finance hire who flags that the current setup can't support ASC 606 revenue recognition"
-              ]
-            },
-            "persona": {
-              "role_job_title": "CTO, VP Engineering, or Founding Engineer",
-              "demographic_context": "Typically 28\u201340 years old; CS or engineering background; has built at least one previous product; reads Hacker News and follows Stripe's changelog; may have used Stripe in a prior role",
-              "motivations": [
-                "Ship the payments feature in days, not months, so the team can return to core product work",
-                "Avoid being paged at 2am because a homegrown billing edge case broke in production",
-                "Look credible to the board and new CFO with clean, auditable revenue data from day one",
-                "Retain engineering talent by not assigning developers to undifferentiated billing plumbing"
-              ],
-              "decision_criteria": [
-                "API design quality and documentation completeness \u2014 they evaluate the docs before they talk to sales",
-                "Time-to-first-successful-charge in their own dev environment, measured in hours",
-                "Availability of a well-maintained SDK in their stack (Node, Python, Ruby, Go)",
-                "Confidence that the platform will scale to $10M+ ARR without a re-platforming event",
-                "No long-term contract or monthly minimums at early stage"
-              ],
-              "language_patterns": [
-                "'I don't want to rebuild Stripe \u2014 I just want to use Stripe'",
-                "'Our billing logic is already a mess and we're only at 200 customers'",
-                "'We need metered billing and I'm not writing that from scratch'",
-                "'If the docs are bad I'm out \u2014 I don't have time to reverse-engineer an API'",
-                "'We'll outgrow this setup the moment we add a second pricing tier'"
-              ],
-              "frustrations": [
-                "Competitors with opaque or poorly versioned APIs that require a support ticket to understand a breaking change",
-                "Payment platforms that require a sales call before you can see pricing",
-                "Limited or unofficial SDK support for their language or framework",
-                "Webhook reliability issues that create silent billing failures they find out about from angry customers"
-              ],
-              "downstream_use_cases": [
-                "Subscription checkout with trial, proration, and plan upgrade/downgrade flows",
-                "Usage-based billing tied to API calls, seats, or compute consumption",
-                "Automated dunning and failed-payment retry logic",
-                "Revenue recognition data feed into their data warehouse for investor reporting"
-              ],
-              "information_sources": [
-                "Stripe documentation and changelog (primary research surface)",
-                "Hacker News 'Ask HN' threads and Show HN posts",
-                "GitHub issues and community forums for their framework's Stripe integration",
-                "Peer recommendations from founder Slack groups (Indie Hackers, OnDeck, YC alumni network)",
-                "Developer-focused podcasts and newsletters (Software Engineering Daily, The Pragmatic Engineer)"
-              ]
-            }
-          },
-          {
-            "segment_label": "Marketplace / Platform Operator Scaling Multi-Party Payouts",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "Gig economy, creator monetization, B2B marketplace, or on-demand services platform \u2014 any business where money flows between a platform, sellers/service-providers, and buyers",
-              "company_size": "50\u2013500 employees; $5M\u2013$100M ARR or GMV-driven; Series B to Series D",
-              "geography": "US-headquartered with cross-border payout obligations to contractors or sellers in 10\u201350 countries",
-              "organizational_structure": "Product and Engineering own the build decision; Head of Platform or VP Product champions internally; Finance and Legal are blockers on KYC/compliance questions; Stripe Connect decision often surfaces during a scaling inflection point",
-              "buying_stage": "Actively in-market; has either outgrown a homegrown payout system or evaluated and rejected a simpler PSP that lacks split-payment logic",
-              "strategic_pain_points": [
-                "Disbursing payouts to thousands of 1099 contractors or sellers across jurisdictions without building a compliance and banking operations team",
-                "Collecting funds from buyers, holding them in escrow-like structures, and releasing to sellers on custom timelines \u2014 logic that generic PSPs can't support",
-                "KYC/AML obligations for onboarding sellers vary by country; managing this in-house is a legal and engineering sinkhole",
-                "1099-K reporting and tax form generation for US contractors is a recurring compliance burden they want to outsource",
-                "Fraud at the seller onboarding layer (fake accounts, money-laundering through payout rails) is existential reputational risk"
-              ],
-              "trigger_events": [
-                "Scaling seller/contractor base past 1,000 active payees where manual ACH batches break down",
-                "Expanding into a new country where local payout rails (SEPA, Faster Payments, PIX) are required",
-                "A fraud incident or regulatory inquiry that forces a review of their KYC and payout compliance posture",
-                "A new fundraise that requires clean financial controls and auditable fund-flow documentation",
-                "A competitor launching faster payouts (instant pay) that creates seller churn pressure"
-              ]
-            },
-            "persona": {
-              "role_job_title": "Head of Platform Product, VP Product, or Director of Payments",
-              "demographic_context": "30\u201345 years old; product management or fintech engineering background; has likely dealt with Stripe Connect, Hyperwallet, or Tipalti in a prior role; thinks in terms of platform unit economics and seller NPS",
-              "motivations": [
-                "Give sellers or contractors the fastest, most transparent payout experience in their category \u2014 make money movement a competitive differentiator, not a support ticket",
-                "Eliminate the internal compliance and banking operations headcount that a home-built payout system requires",
-                "Ship instant or same-day payout capability without building direct integrations with debit card networks",
-                "Ensure the platform passes a Series C due diligence review on financial controls and fund-flow documentation"
-              ],
-              "decision_criteria": [
-                "Support for Custom or Express Connect accounts with the right trade-off between platform control and onboarding friction",
-                "Depth of cross-border payout rail coverage \u2014 ACH, SEPA, Faster Payments, local bank transfer",
-                "Stripe's willingness to own KYC/AML compliance for connected accounts vs. pushing it back to the platform",
-                "Instant payout availability via Stripe Instant Payouts to debit card for contractor-facing products",
-                "Clarity on liability ownership: who is responsible if a connected account is fraudulent"
-              ],
-              "language_patterns": [
-                "'We're essentially a bank for our sellers and we never wanted to be'",
-                "'Our support queue is 40% payout questions \u2014 that's not a payments problem, that's a product problem'",
-                "'We need instant pay or our contractors go to the competitor who offers it'",
-                "'The KYC piece is what kills us every time we expand to a new country'",
-                "'We can't keep running ACH batches manually when we have 5,000 sellers'"
-              ],
-              "frustrations": [
-                "Stripe Connect's three-account-type model (Standard / Express / Custom) is powerful but the trade-offs are under-documented for non-obvious use cases",
-                "Onboarding friction for connected accounts varies unpredictably by country, causing seller drop-off they can't fully attribute",
-                "Payout timing and failure notifications are not granular enough for a high-volume contractor platform where a failed payout triggers a support escalation",
-                "The cost of Instant Payouts (1.5% per payout) is hard to absorb at scale without passing it to sellers"
-              ],
-              "downstream_use_cases": [
-                "Automated split payments \u2014 collect from buyer, take platform fee, disburse remainder to seller in real time or on a schedule",
-                "Contractor onboarding with embedded KYC and identity verification (Stripe Identity integration)",
-                "1099-K tax form generation and filing for US contractor bases",
-                "Instant Payouts to debit card as a retention and acquisition tool for gig workers"
-              ],
-              "information_sources": [
-                "Stripe Connect documentation and migration guides",
-                "Fintech-focused Slack communities (Fintech Devs, Payment Professionals LinkedIn group)",
-                "Peer conversations at Fintech Meetup, Money20/20, and Plaid's peer network",
-                "Andreessen Horowitz and Bessemer fintech blog content on marketplace unit economics",
-                "Stripe support and solutions engineering contacts for architecture reviews"
-              ]
-            }
-          },
-          {
-            "segment_label": "Enterprise SaaS Finance Leader Modernizing Revenue Operations",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "Enterprise or mid-market SaaS \u2014 HR tech, marketing tech, security software, or industry cloud \u2014 with complex, multi-element revenue arrangements",
-              "company_size": "500\u20135,000 employees; $50M\u2013$500M ARR; post-Series D, pre-IPO, or recently public",
-              "geography": "US-headquartered with multi-entity operations across EU, APAC, and LATAM; multi-currency billing is a baseline requirement",
-              "organizational_structure": "Finance-led buying process (CFO, VP Finance, or Revenue Operations owns the RFP); Engineering is a technical validator, not the sponsor; Procurement and Legal are formal blockers; deals involve 3\u20136 month evaluation cycles",
-              "buying_stage": "Late problem-aware to actively evaluating; often triggered by IPO readiness work, a failed audit finding on revenue recognition, or a Zuora/Recurly contract renewal that surfaces dissatisfaction",
-              "strategic_pain_points": [
-                "Revenue recognition under ASC 606 / IFRS 15 across multi-element arrangements (SaaS + professional services + usage) requires automated waterfall logic that legacy billing systems don't provide",
-                "Month-end close takes 10\u201315 days because billing data, ERP data, and bank data live in three systems that don't reconcile cleanly",
-                "Dunning and collections workflows are manual or rely on homegrown scripts that break when deal structures change",
-                "Existing billing system (Zuora or Recurly) has poor API ergonomics and requires a dedicated admin to manage, not self-serve by RevOps",
-                "Multi-currency invoicing and tax calculation across EU VAT, US sales tax, and APAC GST regimes is stitched together with consultants and spreadsheets"
-              ],
-              "trigger_events": [
-                "Audit committee or external auditor flags revenue recognition controls as a material weakness ahead of IPO S-1 filing",
-                "CFO sets a target to reduce DSO (days sales outstanding) by 20% and the current billing system can't support automated collections workflows",
-                "Zuora or Recurly contract renewal with a significant price increase that opens the door for competitive evaluation",
-                "New CFO hired from a company that ran Stripe at scale and is comfortable advocating for it internally",
-                "A new enterprise pricing model (usage-based, hybrid flat + overage) that the current billing system can't support without expensive customization"
-              ]
-            },
-            "persona": {
-              "role_job_title": "CFO, VP Finance, or Director of Revenue Operations (RevOps)",
-              "demographic_context": "35\u201355 years old; CPA or MBA background; has operated in a high-growth SaaS finance function before; increasingly comfortable with API-first tools but not a developer; measured on GAAP revenue accuracy, DSO, and close cycle time",
-              "motivations": [
-                "Get to a 5-day month-end close by eliminating manual reconciliation between billing, CRM, and ERP",
-                "Pass a Big 4 audit on revenue recognition controls without a material weakness finding",
-                "Reduce churn caused by billing friction \u2014 failed payments, incorrect invoices, and confusing dunning emails are a CFO-visible retention problem",
-                "Position the company for IPO or acquisition with clean, auditable, investor-grade revenue reporting"
-              ],
-              "decision_criteria": [
-                "Native ASC 606 revenue recognition waterfall logic without a third-party add-on",
-                "Bi-directional integration with NetSuite or Salesforce CPQ \u2014 the CFO will not switch ERP",
-                "Dedicated enterprise support with a named solutions engineer and SLA-backed response times",
-                "Reference customers of comparable size and complexity willing to take a reference call",
-                "Total cost of ownership including implementation, ongoing admin, and per-transaction fees at their processing volume \u2014 will model Adyen interchange-plus as a benchmark"
-              ],
-              "language_patterns": [
-                "'Our revenue recognition is still done in a spreadsheet and that can't survive an audit'",
-                "'I need the billing system to talk to NetSuite without a custom middleware layer'",
-                "'We close the books in 12 days \u2014 that's not acceptable going into an IPO'",
-                "'My RevOps team spends half their time fixing billing edge cases that should be automated'",
-                "'I need a reference call with a company our size who went through an audit on this platform'"
-              ],
-              "frustrations": [
-                "Stripe's self-serve support model is designed for developers, not finance teams who need a named account manager and contractual SLAs",
-                "Stripe Billing's revenue recognition product (Stripe Revenue Recognition) is perceived as less mature than Zuora's RevRec or a dedicated solution like Maxio",
-                "Per-transaction pricing at $50M+ ARR is materially more expensive than the interchange-plus models Adyen and Checkout.com offer at equivalent volume",
-                "Implementation complexity for multi-entity, multi-currency configurations is underestimated in Stripe's documentation, which skews toward simpler use cases"
-              ],
-              "downstream_use_cases": [
-                "Automated ASC 606 revenue waterfall across multi-element SaaS arrangements",
-                "Stripe Data Pipeline replication into Snowflake or Redshift for finance BI and investor reporting",
-                "Dunning automation with configurable retry logic and collections escalation workflows",
-                "Multi-currency invoicing with automated tax calculation (Stripe Tax) across US, EU, and APAC entities"
-              ],
-              "information_sources": [
-                "Gartner Magic Quadrant for Recurring Billing and Subscription Management",
-                "Forrester Wave on SaaS billing platforms",
-                "NetSuite and Salesforce AppExchange partner reviews",
-                "CFO peer networks (CFO Alliance, SaaStr Finance track, private CFO Slack groups)",
-                "Big 4 accounting firm advisors who are consulted during IPO readiness engagements"
-              ]
-            }
-          },
-          {
-            "segment_label": "Fintech Builder Embedding Issuing & Treasury into a Core Product",
-            "schema_version": 1,
-            "firmographic": {
-              "industry_vertical": "Fintech infrastructure, embedded finance, expense management, B2B spend platforms, or non-fintech verticals (logistics, healthcare, real estate) adding financial services as a product feature",
-              "company_size": "20\u2013200 employees; seed to Series B; pre-revenue to $10M ARR; banking-as-a-service or card program is the core product or a strategic product extension",
-              "geography": "US-primary; UK/EU cohort growing; building for a US-licensed card program (Visa/Mastercard) as a baseline",
-              "organizational_structure": "Founder or CTO makes the infrastructure decision; a dedicated payments or fintech engineer (often the first hire) owns the integration; Compliance and Legal are consulted early because of banking partner and BIN sponsor requirements",
-              "buying_stage": "Early problem-aware to actively building; often comparing Stripe Issuing against Marqeta before writing a line of code; the build-vs-buy decision on card issuance infrastructure is the primary question",
-              "strategic_pain_points": [
-                "Obtaining a BIN sponsor, card program manager, and issuing processor as separate relationships is a 6\u201312 month compliance and legal effort that delays time-to-market",
-                "Marqeta's enterprise-first sales model requires minimum volume commitments that a seed-stage company cannot credibly meet",
-                "Building ledger logic (virtual account balances, float management, spend controls) on top of a raw card issuing API is complex and error-prone without a banking infrastructure layer underneath",
-                "KYC/AML obligations for cardholders must be embedded in the onboarding UX without degrading conversion \u2014 a compliance-product design tension",
-                "FDIC pass-through insurance disclosure requirements add legal complexity that founders don't anticipate"
-              ],
-              "trigger_events": [
-                "A design partner or pilot customer specifically requests a company-branded card or spend account as part of the product",
-                "A competitor in the vertical launches an embedded card product, creating competitive pressure to match",
-                "The founding team decides to add a financial product as a monetization layer (interchange revenue) on top of an existing SaaS platform",
-                "A seed or Series A investor identifies the card program as the highest-margin revenue opportunity and pushes the team to prioritize it",
-                "Marqeta or a legacy issuer processor quotes pricing or minimum volumes that are inaccessible at current scale"
-              ]
-            },
-            "persona": {
-              "role_job_title": "Founder/CEO, CTO, or Lead Fintech/Payments Engineer",
-              "demographic_context": "25\u201340 years old; engineering or product background; often has prior experience at a fintech (Plaid, Brex, Ramp, Marqeta, or similar) or at a company that built an embedded finance feature; deeply technical but also commercially motivated by the interchange economics of a card program",
-              "motivations": [
-                "Launch a functional card program or treasury product within 90 days without hiring a dedicated compliance team",
-                "Capture interchange revenue as a meaningful margin contribution \u2014 at scale, 1\u20131.5% interchange on cardholder spend is transformative to the P&L",
-                "Differentiate the core product with a financial feature (company card, earned wage access, spend account) that competitors can't easily replicate",
-                "Avoid the BIN sponsorship and card network licensing complexity by operating under Stripe's existing program manager and bank partner relationships"
-              ],
-              "decision_criteria": [
-                "Time from API key to first physical or virtual card issued, measured in weeks",
-                "Granularity of spend controls \u2014 can they restrict a card to specific MCC codes, geographies, or per-transaction limits in real time?",
-                "Whether Stripe's program manager structure gives them the level of cardholder data access and brand control they need (vs. Marqeta's more flexible just-in-time authorization model)",
-                "Treasury product capability \u2014 can they hold float, earn yield, and move money via ACH and wire from a single API?",
-                "Unit economics of interchange share \u2014 what percentage does Stripe pass through to the platform?"
-              ],
-              "language_patterns": [
-                "'We want to be the financial operating system for our customers \u2014 the card is how we get there'",
-                "'I don't want to spend 6 months negotiating with a BIN sponsor before we've validated the product'",
-                "'Marqeta has better controls but their minimums are a non-starter at our stage'",
-                "'If we can earn interchange on our customers' spend, the card program funds our entire go-to-market'",
-                "'We need to be able to freeze a card and update spend limits in real time \u2014 not in a batch overnight'"
-              ],
-              "frustrations": [
-                "Stripe Issuing's just-in-time authorization controls are less granular than Marqeta's, limiting complex spend management use cases like dynamic per-merchant limits or real-time ledger checks",
-                "Stripe's Treasury product is US-only and bank-partner-dependent, limiting global expansion plans for companies building cross-border financial products",
-                "Documentation for Issuing and Treasury is thinner and less battle-tested than core Payments docs, leading to architecture questions that require a solutions engineering call to resolve",
-                "Interchange revenue share terms are not publicly documented, requiring a direct conversation with Stripe that delays financial modeling"
-              ],
-              "downstream_use_cases": [
-                "Virtual and physical card issuance with programmatic spend controls for B2B expense management or contractor disbursement",
-                "FDIC-pass-through bank accounts (via Stripe Treasury) for holding customer float or operating balances",
-                "Real-time authorization webhooks enabling ledger-based spend controls enforced by the platform, not the card network",
-                "Earned wage access or instant payout disbursement to a Stripe-issued card for gig or hourly workforce platforms"
-              ],
-              "information_sources": [
-                "Stripe Issuing and Treasury documentation (primary)",
-                "Fintech-specific communities: Fintech Devs Discord, a16z fintech newsletter, Fintech Blueprint by Lex Sokolin",
-                "Peer founder conversations in YC, Techstars, or Andreessen Horowitz portfolio Slack networks",
-                "Marqeta developer docs used as a benchmark for control granularity comparison",
-                "Money20/20 and Fintech Meetup for vendor and bank partner relationship development"
-              ]
-            }
-          }
-        ]
-      }
-    }
-  },
-  "c43d990cbab09edc31fdb4d97d58a9c8fb7c010cae35937881b8c5836f734fc9": {
-    "input_tokens": 2755,
-    "output_tokens": 33,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_actionability",
-      "input": {
-        "passed": true
-      }
-    }
-  },
-  "cc3d48129796db4fca73c97e0a5c5e7f93aee6f717cb915d7a36411968fae2c5": {
-    "input_tokens": 7093,
-    "output_tokens": 528,
+  "d382acd16fba702b659408d04efd31e8cfa3fafe995bab7c7d52a57f749ed5a7": {
+    "input_tokens": 3000,
+    "output_tokens": 600,
     "stop_reason": "tool_use",
     "tool_use": {
       "name": "emit_select_priority_query",
       "input": {
-        "selected_segment_label": "Series A\u2013C SaaS Founder / CTO Building Core Monetization",
+        "schema_version": 1,
+        "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
         "selected_query": {
           "schema_version": 1,
           "query": {
-            "position": 14,
-            "text": "usage-based billing architecture for SaaS",
-            "framing": "power-user",
-            "refinement_applied": false
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
           },
           "metrics": {
             "volume": null,
@@ -1327,114 +1207,26 @@
             "cpc": null,
             "serp_features": []
           },
-          "traffic_score": 6,
-          "difficulty_score": 6,
-          "business_value_score": 7,
-          "composite": 5.8,
+          "traffic_score": 7,
+          "difficulty_score": 7,
+          "business_value_score": 9,
+          "composite": 7.4,
           "competitor_urls": [],
-          "rationale": "Model-estimated: usage-based billing is a high-momentum topic with growing search demand; architecture framing at this stage signals the ICP is actively designing a system, making it high-value for a metered billing platform."
+          "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
         },
-        "rationale": "**\"Usage-based billing architecture for SaaS\"** wins on all three strategic criteria. First, it targets the ICP (CTO/VP Eng) at the exact moment they are designing their monetization system \u2014 not just researching concepts \u2014 which makes it the highest-leverage funnel entry point: a reader landing here is primed to evaluate a platform that handles this architecture for them. Second, it is the strongest cluster anchor in the list: it naturally spawns sub-queries covering metered event ingestion, proration, dunning, Stripe integration, and pricing-tier design \u2014 meaning a single pillar piece here feeds a full content cluster. Third, it avoids the defensibility trap of the top composite query **\"stripe vs dedicated billing platform\"** (position 16, composite 7.1), which is dominated by Stripe's own content and major review sites \u2014 an independent piece has structurally poor odds of earning a foothold there. The architecture query, by contrast, lives in a space where thoughtful, depth-first engineering content can genuinely outrank generic vendor pages."
+        "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
       }
     }
   },
-  "f16227cfec04b979a0e7e9750bee39350de8f524e8883447d3d978a127b5f353": {
-    "input_tokens": 5148,
-    "output_tokens": 2944,
+  "e18ef04a46fd6e72020f6f9300c758954fab6a0fc958d7c4206fb903c8aa20b6": {
+    "input_tokens": 1200,
+    "output_tokens": 40,
     "stop_reason": "tool_use",
     "tool_use": {
-      "name": "emit_draft_content_brief",
+      "name": "emit_judge_brand_voice_match",
       "input": {
-        "target_query": "usage-based billing architecture for SaaS",
-        "icp_segment_label": "Series A\u2013C SaaS Founder / CTO Building Core Monetization",
-        "angle": "A concrete system-design blueprint for CTOs who need metered billing and aren't writing the metering layer from scratch \u2014 covering event pipeline architecture, failure modes, hybrid pricing models, and the build-vs-buy decision with real complexity trade-offs.",
-        "audience": "CTOs, VPs of Engineering, and founding engineers at Series A\u2013C SaaS companies who are implementing usage-based or hybrid billing for the first time and need architecture-level guidance, not a definition of what UBB is.",
-        "structure": [
-          {
-            "heading": "Why Your Billing Logic Is Already a Mess at 200 Customers",
-            "purpose": "Establish problem credibility immediately with the ICP's own language. Reject the common SERP angle of 'UBB aligns cost to value' \u2014 this audience already knows the value proposition; they're here because their homegrown setup is breaking.",
-            "key_points": [
-              "Name the exact inflection points that break naive billing code: adding a second pricing tier, switching from flat-rate to metered, or adding annual prepay with monthly usage overages.",
-              "Quantify the engineering cost of maintaining homegrown metering: typical 3\u20136 month detour, ongoing maintenance burden, and on-call risk from billing edge cases in production.",
-              "Frame the architectural decision ahead: this is not a pricing strategy question \u2014 it's a distributed systems question.",
-              "Explicitly state what this article is NOT: it won't define usage-based billing or rehash 'pay-as-you-go vs. subscription' \u2014 link to a definitional resource and move on."
-            ]
-          },
-          {
-            "heading": "The Core Architecture: Five Layers Every Metered Billing System Needs",
-            "purpose": "Deliver the hands-on system-design blueprint that is completely absent from the top-10 SERP results. This is the primary differentiating section. The writer must treat this as a system design interview answer, not a marketing overview.",
-            "key_points": [
-              "Layer 1 \u2014 Event Ingestion: describe the event producer contract (what fields every usage event must carry: customer_id, timestamp, idempotency_key, unit, quantity, metadata). Compare push-based (direct API call) vs. queue-based (Kafka, Kinesis, SQS) approaches and when each is appropriate.",
-              "Layer 2 \u2014 Metering Service: stateless event validation and enrichment; responsible for deduplication using idempotency keys before events enter the aggregation layer.",
-              "Layer 3 \u2014 Aggregation Layer: time-bucketed counters (e.g., hourly rollups into a billing period running total); explain why storing raw events AND aggregated counters matters for late-arriving event reconciliation.",
-              "Layer 4 \u2014 Rating Engine: applies pricing rules (tiers, volume discounts, overage rates, per-unit costs) against the aggregated usage; this is where hybrid pricing models (seats + usage) are resolved.",
-              "Layer 5 \u2014 Invoice Generation & Downstream Contracts: triggers at billing period close; outputs structured invoice data and usage line items to the payment processor, ERP, and data warehouse simultaneously.",
-              "Include a data-flow narrative (prose diagram) describing how a single API-call event travels from SDK instrumentation through all five layers to a line item on an invoice \u2014 writers should produce a Mermaid or ASCII flow diagram."
-            ]
-          },
-          {
-            "heading": "Failure Modes: Idempotency, Late Events, and the Billing Bugs That Wake You Up at 2am",
-            "purpose": "Address the reliability engineering gap that zero SERP competitors cover. This section directly targets the ICP's stated motivation of not being paged at 2am because a homegrown billing edge case broke in production.",
-            "key_points": [
-              "Idempotency at the ingestion boundary: explain why every event needs a client-generated idempotency_key, and how the metering service must deduplicate using a short-TTL idempotency store (Redis with TTL) before writing to the aggregation layer.",
-              "At-least-once vs. exactly-once delivery: explain why exactly-once is a myth in distributed systems and why at-least-once + idempotent consumers is the practical pattern; cite the CAP theorem implication briefly.",
-              "Late-arriving events: events delayed by mobile clients, batch exporters, or network partitions that arrive after a billing period has closed \u2014 explain the reconciliation window pattern (hold invoice finalization for X hours after period end) and the accounting implications.",
-              "Silent billing failures from webhook unreliability: describe retry-with-exponential-backoff, dead-letter queues, and alerting on sustained DLQ depth as non-optional production requirements.",
-              "Reconciliation audit trail: why the raw event log must be immutable and retained separately from aggregated counters \u2014 critical for dispute resolution and ASC 606 audit support."
-            ]
-          },
-          {
-            "heading": "Hybrid Pricing Architecture: Combining Seat Commitments with Usage Overages",
-            "purpose": "Fill the second major SERP gap \u2014 no existing result addresses mixed pricing model architecture. This is the reality for most Series B+ SaaS companies and the exact scenario that breaks single-model billing systems.",
-            "key_points": [
-              "Describe the two-component billing record: a fixed commitment component (seats \u00d7 price, billed on subscription cadence) and a variable usage component (metered events \u00d7 rate, billed in arrears or at period close).",
-              "Explain how the rating engine must resolve plan-level entitlements before applying overage rates \u2014 e.g., the first 10,000 API calls are included in the seat price; only events above that threshold are rated at $0.002/call.",
-              "Mid-cycle plan changes and proration: when a customer upgrades from 10 seats to 20 seats on day 14 of a 30-day cycle, the system must prorate the fixed component AND re-evaluate the usage inclusion threshold retroactively or prospectively \u2014 define which and why.",
-              "Data model sketch: show the relationship between Plan, PlanComponent (fixed vs. metered), UsageEvent, AggregatedUsage, and Invoice entities.",
-              "Warn that off-the-shelf subscription billing tools (including simple Stripe Billing configurations) handle fixed components well but often treat usage as a bolt-on \u2014 this is the architectural seam where homegrown systems break."
-            ]
-          },
-          {
-            "heading": "Build vs. Buy: A Decision Framework for Engineering Leads",
-            "purpose": "Give the ICP a structured, honest evaluation tool. No SERP competitor does this without immediately pushing their own product. This section earns trust by being genuinely neutral and complexity-honest.",
-            "key_points": [
-              "Present a decision matrix across four dimensions: (1) metering volume (events/month), (2) pricing model complexity (flat \u2192 hybrid \u2192 fully custom), (3) team metering expertise available, (4) time-to-revenue urgency.",
-              "Build case: justified when pricing model is genuinely proprietary (e.g., ML inference billing with custom token-weighting), team has distributed systems depth, and scale is already above ~500M events/month.",
-              "Buy/integrate case: justified for the overwhelming majority of Series A\u2013B companies; frame it as 'I need metered billing and I'm not writing that from scratch' \u2014 using a metering API (Stripe Billing with Meters, Orb, Lago) lets the team own the rating and pricing logic while outsourcing event ingestion reliability.",
-              "Hybrid approach: own the event producer and data warehouse contract; delegate ingestion, aggregation, and invoice generation to a third-party metering API. Describe the integration boundary explicitly.",
-              "Cost of build is not just engineering hours: include ongoing maintenance, on-call burden, idempotency infrastructure, and the re-platforming risk when the homegrown system can't support the next pricing model change.",
-              "Anti-recommendation: avoid building a custom metering layer before reaching product-market fit \u2014 the pricing model will change."
-            ]
-          },
-          {
-            "heading": "The Downstream Data Contract: Feeding Finance, Warehouses, and Customer Dashboards",
-            "purpose": "Address the third major SERP gap \u2014 how metering data flows into finance systems and reporting layers. Directly relevant to the ICP trigger event of a new CFO or Series A investor demanding clean, auditable revenue data.",
-            "key_points": [
-              "Define the downstream data contract: every finalized invoice should emit a structured event (invoice.finalized) containing line items, usage periods, customer ID, and plan IDs \u2014 this is the canonical record for downstream consumers.",
-              "ASC 606 revenue recognition: usage-based revenue is recognized as the performance obligation is satisfied (i.e., as usage occurs); the metering system's aggregated usage records are the audit evidence \u2014 explain why the raw event log must be immutable.",
-              "Data warehouse integration pattern: stream finalized invoice events and usage aggregates to a warehouse (Snowflake, BigQuery, Redshift) via a CDC pipeline or webhook-to-queue-to-loader pattern; define the recommended schema (fact_usage_events, dim_customers, fact_invoices).",
-              "Customer-facing usage dashboard: real-time or near-real-time usage visibility reduces support tickets and involuntary churn; the aggregation layer should expose a current-period usage API that the product UI can query without hitting the billing engine.",
-              "Investor-grade MRR/ARR metrics: explain why usage-based revenue requires a different MRR calculation (trailing 3-month normalized average is common) and how the data warehouse schema should support both recognized revenue and committed ARR views."
-            ]
-          }
-        ],
-        "key_points": [
-          "Never define 'usage-based billing' or explain the value-alignment narrative \u2014 the ICP already knows this; starting there signals the piece isn't written for them. Skip straight to architecture.",
-          "Use ICP language patterns verbatim where they fit naturally: 'we need metered billing and I'm not writing that from scratch,' 'our billing logic is already a mess,' 'we'll outgrow this setup the moment we add a second pricing tier' \u2014 these phrases signal that the writer understands the reader's context.",
-          "Maintain engineering precision throughout: use correct distributed systems terminology (idempotency, at-least-once delivery, dead-letter queues, CDC) \u2014 this audience evaluates content quality the same way they evaluate API docs, and vague language is disqualifying.",
-          "Every section that names a technology option (Kafka vs. Kinesis, Stripe Meters vs. Orb vs. Lago) must do so comparatively and honestly \u2014 the reader has no patience for disguised vendor pitches and will detect them immediately.",
-          "Avoid all SEO filler constructions: no 'in this article we will explore,' no 'as we've seen,' no 'in conclusion.' Treat every paragraph as load-bearing.",
-          "The build-vs-buy section must not conclude with a generic 'it depends' \u2014 it must give a concrete, falsifiable recommendation for the specific company profile of the ICP (Series A\u2013B, <$20M ARR, engineering team without dedicated billing infrastructure expertise)."
-        ],
-        "sources": [
-          "https://www.withorb.com/blog/billing-architecture",
-          "https://www.withorb.com/blog/usage-billing-guide",
-          "https://stripe.com/resources/more/usage-based-pricing-for-saas-how-to-make-the-most-of-this-pricing-model",
-          "https://getlago.com/blog/usage-based-billing-for-saas",
-          "https://schematichq.com/blog/why-usage-based-billing-is-taking-over-saas"
-        ],
-        "recommended_length_words": 2800,
-        "internal_linking_suggestions": []
+        "passed": true,
+        "failures": []
       }
     }
   }

@@ -11,87 +11,6 @@
       }
     }
   },
-  "1ebabdc91cb9e5ab492918080e8b3520b4e770b359bb5ae12e940f8371eb6458": {
-    "input_tokens": 2400,
-    "output_tokens": 1800,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_draft_content_brief",
-      "input": {
-        "schema_version": 1,
-        "target_query": "alternatives to notion for engineering documentation",
-        "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
-        "angle": "How distributed engineering teams pick a Notion alternative when half the team writes in Markdown and half doesn't \u2014 a decision framework + 30-day pilot, framed around bus-factor risk rather than feature checklists.",
-        "audience": "Engineering Directors at 200\u2013500-person dev shops actively evaluating a Notion replacement, especially those whose teams are split between Markdown-source-of-truth and WYSIWYG factions.",
-        "structure": [
-          {
-            "heading": "The bus-factor problem the listicles don't mention",
-            "purpose": "Defuse the dominant listicle angle by reframing the decision around knowledge loss rather than features.",
-            "key_points": [
-              "Listicles compare features; the actual cost of the wrong choice is tribal-knowledge loss when senior engineers leave",
-              "Quantify bus factor \u2014 one or two engineers carrying critical decisions in their heads",
-              "Anchor in a real incident postmortem framing \u2014 what does a 'we couldn't find the docs' incident actually cost?"
-            ]
-          },
-          {
-            "heading": "The Markdown vs WYSIWYG factional split is a workflow question, not a religious one",
-            "purpose": "Address the content gap the SERP misses \u2014 the Markdown/WYSIWYG factional reality inside engineering orgs.",
-            "key_points": [
-              "Half the team writes Markdown by reflex (engineers from dev-tools backgrounds); half wants WYSIWYG (designers, PMs, junior engineers)",
-              "Tooling that exports clean Markdown wins the long game regardless of authoring surface",
-              "Round-trip test: import a Markdown doc, edit it in the tool, export it back \u2014 diff should be trivial",
-              "Use the segment's exact phrase 'single source of truth' here verbatim"
-            ]
-          },
-          {
-            "heading": "Decision framework: the four tests an engineering director should actually run",
-            "purpose": "Give a concrete framework distinct from the SERP's generic feature comparisons.",
-            "key_points": [
-              "Real-time collab parity test (paired-doc concurrent edit, including conflict handling)",
-              "Markdown source-of-truth test (round-trip import/export)",
-              "API + automation test (try to drive an RFC template via CI)",
-              "Security review test (SSO + audit log for SOC 2 readiness)"
-            ]
-          },
-          {
-            "heading": "The 30-day pilot playbook",
-            "purpose": "Fill the content gap: every listicle says 'we switched'; almost none provides a phased pilot script the reader can socialize to their VP.",
-            "key_points": [
-              "Week 1: import 50 critical docs (most painful ones first \u2014 that's the real test)",
-              "Week 2: route RFCs through the new tool",
-              "Week 3: measure search-hit-rate vs the old baseline",
-              "Week 4: decision meeting with data, not feels"
-            ]
-          },
-          {
-            "heading": "When NOT to migrate \u2014 three failure modes that quietly kill these projects",
-            "purpose": "Build trust by naming the unsexy failure modes that listicles never cover.",
-            "key_points": [
-              "Tool sprawl: layering a fifth tool on top of four others guarantees split-brain",
-              "Custom-wiki temptation: maintenance cost compounds and tooling teams hate it",
-              "Half-rolled-out: split-brain across teams kills adoption regardless of tool quality"
-            ]
-          }
-        ],
-        "key_points": [
-          "Lead with bus-factor framing \u2014 that's the content gap. Do not lead with feature comparison.",
-          "Use the ICP's verbatim phrase 'single source of truth' in either the intro or an H2",
-          "Reference the Markdown vs WYSIWYG factional split as a known problem inside engineering orgs",
-          "Avoid the word 'tribal knowledge' in titles (overused in SERP); use it in body sparingly",
-          "Cite the SERP's #2 ('Why We Left Notion') as a foil \u2014 concede their pain, then go deeper",
-          "Recommended format per SERP analysis: decision-framework + migration-playbook hybrid"
-        ],
-        "sources": [
-          "https://example.com/leaving-notion",
-          "https://example.com/notion-vs-outline-deep-dive",
-          "https://example.com/wiki-tool-decision-framework",
-          "Internal incident postmortem (replace with the writer's real example before publish)"
-        ],
-        "recommended_length_words": 2400,
-        "internal_linking_suggestions": []
-      }
-    }
-  },
   "270a501eb60eb260f74ef2c75f8d1aecc1acb2af01d550101f34c7b579918703": {
     "input_tokens": 1200,
     "output_tokens": 1800,
@@ -224,6 +143,87 @@
       "input": {
         "passed": true,
         "failures": []
+      }
+    }
+  },
+  "352b3021a8538d312460e64d1d4b6bda7f6ad664ea7d0c8e68b0b839367332df": {
+    "input_tokens": 2400,
+    "output_tokens": 1800,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_draft_content_brief",
+      "input": {
+        "schema_version": 1,
+        "target_query": "alternatives to notion for engineering documentation",
+        "icp_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "angle": "How distributed engineering teams pick a Notion alternative when half the team writes in Markdown and half doesn't \u2014 a decision framework + 30-day pilot, framed around bus-factor risk rather than feature checklists.",
+        "audience": "Engineering Directors at 200\u2013500-person dev shops actively evaluating a Notion replacement, especially those whose teams are split between Markdown-source-of-truth and WYSIWYG factions.",
+        "structure": [
+          {
+            "heading": "The bus-factor problem the listicles don't mention",
+            "purpose": "Defuse the dominant listicle angle by reframing the decision around knowledge loss rather than features.",
+            "key_points": [
+              "Listicles compare features; the actual cost of the wrong choice is tribal-knowledge loss when senior engineers leave",
+              "Quantify bus factor \u2014 one or two engineers carrying critical decisions in their heads",
+              "Anchor in a real incident postmortem framing \u2014 what does a 'we couldn't find the docs' incident actually cost?"
+            ]
+          },
+          {
+            "heading": "The Markdown vs WYSIWYG factional split is a workflow question, not a religious one",
+            "purpose": "Address the content gap the SERP misses \u2014 the Markdown/WYSIWYG factional reality inside engineering orgs.",
+            "key_points": [
+              "Half the team writes Markdown by reflex (engineers from dev-tools backgrounds); half wants WYSIWYG (designers, PMs, junior engineers)",
+              "Tooling that exports clean Markdown wins the long game regardless of authoring surface",
+              "Round-trip test: import a Markdown doc, edit it in the tool, export it back \u2014 diff should be trivial",
+              "Use the segment's exact phrase 'single source of truth' here verbatim"
+            ]
+          },
+          {
+            "heading": "Decision framework: the four tests an engineering director should actually run",
+            "purpose": "Give a concrete framework distinct from the SERP's generic feature comparisons.",
+            "key_points": [
+              "Real-time collab parity test (paired-doc concurrent edit, including conflict handling)",
+              "Markdown source-of-truth test (round-trip import/export)",
+              "API + automation test (try to drive an RFC template via CI)",
+              "Security review test (SSO + audit log for SOC 2 readiness)"
+            ]
+          },
+          {
+            "heading": "The 30-day pilot playbook",
+            "purpose": "Fill the content gap: every listicle says 'we switched'; almost none provides a phased pilot script the reader can socialize to their VP.",
+            "key_points": [
+              "Week 1: import 50 critical docs (most painful ones first \u2014 that's the real test)",
+              "Week 2: route RFCs through the new tool",
+              "Week 3: measure search-hit-rate vs the old baseline",
+              "Week 4: decision meeting with data, not feels"
+            ]
+          },
+          {
+            "heading": "When NOT to migrate \u2014 three failure modes that quietly kill these projects",
+            "purpose": "Build trust by naming the unsexy failure modes that listicles never cover.",
+            "key_points": [
+              "Tool sprawl: layering a fifth tool on top of four others guarantees split-brain",
+              "Custom-wiki temptation: maintenance cost compounds and tooling teams hate it",
+              "Half-rolled-out: split-brain across teams kills adoption regardless of tool quality"
+            ]
+          }
+        ],
+        "key_points": [
+          "Lead with bus-factor framing \u2014 that's the content gap. Do not lead with feature comparison.",
+          "Use the ICP's verbatim phrase 'single source of truth' in either the intro or an H2",
+          "Reference the Markdown vs WYSIWYG factional split as a known problem inside engineering orgs",
+          "Avoid the word 'tribal knowledge' in titles (overused in SERP); use it in body sparingly",
+          "Cite the SERP's #2 ('Why We Left Notion') as a foil \u2014 concede their pain, then go deeper",
+          "Recommended format per SERP analysis: decision-framework + migration-playbook hybrid"
+        ],
+        "sources": [
+          "https://example.com/leaving-notion",
+          "https://example.com/notion-vs-outline-deep-dive",
+          "https://example.com/wiki-tool-decision-framework",
+          "Internal incident postmortem (replace with the writer's real example before publish)"
+        ],
+        "recommended_length_words": 2400,
+        "internal_linking_suggestions": []
       }
     }
   },
