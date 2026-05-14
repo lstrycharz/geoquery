@@ -28,6 +28,10 @@ _SKIP_STATUSES = ("rejected", "inconclusive")
 # A divergence signal needs enough reviewed runs to be worth acting on.
 _MIN_REVIEWED_FOR_DIVERGENCE = 5
 
+# Winning patterns are a slow-moving signal — but if the last extraction is
+# older than this, the drafter is learning from a stale picture of "what works".
+WINNING_PATTERNS_MAX_AGE_DAYS = 14
+
 
 @dataclass(frozen=True)
 class Pattern:
@@ -116,6 +120,44 @@ def _divergence_patterns(db_path: Path, now: datetime) -> list[Pattern]:
     ]
 
 
+def _winning_patterns_stale(db_path: Path, now: datetime) -> list[Pattern]:
+    """Flag winning-patterns extraction that has gone stale.
+
+    Fires only when there is a *prior* extraction older than the max age — a
+    system that never ran `extract-patterns` hasn't adopted the feature, and
+    the meta-agent nags about rot, not about unused features.
+    """
+    with _ro_connect(db_path) as conn:
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if "winning_patterns" not in tables:  # pre-v3 DB
+            return []
+        row = conn.execute(
+            "SELECT extracted_at FROM winning_patterns ORDER BY extracted_at DESC LIMIT 1"
+        ).fetchone()
+    if row is None:  # never extracted — not stale, just unadopted
+        return []
+    extracted_at = datetime.fromisoformat(row["extracted_at"])
+    age_days = (now - extracted_at).total_seconds() / 86400
+    if age_days <= WINNING_PATTERNS_MAX_AGE_DAYS:
+        return []
+    return [
+        Pattern(
+            kind="winning_patterns_stale",
+            signal_id="winning_patterns:stale",
+            summary=(
+                f"winning patterns last extracted {age_days:.0f} days ago — the "
+                f"drafter is learning from a stale picture of what works"
+            ),
+            severity=min(0.4, age_days / 90),
+            evidence={
+                "extracted_at": row["extracted_at"],
+                "age_days": age_days,
+                "max_age_days": WINNING_PATTERNS_MAX_AGE_DAYS,
+            },
+        )
+    ]
+
+
 def analyze(db_path: Path, *, now: datetime | None = None) -> list[Pattern]:
     """Read-only, deterministic. Returns patterns ranked by severity (desc).
 
@@ -125,7 +167,11 @@ def analyze(db_path: Path, *, now: datetime | None = None) -> list[Pattern]:
     """
     now = now or datetime.now(UTC)
     skipped = _recently_skipped(db_path, now)
-    patterns = _drift_patterns(db_path, now) + _divergence_patterns(db_path, now)
+    patterns = (
+        _drift_patterns(db_path, now)
+        + _divergence_patterns(db_path, now)
+        + _winning_patterns_stale(db_path, now)
+    )
     patterns = [p for p in patterns if p.signal_id not in skipped]
     patterns.sort(key=lambda p: (-p.severity, p.signal_id))
     return patterns

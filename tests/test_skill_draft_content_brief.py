@@ -64,3 +64,32 @@ def test_draft_brief_without_serp_analysis_still_works(fake_client):
     )
 
     assert isinstance(result.output, ContentBrief)
+
+
+def test_build_user_message_injects_winning_patterns(fake_client):
+    """v3 chunk 5: the drafter receives the cached winning patterns as guidance."""
+    skill = DraftContentBrief(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
+    inputs = DraftBriefInputs(
+        target_query="how to pick a knowledge base",
+        icp_segment=_first_segment_from_icp_cassette(),
+        market="B2B SaaS knowledge management",
+        winning_patterns=(
+            "name a specific persona pain in the angle",
+            "5-6 sections each with a concrete action",
+        ),
+    )
+    message = skill.build_user_message(inputs)
+    assert "name a specific persona pain in the angle" in message
+    assert "5-6 sections each with a concrete action" in message
+
+
+def test_build_user_message_without_winning_patterns_is_explicit(fake_client):
+    """No patterns extracted yet → the drafter is told so, not left guessing."""
+    skill = DraftContentBrief(client=fake_client, budget=RunBudget(max_cost_usd=3.0))
+    inputs = DraftBriefInputs(
+        target_query="how to pick a knowledge base",
+        icp_segment=_first_segment_from_icp_cassette(),
+        market="B2B SaaS knowledge management",
+    )
+    message = skill.build_user_message(inputs)
+    assert "winning patterns" in message.lower()

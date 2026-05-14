@@ -134,19 +134,7 @@
       }
     }
   },
-  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
-    "input_tokens": 1300,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_search_intent_alignment",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "31b8b35614b9b42e3e27480924d6a42518ce347bdb1890c84a06f5aeaf1d6601": {
+  "1e78cea9a8a4881d956347a51a621a9ad863ab29bdbb6ac74f610224d7b0c122": {
     "input_tokens": 2400,
     "output_tokens": 1800,
     "stop_reason": "tool_use",
@@ -224,6 +212,18 @@
         ],
         "recommended_length_words": 2400,
         "internal_linking_suggestions": []
+      }
+    }
+  },
+  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
+    "input_tokens": 1300,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_search_intent_alignment",
+      "input": {
+        "passed": true,
+        "failures": []
       }
     }
   },

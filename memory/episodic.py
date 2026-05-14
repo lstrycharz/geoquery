@@ -268,6 +268,47 @@ class EpisodicMemory:
             )
             return int(cur.lastrowid)
 
+    # ------------------------------------------------------------------
+    # Winning patterns (v3 chunk 5)
+    # ------------------------------------------------------------------
+
+    def record_winning_patterns(
+        self,
+        *,
+        briefs_analyzed: int,
+        min_eval_score: float,
+        patterns: list[str],
+        extracted_at: str | None = None,
+    ) -> int:
+        """Append one winning-patterns extraction. `extracted_at` defaults to
+        now; tests override it to exercise the staleness signal."""
+        with self._connect() as conn:
+            cur = conn.execute(
+                "INSERT INTO winning_patterns "
+                "(extracted_at, briefs_analyzed, min_eval_score, patterns_json) "
+                "VALUES (?, ?, ?, ?)",
+                (
+                    extracted_at or _now(),
+                    briefs_analyzed,
+                    min_eval_score,
+                    json.dumps(patterns),
+                ),
+            )
+            return int(cur.lastrowid)
+
+    def get_latest_winning_patterns(self) -> dict[str, Any] | None:
+        """The most recent extraction, with `patterns` decoded to list[str].
+        None when nothing has been extracted yet."""
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT * FROM winning_patterns ORDER BY extracted_at DESC, id DESC LIMIT 1"
+            ).fetchone()
+        if row is None:
+            return None
+        record = dict(row)
+        record["patterns"] = json.loads(record.pop("patterns_json"))
+        return record
+
 
 def serialize_for_log(value: Any) -> str:
     """Best-effort JSON serialization for skill inputs/outputs."""

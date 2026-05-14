@@ -1103,53 +1103,7 @@
       }
     }
   },
-  "d382acd16fba702b659408d04efd31e8cfa3fafe995bab7c7d52a57f749ed5a7": {
-    "input_tokens": 3000,
-    "output_tokens": 600,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_select_priority_query",
-      "input": {
-        "schema_version": 1,
-        "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
-        "selected_query": {
-          "schema_version": 1,
-          "query": {
-            "position": 19,
-            "text": "alternatives to notion for engineering documentation",
-            "framing": "vendor-comparing",
-            "refinement_applied": true
-          },
-          "metrics": {
-            "volume": null,
-            "kd": null,
-            "cpc": null,
-            "serp_features": []
-          },
-          "traffic_score": 7,
-          "difficulty_score": 7,
-          "business_value_score": 9,
-          "composite": 7.4,
-          "competitor_urls": [],
-          "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
-        },
-        "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
-      }
-    }
-  },
-  "e18ef04a46fd6e72020f6f9300c758954fab6a0fc958d7c4206fb903c8aa20b6": {
-    "input_tokens": 1200,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brand_voice_match",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "e229cc1d7f4289c45acfb1323cfbf333aa0ae3a14f74b84d0d86d178343816b0": {
+  "c77b24ae9994eae3ce0a18ceef1cda8575ac2832be4ae120e11f03aaaa038619": {
     "input_tokens": 2400,
     "output_tokens": 1800,
     "stop_reason": "tool_use",
@@ -1227,6 +1181,52 @@
         ],
         "recommended_length_words": 2400,
         "internal_linking_suggestions": []
+      }
+    }
+  },
+  "d382acd16fba702b659408d04efd31e8cfa3fafe995bab7c7d52a57f749ed5a7": {
+    "input_tokens": 3000,
+    "output_tokens": 600,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_select_priority_query",
+      "input": {
+        "schema_version": 1,
+        "selected_segment_label": "Distributed Engineering Lead at 200-500 dev shop",
+        "selected_query": {
+          "schema_version": 1,
+          "query": {
+            "position": 19,
+            "text": "alternatives to notion for engineering documentation",
+            "framing": "vendor-comparing",
+            "refinement_applied": true
+          },
+          "metrics": {
+            "volume": null,
+            "kd": null,
+            "cpc": null,
+            "serp_features": []
+          },
+          "traffic_score": 7,
+          "difficulty_score": 7,
+          "business_value_score": 9,
+          "composite": 7.4,
+          "competitor_urls": [],
+          "rationale": "Bottom-funnel alternatives query; great cluster-anchor potential and the buyer is actively switching."
+        },
+        "rationale": "Picked alternatives-to-notion over the slightly higher-composite 'best knowledge base for engineering teams 2026' (#14) because the 'best X' SERP is dominated by listicle aggregators that out-rank niche brands; an 'alternatives to' page is more defensible and anchors a wider cluster (one piece can spawn vs-pages and migration guides). The runner-up was #17 'notion vs confluence' but its SERP is dominated by Notion and Atlassian's own marketing pages."
+      }
+    }
+  },
+  "e18ef04a46fd6e72020f6f9300c758954fab6a0fc958d7c4206fb903c8aa20b6": {
+    "input_tokens": 1200,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brand_voice_match",
+      "input": {
+        "passed": true,
+        "failures": []
       }
     }
   }

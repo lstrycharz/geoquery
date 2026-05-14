@@ -35,6 +35,10 @@ class DraftBriefInputs:
     company_dossier: CompanyDossier | None = None
     # v2 chunk 2: priority enables SearchIntentAlignmentJudge.
     priority: Priority | None = None
+    # v3 chunk 5: structural patterns distilled from the highest-scoring past
+    # briefs (Mechanism 2). Carries the *deep lessons*; the few-shot examples
+    # above only carry *shape*. Empty until `geoquery extract-patterns` runs.
+    winning_patterns: tuple[str, ...] = ()
 
 
 class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
@@ -65,6 +69,13 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
                 for b in inputs.similar_past_briefs
             )
         )
+        # v3 chunk 5: winning-patterns guidance — the deep structural lessons
+        # distilled from the highest-scoring briefs across all past runs.
+        patterns_block = (
+            "(no winning patterns extracted yet — run `geoquery extract-patterns`)"
+            if not inputs.winning_patterns
+            else "\n".join(f"- {p}" for p in inputs.winning_patterns)
+        )
         sitemap_block = (
             "(no sitemap provided — internal_linking_suggestions should be left empty)"
             if not inputs.sitemap_entries
@@ -84,6 +95,8 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
             f"SERP analysis:\n{serp_block}\n\n"
             f"High-performing similar past briefs (learn from their shape; do NOT "
             f"repeat their angles — differentiate):\n{past_block}\n\n"
+            f"Winning patterns — structural lessons from the highest-scoring briefs "
+            f"across all past runs; apply these:\n{patterns_block}\n\n"
             f"{sitemap_block}\n\n"
             "Produce the ContentBrief per the system instructions."
         )

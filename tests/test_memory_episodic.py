@@ -60,3 +60,46 @@ def test_list_runs_orders_newest_first(tmp_path):
     rows = mem.list_runs()
     assert rows[0]["id"] == b.id
     assert rows[1]["id"] == a.id
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 5 — winning patterns
+# ---------------------------------------------------------------------------
+
+
+def test_record_and_get_latest_winning_patterns(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    mem.record_winning_patterns(
+        briefs_analyzed=10,
+        min_eval_score=0.82,
+        patterns=["names a specific persona pain", "5-6 sections each with an action"],
+    )
+    latest = mem.get_latest_winning_patterns()
+    assert latest is not None
+    assert latest["briefs_analyzed"] == 10
+    assert latest["patterns"] == [
+        "names a specific persona pain",
+        "5-6 sections each with an action",
+    ]
+
+
+def test_get_latest_winning_patterns_returns_most_recent(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    mem.record_winning_patterns(
+        briefs_analyzed=5,
+        min_eval_score=0.5,
+        patterns=["old"],
+        extracted_at="2026-01-01T00:00:00+00:00",
+    )
+    mem.record_winning_patterns(
+        briefs_analyzed=8,
+        min_eval_score=0.7,
+        patterns=["new"],
+        extracted_at="2026-05-01T00:00:00+00:00",
+    )
+    assert mem.get_latest_winning_patterns()["patterns"] == ["new"]
+
+
+def test_get_latest_winning_patterns_none_when_empty(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    assert mem.get_latest_winning_patterns() is None

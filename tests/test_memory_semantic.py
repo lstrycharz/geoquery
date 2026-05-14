@@ -175,3 +175,17 @@ def test_find_similar_rank_by_eval_score_returns_at_most_k(tmp_path: Path, stub_
     assert len(hits) == 5
     # Highest scorer (r7, 0.7) must be first.
     assert hits[0].run_id == "r7"
+
+
+def test_top_scoring_briefs_orders_by_eval_score_desc(tmp_path: Path, stub_embedder):
+    mem = SemanticMemory(db_path=tmp_path / "sem.db", embedder=stub_embedder)
+    _index(mem, "low", "m", "i", "a", eval_score=0.30)
+    _index(mem, "high", "m", "i", "a", eval_score=0.90)
+    _index(mem, "mid", "m", "i", "a", eval_score=0.60)
+    top = mem.top_scoring_briefs(limit=2)
+    assert [b.run_id for b in top] == ["high", "mid"]
+
+
+def test_top_scoring_briefs_returns_empty_on_empty_store(tmp_path: Path, stub_embedder):
+    mem = SemanticMemory(db_path=tmp_path / "sem.db", embedder=stub_embedder)
+    assert mem.top_scoring_briefs(limit=5) == []
