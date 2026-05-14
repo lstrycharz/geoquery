@@ -61,3 +61,25 @@ CREATE TABLE IF NOT EXISTS human_reviews (
 );
 CREATE INDEX IF NOT EXISTS idx_human_reviews_run_id ON human_reviews(run_id);
 CREATE INDEX IF NOT EXISTS idx_human_reviews_pending ON human_reviews(reviewed_at);
+
+-- Meta-agent proposals (v3 chunk 2). One row per change the meta-agent
+-- proposes. `target_pattern` is the stable signal_id from meta/analyze.py;
+-- analyze() reads this table to skip patterns it already proposed and got
+-- rejected/inconclusive on within the cooldown window. The baseline_* columns
+-- are populated post-merge by meta/measure.py (chunk 9).
+CREATE TABLE IF NOT EXISTS meta_proposals (
+    id                             INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at                     TEXT NOT NULL,
+    target_pattern                 TEXT NOT NULL,   -- analyze() signal_id
+    change_type                    TEXT NOT NULL,   -- 'prompt'|'rubric'|'eval'|'fewshot'
+    hypothesis                     TEXT NOT NULL,
+    branch                         TEXT,
+    pr_number                      INTEGER,
+    status                         TEXT NOT NULL DEFAULT 'proposed',
+        -- 'proposed'|'rejected'|'inconclusive'|'merged'|'measured'|'reverted'
+    merged_at                      TEXT,
+    baseline_regression_pass_rate  REAL,
+    baseline_window_json           TEXT,
+    schema_version                 INTEGER NOT NULL DEFAULT 1
+);
+CREATE INDEX IF NOT EXISTS idx_meta_proposals_pattern ON meta_proposals(target_pattern);

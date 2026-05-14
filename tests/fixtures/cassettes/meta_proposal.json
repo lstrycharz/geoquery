@@ -1,0 +1,11 @@
+{
+  "input": {
+    "change_type": "prompt",
+    "hypothesis": "score_queries is collapsing composite scores because the prompt does not anchor the 1-10 scale to concrete volume/KD bands; adding explicit banding guidance should restore score spread.",
+    "diff": "--- a/skills/prompts/score_queries.md\n+++ b/skills/prompts/score_queries.md\n@@\n-Score each query 1-10.\n+Score each query 1-10, anchored to these bands: volume <100 -> 1-3, 100-1k -> 4-6, >1k -> 7-10.\n",
+    "predicted_effect": "composite score variance returns to its prior-week distribution; BriefSpecificityJudge pass-rate recovers on B2B SaaS cases.",
+    "edit_paths": ["skills/prompts/score_queries.md"]
+  },
+  "input_tokens": 2200,
+  "output_tokens": 320
+}
