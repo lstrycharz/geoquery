@@ -102,6 +102,99 @@ def judge_outcomes_for_run(db_path: Path, run_id: str) -> list[dict[str, Any]]:
     return [dict(r) for r in rows]
 
 
+def brief_quality_trend_by_run(db_path: Path) -> dict[str, Any]:
+    """The learning curve (v3 chunk 10): per completed run, a 0-1 quality score
+    plotted against run sequence, plus the merged meta-agent PRs positioned on
+    the same axis.
+
+    `quality` is the mean of whichever signals exist for the run:
+      - judge score: the run's eval composite (clean invocation fraction);
+      - outcome score: `confidence` if the prediction was top-10, else its
+        complement — present only for runs the outcome judge scored;
+      - human score: the reviewer's 1-5 rating mapped to 0-1 — present only
+        for runs that were sampled and reviewed.
+
+    All three live in episodic.db, so the dashboard never touches semantic.db.
+    """
+    with _connect(db_path) as conn:
+        runs = conn.execute(
+            "SELECT id, company, started_at FROM runs "
+            "WHERE status = 'completed' ORDER BY started_at ASC, id ASC"
+        ).fetchall()
+        judge_rows = conn.execute(
+            "SELECT run_id, COUNT(*) AS evaluated, "
+            "SUM(CASE WHEN eval_passed = 1 "
+            "         AND (eval_details_json IS NULL OR eval_details_json = '[]') "
+            "    THEN 1 ELSE 0 END) AS clean "
+            "FROM skill_invocations WHERE eval_passed IS NOT NULL GROUP BY run_id"
+        ).fetchall()
+        outcome_rows = conn.execute(
+            "SELECT run_id, predicted_top10, confidence FROM outcome_predictions "
+            "ORDER BY created_at ASC, id ASC"
+        ).fetchall()
+        human_rows = conn.execute(
+            "SELECT run_id, reviewer_rating_overall FROM human_reviews "
+            "WHERE reviewer_rating_overall IS NOT NULL ORDER BY reviewed_at ASC, id ASC"
+        ).fetchall()
+        meta_rows = conn.execute(
+            "SELECT pr_number, target_pattern, merged_at, status FROM meta_proposals "
+            "WHERE merged_at IS NOT NULL ORDER BY merged_at ASC"
+        ).fetchall()
+
+    # judge composite per run — 1.0 (neutral) when nothing was evaluated, to
+    # match EpisodicMemory.compute_run_eval_score.
+    judge = {
+        r["run_id"]: (r["clean"] / r["evaluated"] if r["evaluated"] else 1.0) for r in judge_rows
+    }
+    # Later predictions/reviews overwrite earlier ones — we want the latest.
+    outcome = {
+        r["run_id"]: (r["confidence"] if r["predicted_top10"] else 1.0 - r["confidence"])
+        for r in outcome_rows
+    }
+    human = {r["run_id"]: (r["reviewer_rating_overall"] - 1) / 4 for r in human_rows}
+
+    points: list[dict[str, Any]] = []
+    for seq, run in enumerate(runs, start=1):
+        rid = run["id"]
+        judge_score = judge.get(rid, 1.0)
+        outcome_score = outcome.get(rid)
+        human_score = human.get(rid)
+        signals = [judge_score]
+        if outcome_score is not None:
+            signals.append(outcome_score)
+        if human_score is not None:
+            signals.append(human_score)
+        points.append(
+            {
+                "run_seq": seq,
+                "run_id": rid,
+                "company": run["company"],
+                "started_at": run["started_at"],
+                "judge_score": judge_score,
+                "outcome_score": outcome_score,
+                "human_score": human_score,
+                "quality": sum(signals) / len(signals),
+            }
+        )
+
+    # Position each merged meta-PR at the run-sequence count up to its merge:
+    # the number of runs that had already started when the change landed.
+    markers: list[dict[str, Any]] = []
+    for m in meta_rows:
+        run_seq = sum(1 for run in runs if run["started_at"] <= m["merged_at"])
+        markers.append(
+            {
+                "run_seq": run_seq,
+                "pr_number": m["pr_number"],
+                "target_pattern": m["target_pattern"],
+                "merged_at": m["merged_at"],
+                "status": m["status"],
+            }
+        )
+
+    return {"points": points, "meta_pr_markers": markers}
+
+
 def skill_failure_rate(db_path: Path) -> list[dict[str, Any]]:
     """For each skill, count failed + null invocations as 'failures'.
 

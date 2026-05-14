@@ -46,9 +46,12 @@ report = ["jinja2==3.1.4"]
 # 1.27.1 is the current stable; verified locally.
 mcp = ["mcp==1.27.1"]
 # v2 Chunk 1: Streamlit dashboard reading data/episodic.db.
+# v3 Chunk 10: plotly for the annotated Learning Curve page (Streamlit's
+# native charts can't draw vertical meta-agent-PR annotations).
 dashboard = [
     "streamlit==1.40.2",
     "pandas==2.2.3",
+    "plotly==5.24.1",
 ]
 # v3 Chunk 4: meta-agent opens PRs via the GitHub API. Lazy-imported in
 # meta/github_pr.py, so the base install and the test suite never need it —
