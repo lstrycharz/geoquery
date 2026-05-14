@@ -6,6 +6,8 @@
 geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
 ```
 
+*That's the command once it's installed — the full setup is in [Getting Started](#getting-started) below, about five minutes.*
+
 Out comes a finished brief that a writer can use to draft the article: who it's for, the specific angle to take, what sections to write, what to cover in each one, what sources to cite, how long it should be, and which pages on your own site to link to.
 
 It costs about **30 to 60 cents** per brief and takes **5 to 10 minutes**. There are [eight real examples](./briefs/) in the repo across very different industries — knowledge software, payments, beauty, outdoor apparel, and more — that show what you actually get.
@@ -31,6 +33,103 @@ It then does, in order, the work a senior content strategist would do:
 7. **Writes the brief** — focused on a specific angle that doesn't repeat what's already out there.
 
 Then it hands you a markdown file. You give it to a writer. They write the article.
+
+---
+
+## Getting Started
+
+The block at the top is the command you run *once it's installed*. Here's the full setup — about five minutes.
+
+### Prerequisites
+
+| You need | Check it's there | If not |
+|---|---|---|
+| **An Anthropic API key** | — | Get one at [console.anthropic.com](https://console.anthropic.com/). A few dollars covers dozens of briefs. |
+| **git** | `git --version` | [git-scm.com/downloads](https://git-scm.com/downloads) |
+| **Python 3.13+** *(local-install path only)* | `python3.13 --version` | [python.org/downloads](https://www.python.org/downloads/) — 3.13+ ships the recent SQLite the vector-memory extension needs |
+| **Docker** *(no-Python path only)* | `docker --version` | [docker.com/get-started](https://www.docker.com/get-started/) |
+| **A DataForSEO account** *(optional)* | — | [dataforseo.com](https://dataforseo.com/) — for real keyword data instead of LLM estimates |
+
+Pick **one** of the two setup paths below — you don't need both.
+
+### Path A — Docker (no Python setup)
+
+```bash
+git clone https://github.com/lstrycharz/geoquery
+cd geoquery
+cp .env.example .env
+```
+
+Now **open `.env` in any text editor** and paste your key so this line reads:
+
+```
+ANTHROPIC_API_KEY=sk-ant-your-actual-key-here
+```
+
+Then run a brief:
+
+```bash
+docker compose run --rm geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
+```
+
+### Path B — Python (local install)
+
+```bash
+git clone https://github.com/lstrycharz/geoquery
+cd geoquery
+python3.13 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[semantic,web,report,mcp,dashboard,dev]"
+cp .env.example .env
+```
+
+**Open `.env`** and paste your key into the `ANTHROPIC_API_KEY=` line (same as Path A above).
+
+Confirm the install worked:
+
+```bash
+geoquery --help
+```
+
+Run your first brief:
+
+```bash
+geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
+```
+
+> **Coming back later?** Every new terminal session needs the environment re-activated before `geoquery` is on your path:
+> ```bash
+> cd geoquery && source .venv/bin/activate
+> ```
+
+### What you'll see
+
+The agent prints one line per stage as it works — research, audience, searches, scoring, SERP, draft — then finishes with the path to the brief:
+
+```
+brief: briefs/<run-id>_notion.md
+```
+
+Open that markdown file — that's your content brief. The run takes 5–10 minutes and costs roughly 30–60¢.
+
+### Run the dashboard locally (optional)
+
+To watch your *own* runs instead of the cloud demo data:
+
+```bash
+streamlit run dashboard/app.py
+```
+
+Opens at `http://localhost:8501` with all seven pages, including the **Learning Curve**.
+
+### Troubleshooting
+
+| Symptom | Cause and fix |
+|---|---|
+| `zsh: command not found: $` | You copied the `$` shell-prompt marker along with the command. Copy only the command itself. |
+| `command not found: geoquery` | The virtualenv isn't active. Run `source .venv/bin/activate` from the repo folder (Path B). |
+| An error mentioning `ANTHROPIC_API_KEY` | Your key isn't in `.env` — or you edited `.env.example` by mistake instead of `.env`. |
+| `pip install` fails on a Python-version check | Run `python3.13 --version`. The vector-memory extension needs the SQLite that ships with Python 3.13+. |
 
 ---
 
@@ -118,43 +217,6 @@ The factory doesn't just run — it studies its own track record and improves.
 **And it can't cheat.** This is the hard part. An agent told to "improve the scores" will, left unchecked, just weaken the inspectors. So the meta-agent is boxed in: it can only edit a short allowlist of files (never the graders, never the test box), it never even *sees* the inspectors' instructions when it writes a fix (so it can't write to the test instead of to the work), and six separate guards run on every proposal it makes — checking that it didn't loosen a rubric, didn't add a do-nothing inspector, didn't touch the sealed test box. The guards run from *trusted* copies of themselves, so the meta-agent can't disable its own guards. The full design is in [**`SELF_IMPROVEMENT.md`**](./SELF_IMPROVEMENT.md).
 
 The **Learning Curve** page on the dashboard shows it all in one chart: brief quality over time, with a marker for every meta-agent change that merged along the way.
-
----
-
-## Try it yourself
-
-You need an [Anthropic API key](https://console.anthropic.com/) (a few dollars goes a long way). Optionally, a [DataForSEO](https://dataforseo.com/) account if you want real keyword data instead of LLM estimates.
-
-**Easiest path — Docker:**
-
-```bash
-git clone https://github.com/lstrycharz/geoquery && cd geoquery
-cp .env.example .env       # then paste your ANTHROPIC_API_KEY into .env
-docker compose run --rm geoquery brief \
-  --company "Notion" --market "B2B SaaS knowledge management"
-```
-
-**If you have Python locally** (3.13+ on macOS for the vector-database support):
-
-```bash
-git clone https://github.com/lstrycharz/geoquery && cd geoquery
-python3.13 -m venv .venv && source .venv/bin/activate
-pip install -e ".[semantic,web,report,mcp,dashboard,dev]"
-cp .env.example .env       # paste your ANTHROPIC_API_KEY
-geoquery brief --company "Notion" --market "B2B SaaS knowledge management"
-```
-
-In any **new terminal session**, re-activate the environment first — `cd geoquery && source .venv/bin/activate` — then `geoquery …` is on your path again.
-
-The agent will print a live commentary as it works (one line per stage), then a path to the finished brief.
-
-**To run the dashboard locally** (against your own runs instead of the cloud demo data):
-
-```bash
-streamlit run dashboard/app.py
-```
-
-Opens at `http://localhost:8501` with all seven pages — including the **Learning Curve**.
 
 ---
 
