@@ -22,6 +22,7 @@ from memory import EpisodicMemory, SemanticMemory, SkillInvocationRecord
 from memory.episodic import _now, serialize_for_log
 from memory.semantic import Embedder
 from skills.analyze_serp import AnalyzeSerp, AnalyzeSerpInputs
+from skills.base import SkillEscalation
 from skills.define_icp import DefineIcp, DefineIcpInputs
 from skills.draft_content_brief import DraftBriefInputs, DraftContentBrief
 from skills.generate_geo_query_list import GenerateGeoQueryList, GenerateQueriesInputs
@@ -450,6 +451,17 @@ def run_brief(
     except BudgetExceeded as e:
         memory.finish_run(run.id, "aborted_cost", budget.spent_usd, None)
         return AgentOutcome(run.id, "aborted_cost", None, budget.spent_usd, str(e))
+    except SkillEscalation as e:
+        # v3 chunk 6: retry-cap exhaustion writes a rich escalation row (every
+        # attempt's failures + the final output) — the meta-agent's input.
+        memory.record_escalation(
+            run_id=run.id,
+            skill_name=e.skill_name,
+            attempt_failures=e.attempt_failures,
+            final_output_json=e.final_output_json,
+        )
+        memory.finish_run(run.id, "aborted_retries", budget.spent_usd, None)
+        return AgentOutcome(run.id, "aborted_retries", None, budget.spent_usd, str(e))
     except RetryExceeded as e:
         memory.finish_run(run.id, "aborted_retries", budget.spent_usd, None)
         return AgentOutcome(run.id, "aborted_retries", None, budget.spent_usd, str(e))

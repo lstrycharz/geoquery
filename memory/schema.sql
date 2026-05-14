@@ -84,6 +84,22 @@ CREATE TABLE IF NOT EXISTS meta_proposals (
 );
 CREATE INDEX IF NOT EXISTS idx_meta_proposals_pattern ON meta_proposals(target_pattern);
 
+-- Escalations (v3 chunk 6). One row per skill that exhausted its retry cap.
+-- Carries every attempt's failures + the final (rejected) output — the
+-- meta-agent's richest input signal: a clustered escalation on one skill is a
+-- systematic pattern worth a proposal.
+CREATE TABLE IF NOT EXISTS escalations (
+    id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+    run_id             TEXT NOT NULL REFERENCES runs(id) ON DELETE CASCADE,
+    skill_name         TEXT NOT NULL,
+    attempts_json      TEXT NOT NULL,   -- JSON list[list[str]] — per-attempt failures
+    final_output_json  TEXT,            -- the last (rejected) attempt's output
+    escalated_at       TEXT NOT NULL,
+    schema_version     INTEGER NOT NULL DEFAULT 1
+);
+CREATE INDEX IF NOT EXISTS idx_escalations_run_id ON escalations(run_id);
+CREATE INDEX IF NOT EXISTS idx_escalations_skill ON escalations(skill_name);
+
 -- Winning patterns (v3 chunk 5). Each row is one periodic extraction:
 -- structural patterns common to the top-N highest-scoring briefs ("high-
 -- scorers name a specific persona pain in the angle; 5-6 sections; ..."),

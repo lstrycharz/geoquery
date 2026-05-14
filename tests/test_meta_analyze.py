@@ -145,3 +145,37 @@ def test_analyze_does_not_flag_staleness_when_never_extracted(tmp_path: Path):
     nags about *rotted* patterns, not unused ones."""
     mem = EpisodicMemory(tmp_path / "episodic.db")
     assert analyze(mem.db_path, now=_NOW) == []
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 6 — escalation-cluster signal
+# ---------------------------------------------------------------------------
+
+
+def test_analyze_flags_escalation_cluster(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    run = mem.start_run("Acme", "project management")
+    for _ in range(2):
+        mem.record_escalation(
+            run_id=run.id,
+            skill_name="score_queries",
+            attempt_failures=[["x"], ["x"], ["x"]],
+            final_output_json="{}",
+            escalated_at=_iso(3),
+        )
+    patterns = analyze(mem.db_path, now=_NOW)
+    assert [p.signal_id for p in patterns] == ["escalation:score_queries"]
+    assert patterns[0].evidence["escalation_count"] == 2
+
+
+def test_analyze_does_not_flag_a_single_escalation(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    run = mem.start_run("Acme", "m")
+    mem.record_escalation(
+        run_id=run.id,
+        skill_name="score_queries",
+        attempt_failures=[["x"], ["x"], ["x"]],
+        final_output_json="{}",
+        escalated_at=_iso(3),
+    )
+    assert analyze(mem.db_path, now=_NOW) == []

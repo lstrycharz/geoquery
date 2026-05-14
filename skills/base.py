@@ -23,7 +23,7 @@ from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar
 from anthropic import Anthropic
 from pydantic import BaseModel, ValidationError
 
-from guardrails import RunBudget
+from guardrails import RetryExceeded, RunBudget
 
 if TYPE_CHECKING:
     from evals.deterministic import Evaluator
@@ -72,6 +72,31 @@ class SkillResult(Generic[OutputT]):
     eval_failures: list[str] = field(default_factory=list)
 
 
+class SkillEscalation(RetryExceeded):
+    """Raised by `Skill.run()` when a skill exhausts its retry cap (v3 chunk 6).
+
+    Subclasses RetryExceeded so existing `except RetryExceeded` handlers still
+    catch it — but it carries every attempt's failures + the final output, so
+    the orchestrator can write a rich `escalations` row. That row is the
+    meta-agent's richest input signal (Mechanism 4).
+    """
+
+    def __init__(
+        self,
+        *,
+        skill_name: str,
+        attempt_failures: list[list[str]],
+        final_output_json: str | None,
+    ) -> None:
+        self.skill_name = skill_name
+        self.attempt_failures = attempt_failures
+        self.final_output_json = final_output_json
+        super().__init__(
+            f"skill {skill_name!r} exhausted its retry cap after "
+            f"{len(attempt_failures)} failed attempts"
+        )
+
+
 ProgressCallback = Any  # Callable[[int], None] | None — kept Any to dodge import cycles
 
 
@@ -84,6 +109,11 @@ class Skill(ABC, Generic[InputT, OutputT]):
     # emits partial-JSON deltas to `progress_callback`. Used by the drafter so
     # the CLI can show "tokens streamed: N" while the brief is being assembled.
     streams: ClassVar[bool] = False
+    # v3 chunk 6 — consensus gating. A deterministic (blocking) eval failing
+    # always gates a revision. Judges (advisory) are consensus-gated: a single
+    # judge failing stays advisory, but when the *fraction* of a skill's judges
+    # that failed exceeds this threshold, a revision fires. Default: majority.
+    judge_consensus_threshold: ClassVar[float] = 0.5
 
     def __init__(self, client: Anthropic, budget: RunBudget) -> None:
         self.client = client
@@ -112,37 +142,65 @@ class Skill(ABC, Generic[InputT, OutputT]):
         return []
 
     def run(self, inputs: InputT) -> SkillResult[OutputT]:
-        """Public entry: runs the skill and applies the inner-loop revision
-        if any *blocking* evaluators fail. Advisory evaluators (model-graded
-        judges) surface their failures in the result but do not gate the loop.
-        Bounded by RunBudget.register_attempt's retry cap.
+        """Public entry: runs the skill and applies the inner-loop revision.
+
+        A revision fires when a deterministic (blocking) eval fails, OR when a
+        *majority* of the skill's judges fail (consensus gating — a lone judge
+        stays advisory). When it fires, the revision header carries *every*
+        failing critique, deterministic and judge alike. On retry-cap
+        exhaustion the skill raises `SkillEscalation` with every attempt's
+        failures attached.
         """
         evaluators = self.make_evaluators(inputs)
+        judge_count = sum(1 for ev in evaluators if not getattr(ev, "blocking", True))
         revision_feedback: list[str] = []
+        attempt_failures: list[list[str]] = []
+        last_result: SkillResult[OutputT] | None = None
         while True:
-            result = self._invoke_once(inputs, revision_feedback)
-            blocking_failures: list[str] = []
-            advisory_failures: list[str] = []
+            try:
+                result = self._invoke_once(inputs, revision_feedback)
+            except RetryExceeded as exc:
+                raise SkillEscalation(
+                    skill_name=self.name,
+                    attempt_failures=attempt_failures,
+                    final_output_json=(
+                        last_result.output.model_dump_json() if last_result else None
+                    ),
+                ) from exc
+            last_result = result
+
+            det_failures: list[str] = []
+            judge_failures: list[str] = []
+            failed_judges = 0
             for ev in evaluators:
                 er = ev.evaluate(result.output)
                 if er.passed:
                     continue
-                bucket = blocking_failures if getattr(ev, "blocking", True) else advisory_failures
-                bucket.extend(f"[{er.name}] {msg}" for msg in er.failures)
-            if not blocking_failures:
-                # Pipeline proceeds. Advisory failures are recorded but not
-                # treated as failures for purposes of eval_passed (which gates
-                # downstream consumers / episodic-log "did this skill pass?").
+                critiques = [f"[{er.name}] {msg}" for msg in er.failures]
+                if getattr(ev, "blocking", True):
+                    det_failures.extend(critiques)
+                else:
+                    failed_judges += 1
+                    judge_failures.extend(critiques)
+
+            consensus_gates = bool(judge_count) and (
+                failed_judges / judge_count > self.judge_consensus_threshold
+            )
+            if not det_failures and not consensus_gates:
+                # Pipeline proceeds. Judge grumbles that didn't reach consensus
+                # are recorded as advisory — they don't flip eval_passed.
                 result.eval_passed = True
-                result.eval_failures = [f"[ADVISORY] {f}" for f in advisory_failures]
+                result.eval_failures = [f"[ADVISORY] {f}" for f in judge_failures]
                 return result
+
+            # A revision fires. The header carries the *full critique* — every
+            # deterministic failure and every failing judge, not just the
+            # gating ones — so the model sees the whole picture.
+            all_failures = det_failures + judge_failures
             result.eval_passed = False
-            result.eval_failures = blocking_failures + [
-                f"[ADVISORY] {f}" for f in advisory_failures
-            ]
-            # Only blocking failures feed the revision header — advisory ones
-            # would distract the model with irrelevant instructions.
-            revision_feedback = blocking_failures
+            result.eval_failures = all_failures
+            attempt_failures.append(all_failures)
+            revision_feedback = all_failures
 
     def _invoke_once(self, inputs: InputT, revision_feedback: list[str]) -> SkillResult[OutputT]:
         attempt = self.budget.register_attempt(self.name)

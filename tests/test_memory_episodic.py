@@ -103,3 +103,34 @@ def test_get_latest_winning_patterns_returns_most_recent(tmp_path):
 def test_get_latest_winning_patterns_none_when_empty(tmp_path):
     mem = EpisodicMemory(db_path=tmp_path / "ep.db")
     assert mem.get_latest_winning_patterns() is None
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 6 — escalations
+# ---------------------------------------------------------------------------
+
+
+def test_record_and_get_escalations(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    run = mem.start_run("Acme", "project management")
+    mem.record_escalation(
+        run_id=run.id,
+        skill_name="score_queries",
+        attempt_failures=[["[a] fail one"], ["[a] fail two"], ["[a] fail three"]],
+        final_output_json='{"composite": 5.0}',
+    )
+    rows = mem.get_escalations(run.id)
+    assert len(rows) == 1
+    assert rows[0]["skill_name"] == "score_queries"
+    assert rows[0]["attempt_failures"] == [
+        ["[a] fail one"],
+        ["[a] fail two"],
+        ["[a] fail three"],
+    ]
+    assert rows[0]["final_output_json"] == '{"composite": 5.0}'
+
+
+def test_get_escalations_empty_when_none_recorded(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    run = mem.start_run("Acme", "m")
+    assert mem.get_escalations(run.id) == []
