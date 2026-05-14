@@ -234,6 +234,40 @@ class EpisodicMemory:
             row = conn.execute("SELECT * FROM human_reviews WHERE id = ?", (review_id,)).fetchone()
         return dict(row) if row else None
 
+    # ------------------------------------------------------------------
+    # Meta-agent proposals (v3 chunk 2)
+    # ------------------------------------------------------------------
+
+    def record_meta_proposal(
+        self,
+        *,
+        target_pattern: str,
+        change_type: str,
+        hypothesis: str,
+        branch: str | None = None,
+        pr_number: int | None = None,
+        status: str = "proposed",
+        created_at: str | None = None,
+    ) -> int:
+        """Append a meta-agent proposal. `created_at` defaults to now; tests
+        override it to exercise the analyze() cooldown window."""
+        with self._connect() as conn:
+            cur = conn.execute(
+                "INSERT INTO meta_proposals "
+                "(created_at, target_pattern, change_type, hypothesis, branch, "
+                " pr_number, status) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (
+                    created_at or _now(),
+                    target_pattern,
+                    change_type,
+                    hypothesis,
+                    branch,
+                    pr_number,
+                    status,
+                ),
+            )
+            return int(cur.lastrowid)
+
 
 def serialize_for_log(value: Any) -> str:
     """Best-effort JSON serialization for skill inputs/outputs."""
