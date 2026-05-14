@@ -269,6 +269,48 @@ class EpisodicMemory:
             return int(cur.lastrowid)
 
     # ------------------------------------------------------------------
+    # Escalations (v3 chunk 6)
+    # ------------------------------------------------------------------
+
+    def record_escalation(
+        self,
+        *,
+        run_id: str,
+        skill_name: str,
+        attempt_failures: list[list[str]],
+        final_output_json: str | None,
+        escalated_at: str | None = None,
+    ) -> int:
+        """Append an escalation row — a skill that exhausted its retry cap."""
+        with self._connect() as conn:
+            cur = conn.execute(
+                "INSERT INTO escalations "
+                "(run_id, skill_name, attempts_json, final_output_json, escalated_at) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (
+                    run_id,
+                    skill_name,
+                    json.dumps(attempt_failures),
+                    final_output_json,
+                    escalated_at or _now(),
+                ),
+            )
+            return int(cur.lastrowid)
+
+    def get_escalations(self, run_id: str) -> list[dict[str, Any]]:
+        """Escalations for a run, with `attempt_failures` decoded to a list."""
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT * FROM escalations WHERE run_id = ? ORDER BY id ASC", (run_id,)
+            ).fetchall()
+        out: list[dict[str, Any]] = []
+        for row in rows:
+            record = dict(row)
+            record["attempt_failures"] = json.loads(record.pop("attempts_json"))
+            out.append(record)
+        return out
+
+    # ------------------------------------------------------------------
     # Winning patterns (v3 chunk 5)
     # ------------------------------------------------------------------
 

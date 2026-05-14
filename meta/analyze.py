@@ -32,6 +32,11 @@ _MIN_REVIEWED_FOR_DIVERGENCE = 5
 # older than this, the drafter is learning from a stale picture of "what works".
 WINNING_PATTERNS_MAX_AGE_DAYS = 14
 
+# An escalation cluster: one skill exhausting its retry cap repeatedly inside
+# this window is a systematic failure, not bad luck.
+ESCALATION_CLUSTER_WINDOW_DAYS = 14
+_MIN_ESCALATIONS_FOR_CLUSTER = 2
+
 
 @dataclass(frozen=True)
 class Pattern:
@@ -158,6 +163,42 @@ def _winning_patterns_stale(db_path: Path, now: datetime) -> list[Pattern]:
     ]
 
 
+def _escalation_patterns(db_path: Path, now: datetime) -> list[Pattern]:
+    """Flag skills that exhausted their retry cap repeatedly — a clustered
+    escalation is the meta-agent's richest input: the skill couldn't produce
+    passing output at all, three attempts running."""
+    cutoff = (now - timedelta(days=ESCALATION_CLUSTER_WINDOW_DAYS)).isoformat()
+    with _ro_connect(db_path) as conn:
+        tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        if "escalations" not in tables:  # pre-v3 DB
+            return []
+        rows = conn.execute(
+            "SELECT skill_name, COUNT(*) AS n FROM escalations "
+            "WHERE escalated_at >= ? GROUP BY skill_name "
+            "HAVING n >= ? ORDER BY skill_name",
+            (cutoff, _MIN_ESCALATIONS_FOR_CLUSTER),
+        ).fetchall()
+    return [
+        Pattern(
+            kind="escalation",
+            signal_id=f"escalation:{r['skill_name']}",
+            summary=(
+                f"{r['skill_name']} exhausted its retry cap {r['n']} times in the "
+                f"last {ESCALATION_CLUSTER_WINDOW_DAYS} days"
+            ),
+            # Escalations are severe — a skill that can't pass at all outranks
+            # mild drift. 2 escalations → 0.7, 5+ → capped at 1.0.
+            severity=min(1.0, 0.5 + 0.1 * r["n"]),
+            evidence={
+                "skill_name": r["skill_name"],
+                "escalation_count": r["n"],
+                "window_days": ESCALATION_CLUSTER_WINDOW_DAYS,
+            },
+        )
+        for r in rows
+    ]
+
+
 def analyze(db_path: Path, *, now: datetime | None = None) -> list[Pattern]:
     """Read-only, deterministic. Returns patterns ranked by severity (desc).
 
@@ -170,6 +211,7 @@ def analyze(db_path: Path, *, now: datetime | None = None) -> list[Pattern]:
     patterns = (
         _drift_patterns(db_path, now)
         + _divergence_patterns(db_path, now)
+        + _escalation_patterns(db_path, now)
         + _winning_patterns_stale(db_path, now)
     )
     patterns = [p for p in patterns if p.signal_id not in skipped]
