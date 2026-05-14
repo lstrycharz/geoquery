@@ -25,6 +25,7 @@ lxml_html_clean==0.4.4
 # report — jinja2 (eval HTML reports)
 jinja2==3.1.4
 
-# dashboard — Streamlit + pandas
+# dashboard — Streamlit + pandas + plotly (Learning Curve page, v3 chunk 10)
 streamlit==1.40.2
 pandas==2.2.3
+plotly==5.24.1
