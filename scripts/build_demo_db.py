@@ -75,6 +75,10 @@ def _seed(rng: random.Random, memory: EpisodicMemory) -> None:
     completed_run_ids: list[str] = []  # for seeding the review queue
     for day_offset in range(13, -1, -1):  # 14 days, oldest first
         day_start = now - timedelta(days=day_offset)
+        # v3 chunk 10: a gentle upward quality ramp over the 14-day window, so
+        # the Learning Curve page shows the system getting better over time
+        # (synthetic — this is demo data). 0.0 on the oldest day, 1.0 on today.
+        day_progress = (13 - day_offset) / 13.0
         runs_today = rng.randint(1, 4)  # uneven volume per day
         for _ in range(runs_today):
             company, market = rng.choice(_COMPANIES)
@@ -94,7 +98,9 @@ def _seed(rng: random.Random, memory: EpisodicMemory) -> None:
                 # Skip remaining skills if a prior one's "tool failure" path fired.
                 if run_failed:
                     break
-                base = _BASE_PASS_RATES[skill_name]
+                # Ramp the base pass rate by day progress: early runs are
+                # noisier, later runs cleaner.
+                base = min(1.0, _BASE_PASS_RATES[skill_name] * (0.85 + 0.15 * day_progress))
                 eval_passed = rng.random() < base
                 # 2% of invocations simulate a tool fault (eval_passed = NULL).
                 if rng.random() < 0.02:
@@ -158,6 +164,31 @@ def _seed(rng: random.Random, memory: EpisodicMemory) -> None:
                 ratings_by_dim={"brand_voice": 4, "intent_fit": 2, "actionability": 2},
                 notes="judges said this passed but the angle was generic and key points abstract",
             )
+
+    # v3 chunk 10: a few merged meta-agent proposals across the window so the
+    # Learning Curve page has annotations. Two measured, one reverted — the
+    # loop closes both directions, and the demo shows that.
+    _seed_meta_proposals(memory, now)
+
+
+def _seed_meta_proposals(memory: EpisodicMemory, now: datetime) -> None:
+    proposals = [
+        (10, "drift:score_queries", "prompt", "measured"),
+        (7, "drift:draft_content_brief", "rubric", "reverted"),
+        (3, "winning_patterns:stale", "prompt", "measured"),
+    ]
+    for days_ago, target_pattern, change_type, status in proposals:
+        merged_at = now - timedelta(days=days_ago)
+        created_at = merged_at - timedelta(days=1)
+        pid = memory.record_meta_proposal(
+            target_pattern=target_pattern,
+            change_type=change_type,
+            hypothesis=f"meta-agent proposal for {target_pattern}",
+            branch=f"meta-agent/{target_pattern.replace(':', '-')}",
+            pr_number=100 + days_ago,
+            created_at=created_at.isoformat(),
+        )
+        memory.update_meta_proposal(pid, status=status, merged_at=merged_at.isoformat())
 
 
 def main() -> None:
