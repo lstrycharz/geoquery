@@ -50,6 +50,10 @@ dashboard = [
     "streamlit==1.40.2",
     "pandas==2.2.3",
 ]
+# v3 Chunk 4: meta-agent opens PRs via the GitHub API. Lazy-imported in
+# meta/github_pr.py, so the base install and the test suite never need it —
+# only the weekly cron (chunk 9) does.
+meta = ["PyGithub==2.5.0"]
 # Dev tooling.
 dev = [
     "pytest==9.0.3",
