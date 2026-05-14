@@ -137,6 +137,27 @@ class EpisodicMemory:
             ).fetchall()
         return [dict(r) for r in rows]
 
+    def compute_run_eval_score(self, run_id: str) -> float:
+        """v3 chunk 1: a run's 0-1 eval composite - the fraction of its skill
+        invocations that passed *cleanly* (eval_passed=1 AND no failure entries,
+        advisory ones included). A run where every judge was happy scores 1.0;
+        advisory judge grumbles on the drafter pull it down. Skills with no
+        evaluators count as clean. Returns 1.0 (neutral) when nothing was
+        evaluated.
+        """
+        with self._connect() as conn:
+            rows = conn.execute(
+                "SELECT eval_passed, eval_details_json FROM skill_invocations "
+                "WHERE run_id = ? AND eval_passed IS NOT NULL",
+                (run_id,),
+            ).fetchall()
+        if not rows:
+            return 1.0
+        clean = sum(
+            1 for r in rows if r["eval_passed"] == 1 and (r["eval_details_json"] in (None, "[]"))
+        )
+        return clean / len(rows)
+
     def log_human_edit(
         self,
         *,

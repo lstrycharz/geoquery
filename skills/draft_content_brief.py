@@ -51,11 +51,17 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
             if inputs.serp_analysis is None
             else f"```json\n{inputs.serp_analysis.model_dump_json(indent=2)}\n```"
         )
+        # v3 chunk 1: slim few-shot payload. These are the top-5 *highest-scoring*
+        # similar past briefs (score-aware retrieval). We inject angle +
+        # section-skeleton only (~200 tokens each) — not the full ~1.5k-token
+        # bodies — because the deep structural lessons are carried separately by
+        # the winning-patterns guidance; few-shot only needs to show the *shape*.
         past_block = (
             "(no similar past briefs)"
             if not inputs.similar_past_briefs
             else "\n".join(
-                f"- (similarity {b.distance:.3f}) market={b.market!r}, angle={b.angle!r}"
+                f"- [eval_score {b.eval_score:.2f}] angle: {b.angle}\n"
+                f"  sections: {b.section_skeleton or '(skeleton not recorded)'}"
                 for b in inputs.similar_past_briefs
             )
         )
@@ -76,7 +82,8 @@ class DraftContentBrief(Skill[DraftBriefInputs, ContentBrief]):
             f"Target query: {inputs.target_query}\n\n"
             f"Priority ICP segment:\n```json\n{icp_json}\n```\n\n"
             f"SERP analysis:\n{serp_block}\n\n"
-            f"Similar past briefs (do NOT repeat their angles — differentiate):\n{past_block}\n\n"
+            f"High-performing similar past briefs (learn from their shape; do NOT "
+            f"repeat their angles — differentiate):\n{past_block}\n\n"
             f"{sitemap_block}\n\n"
             "Produce the ContentBrief per the system instructions."
         )

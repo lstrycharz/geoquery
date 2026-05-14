@@ -16,7 +16,7 @@ import sqlite3
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Protocol
+from typing import ClassVar, Protocol
 
 import sqlite_vec
 
@@ -51,6 +51,11 @@ class SimilarBrief:
     angle: str
     brief_path: str
     distance: float
+    # v3 chunk 1: score-aware memory. eval_score is the run's 0-1 eval composite;
+    # section_skeleton is the brief's headings joined - enough to show the drafter
+    # the *shape* of a high-scoring brief without injecting the full ~1.5k-token body.
+    eval_score: float = 1.0
+    section_skeleton: str = ""
 
 
 def _now() -> str:
@@ -73,6 +78,14 @@ class SemanticMemory:
         self.embedder: Embedder = embedder or FastembedEmbedder()
         self._init_schema()
 
+    # v3 chunk 1: columns added after the original v2 `briefs` table. Applied as
+    # additive ALTER TABLE migrations so pre-v3 semantic.db files keep working.
+    _V3_COLUMNS: ClassVar[dict[str, str]] = {
+        "eval_score": "REAL NOT NULL DEFAULT 1.0",
+        "eval_details_json": "TEXT",
+        "section_skeleton": "TEXT NOT NULL DEFAULT ''",
+    }
+
     def _init_schema(self) -> None:
         with _connect(self.db_path) as conn:
             conn.executescript(
@@ -91,6 +104,10 @@ class SemanticMemory:
                 USING vec0(embedding float[{EMBEDDING_DIM}]);
                 """
             )
+            existing = {row[1] for row in conn.execute("PRAGMA table_info(briefs)")}
+            for name, decl in self._V3_COLUMNS.items():
+                if name not in existing:
+                    conn.execute(f"ALTER TABLE briefs ADD COLUMN {name} {decl}")
 
     @staticmethod
     def _signature(market: str, icp_summary: str, angle: str) -> str:
@@ -104,6 +121,9 @@ class SemanticMemory:
         icp_summary: str,
         angle: str,
         brief_path: str,
+        eval_score: float = 1.0,
+        eval_details_json: str | None = None,
+        section_skeleton: str = "",
     ) -> None:
         embedding = self.embedder.embed(self._signature(market, icp_summary, angle))
         if len(embedding) != EMBEDDING_DIM:
@@ -112,9 +132,20 @@ class SemanticMemory:
             )
         with _connect(self.db_path) as conn:
             cur = conn.execute(
-                "INSERT INTO briefs (run_id, market, icp_summary, angle, brief_path, created_at) "
-                "VALUES (?, ?, ?, ?, ?, ?)",
-                (run_id, market, icp_summary, angle, brief_path, _now()),
+                "INSERT INTO briefs (run_id, market, icp_summary, angle, brief_path, "
+                "created_at, eval_score, eval_details_json, section_skeleton) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    run_id,
+                    market,
+                    icp_summary,
+                    angle,
+                    brief_path,
+                    _now(),
+                    eval_score,
+                    eval_details_json,
+                    section_skeleton,
+                ),
             )
             rowid = cur.lastrowid
             conn.execute(
@@ -123,27 +154,47 @@ class SemanticMemory:
             )
 
     def find_similar(
-        self, *, market: str, icp_summary: str, angle_hint: str = "", k: int = 3
+        self,
+        *,
+        market: str,
+        icp_summary: str,
+        angle_hint: str = "",
+        k: int = 3,
+        rank_by_eval_score: bool = False,
     ) -> list[SimilarBrief]:
+        """Retrieve the k most relevant past briefs.
+
+        Default: ranked by embedding distance (closest first).
+        `rank_by_eval_score=True` (v3 chunk 1): pull a wider distance-candidate
+        set, then re-rank it by eval_score (highest first, distance as
+        tie-break) and return the top k. This is how the drafter gets
+        *high-performing* similar briefs as few-shot examples rather than just
+        *nearby* ones.
+        """
         embedding = self.embedder.embed(self._signature(market, icp_summary, angle_hint))
         with _connect(self.db_path) as conn:
             # If the store is empty, sqlite-vec's KNN raises; return [] cleanly.
             count = conn.execute("SELECT COUNT(*) FROM briefs").fetchone()[0]
             if count == 0:
                 return []
+            # When re-ranking by score, fetch a wider candidate pool so the
+            # re-rank has room to surface a high-scorer that wasn't the single
+            # closest by distance.
+            fetch_k = min(k * 4, count) if rank_by_eval_score else min(k, count)
             rows = conn.execute(
                 """
                 SELECT briefs.run_id, briefs.market, briefs.icp_summary, briefs.angle,
-                       briefs.brief_path, vec.distance
+                       briefs.brief_path, briefs.eval_score, briefs.section_skeleton,
+                       vec.distance
                 FROM brief_vec vec
                 JOIN briefs ON briefs.rowid = vec.rowid
                 WHERE vec.embedding MATCH ?
                   AND k = ?
                 ORDER BY vec.distance
                 """,
-                (_serialize_vector(embedding), k),
+                (_serialize_vector(embedding), fetch_k),
             ).fetchall()
-        return [
+        briefs = [
             SimilarBrief(
                 run_id=r["run_id"],
                 market=r["market"],
@@ -151,9 +202,15 @@ class SemanticMemory:
                 angle=r["angle"],
                 brief_path=r["brief_path"],
                 distance=float(r["distance"]),
+                eval_score=float(r["eval_score"]),
+                section_skeleton=r["section_skeleton"] or "",
             )
             for r in rows
         ]
+        if rank_by_eval_score:
+            # Highest eval_score first; closer distance breaks ties.
+            briefs.sort(key=lambda b: (-b.eval_score, b.distance))
+        return briefs[:k]
 
 
 def _serialize_vector(vec: list[float]) -> bytes:

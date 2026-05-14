@@ -11,19 +11,7 @@
       }
     }
   },
-  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
-    "input_tokens": 1300,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_search_intent_alignment",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "55abe148eb678eff27dc5c6a1d29d54ece2f66c620f1a28a255db5ebb191806e": {
+  "0552739a6dc131b68a201780563cd1173c2417d5e51c3eb66b0bdb21ccf18083": {
     "input_tokens": 2400,
     "output_tokens": 1800,
     "stop_reason": "tool_use",
@@ -101,6 +89,18 @@
         ],
         "recommended_length_words": 2400,
         "internal_linking_suggestions": []
+      }
+    }
+  },
+  "2cbd02cc96f6714d3f4d6c1534fb28525aa7f87a401cd9d34541d84c66e87bf2": {
+    "input_tokens": 1300,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_search_intent_alignment",
+      "input": {
+        "passed": true,
+        "failures": []
       }
     }
   },
