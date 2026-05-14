@@ -1,0 +1,44 @@
+{
+  "target_query": "how to choose design handoff tool",
+  "icp_segment_label": "product designer",
+  "angle": "what a working product designer should weigh when picking design handoff tool",
+  "audience": "a product designer evaluating design handoff tool",
+  "structure": [
+    {
+      "heading": "why enterprise crm advice fails small teams",
+      "purpose": "frame the buyer's real problem",
+      "key_points": [
+        "enterprise crms over-serve",
+        "setup cost dominates ROI"
+      ]
+    },
+    {
+      "heading": "the three capabilities that matter",
+      "purpose": "deliver the core answer",
+      "key_points": [
+        "contact timeline",
+        "pipeline view",
+        "two-way email sync"
+      ]
+    },
+    {
+      "heading": "a 30-minute setup path",
+      "purpose": "make it actionable",
+      "key_points": [
+        "import existing contacts",
+        "define four pipeline stages"
+      ]
+    }
+  ],
+  "key_points": [
+    "small teams need 3 features not 30",
+    "setup time is the real cost",
+    "pick by workflow not feature count"
+  ],
+  "sources": [
+    "https://example.com/crm-guide",
+    "https://example.com/smb-sales"
+  ],
+  "recommended_length_words": 1400,
+  "internal_linking_suggestions": []
+}

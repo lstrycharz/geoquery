@@ -1,0 +1,10 @@
+{
+  "evals/golden_set.py": "44b9296a13c4eb74dc8fb4502fef4d4179dd50306936361f2823f288de03d767",
+  "evals/production.py": "253f015f0055de32256d69958dae6261f583d401441354b60917b9d8903e77f9",
+  "evals/regression.py": "4872c3f2bafda49606e85440cc088fb393d2ce9ea5db42fd228694a687230ae4",
+  "evals/rubrics/brand_voice_match.md": "45dac7380402f21600ea32e07435eddd5ca93751b69e2d4345503dc9e78e1df4",
+  "evals/rubrics/brief_actionability.md": "370959434bde49fcf8a89bb51564f7e5d3c0f1c883f25d067bddd8b8a2967f18",
+  "evals/rubrics/brief_specificity.md": "d06110da22cee5831a9297fab04a410900c25c235922a5762e699fe57a9a7329",
+  "evals/rubrics/buyer_realism.md": "1cbed12d07d2bd0cd82620de37efb6610b0d8689da4e99acfcc5241227124fee",
+  "evals/rubrics/search_intent_alignment.md": "314aaec2f2dd3ee4343ee0778c521f70b97b3d1b7c00a2b8df7af046158e9c88"
+}
