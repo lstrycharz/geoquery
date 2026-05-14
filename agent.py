@@ -353,6 +353,12 @@ def run_brief(
 
         on_progress(f"  ✓ analyze_serp  {analyze_result.cost_usd:.4f}$")
 
+        # Winning patterns (v3 chunk 5): the cached structural lessons from the
+        # highest-scoring past briefs. Empty tuple until `geoquery
+        # extract-patterns` has run at least once.
+        latest_patterns = memory.get_latest_winning_patterns()
+        winning_patterns = tuple(latest_patterns["patterns"]) if latest_patterns else ()
+
         # Tool (chunk 12): sitemap-grounded internal linking. Empty tuple when
         # no --sitemap was supplied; the drafter then leaves the section blank.
         sitemap_entries = tuple(parse_sitemap(sitemap_url)) if sitemap_url else ()
@@ -372,6 +378,7 @@ def run_brief(
             sitemap_entries=sitemap_entries,
             company_dossier=research_result.output,
             priority=priority,
+            winning_patterns=winning_patterns,
         )
         draft_start = time.monotonic()
         draft_started_at = _now()

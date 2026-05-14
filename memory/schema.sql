@@ -83,3 +83,17 @@ CREATE TABLE IF NOT EXISTS meta_proposals (
     schema_version                 INTEGER NOT NULL DEFAULT 1
 );
 CREATE INDEX IF NOT EXISTS idx_meta_proposals_pattern ON meta_proposals(target_pattern);
+
+-- Winning patterns (v3 chunk 5). Each row is one periodic extraction:
+-- structural patterns common to the top-N highest-scoring briefs ("high-
+-- scorers name a specific persona pain in the angle; 5-6 sections; ..."),
+-- distilled by an LLM call. Append-only; the drafter reads the most recent
+-- row and injects it as guidance. Populated by `geoquery extract-patterns`.
+CREATE TABLE IF NOT EXISTS winning_patterns (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    extracted_at    TEXT NOT NULL,
+    briefs_analyzed INTEGER NOT NULL,
+    min_eval_score  REAL NOT NULL,      -- score floor of the analyzed set
+    patterns_json   TEXT NOT NULL,      -- JSON list[str] of structural patterns
+    schema_version  INTEGER NOT NULL DEFAULT 1
+);

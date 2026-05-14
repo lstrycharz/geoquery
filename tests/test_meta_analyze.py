@@ -115,3 +115,33 @@ def test_analyze_does_not_skip_old_rejected_pattern(tmp_path: Path):
     )
     patterns = analyze(mem.db_path, now=_NOW)
     assert [p.signal_id for p in patterns] == ["drift:score_queries"]
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 5 — winning-pattern staleness signal
+# ---------------------------------------------------------------------------
+
+
+def test_analyze_flags_stale_winning_patterns(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    mem.record_winning_patterns(
+        briefs_analyzed=10, min_eval_score=0.8, patterns=["x"], extracted_at=_iso(40)
+    )
+    patterns = analyze(mem.db_path, now=_NOW)
+    assert [p.signal_id for p in patterns] == ["winning_patterns:stale"]
+    assert patterns[0].kind == "winning_patterns_stale"
+
+
+def test_analyze_does_not_flag_fresh_winning_patterns(tmp_path: Path):
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    mem.record_winning_patterns(
+        briefs_analyzed=10, min_eval_score=0.8, patterns=["x"], extracted_at=_iso(3)
+    )
+    assert analyze(mem.db_path, now=_NOW) == []
+
+
+def test_analyze_does_not_flag_staleness_when_never_extracted(tmp_path: Path):
+    """No prior extraction = the feature was never adopted. The meta-agent
+    nags about *rotted* patterns, not unused ones."""
+    mem = EpisodicMemory(tmp_path / "episodic.db")
+    assert analyze(mem.db_path, now=_NOW) == []

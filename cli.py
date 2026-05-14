@@ -144,5 +144,36 @@ def eval_golden(
     raise typer.Exit(code=0 if result.pass_rate >= 0.8 else 1)
 
 
+@app.command(name="extract-patterns")
+def extract_patterns(
+    top_n: int = typer.Option(
+        10, "--top-n", "-n", help="How many of the highest-scoring briefs to analyze."
+    ),
+) -> None:
+    """Distill structural patterns from the highest-scoring past briefs (v3
+    Mechanism 2). Run periodically — the drafter injects the latest result."""
+    from anthropic import Anthropic
+
+    from evals.winning_patterns import extract_winning_patterns
+    from guardrails import RunBudget
+    from memory import SemanticMemory
+
+    settings = get_settings()
+    client = Anthropic(api_key=settings.anthropic_api_key)
+    episodic = EpisodicMemory(db_path=settings.data_dir / "episodic.db")
+    semantic = SemanticMemory(db_path=settings.data_dir / "semantic.db")
+    budget = RunBudget(max_cost_usd=settings.max_cost_usd)
+
+    patterns = extract_winning_patterns(
+        semantic=semantic, episodic=episodic, client=client, budget=budget, top_n=top_n
+    )
+    if not patterns:
+        typer.echo("no scored briefs yet — nothing to extract.")
+        return
+    typer.echo(f"extracted {len(patterns)} winning patterns (cost ${budget.spent_usd:.4f}):")
+    for p in patterns:
+        typer.echo(f"  - {p}")
+
+
 if __name__ == "__main__":
     app()

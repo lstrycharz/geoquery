@@ -409,7 +409,56 @@
       }
     }
   },
-  "3f450e6bcf7a95d6e08dcbe515c9909f82a07624ddf5d429fe9abb2fec8e536c": {
+  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
+    "input_tokens": 1800,
+    "output_tokens": 900,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_analyze_serp",
+      "input": {
+        "schema_version": 1,
+        "query_text": "alternatives to notion for engineering documentation",
+        "top_results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison.",
+            "extracted_content": null
+          }
+        ],
+        "common_angles": [
+          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
+          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
+          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
+          "Editorial 'best of' picks with brief mini-reviews",
+          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
+        ],
+        "content_gaps": [
+          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
+          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
+          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
+          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
+        ],
+        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
+      }
+    }
+  },
+  "60ec91ae9e6dc4b060d64f5bc67bf9d02c16c12df92590476a8b427aa2159d18": {
     "input_tokens": 2400,
     "output_tokens": 1800,
     "stop_reason": "tool_use",
@@ -487,55 +536,6 @@
         ],
         "recommended_length_words": 2400,
         "internal_linking_suggestions": []
-      }
-    }
-  },
-  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
-    "input_tokens": 1800,
-    "output_tokens": 900,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_analyze_serp",
-      "input": {
-        "schema_version": 1,
-        "query_text": "alternatives to notion for engineering documentation",
-        "top_results": [
-          {
-            "rank": 1,
-            "url": "https://example.com/notion-alternatives-engineering-2026",
-            "title": "10 Notion Alternatives for Engineering Teams (2026)",
-            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
-            "extracted_content": null
-          },
-          {
-            "rank": 2,
-            "url": "https://example.com/leaving-notion",
-            "title": "Why We Left Notion (and What We Switched To)",
-            "snippet": "A migration story from a 200-person dev shop.",
-            "extracted_content": null
-          },
-          {
-            "rank": 3,
-            "url": "https://example.com/notion-vs-outline-deep-dive",
-            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
-            "snippet": "Feature-by-feature comparison.",
-            "extracted_content": null
-          }
-        ],
-        "common_angles": [
-          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
-          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
-          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
-          "Editorial 'best of' picks with brief mini-reviews",
-          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
-        ],
-        "content_gaps": [
-          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
-          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
-          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
-          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
-        ],
-        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
       }
     }
   },

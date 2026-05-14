@@ -212,6 +212,33 @@ class SemanticMemory:
             briefs.sort(key=lambda b: (-b.eval_score, b.distance))
         return briefs[:k]
 
+    def top_scoring_briefs(self, limit: int = 10) -> list[SimilarBrief]:
+        """The globally highest-scoring indexed briefs, ranked by eval_score.
+
+        Unlike `find_similar`, this isn't query-relative — it's the corpus the
+        winning-patterns extractor (v3 chunk 5) distills structural patterns
+        from. `distance` is 0.0 (not meaningful here)."""
+        with _connect(self.db_path) as conn:
+            rows = conn.execute(
+                "SELECT run_id, market, icp_summary, angle, brief_path, "
+                "eval_score, section_skeleton "
+                "FROM briefs ORDER BY eval_score DESC, rowid DESC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [
+            SimilarBrief(
+                run_id=r["run_id"],
+                market=r["market"],
+                icp_summary=r["icp_summary"],
+                angle=r["angle"],
+                brief_path=r["brief_path"],
+                distance=0.0,
+                eval_score=float(r["eval_score"]),
+                section_skeleton=r["section_skeleton"] or "",
+            )
+            for r in rows
+        ]
+
 
 def _serialize_vector(vec: list[float]) -> bytes:
     """sqlite-vec accepts the raw little-endian f32 byte string."""

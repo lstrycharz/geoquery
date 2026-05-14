@@ -310,7 +310,80 @@
       }
     }
   },
-  "5077883c643d3ae88651e94355be59dba58b1bf4f348752df0a4bd27136499d1": {
+  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
+    "input_tokens": 1800,
+    "output_tokens": 900,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_analyze_serp",
+      "input": {
+        "schema_version": 1,
+        "query_text": "alternatives to notion for engineering documentation",
+        "top_results": [
+          {
+            "rank": 1,
+            "url": "https://example.com/notion-alternatives-engineering-2026",
+            "title": "10 Notion Alternatives for Engineering Teams (2026)",
+            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
+            "extracted_content": null
+          },
+          {
+            "rank": 2,
+            "url": "https://example.com/leaving-notion",
+            "title": "Why We Left Notion (and What We Switched To)",
+            "snippet": "A migration story from a 200-person dev shop.",
+            "extracted_content": null
+          },
+          {
+            "rank": 3,
+            "url": "https://example.com/notion-vs-outline-deep-dive",
+            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
+            "snippet": "Feature-by-feature comparison.",
+            "extracted_content": null
+          }
+        ],
+        "common_angles": [
+          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
+          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
+          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
+          "Editorial 'best of' picks with brief mini-reviews",
+          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
+        ],
+        "content_gaps": [
+          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
+          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
+          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
+          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
+        ],
+        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
+      }
+    }
+  },
+  "7d83236a0d4f62e8eeb6612b3079e2c9b53d8bb0e89cca3dc56dcaea8de18cf6": {
+    "input_tokens": 1400,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_actionability",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "80919f77920b34861fe4eee56254bf512949dbdb7263e352b2b7e979f65686d6": {
+    "input_tokens": 800,
+    "output_tokens": 40,
+    "stop_reason": "tool_use",
+    "tool_use": {
+      "name": "emit_judge_brief_specificity",
+      "input": {
+        "passed": true,
+        "failures": []
+      }
+    }
+  },
+  "9e5bc82aba6f0598adc483b44dea2e9d206472ea8ff970c0b91e308b4107afa8": {
     "input_tokens": 2400,
     "output_tokens": 1800,
     "stop_reason": "tool_use",
@@ -388,79 +461,6 @@
         ],
         "recommended_length_words": 2400,
         "internal_linking_suggestions": []
-      }
-    }
-  },
-  "5cd7e8b43d47ded77c6eb9e9d42f6386d658896ad21f424d3954c03ae0658554": {
-    "input_tokens": 1800,
-    "output_tokens": 900,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_analyze_serp",
-      "input": {
-        "schema_version": 1,
-        "query_text": "alternatives to notion for engineering documentation",
-        "top_results": [
-          {
-            "rank": 1,
-            "url": "https://example.com/notion-alternatives-engineering-2026",
-            "title": "10 Notion Alternatives for Engineering Teams (2026)",
-            "snippet": "We tested 10 wiki tools with a 50-person engineering team.",
-            "extracted_content": null
-          },
-          {
-            "rank": 2,
-            "url": "https://example.com/leaving-notion",
-            "title": "Why We Left Notion (and What We Switched To)",
-            "snippet": "A migration story from a 200-person dev shop.",
-            "extracted_content": null
-          },
-          {
-            "rank": 3,
-            "url": "https://example.com/notion-vs-outline-deep-dive",
-            "title": "Notion vs Outline: A Side-by-Side for Engineering Wikis",
-            "snippet": "Feature-by-feature comparison.",
-            "extracted_content": null
-          }
-        ],
-        "common_angles": [
-          "Listicle roundup of 10 alternatives, framed around team-size and pricing tiers",
-          "First-person migration story (we-left-Notion-and-here's-why), with concrete pain points listed",
-          "Side-by-side feature comparison anchored on Markdown source, API, SSO, audit log",
-          "Editorial 'best of' picks with brief mini-reviews",
-          "Cost-at-scale analysis (price-per-seat doesn't scale at 200 engineers)"
-        ],
-        "content_gaps": [
-          "No content addresses the Markdown vs WYSIWYG factional split inside engineering orgs",
-          "Migration playbooks lack a phased 30-day pilot script (most are 'we did it, here's what we use')",
-          "Decision frameworks don't tie alternative choice to specific incident postmortems or trigger events",
-          "Bus-factor framing is absent \u2014 every article talks features, none talks knowledge loss"
-        ],
-        "recommended_format": "Decision framework + migration playbook hybrid, anchored on bus-factor framing and the Markdown vs WYSIWYG factional split"
-      }
-    }
-  },
-  "7d83236a0d4f62e8eeb6612b3079e2c9b53d8bb0e89cca3dc56dcaea8de18cf6": {
-    "input_tokens": 1400,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_actionability",
-      "input": {
-        "passed": true,
-        "failures": []
-      }
-    }
-  },
-  "80919f77920b34861fe4eee56254bf512949dbdb7263e352b2b7e979f65686d6": {
-    "input_tokens": 800,
-    "output_tokens": 40,
-    "stop_reason": "tool_use",
-    "tool_use": {
-      "name": "emit_judge_brief_specificity",
-      "input": {
-        "passed": true,
-        "failures": []
       }
     }
   },
