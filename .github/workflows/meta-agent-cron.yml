@@ -1,0 +1,47 @@
+name: meta-agent-cron
+
+# Weekly: the meta-agent reads the eval history, proposes one change (opens a
+# PR), and measures any merged-but-unmeasured proposals that now have enough
+# post-merge runs. Both steps are read-only on the eval DB except for the
+# meta_proposals bookkeeping rows.
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Mondays 09:00 UTC
+  workflow_dispatch: {} # allow manual runs
+
+jobs:
+  meta-agent:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package + extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[semantic,web,report,mcp,meta,dev]"
+
+      - name: Propose one change (opens a meta-agent/* PR)
+        run: python -m meta.run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Fine-grained PAT scoped to PR-write only — no merge, no
+          # branch-protection edit, no push to a protected branch.
+          GITHUB_META_AGENT_TOKEN: ${{ secrets.META_AGENT_PAT }}
+          GITHUB_REPO: ${{ github.repository }}
+
+      - name: Measure merged proposals (auto-reverts clear regressions)
+        run: python -m meta.measure --measure-all
+        env:
+          GITHUB_META_AGENT_TOKEN: ${{ secrets.META_AGENT_PAT }}
+          GITHUB_REPO: ${{ github.repository }}

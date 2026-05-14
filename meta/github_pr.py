@@ -44,6 +44,13 @@ class PRPublisher(Protocol):
     def publish(self, *, branch: str, title: str, body: str, diff: str) -> OpenedPR: ...
 
 
+class RevertPublisher(Protocol):
+    """The boundary `meta/measure.py` depends on to open an auto-revert PR when
+    a merged proposal measures clearly negative — the loop closing downward."""
+
+    def publish_revert(self, *, merge_sha: str, title: str, body: str) -> OpenedPR: ...
+
+
 def branch_name(signal_id: str, *, now: datetime | None = None) -> str:
     """`meta-agent/<slugified-signal-id>-<YYYYMMDD>` — namespaced so the CI gate
     can target it, dated so re-proposals of the same pattern don't collide."""
@@ -93,6 +100,16 @@ class GitHubPRPublisher:
         self._git("apply", "-", stdin=diff)
         self._git("add", "-A")
         self._git("commit", "-m", title)
+        self._git("push", "-u", "origin", branch)
+        return self._open_pull(branch=branch, title=title, body=body)
+
+    def publish_revert(self, *, merge_sha: str, title: str, body: str) -> OpenedPR:
+        """Open a revert PR for a merged meta-agent change that measured
+        clearly negative. `git revert` of the squash-merge commit — the human
+        still reviews and merges; the meta-agent can't ratchet only upward."""
+        branch = f"{_BRANCH_PREFIX}revert-{merge_sha[:8]}"
+        self._git("checkout", "-b", branch)
+        self._git("revert", "--no-edit", merge_sha)
         self._git("push", "-u", "origin", branch)
         return self._open_pull(branch=branch, title=title, body=body)
 

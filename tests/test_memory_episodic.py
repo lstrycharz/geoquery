@@ -233,3 +233,67 @@ def test_blend_eval_score_negative_prediction_pulls_score_down():
     # -> 0.6*0.8 + 0.4*0.1 = 0.52
     blended = blend_eval_score(0.8, predicted_top10=False, confidence=0.9)
     assert blended == pytest.approx(0.52)
+
+
+# ---------------------------------------------------------------------------
+# v3 chunk 9 — meta-proposal measurement helpers
+# ---------------------------------------------------------------------------
+
+
+def test_get_meta_proposal_and_by_pr(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    pid = mem.record_meta_proposal(
+        target_pattern="drift:score_queries",
+        change_type="prompt",
+        hypothesis="h",
+        pr_number=77,
+    )
+    by_id = mem.get_meta_proposal(pid)
+    assert by_id["pr_number"] == 77
+    assert mem.get_meta_proposal_by_pr(77)["id"] == pid
+    assert mem.get_meta_proposal(9999) is None
+    assert mem.get_meta_proposal_by_pr(123) is None
+
+
+def test_update_meta_proposal_sets_only_given_fields(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    pid = mem.record_meta_proposal(
+        target_pattern="drift:x", change_type="prompt", hypothesis="h"
+    )
+    mem.update_meta_proposal(
+        pid, status="merged", merged_at="2026-05-01T00:00:00+00:00",
+        baseline_window_json='{"before_scores": [0.5]}',
+    )
+    row = mem.get_meta_proposal(pid)
+    assert row["status"] == "merged"
+    assert row["merged_at"] == "2026-05-01T00:00:00+00:00"
+    assert row["baseline_window_json"] == '{"before_scores": [0.5]}'
+    # untouched fields stay put
+    assert row["target_pattern"] == "drift:x"
+
+
+def test_completed_run_scores_windows_by_started_at(tmp_path):
+    mem = EpisodicMemory(db_path=tmp_path / "ep.db")
+    cutoff = "2026-05-10T00:00:00+00:00"
+
+    def _seed(company, started_at, passed):
+        run = mem.start_run(company, "m")
+        # overwrite started_at deterministically
+        with mem._connect() as conn:
+            conn.execute("UPDATE runs SET started_at = ? WHERE id = ?", (started_at, run.id))
+        mem.log_skill_invocation(
+            SkillInvocationRecord(
+                run_id=run.id, skill_name="draft_content_brief", attempt=1,
+                model="claude-sonnet-4-6", input_json="{}", output_json="{}",
+                eval_passed=passed, started_at=started_at,
+            )
+        )
+        mem.finish_run(run.id, "completed", 1.0, "/b.md")
+
+    _seed("Before", "2026-05-05T00:00:00+00:00", True)
+    _seed("After", "2026-05-12T00:00:00+00:00", False)
+
+    before = mem.completed_run_scores(before=cutoff)
+    after = mem.completed_run_scores(after=cutoff)
+    assert before == [1.0]   # the "Before" run, all invocations clean
+    assert after == [0.0]    # the "After" run, the invocation failed
