@@ -70,7 +70,11 @@ Reference: GEOQuery's seven stages — `agent.py`, `skills/*.py`,
 
 ## L1.2 — Each stage is a deep module
 
-A **deep module** has a small public interface and hides a lot of complexity.
+A **deep module** has a small public interface and hides a lot of
+complexity — the principle from Ousterhout's *A Philosophy of Software
+Design*, applied directly. AI codebases default to the opposite ("classitis":
+one class to format the prompt, one to call the model, one to parse the
+JSON), which produces high cognitive load with no information hiding.
 
 - ✅ One public method: `run(inputs) -> output`.
 - ✅ Inside: prompt + strict output contract + model choice + own evaluators.
@@ -90,6 +94,11 @@ Reference: `skills/base.py::Skill` + any `skills/<name>.py`.
 Every stage's output is a **strict typed shape**. Pydantic in Python, Zod
 in TS, whatever.
 
+- ✅ **Force the schema at the API level**, not just in-prompt instructions:
+  OpenAI's `response_format={"type":"json_schema",...}`, or Anthropic's
+  forced tool calling (`tool_choice={"type":"tool","name":...}` with the
+  schema as the tool's `input_schema`). The model literally cannot return
+  malformed JSON. *Asking* a model to return JSON in prose is obsolete.
 - ✅ Malformed output **fails loudly and immediately** — not three stages
   later as a `'NoneType' has no attribute …`.
 - ✅ Validators that gently coerce common model quirks (e.g. the model
@@ -98,9 +107,10 @@ in TS, whatever.
   everything else.
 - ❌ "Parse the model output with regex." Always loses.
 
-Reference: GEOQuery `contracts.py` — every output is a `BaseModel`; the
-`_coerce_json_list` / `_coerce_json_dict` validators are documented battle
-scars.
+Reference: GEOQuery `skills/base.py` (every skill call goes through Anthropic
+forced tool-use with a Pydantic-derived `input_schema`) + `contracts.py`
+(the `_coerce_json_list` / `_coerce_json_dict` validators are documented
+battle scars).
 
 ## L1.4 — Per-stage model routing as *correctness*
 
@@ -202,12 +212,21 @@ lone judge failing stays advisory, but a *majority* failing triggers a
 revision. Pure-advisory under-reacts (ships work multiple judges flagged);
 full re-gate thrashes on one noisy judge call.
 
+If your judges are slow or expensive (Opus-tier reasoning, big payloads),
+fire the advisory ones **asynchronously** after the response is returned —
+their verdict still lands in the log and dashboard, it just doesn't block
+the user. GEOQuery's judges are cheap Haiku calls (<2s, ~$0.001) so
+synchronous is fine; pick the right answer for your latency budget.
+
 Reference: `skills/base.py::Skill.run` (the revision loop with
 `judge_consensus_threshold`).
 
 ## L2.3 — Cassette-replay regression suite
 
-The single highest-leverage piece of testing for any LLM system.
+The single highest-leverage piece of testing for any LLM system. (A
+**cassette** here is a saved LLM response — the parsed structured output,
+not the raw HTTP envelope — replayed in tests instead of calling the real
+API. Same idea as VCR.py but at the contract level, not the wire level.)
 
 - Record 30+ representative cases once (real API, real money — budget $10–30).
 - Each case = `(input, recorded LLM responses, expected output profile)`.
@@ -366,8 +385,19 @@ Reference: GEOQuery `meta/{analyze,propose,measure}.py`.
 eval scores" will, given the chance, weaken a rubric, edit a regression
 baseline, add a trivially-passing eval, or push outputs toward verbose
 patterns the LLM judges like and humans don't. That failure mode is
-**reward hacking**, and it's the default behavior of an optimizer pointed
-at a gameable metric.
+**reward hacking** (also called **specification gaming** in the safety
+literature — Krakovna et al., DeepMind 2020), and it's the default behavior
+of an optimizer pointed at a gameable metric.
+
+> A note on framing: this is **not** RLAIF. RLAIF specifically means using
+> AI-generated preference labels to train a reward model that drives
+> gradient-based RL fine-tuning. The meta-agent here proposes code/prompt
+> edits as pull requests; humans are the merge gate; no weights ever move.
+> It's closer in spirit to **automated prompt/program optimization** (DSPy,
+> OPRO). The *failure mode* — specification gaming — is the same one
+> RLHF/RLAIF systems face, which is why the defenses below are worth as
+> much as they are. Borrowing the failure-mode lineage is correct;
+> borrowing the technique name is not.
 
 The defense has nine parts. **All of them. None are optional.**
 
