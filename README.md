@@ -244,6 +244,8 @@ Three write-ups cover everything:
 - [**`EVALS.md`**](./EVALS.md) — the trust layer: four eval layers (deterministic + LLM-judge + regression suite + production monitoring), the CI regression gate, the Streamlit dashboard.
 - [**`SELF_IMPROVEMENT.md`**](./SELF_IMPROVEMENT.md) — the self-improvement layer: the four learning mechanisms, the meta-agent, and the nine-part reward-hacking defense that stops it from gaming its own evals.
 
+If you're starting **your own** agent project and want to reuse the framework distilled here as a planning checklist: [**`docs/AGENT_PROJECT_PLAYBOOK.md`**](./docs/AGENT_PROJECT_PLAYBOOK.md). Walk it in plan mode at project kickoff — three separable layers, decide which apply, with file pointers back into this repo as the worked example.
+
 Built incrementally — v1 in 19 commits, v2 in 12 more, v3 in 11 chunks. Every commit leaves the repo in a working state. Tests run in ~11 seconds and cost $0.
 
 ```bash
